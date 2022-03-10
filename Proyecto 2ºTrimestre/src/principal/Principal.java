@@ -60,6 +60,7 @@ public class Principal {
 							switch (metodosMenu.Metodos.menu(elec, validas, "TIPO DE VEHÍCULO",errorLetras, lector))
 							{
 							case "A","a":	//Combustion
+								
 								switch (metodosMenu.Metodos.menu(combustion, opcValidas, "Vehiculos de combustión", menError, lector))
 								{
 								case "1":	//Coche
@@ -116,7 +117,7 @@ public class Principal {
 							case "C","c": //SALIR
 								break;
 							}
-						case "B","b":
+						case "B","b":	//ELIMINAR VEHICULO
 							
 						case "C","c": //SALIR
 							break;

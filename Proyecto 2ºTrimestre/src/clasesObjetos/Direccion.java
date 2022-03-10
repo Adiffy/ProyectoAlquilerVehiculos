@@ -1,5 +1,7 @@
 package clasesObjetos;
 
+import java.util.Objects;
+
 import exceptions.CodigoPostalException;
 import exceptions.LongitudCadenaNoValidaException;
 import exceptions.LongitudNoValidaException;
@@ -142,6 +144,25 @@ public class Direccion {
 		this.localidad = loc;
 		this.planta = plant;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(codigoPostal, localidad, nombreVia, numVia, planta);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Direccion other = (Direccion) obj;
+		return Objects.equals(codigoPostal, other.codigoPostal) && Objects.equals(localidad, other.localidad)
+				&& Objects.equals(nombreVia, other.nombreVia) && Objects.equals(numVia, other.numVia)
+				&& Objects.equals(planta, other.planta);
+	}
 	
 	
 	
@@ -158,5 +179,7 @@ public class Direccion {
 		return valido;
 	}
 */
+	
+	
 	
 }

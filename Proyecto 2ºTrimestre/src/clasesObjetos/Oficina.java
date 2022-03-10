@@ -1,5 +1,6 @@
 package clasesObjetos;
 
+import java.util.Objects;
 import java.util.TreeMap;
 
 import metodos.Validadores;
@@ -119,6 +120,27 @@ public class Oficina {
 			Código = cop;
 		}
 		
+	}
+	
+	
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(Código, Descripción, Localidad, Provincia, deAeropuerto, personal, ubicacion);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Oficina other = (Oficina) obj;
+		return Objects.equals(Código, other.Código) && Objects.equals(Descripción, other.Descripción)
+				&& Objects.equals(Localidad, other.Localidad) && Objects.equals(Provincia, other.Provincia)
+				&& deAeropuerto == other.deAeropuerto && Objects.equals(personal, other.personal)
+				&& Objects.equals(ubicacion, other.ubicacion);
 	}
 	@SuppressWarnings("unchecked")
 	public TreeMap<String, Empleado> getPersonal() {

@@ -1,6 +1,7 @@
 package clasesObjetos;
 
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 import exceptions.FechaNoValidaException;
 
@@ -99,4 +100,29 @@ public class Alquiler {
 				return false;
 			}
 		}
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(FechaDevolucion, FechaInicioAlquiler, FechaPrevistaFinAlquiler, OficinaEntrega,
+					OficinaRecogida);
+		}
+
+		//Hacemos un equals por costumbre, aunque seguramente nunca le demos uso
+		@Override
+		public boolean equals(Object o) {
+			if (this == o)
+				return true;
+			if (o == null)
+				return false;
+			if (getClass() != o.getClass())
+				return false;
+			Alquiler otro = (Alquiler) o;
+			return Objects.equals(FechaDevolucion, otro.FechaDevolucion)
+					&& Objects.equals(FechaInicioAlquiler, otro.FechaInicioAlquiler)
+					&& Objects.equals(FechaPrevistaFinAlquiler, otro.FechaPrevistaFinAlquiler)
+					&& Objects.equals(OficinaEntrega, otro.OficinaEntrega)
+					&& Objects.equals(OficinaRecogida, otro.OficinaRecogida);
+		}
+		
+		
 }
