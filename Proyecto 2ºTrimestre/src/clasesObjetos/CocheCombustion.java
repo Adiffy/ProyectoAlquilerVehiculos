@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 import clasesObjetosInterfaces.Coche;
+import exceptions.ConsumoNoValidoException;
 import exceptions.EmisionesNoValidasException;
 import exceptions.NumPlazasNoValidoException;
+import exceptions.PotenciaNoValidaException;
+import exceptions.TipoNoValidoException;
 
 @SuppressWarnings("serial")
 public final class CocheCombustion extends DeCombustion implements Coche, Serializable{
@@ -16,6 +19,7 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 	int numPlazas = 1; //numero de plazas que tiene el coche
 	String tipo = ""; //el tipo del coche in "Familiar, Deportivo"
 	
+	private int precioBase = 50;
 	
 	//Getters & Setters
 	@Override
@@ -28,14 +32,14 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 			throw new NumPlazasNoValidoException("Número de plazas no válido");
 		}
 	}
-	public void setTipo(String Tipo) throws EmisionesNoValidasException 
+	public void setTipo(String Tipo) throws TipoNoValidoException
 	{
 		if (Tipo.equalsIgnoreCase("deportivo")||Tipo.equalsIgnoreCase("familiar")||Tipo.equalsIgnoreCase("todoterreno") ||Tipo.equalsIgnoreCase("4x4")) //si es A o B o C
 		{
 			String trab = Tipo;
 			this.tipo = trab;
 		}else {
-			throw new EmisionesNoValidasException("El tipo puede ser únicamente 'familiar', 'deportivo' o 'todoterreno(4x4)'");
+			throw new TipoNoValidoException("El tipo puede ser únicamente 'familiar', 'deportivo' o 'todoterreno(4x4)'");
 		}
 	}
 
@@ -70,20 +74,63 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 	 * 
 	 * @throws EmisionesNoValidasException Error. Las emisiones no son "A" ni "B" ni "C".
 	 * @throws NumPlazasNoValidoException  Error. El número de plazas es 0 o muy alto(>8).
+	 * @throws PotenciaNoValidaException 
+	 * @throws ConsumoNoValidoException 
+	 * @throws TipoNoValidoException 
 	 */
 	public CocheCombustion(Matricula matricula, String marca, String modelo, Categoria categoria, String color,
-			GregorianCalendar fecha_alta, boolean alquilado, Direccion oficina, int num_km, int num_plazas, double consumo, String tipo, int potencia, String emisiones, int numDias) throws EmisionesNoValidasException, NumPlazasNoValidoException {
-		super(matricula, marca, modelo, categoria, color, fecha_alta, alquilado, oficina, num_km, consumo, potencia, emisiones);
+			GregorianCalendar fecha_alta, Oficina oficina, int num_km, int num_plazas, double consumo, String tipo, int potencia, String emisiones, int numDias) throws EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, TipoNoValidoException {
+		super(matricula, marca, modelo, categoria, color, fecha_alta, oficina, num_km, consumo, potencia, emisiones);
 		this.setNumPlazas(num_plazas);
 		this.setTipo(tipo);
 	}
-
 	
+
+	@Override
+	public boolean equals(Object a)
+	{
+		if (this == a)
+		{
+			return true;
+		}
+		if (a == null || this.getClass() != a.getClass())
+		{
+			return false;
+		}
+		CocheCombustion dado = (CocheCombustion) a; //Hacemos que lo trate como COCHE y no OBJETO
+		
+		if (this.matricula == dado.matricula) { //Comparamos sus matrículas
+			return true;
+		}else {
+			return false;	//Ya a estas alturas ha fallado todos los controles por lo que, es falso
+		}
+	}
 	
 	@Override
-	public double precioAlquiler() {
-		return (precioBase * this.getNumDias());
+	public double PrecioAlquiler() {
+		int precioBase = this.precioBase;
+		int porcentaje = 0;
+		double recargo = 0;
+		double precio;
+		
+		precio = precioBase + (porcentaje*precioBase)/100;
+		
+		recargo = this.getCategoria().getRecargo();	//Averiguamos cuanto es el porcentaje: 10,15,30 ...
+		recargo= (recargo*this.precioBase)/100;	//Calculamos el porcentaje
+		precio += recargo;
+		if (this.getOficina().isDeAeropuerto())
+		{
+			precio += (precioBase*10)/100; 
+		}
+		
+		return precio;
 	}
+	
+/*	
+	@Override
+	public double precioAlquiler() {
+		return (precioBase * Alquiler.getNumDias());
+	}*/
 
 	
 	

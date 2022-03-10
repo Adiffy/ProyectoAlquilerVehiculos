@@ -76,13 +76,13 @@ public class Direccion {
 	
 	/**
 	 * <strong>Constructor completo</strong>
-	 * Genera una dirección con todos sus parámetros. Incluye el parámetro {@code planta} que al igual que los demás
+	 * Genera una direcciï¿½n con todos sus parï¿½metros. Incluye el parï¿½metro {@code planta} que al igual que los demï¿½s
 	 * es un {@code String}.
-	 * @param nombreVia Nombre de la vía (<strong>Calle, Avenida, ...</strong>).
-	 * @param numVia Número de la vía (<strong>Calle, Avenida, ...</strong>).
+	 * @param nombreVia Nombre de la vï¿½a (<strong>Calle, Avenida, ...</strong>).
+	 * @param numVia Nï¿½mero de la vï¿½a (<strong>Calle, Avenida, ...</strong>).
 	 * @param planta La planta del edificio en el que vive.
-	 * @param codigoPostal	Código Postal. Ejemplo: {@code 23001} en el caso de {@code Vitoria-gasteiz}.
-	 * @param localidad	El nombre de la localidad. Ejemplo: "{@code Jaén}".
+	 * @param codigoPostal	Cï¿½digo Postal. Ejemplo: {@code 23001} en el caso de {@code Vitoria-gasteiz}.
+	 * @param localidad	El nombre de la localidad. Ejemplo: "{@code Jaï¿½n}".
 	 */
 	public Direccion(String nombreVia, String numVia, String planta, String codigoPostal, String localidad) {
 		super();
@@ -96,9 +96,9 @@ public class Direccion {
 	/**
 	 * Constructor hecho para el caso 
 	 *  de vivir en una casa unifamiliar (sin planta/piso)
-	 * @param nombreVia El nombre de la vía (<strong>Calle, Avenida, ...</strong>).
-	 * @param numVia	El número de la <em>vía</em> (<strong>Calle, Avenida, ...</strong>).
-	 * @param codigoPostal Código Postal. Ejemplo: {@code 23009} en el caso de {@code Jaén}.
+	 * @param nombreVia El nombre de la vï¿½a (<strong>Calle, Avenida, ...</strong>).
+	 * @param numVia	El nï¿½mero de la <em>vï¿½a</em> (<strong>Calle, Avenida, ...</strong>).
+	 * @param codigoPostal Cï¿½digo Postal. Ejemplo: {@code 23009} en el caso de {@code Jaï¿½n}.
 	 * @param localidad El nombre de la localidad. Ejemplo: "{@code Vitoria-gasteiz}".
 	 */
 	public Direccion(String nombreVia, String numVia, String codigoPostal, String localidad) {
@@ -108,29 +108,9 @@ public class Direccion {
 		this.setCodigoPostal(codigoPostal);
 		this.setLocalidad(localidad);
 	}
-
-	/**
-	 * Constructor de copia
-	 * Se le da una direccón ya creada y se crea una idéntica
-	 * @param ubi	un Objeto tipo {@code Direccion}.
-	 */
-	public Direccion(Direccion ubi) {
-		String nombreV = ubi.getNombreVia();
-		String numV = ubi.getNumVia();
-		String plant = ubi.getPlanta();
-		String cp = ubi.getCodigoPostal();
-		String loc = ubi.getLocalidad();
-		
-//		this = new Direccion(nombreV,numV,plant,cp,loc);	No funciona así
-		this.codigoPostal = cp;
-		this.nombreVia = nombreV;
-		this.numVia = numV;
-		this.localidad = loc;
-		this.planta = plant;
-	}
 	
 	/**
-	 * Valida una {@code Direccion} válida, devuelve un verdadero si es <strong>válido</strong> o un falso
+	 * Valida una {@code Direccion} vï¿½lida, devuelve un verdadero si es <strong>vï¿½lido</strong> o un falso
 	 * si <strong>NO</strong> lo es.
 	 * @param domicilio
 	 * @return

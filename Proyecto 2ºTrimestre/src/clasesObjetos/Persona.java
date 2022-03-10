@@ -102,7 +102,7 @@ public abstract class Persona implements Comparable<Persona>{
 	public int compareTo(Persona o) {
 		int resultado = 0;
 		Persona copia = (Persona) o; //Hacemos una copia
-		resultado = this.getNombreCompleto().compareToIgnoreCase(copia.getNombreCompleto()); //Comparamos sus nombres completos
+		resultado = this.getDni().compareToIgnoreCase(copia.getDni()); //Comparamos sus nombres completos
 		return resultado;
 	}
 	

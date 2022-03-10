@@ -2,7 +2,7 @@ package comparadores;
 
 import java.util.Comparator;
 
-import clasesObjetos.Cliente;
+import clases.Objetos.Cliente;
 
 public class ComparaClientePorDNI implements Comparator<Cliente> {
 

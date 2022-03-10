@@ -22,8 +22,8 @@ public class Serializar {
 			System.out.println("Error al intentar grabar: " + e.getLocalizedMessage());
 			
 		}
-		 catch (IOException e) {
-			 System.out.println("Error al intentar grabar: " + e.getLocalizedMessage());
+		 catch (IOException i) {
+			 System.out.println("Error al intentar grabar: " + i.getLocalizedMessage());
 		}
 	}
 	
