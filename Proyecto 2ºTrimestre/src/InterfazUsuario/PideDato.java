@@ -4,55 +4,11 @@ import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 import clasesObjetos.*;
-import exceptions.CarnetRequeridoInvalidoException;
-import exceptions.CilindradaNoValidaException;
-import exceptions.CodigoPostalException;
-import exceptions.ConsumoNoValidoException;
-import exceptions.EmisionesNoValidasException;
-import exceptions.LetrasMatriculaNoValidasException;
-import exceptions.LongitudCadenaNoValidaException;
 import exceptions.LongitudNoValidaException;
-import exceptions.NumPlazasNoValidoException;
-import exceptions.NumeroMatriculaNoValidoException;
 import exceptions.PlantaNoValidaException;
-import exceptions.PotenciaNoValidaException;
-import exceptions.RecargoNoValidoException;
-import exceptions.TiempoRecargaNoValidoException;
-import exceptions.TipoNoValidoException;
-import metodos.Validadores;
-import metodosMenu.Metodos;
 
 public class PideDato {
 
-	
-	public static String menu(String[] opciones, String[] opcionesvalidas, String titulo,String mensajeError, Scanner l)
-	{
-		String opcionesval="";
-		for (int i=0;i<opcionesvalidas.length;i++) //recorremos el vector
-		{
-			opcionesval+=opcionesvalidas[i];
-		}
-		//String opcionesval=opcionesvalidas.toString(); No funciona
-		return Metodos.menu(opciones, opcionesval, titulo, mensajeError, l);
-	}
-	public static String menuProvincias(Scanner s)
-	{
-		String[] ListaProv= {"1.- Álava","2.- Albacete","3.- Alicante","4.- Almería","5.- Asturias", "6.- Ávila", "7.- Badajoz", "8.- Barcelona", "9.- Burgos", "10.- Cáceres", "11.- Cádiz", "12.- Cantabria", "13.- Castellón", 
-			"14.- Ciudad Real", "15.- Córdoba", "16.- Cuenca", "17.- Gerona (Girona)", "18.- Guadalajara", "19.- Guipúzcoa (Gipuzkoa)", "20.- Huelva", "21.- Huesca", "22.- Islas Baleares", "23.- Jaén", "24.- La coruña (A Coruña)",
-			"25.- La Rioja", "26.- Las Palmas", "27.- León", "28.- Lérida (Lleida)", "29.- Lugo", "30.- Madrid", "31.- Málaga", "32.- Murcia", "33.- Navarra", "34.- Orense (Ourense)", "35.- Palencia", "36.- Pontevedra", "37.- Salamanca",
-			"38.- Santa Cruz de Tenerife", "39.- Segovia", "40.- Sevilla", "41.- Soria","42.- Tarragona", "43.- Teruel","44.- Toledo","45.- Valencia", "46.- Valladolid", "47.- Vizcaya (Bizkaia)", "48.- Zamora", "49.- Zaragoza", "50.- Granada", 
-			"51.- Ceuta", "52.- Melilla"};
-		
-		
-		String[] ListaOpciones= {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41",
-				"42","43","44","45","46","47","48","49","50","51","52"};
-		
-		//comunidad=menu ("COMUNIDADES AUTÓNOMAS");
-		
-		return menu(ListaProv,ListaOpciones, "MENU DE PROVINCIAS", "Seleccione el número de su provincia", s);
-	
-	}
-	
 	/**
 	 * Método que pide un número entero al usuario mediante consola. Necesita:
 	 * @param mensaje Un mensaje de tipo {@code String} que será la petición al usuario. Ejemplo: "Escriba su edad"
@@ -181,10 +137,8 @@ public class PideDato {
 	 * Pide una matrícula al usuario
 	 * @param l El {@code Scanner} utilizado para la petición de datos
 	 * @return	Un objeto de tipo {@code Matricula}
-	 * @throws NumeroMatriculaNoValidoException El conjunto numérico que compone la matrícula no puede ser de otro tipo que no sea {@code int}
-	 * @throws LetrasMatriculaNoValidasException El conjunto de letras que componen a su vez la matrícula deben ser de tipo {@code String}
 	 */
-	public static Matricula matricula(Scanner l) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException 
+	public static Matricula matricula(Scanner l)
 	{
 		System.out.println("Escribe:");
 		System.out.print("2.- Los números de la matrícula:");
@@ -192,11 +146,8 @@ public class PideDato {
 		System.out.print("2.- Las letras de la matrícula:");
 		String letras = PideDato.cadena(l);
 		
-		Matricula a;
-		
-			a = new Matricula(numeros, letras);
-			return a;
-		
+		Matricula a = new Matricula(numeros, letras);
+		return a;
 	}
 	
 	/**
@@ -222,22 +173,13 @@ public class PideDato {
 		l.nextLine();
 		return  new GregorianCalendar(anno,mes,dia);	//Creamos el GregorianCalendar con los datos introducidos
 	}
-	public static Categoria categoria(Scanner l) throws RecargoNoValidoException
-	{
-		metodosMenu.Metodos.pintaSubrayado("Categoría");
-		String cod = PideDato.cadena("Código",l);
-		String desc = PideDato.cadena("Descripción","La descripción debe ser breve",0,30,l);
-		double recargo = PideDato.real("Porcentaje de recargo", l);
-		return new Categoria(cod,desc,recargo);
-	}
 	
 	public static GregorianCalendar fecha(Scanner l)
 	{
 		return PideDato.fecha("", l);
 	}
 	
-	
-	public static Direccion direccion(Scanner l) throws LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException 
+	public static Direccion direccion(Scanner l) throws LongitudNoValidaException, PlantaNoValidaException 
 	{
 		boolean DatoBueno = false; //A priori es falso
 		String nombreVia;
@@ -265,232 +207,4 @@ public class PideDato {
 		Direccion home = new Direccion(nombreVia,numVia,planta,codigoPostal,localidad); //Al crear una nueva direccion podemos lanzar dos Exceptions
 		return home;
 	}
-	public static Oficina oficina(Scanner l) throws LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
-	{
-		String codigo; //(es un alfanumérico de 4 letras : JA01, MA10…)
-		String Descripcion; //(“Jaén estación de trenes”, “Málaga principal”
-		String Localidad;
-		String Provincia;
-		boolean deAeropuerto = false; //Si no es false
-		Direccion ubi;
-		
-		ubi = PideDato.direccion(l);
-		do 
-		{
-			codigo = PideDato.cadena("Código", l);
-		}while (Validadores.codigoValidado(codigo)); //Pedirá el codigo mientras sea inválido
-		Descripcion = PideDato.cadena("Descripción de la oficina","Tiene un límite de 40 caracteres",0,40,l);
-		Provincia = menuProvincias(l);
-		Localidad = PideDato.cadena("Localidad", l);
-		
-		String[] opc = {"S.- Si", "N.- No"};
-		String respuesta = "SN";
-		switch (metodosMenu.Metodos.menu(opc, respuesta, "¿Se trata de una oficina de aeropuerto?", "Elija una opción escribiendo S o N", l))
-		{
-		case "S","s":
-			deAeropuerto = true;
-		case "N","n":
-			deAeropuerto = false;
-		}
-		return new Oficina(codigo, Descripcion, ubi, Provincia, Localidad, deAeropuerto);
-	}
-	
-	public static CocheCombustion cocheCombustion(Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException 
-	{
-		Oficina oficina;		
-		l.nextLine(); //Limpiamos el Scanner
-		System.out.println("Matrícula del coche");
-		Matricula mat = null;
-		
-			mat = PideDato.matricula(l);
-		
-		System.out.println("Marca del coche");
-		String marca = l.nextLine();	
-		String model = PideDato.cadena("Modelo del coche", "Longitud no válida", 0, 25, l);
-		Categoria cat = null;
-		
-			cat = PideDato.categoria(l);
-		
-		String color = PideDato.cadena("Color del coche", l);
-		GregorianCalendar fechaAlta = PideDato.fecha("Fecha de alta del vehículo", l);
-//		boolean alquilado = true;	//A priori está alquilado así no habrá que asignarle una oficina aún
-//		String[] opc = {"S.- Si", "N.- No"};
-//		String respuesta = "SN";
-//		switch (metodosMenu.Metodos.menu(opc, respuesta, "¿Se encuentra alquilado ahora mismo?", "Elija una opción escribiendo S o N", l))
-//		{
-//		case "S","s":
-//			alquilado = true;
-//		case "N","n":
-//			alquilado = false;
-//		}
-		int kms = PideDato.numerico("¿Cuántos kilómetros tiene?",l);
-		int plazas = PideDato.numerico("¿Cuántas plazas tiene?",l);
-		double consumo = PideDato.real("¿Cuánto consumo (Litros por cada 100 kilómetros) tiene?", l);
-		String tipoCoche = PideDato.cadena("Tipo de coche: Familiar, deportivo o 4x4", l);
-		int potencia = PideDato.numerico("Potencia del coche (en CV)", l);
-		String emisiones = PideDato.cadena("Emisiones (A,B o C)", l);
-//		
-//		if(alquilado)
-//		{
-//			oficina = null;
-//		}else {
-			oficina = PideDato.oficina(l);
-		//}
-		
-		return new CocheCombustion(mat, marca, model, cat, color, fechaAlta, oficina, kms, plazas, consumo, tipoCoche, potencia, emisiones, potencia);
-		
-		
-	}
-	
-	public static CocheElectrico cocheElectrico(Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TiempoRecargaNoValidoException, TipoNoValidoException 
-	{
-		Oficina oficina;		
-		l.nextLine(); //Limpiamos el Scanner
-		System.out.println("Matrícula del coche");
-		Matricula mat = null;
-		int autonomia; //(kms)
-		int TiempoRecarga; //(min)
-		int numPlazas;
-		
-			mat = PideDato.matricula(l);
-		
-		System.out.println("Marca del coche");
-		String marca = l.nextLine();	
-		String model = PideDato.cadena("Modelo del coche", "Longitud no válida", 0, 25, l);
-		Categoria cat = null;
-		
-			cat = PideDato.categoria(l);
-		
-		String color = PideDato.cadena("Color del coche", l);
-		GregorianCalendar fechaAlta = PideDato.fecha("Fecha de alta del vehículo", l);
-		
-//		String[] opc = {"S.- Si", "N.- No"};
-//		String respuesta = "SN";
-//		switch (metodosMenu.Metodos.menu(opc, respuesta, "¿Se encuentra alquilado ahora mismo?", "Elija una opción escribiendo S o N", l))
-//		{
-//		case "S","s":
-//			alquilado = true;
-//		case "N","n":
-//			alquilado = false;
-//		}
-		int kms = PideDato.numerico("¿Cuántos kilómetros tiene?",l);
-		numPlazas = PideDato.numerico("¿Cuántas plazas tiene?",l);
-		
-		String tipoCoche = PideDato.cadena("Tipo de coche: Familiar, deportivo o 4x4", l);
-		
-		autonomia = PideDato.numerico("Autonomía en kilómetros:", l);
-		TiempoRecarga = PideDato.numerico("Tiempo de recarga promedio (en minutos):", l);
-		
-		
-		//if(alquilado)
-		//{
-		//	oficina = null;
-		//}else {
-			oficina = PideDato.oficina(l);
-		//}
-		
-		return new CocheElectrico(mat, marca, model, cat, color, fechaAlta, oficina, kms, autonomia, TiempoRecarga, tipoCoche, numPlazas);
-		
-		
-	}
-	
-	public static Moto moto(Scanner l) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
-	{
-		int cilindrada;
-		String carnet; //Carnet requerido (AM/A1/A2)
-		l.nextLine(); //Limpiamos el Scanner
-		
-		System.out.println("Matrícula del coche");
-		Matricula mat = null;
-		
-			mat = PideDato.matricula(l);
-		
-		System.out.println("Marca del coche");
-		String marca = l.nextLine();	
-		String model = PideDato.cadena("Modelo del coche", "Longitud no válida", 0, 25, l);
-		Categoria cat = null;
-		
-			cat = PideDato.categoria(l);
-		
-		String color = PideDato.cadena("Color del coche", l);
-		GregorianCalendar fechaAlta = PideDato.fecha("Fecha de alta del vehículo", l);
-
-		int kms = PideDato.numerico("¿Cuántos kilómetros tiene?",l);
-		
-		double consumo = PideDato.real("¿Cuánto consumo (Litros por cada 100 kilómetros) tiene?", l);
-		
-		int potencia = PideDato.numerico("Potencia del coche (en CV)", l);
-		String emisiones = PideDato.cadena("Emisiones (A,B o C)", l);
-		
-		cilindrada = PideDato.numerico("Cilindrada de la moto", l);
-		
-		do {
-			System.out.println("Carnet requerido:");
-			carnet = l.nextLine();
-			//Lo repetiremos mientras sea distinto de AM, A1 o A2
-		}while (carnet.compareToIgnoreCase("AM")!=0 || carnet.compareToIgnoreCase("A1")==0 || carnet.compareToIgnoreCase("A2")==0 );
-		
-		
-			return new Moto(mat, marca, model, cat, color, fechaAlta, null, kms, consumo, potencia, emisiones, cilindrada, carnet);
-	}
-	
-	public static Furgoneta furgoneta(Scanner l) throws EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException 
-	{
-/*
- * * @param matricula	Objeto tipo {@code Matricula} 
-	 * @param marca	Marca de la furgoneta, por ejemplo "skoda" en forma de {@code String}
-	 * @param modelo	Modelo de la furgoneta, tipo {@code String}
-	 * @param categoria	Categoría de la furgoneta, tipo {@code Categoria}
-	 * @param color	Color de la furgoneta, por ejemplo "blanco". Tipo {@code String}
-	 * @param fecha_alta	Fecha de alta del vehículo, del tipo {@code GregorianCalendar}
-	 * @param oficina	{@code Direccion} que indica donde se encuentra la furgoneta (si no está alquilada)
-	 * @param num_km	Los kilómetros que tiene el vehículo en forma de {@code int}
-	 * @param consumo	El consumo (Litros por cada 100km) de la furgoneta, es un {@code double}
-	 * @param caballaje	La potencia medida en {@code int} (medida en CV)
-	 * @param emisiones	El tipo de emisiones ({@code String} Puede ser A, B o C
-	 * @param capacidadCarga	El {@code int} 
-	 * @param carnetRequerido
- */
-		l.nextLine(); //Limpiamos el Scanner
-		System.out.println("Matrícula del coche");
-		Matricula mat = null;
-		
-			mat = PideDato.matricula(l);
-		
-		System.out.println("Marca del coche");
-		String marca = l.nextLine();	
-		String model = PideDato.cadena("Modelo del coche", "Longitud no válida", 0, 25, l);
-		Categoria cat = null;
-		
-			cat = PideDato.categoria(l);
-		
-		String color = PideDato.cadena("Color del coche", l);
-		GregorianCalendar fechaAlta = PideDato.fecha("Fecha de alta del vehículo", l);
-//		boolean alquilado = true;	//A priori está alquilado así no habrá que asignarle una oficina aún
-//		String[] opc = {"S.- Si", "N.- No"};
-//		String respuesta = "SN";
-//		switch (metodosMenu.Metodos.menu(opc, respuesta, "¿Se encuentra alquilado ahora mismo?", "Elija una opción escribiendo S o N", l))
-//		{
-//		case "S","s":
-//			alquilado = true;
-//		case "N","n":
-//			alquilado = false;
-//		}
-		int kms = PideDato.numerico("¿Cuántos kilómetros tiene?",l);
-		
-		double consumo = PideDato.real("¿Cuánto consumo (Litros por cada 100 kilómetros) tiene?", l);
-		
-		int potencia = PideDato.numerico("Potencia del coche (en CV)", l);
-		String emisiones = PideDato.cadena("Emisiones (A,B o C)", l);
-		
-		int capacidad = PideDato.numerico("Capacidad de carga (m²):",l)	;
-		System.out.println("Carnet requerido:");
-		String carnet = l.nextLine();
-		
-			return new Furgoneta(mat, marca, model, cat, color, fechaAlta, null, kms, consumo, potencia, emisiones, capacidad, carnet);
-		
-		}
-		
-	}
-	
-
+}

@@ -1,24 +1,12 @@
 package clasesObjetos;
 
-import java.util.Objects;
 import java.util.TreeMap;
-
-import metodos.Validadores;
 
 public class Oficina {
 
 	//Propiedades
 	private Direccion ubicacion;
 	private TreeMap<String, Empleado> personal;
-	  
-	 
-	private String Código; //(es un alfanumérico de 4 letras : JA01, MA10…)
-	private String Descripción; //(“Jaén estación de trenes”, “Málaga principal”
-	private String Localidad;
-	private String Provincia;
-	private boolean deAeropuerto; //Si es o no oficina de aeropuerto (porque esto supone un recargo en los alquileres, según se explica más adelante)
-
-	
 	
 	//Getters Y setters
 	public Direccion getUbicacion() {
@@ -30,118 +18,6 @@ public class Oficina {
 		this.ubicacion = new Direccion(ubicacion);
 	}
 	
-	public String getLocalidad() {
-		String copia = Localidad;
-		return copia;
-	}
-	public void setLocalidad(String localidad) {
-		if (localidad.length()>0 && localidad.length()<30)
-		{
-			String jaen = localidad; //Creamos una nueva localidad clon
-			Localidad = jaen;
-		}
-	}
-	public String getDescripción() {
-		String desc = this.Descripción;
-		return desc ;
-	}
-	public void setDescripción(String descripcion) {
-		if (descripcion.length()>0)
-		{
-			String desc = descripcion;
-			Descripción = desc;
-		}
-	}
-	public String getProvincia() {
-		String clon = Provincia;
-		return clon;
-	}
-	public void setProvincia(String provincia) {
-		if (provincia.length()>0 && provincia.length()<30)
-		{
-			String jaen = provincia; //Creamos una nueva provincia clon
-			Provincia = jaen;
-		}
-	}
-	/**
-	 * Constructor de copia de oficina
-	 * @param oficina	La oficina a clonar
-	 */
-	public Oficina(Oficina oficina) {
-		this.setCódigo(oficina.getCódigo());
-		this.setDeAeropuerto(oficina.isDeAeropuerto());
-		this.setDescripción(oficina.getDescripción());
-		this.setLocalidad(oficina.getLocalidad());
-		this.setProvincia(oficina.getProvincia());
-		this.setPersonal(oficina.getPersonal());
-		this.setUbicacion(oficina.getUbicacion());
-	}
-	
-	
-	public Oficina(String código, String descripción, Direccion ubicacion, TreeMap<String, Empleado> personal,  
-			 String provincia, String localidad, boolean deAeropuerto) {
-		super();
-		this.setUbicacion(ubicacion);
-		this.setPersonal(personal);
-		this.setCódigo(localidad);
-		this.setDescripción(descripción);
-		this.setLocalidad(localidad);
-		this.setProvincia(provincia);
-		this.setDeAeropuerto(deAeropuerto);
-	}
-	
-	public Oficina(String código, String descripción, Direccion ubicacion,   
-			 String provincia, String localidad, boolean deAeropuerto) {
-		super();
-		this.setUbicacion(ubicacion);
-		this.setCódigo(localidad);
-		this.setDescripción(descripción);
-		this.setLocalidad(localidad);
-		this.setProvincia(provincia);
-		this.setDeAeropuerto(deAeropuerto);
-	}
-	
-	public boolean isDeAeropuerto() {
-		boolean copia = deAeropuerto;
-		return copia;
-	}
-	public void setDeAeropuerto(boolean deAeropuerto) {
-		boolean SIoNO = deAeropuerto;	//Evitamos el tampering
-		this.deAeropuerto = SIoNO;	//Introducimos el valor que queramos T / F
-	}
-	public String getCódigo() {
-		String copiaCod = this.Código;
-		return copiaCod;
-	}
-	public void setCódigo(String code) {
-		if (Validadores.codigoValidado(code))
-		{
-			String cop = code;
-			Código = cop;
-		}
-		
-	}
-	
-	
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(Código, Descripción, Localidad, Provincia, deAeropuerto, personal, ubicacion);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Oficina other = (Oficina) obj;
-		return Objects.equals(Código, other.Código) && Objects.equals(Descripción, other.Descripción)
-				&& Objects.equals(Localidad, other.Localidad) && Objects.equals(Provincia, other.Provincia)
-				&& deAeropuerto == other.deAeropuerto && Objects.equals(personal, other.personal)
-				&& Objects.equals(ubicacion, other.ubicacion);
-	}
 	@SuppressWarnings("unchecked")
 	public TreeMap<String, Empleado> getPersonal() {
 		return (TreeMap<String, Empleado>) personal.clone() ;

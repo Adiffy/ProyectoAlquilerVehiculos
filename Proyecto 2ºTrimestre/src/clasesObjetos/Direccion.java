@@ -1,9 +1,5 @@
 package clasesObjetos;
 
-import java.util.Objects;
-
-import exceptions.CodigoPostalException;
-import exceptions.LongitudCadenaNoValidaException;
 import exceptions.LongitudNoValidaException;
 import exceptions.PlantaNoValidaException;
 
@@ -59,25 +55,25 @@ public class Direccion {
 	public String getCodigoPostal() {
 		return codigoPostal;
 	}
-	public void setCodigoPostal(String codigoPostal) throws CodigoPostalException {
-		if (codigoPostal.length()==5) //Los CP tienen 5 caracteres, por ejemplo: 23009
+	public void setCodigoPostal(String codigoPostal) {
+		if (codigoPostal.length()==5)
 		{
 			String CP = codigoPostal;
 			this.codigoPostal = CP;
 		}else {
-			throw new CodigoPostalException("Longitud del Codigo Postal inválido");
+			//TODO mensaje error
 		}
 	}
 	public String getLocalidad() {
 		return localidad;
 	}
-	public void setLocalidad(String localidad) throws LongitudCadenaNoValidaException {
+	public void setLocalidad(String localidad) {
 		if (localidad.length()>3 && localidad.length()<25)
 		{
 			String loc = localidad;
 			this.localidad = loc;
 		}else {
-			throw new LongitudCadenaNoValidaException("Nombre de localidad muy largo");
+			//TODO mensaje error
 		}
 	}
 	
@@ -94,10 +90,8 @@ public class Direccion {
 	 * @param localidad	El nombre de la localidad. Ejemplo: "{@code Jaén}".
 	 * @throws LongitudNoValidaException Error cuando la longitud del dato introducido es inválida
 	 * @throws PlantaNoValidaException Error cuando la planta tiene demasiados números (más de 4 dígitos). Ejemplo: planta nº 1000
-	 * @throws CodigoPostalException Longitud del Codigo postal inváilida
-	 * @throws LongitudCadenaNoValidaException 
 	 */
-	public Direccion(String nombreVia, String numVia, String planta, String codigoPostal, String localidad) throws LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException {
+	public Direccion(String nombreVia, String numVia, String planta, String codigoPostal, String localidad) throws LongitudNoValidaException, PlantaNoValidaException {
 		super();
 		this.setNombreVia(nombreVia);
 		this.setNumVia(numVia);
@@ -114,10 +108,8 @@ public class Direccion {
 	 * @param codigoPostal Código Postal. Ejemplo: {@code 23009} en el caso de {@code Jaén}.
 	 * @param localidad El nombre de la localidad. Ejemplo: "{@code Vitoria-gasteiz}".
 	 * @throws LongitudNoValidaException Error cuando la longitud del dato introducido es inválida
-	 * @throws CodigoPostalException Longitud del Codigo postal inváilida
-	 * @throws LongitudCadenaNoValidaException 
 	 */
-	public Direccion(String nombreVia, String numVia, String codigoPostal, String localidad) throws LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException {
+	public Direccion(String nombreVia, String numVia, String codigoPostal, String localidad) throws LongitudNoValidaException {
 		super();
 		this.setNombreVia(nombreVia);
 		this.setNumVia(numVia);
@@ -144,29 +136,7 @@ public class Direccion {
 		this.localidad = loc;
 		this.planta = plant;
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(codigoPostal, localidad, nombreVia, numVia, planta);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Direccion other = (Direccion) obj;
-		return Objects.equals(codigoPostal, other.codigoPostal) && Objects.equals(localidad, other.localidad)
-				&& Objects.equals(nombreVia, other.nombreVia) && Objects.equals(numVia, other.numVia)
-				&& Objects.equals(planta, other.planta);
-	}
 	
-	
-	
-/*				ELIMINAMOS EL JAVADOC
 	/**
 	 * Valida una {@code Direccion} válida, devuelve un verdadero si es <strong>válido</strong> o un falso
 	 * si <strong>NO</strong> lo es.
@@ -179,7 +149,5 @@ public class Direccion {
 		return valido;
 	}
 */
-	
-	
 	
 }

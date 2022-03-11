@@ -1,6 +1,4 @@
-package clasesObjetos;
-
-import exceptions.RecargoNoValidoException;
+package clases;
 
 public class Categoria {
 
@@ -42,18 +40,11 @@ public class Categoria {
 			} 
 		}
 	}
-	private void setRecargo(double recargo) throws RecargoNoValidoException {
-		if (recargo>=0 && recargo<=100)	//No puede ser un recargo del 100% pero sí puede ser nulo (0)
+	private void setRecargo(double recargo) {
+		if (recargo>=0 && recargo<=100)
 		{
 			double cop = recargo; //Copia
 			this.recargo = cop;
-		}else {
-			if (recargo >100) // Comprobamos si se ha pasado por ser mayor que 100 o no
-			{
-				throw new RecargoNoValidoException("Recargo demasiado alto");
-			}else {	//Si no es mayor que 100, será menor que 0
-				throw new RecargoNoValidoException("Recargo demasiado bajo (menor que 0)");
-			}
 		}
 	}
 	public double getRecargo() {
@@ -75,9 +66,8 @@ public class Categoria {
 	 * @param codigo	El código de la categoria. Puede ser "A", "B", "C" ...
 	 * @param descripcion	{@code String} que puede ser "ECONOMICO", "MEDIO" o "PREMIUM".
 	 * @param recargo	Entero referido al porcentaje de recargo (necesario para luego calcular la factura)
-	 * @throws RecargoNoValidoException Porcentaje de recargo no válido (mayor que 100 o menor que 0)
 	 */
-	public Categoria(String codigo, String descripcion, double recargo) throws RecargoNoValidoException {
+	public Categoria(String codigo, String descripcion, double recargo) {
 		super();
 		this.setCodigo(codigo);
 		this.setDescripcion(descripcion);
@@ -97,9 +87,8 @@ public class Categoria {
 	/**
 	 * Constructor de copia
 	 * @param otro	El Objeto tipo {@code Categoria} a copiar.
-	 * @throws RecargoNoValidoException Porcentaje de recargo no válido (mayor que 100 o menor que 0)
 	 */
-	public Categoria(Categoria otro) throws RecargoNoValidoException {
+	public Categoria(Categoria otro) {
 		//Obtenemos los parámetros que necesitamos
 		String codcop = otro.getCodigo();
 		String desccop = otro.getDescripcion();

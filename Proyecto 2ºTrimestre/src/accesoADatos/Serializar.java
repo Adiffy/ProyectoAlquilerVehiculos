@@ -1,4 +1,4 @@
-package accesoADatos;
+package acceso.a.Datos;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import clasesObjetos.Cliente;
+import clases.Objetos.Cliente;
 
 public class Serializar {
 
@@ -22,8 +22,8 @@ public class Serializar {
 			System.out.println("Error al intentar grabar: " + e.getLocalizedMessage());
 			
 		}
-		 catch (IOException i) {
-			 System.out.println("Error al intentar grabar: " + i.getLocalizedMessage());
+		 catch (IOException e) {
+			 System.out.println("Error al intentar grabar: " + e.getLocalizedMessage());
 		}
 	}
 	
