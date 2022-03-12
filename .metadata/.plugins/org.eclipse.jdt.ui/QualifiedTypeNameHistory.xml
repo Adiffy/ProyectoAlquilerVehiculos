@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="exceptions.LongitudNoValidaException"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="comparadores.ComparaEmpleadoPorNombre"/>
+    <fullyQualifiedTypeName name="exceptions.CodigoPostalException"/>
+    <fullyQualifiedTypeName name="exceptions.LongitudCadenaNoValidaException"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Cliente"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Empleado"/>
+    <fullyQualifiedTypeName name="java.util.Set"/>
+    <fullyQualifiedTypeName name="exceptions.LicenciaNoValidaException"/>
+    <fullyQualifiedTypeName name="comparadores.ComparaClientePorNombre"/>
+</qualifiedTypeNameHistroy>

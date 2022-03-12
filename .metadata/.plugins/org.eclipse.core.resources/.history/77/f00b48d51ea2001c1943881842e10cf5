@@ -87,7 +87,7 @@ public class Menus {
 		}
 		
 	}
-	private static void MenuListados(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, PlantaNoValidaException
+	private static void MenuListados(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
 		String[] list = {"1.- Listar vehículos","2.- Listar Personas", "3.- Listar Oficinas","4.- Salir"};
 		String posibilidades = "1234";
@@ -99,7 +99,7 @@ public class Menus {
 		case "2":	//Personas
 			Menus.listadoPersonas(empresa, lector);
 		case "3":	//Oficinas
-			Menus.MenuOficinas(empresa, lector);
+			
 		case "4": //Salir
 			break;
 		}
@@ -251,7 +251,7 @@ public class Menus {
 			break;
 		}
 	}
-	private static void add(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
+	public static void add(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
 	{
 		String[] elec = {"A.- De combustión","B.- Eléctrico","C.- Salir"}; //elec de Elección
 		String validas = "ABC";
