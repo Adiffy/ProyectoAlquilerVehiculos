@@ -3,30 +3,46 @@ package clasesObjetos;
 import java.util.GregorianCalendar;
 
 import clasesObjetosInterfaces.Alquilable;
-import exceptions.FechaNoValidaException;
+import exceptions.LetrasMatriculaNoValidasException;
+import exceptions.NumeroMatriculaNoValidoException;
+import exceptions.RecargoNoValidoException;
 
 
 public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable {
 
 	//Propiedades
-	private Matricula matricula; //Matrícula del vehículo
+	protected Matricula matricula; //Matrícula del vehículo
 	private String marca;	//Marca del coche. Ejemplo: "Renault"
 	private String modelo; 	//Modelo del coche (puede ser numérico y/o contener letras. Por ejemplo--> Audi "R8") 
 	private String Color; //Color del vehículo
 	private GregorianCalendar fechaAlta;
 	private int kms; //Los kilómetros que tiene
 	private Categoria categoria;
-	private Direccion ubi; 
-	private boolean alquilado=false; //Por defecto NO está alquilado
+	 
+	//private boolean alquilado=false; //Por defecto NO está alquilado
 	
-	//Variables que pueden ser nulas. Se usarán en caso de alquiler
-	private GregorianCalendar FechaInicioAlquiler = new GregorianCalendar();
-	private GregorianCalendar FechaPrevistaFinAlquiler = new GregorianCalendar();
-	private GregorianCalendar FechaDevolucion = new GregorianCalendar();
+	
+	private Oficina Oficina;
+	private boolean esElectrico;
 	
 	//Getters y Setters 
 	
 	
+	public Oficina getOficina() {
+		return new Oficina(Oficina);
+	}
+	public void setOficina(Oficina oficina) {
+		//Ya está creada (se supone que validada)
+		Oficina = oficina;
+	}
+	public boolean isEsElectrico() {
+		boolean cop = this.esElectrico;
+		return cop;
+	}
+	public void setEsElectrico(boolean esElectrico) {
+		boolean copia = esElectrico;
+		this.esElectrico = copia;
+	}
 	public String getModelo() {
 		return modelo;
 	}
@@ -40,13 +56,8 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable {
 		Color = color;
 	}
 	
-	public GregorianCalendar getFechaInicioAlquiler() {
-		return FechaInicioAlquiler;
-	}
-	public void setFechaInicioAlquiler(GregorianCalendar fechaInicioAlquiler) {
-		FechaInicioAlquiler = fechaInicioAlquiler;
-	}
-	public Matricula getMatricula() {
+	
+	public Matricula getMatricula() throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException {
 		Matricula copia = new Matricula(this.matricula);
 		return copia;
 	}
@@ -64,31 +75,6 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable {
 		}
 	}
 	
-	/**
-	 * @return El nº de días que el vehículo está alquilado
-	 */
-	public int getNumDias()
-	{
-		@SuppressWarnings("static-access")
-		int num = ((this.FechaDevolucion.MONTH - this.FechaInicioAlquiler.MONTH) + (this.FechaDevolucion.DATE - this.FechaInicioAlquiler.DATE));
-		return num;
-	}
-	
-	
-	public GregorianCalendar getFechaPrevistaFinAlquiler() {
-		return (GregorianCalendar) FechaPrevistaFinAlquiler.clone();
-	}
-	@SuppressWarnings("static-access")
-	public void setFechaPrevistaFinAlquiler(GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
-		if (fechaPrevistaFinAlquiler.DATE > GregorianCalendar.getInstance().DATE && (fechaPrevistaFinAlquiler.MONTH > GregorianCalendar.getInstance().MONTH || fechaPrevistaFinAlquiler.DAY_OF_YEAR > GregorianCalendar.getInstance().DAY_OF_YEAR))
-		{
-			FechaPrevistaFinAlquiler = fechaPrevistaFinAlquiler;
-		}else 
-		{
-			throw new FechaNoValidaException("Fecha anterior a la actual");
-		}
-		
-	}
 	@SuppressWarnings("static-access")
 	public GregorianCalendar getFechaAlta() {
 		//Obtenemos los datos necesarios para construir un clon
@@ -110,7 +96,7 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable {
 			this.kms = kms;
 		}
 	}
-	public Direccion getUbi() {
+	/*public Direccion getUbi() {
 		Direccion cop = new Direccion(ubi);
 		return cop; //Devolvemos una copia
 	}
@@ -120,25 +106,27 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable {
 			this.ubi = cop;
 		}else {
 			//TODO excepción ---> NO se puede meter una ubicación si está alquilado por alguien
+			 //Mala filosofía
 		}
-	}
+	}*/
 	public Categoria getCategoria() {
 		return categoria;
 	}
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	public void setCategoria(String codigo, String descripcion, double recargo) {
+	public void setCategoria(String codigo, String descripcion, double recargo) throws RecargoNoValidoException {
 		Categoria creada = new Categoria(codigo,descripcion,recargo);
 		this.categoria = creada;
 	}
 	public boolean isAlquilado() {
-		if (this.alquilado==true)
+		return esElectrico;
+		/*if ()
 		{
 			return true;
-		}else {
+		}else {				//TODO metodo para saber si seencuentra alquilado
 			return false;
-		}
+		}*/
 	}
 	/**
 	 *	<p>
@@ -149,7 +137,7 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable {
 	 * @param alquilado
 	 */
 	public void setAlquilado(boolean alquilado) {
-		this.alquilado = alquilado;
+		// = alquilado;
 	}
 	
 	
@@ -164,7 +152,7 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable {
 	
 	public Vehiculo(Matricula matricula, String marca, String modelo, String color,GregorianCalendar fecha_alta ) {
 		super();	
-		this.setAlquilado(alquilado);
+
 		this.setMarca(marca);
 		this.setModelo(modelo);
 		this.setColor(color);
@@ -174,29 +162,34 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable {
 	/**
 	 * Constructor de copia para vehículo
 	 * @param vehiculo el vehículo a copiar
+	 * @throws NumeroMatriculaNoValidoException 
+	 * @throws LetrasMatriculaNoValidasException 
 	 */
-	public Vehiculo(Vehiculo vehiculo) {
+	public Vehiculo(Vehiculo vehiculo) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException {
 		
 		this.setModelo(vehiculo.getModelo());
 		this.setMarca(vehiculo.getMarca());
-		this.setAlquilado(vehiculo.isAlquilado());
+		
 		this.setCategoria(vehiculo.getCategoria());
 		this.setFechaAlta(vehiculo.getFechaAlta());
 		this.setKms(vehiculo.getKms());
-		this.setUbi(vehiculo.getUbi());
+		//this.setUbi(vehiculo.getUbi());
+		this.setOficina(vehiculo.getOficina());
 		this.setColor(vehiculo.getColor());
 		this.setMatricula(vehiculo.getMatricula());
 	}
 	
-public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categoria, String color, boolean alquilado, Direccion oficina, int num_km) {
-		
+	
+	
+	public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categoria, String color,  Direccion oficina, int num_km) {
+	
 		this.setMatricula(matricula);
 		this.setMarca(marca);
 		this.setModelo(modelo);
-		this.setAlquilado(alquilado);
+		
 		this.setColor(color);
 		this.setCategoria(categoria);
-		this.setUbi(oficina);
+		//this.setUbi(oficina);
 		this.setKms(num_km);
 	}
 /**
@@ -211,15 +204,16 @@ public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categ
  * @param oficina La oficina o ubicación en la que se encuentra el vehículo si NO está alquilado {@value false}, de tipo {@code Direccion}
  * @param num_km El nº de kilómetros que tiene el coche de forma entera, es decir, de tipo {@code int}
  */
-public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categoria, String color, GregorianCalendar fecha_alta ,boolean alquilado, Direccion oficina, int num_km) {
+public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categoria, String color, GregorianCalendar fecha_alta, Oficina oficina, int num_km) {
 	
 	this.setMatricula(matricula);
 	this.setMarca(marca);
 	this.setModelo(modelo);
-	this.setAlquilado(alquilado);
+	
 	this.setColor(color);
 	this.setCategoria(categoria);
-	this.setUbi(oficina);
+	this.setOficina(oficina);
+	//this.setUbi(oficina);
 	this.setKms(num_km);
 	this.setFechaAlta(fecha_alta);
 }
@@ -232,36 +226,23 @@ public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categ
  * @param categoria La categoría del vehículo del tipo {@code Categoria}
  * @param color	El color del vehículo del tipo {@code String} puede ser nulo (""). Ejemplo: "Naranja"
  * @param fecha_alta	La fecha en la que el vehículo entró en la base de datos, tipo {@code GregorianCalendar}
- * @param alquilado El buleano que identifica si el vehículo se encuentra alquilado {@value true} o no {@value false}
  * @param oficina La oficina o ubicación en la que se encuentra el vehículo si NO está alquilado {@value false}, de tipo {@code Direccion}
  * @param num_km El nº de kilómetros que tiene el coche de forma entera, es decir, de tipo {@code int}
- * @param FechaInicioAlquiler	La fecha prevista para el alquiler del vehiculo en cuestión. Tipo {@code GregorianCalendar}
- * @param FechaFinAlquiler	La fehca en la que se espera (a priori) que el cliente deje el vehículo. También {@code GregorianCalendar}
- * @throws FechaNoValidaException 
  */
-public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categoria, String color, GregorianCalendar fecha_alta ,boolean alquilado, Direccion oficina, int num_km, GregorianCalendar FechaInicioAlquiler, GregorianCalendar FechaFinAlquiler) throws FechaNoValidaException {
+public Vehiculo(Matricula matricula, String marca, String modelo, Categoria categoria, String color, GregorianCalendar fecha_alta , Direccion oficina, int num_km) {
 	
 	this.setMatricula(matricula);
 	this.setMarca(marca);
 	this.setModelo(modelo);
-	this.setAlquilado(alquilado);
+
 	this.setColor(color);
 	this.setCategoria(categoria);
-	this.setUbi(oficina);
+	//this.setUbi(oficina);
 	this.setKms(num_km);
 	this.setFechaAlta(fecha_alta);
-	this.setFechaInicioAlquiler(FechaInicioAlquiler);
-	this.setFechaPrevistaFinAlquiler(FechaFinAlquiler);
+	
 }
 
-	public Vehiculo(Matricula matricula, String marca, String modelo, String color, boolean alquilado) {
-		
-		this.setMatricula(matricula);
-		this.setMarca(marca);
-		this.setModelo(modelo);
-		this.setAlquilado(alquilado);
-		this.setColor(color);
-	}
 	
 	public String getNombreVehiculo() {
 		return this.getMarca() + "" + this.getModelo() + ".";
@@ -278,8 +259,15 @@ public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categ
 			return false;
 		}
 		Vehiculo copia = (Vehiculo) otro;
-		return (copia.matricula==this.getMatricula());
+		
+			//Comparamos sus matrículas
+			return (copia.matricula==this.matricula);
+			
+		
+	
+			
 	}
+	
 	
 	@Override
 	public int compareTo(Vehiculo otro) 
@@ -290,6 +278,28 @@ public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categ
 		return resultado;
 	}
 	
-	//public abstract double CalculaAlquiler();
-	
+	public abstract double PrecioAlquiler();
+	/*@SuppressWarnings("static-access")
+	public double PrecioAlquiler(int base)
+	{
+		double precio = base;	//El total a pagar por el cliente
+		double porcentaje = 0;	//El porcentaje que se le aplica si es eléctrico/de combustión
+		double recargo = 0; //El recargo que se le aplica en base a su categoría
+		
+		if (this.esElectrico )
+		{
+			porcentaje = (15 * this.precioBase)/100; //Calculamos el 15% para luego sumarlo
+		}
+		recargo = this.categoria.getRecargo();	//Averiguamos cuanto es el porcentaje: 10,15,30 ...
+		recargo= (recargo*this.precioBase)/100;	//Calculamos el porcentaje
+		
+		precio+=porcentaje; //Le sumamos el 0 o el 15% 
+		precio+=recargo; //Le sumamos el recargo
+		
+		if (this.Oficina.isDeAeropuerto())
+		{
+			precio += (this.precioBase*porcentaje*10)/100; //Calculamos el 10% de la nueva cantidad
+		}
+		return precio; 
+	}*/
 }

@@ -1,6 +1,12 @@
 package exceptions;
 
+
 public class LongitudNoValidaException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public LongitudNoValidaException() {
 		// TODO Auto-generated constructor stub

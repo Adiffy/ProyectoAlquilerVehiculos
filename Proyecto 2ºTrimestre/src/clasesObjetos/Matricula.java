@@ -2,6 +2,9 @@ package clasesObjetos;
 
 import java.util.Objects;
 
+import exceptions.LetrasMatriculaNoValidasException;
+import exceptions.NumeroMatriculaNoValidoException;
+
 public class Matricula {
 
 	//Propiedades
@@ -14,10 +17,12 @@ public class Matricula {
 		return numeros;
 	}
 	
-	private void setNumeros(int numeros) {
+	private void setNumeros(int numeros) throws NumeroMatriculaNoValidoException {
 		if (String.valueOf(numeros).length()<5 && String.valueOf(numeros).length()>2) //TODO revisar cuantos nº hay en matrícula
 		{
 			this.numeros = numeros;
+		}else {
+			throw new NumeroMatriculaNoValidoException("Se esperaba únicamente la parte numérica de su matrícula. Por ejemplo: 3025");
 		}
 	}
 	
@@ -25,10 +30,12 @@ public class Matricula {
 		return letras;
 	}
 	
-	private void setLetras(String letras) {
+	private void setLetras(String letras) throws LetrasMatriculaNoValidasException {
 		if (letras.length()==3)
 		{
 			this.letras = letras;
+		}else {
+			throw new LetrasMatriculaNoValidasException("Se esperaba solo la cadena final de matrícula. Ejemplo: 'DML'");
 		}
 	}
 	
@@ -57,7 +64,7 @@ public class Matricula {
 
 	@Override
 	public String toString() {
-		return "Matricula: " + numeros + letras;
+		return "" + numeros + letras + "";
 	}
 
 
@@ -66,8 +73,10 @@ public class Matricula {
 	/**
 	 * Constructor de copia
 	 * @param otra	 La matrícula a copiar
+	 * @throws LetrasMatriculaNoValidasException Las letras de la matrícula no pueden ser de otro tipo que no sea {@code String}
+	 * @throws NumeroMatriculaNoValidoException El tamaño y tipo de los números de la matrícula. {@code int}
 	 */
-	public Matricula(Matricula otra) {
+	public Matricula(Matricula otra) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException {
 		this.setLetras(otra.letras);
 		this.setNumeros(otra.numeros);
 	}
@@ -76,12 +85,15 @@ public class Matricula {
 	 * Constructor completo
 	 * @param numeros	Los números que tiene una matrícula al principio generalmente
 	 * @param letras	Las letras que acompañan a los números y que también componen la matrícula
+	 * @throws LetrasMatriculaNoValidasException Las letras de la matrícula sólo pueden ser tipo {@code String} y respetar su tamaño 
+	 * @throws NumeroMatriculaNoValidoException Los números de la matrícula se escriben por separado, por tanto sólo pueden ser tipo {@code int}
 	 */
-	public Matricula(int numeros, String letras) {
+	public Matricula(int numeros, String letras) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException {
 		super();
 		this.setLetras(letras);
 		this.setNumeros(numeros);
 	}
+	
 	
 	
 	
