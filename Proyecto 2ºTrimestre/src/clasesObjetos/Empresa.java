@@ -20,12 +20,14 @@ public class Empresa {
 
 	//Setters & Getters
 	
+	@SuppressWarnings("unchecked")	//Quitamos el Warning para evitar errores al exportar
 	public TreeMap<String, Empleado> getEmpleados() {
 		//Devolvemos un clon
 		return (TreeMap<String, Empleado>) Empleados.clone() ;
 	}
 
 	
+	@SuppressWarnings("unchecked")	//Quitamos el Warning para evitar errores al exportar
 	public void setEmpleados(TreeMap<String, Empleado> empleados) {
 		//Devolvemos un clon
 		Empleados = (TreeMap<String, Empleado>) empleados.clone();
@@ -37,6 +39,7 @@ public class Empresa {
 	}
 	
 	
+	@SuppressWarnings("unchecked")	//Quitamos el Warning para evitar errores al exportar
 	public TreeMap<Matricula, Vehiculo> getGaraje() {
 		//Devolvemos un clon
 		return (TreeMap<Matricula, Vehiculo>) Stock.clone() ;
@@ -46,28 +49,33 @@ public class Empresa {
 	 * Constructor "de copia" que requiere de un treeMap ya creado de garage
 	 * @param garage El {@code TreeMap} de Vehículos con clave principal del tipo {@code Matrícula}
 	 */
+	@SuppressWarnings("unchecked")//Quitamos el Warning para evitar errores al exportar
 	public void setGaraje(TreeMap<Matricula, Vehiculo> garaje) {
 		//Devolvemos un clon
 		Stock = (TreeMap<Matricula, Vehiculo>) garaje.clone() ;
 	}
 
 	
+	@SuppressWarnings("unchecked") //Quitamos el Warning para evitar errores al exportar
 	public TreeMap<String, Cliente> getClientes() {
 		//Devolvemos un clon
 		return (TreeMap<String, Cliente>) Clientes.clone();
 	}
 
 	
+	@SuppressWarnings("unchecked")	//Quitamos el Warning para evitar errores al exportar
 	public void setClientes(TreeMap<String, Cliente> clientes) {
 		//Devolvemos un clon
 		Clientes = (TreeMap<String, Cliente>) clientes.clone();
 	}
 
+	@SuppressWarnings("unchecked")	//Quitamos el Warning para evitar errores al exportar
 	public TreeMap<String, Oficina> getOficinas() {
 		return (TreeMap<String, Oficina>) Oficinas.clone() ;
 	}
 
 	
+	@SuppressWarnings("unchecked")	//Quitamos el Warning para evitar errores al exportar
 	public void setOficinas(TreeMap<String, Oficina> oficinas) {
 		Oficinas = (TreeMap<String, Oficina>) oficinas.clone();
 	}
@@ -154,6 +162,7 @@ public class Empresa {
 	}
 	
 	//Constructor
+	@SuppressWarnings("unused")		//Quitamos los Warnings para evitar errores al exportar
 	public Empresa()
 	{
 		TreeMap<String, Oficina> Oficinas = new TreeMap<String,Oficina>();
