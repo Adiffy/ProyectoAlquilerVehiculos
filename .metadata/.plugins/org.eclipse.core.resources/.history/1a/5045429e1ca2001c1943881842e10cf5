@@ -306,8 +306,8 @@ public class Menus {
 	
 	private static void oficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
-		String[] opcioness = {"A.- Empleados", "B.- Oficinas", "C.- Salir"};
-		String Validas = "ABC";
+		String[] opcioness = {"A.- Empleados", "B.- Oficinas", "C.- ", "D.- Salir"};
+		String Validas = "ABCD";
 		String errorLetras = "Debe elegir una opción válida pulsando:"; //Error en los menús no-numéricos
 		switch (metodosMenu.Metodos.menu(opcioness, Validas, "GESTIÓN DE OFICINAS",errorLetras, lector))
 		{
@@ -315,8 +315,10 @@ public class Menus {
 			Menus.MenuEmpleado(empresa,lector);
 		case "B","b":	//Añadir o eliminar oficinas
 			Menus.MenuOficinas(empresa, lector);
-		case "C","c":	
-			break;	//Salir		
+		case "C","c":	//
+			
+		case "D","d":
+			break;	//Salir
 		}
 	}
 	
@@ -406,7 +408,7 @@ public class Menus {
 		
 		
 	}
-	private static void creaFurgoneta(Empresa empresa, Scanner lector) throws EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
+	public static void creaFurgoneta(Empresa empresa, Scanner lector) throws EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
 	{
 		
 			Furgoneta furgo = PideDato.furgoneta(lector);
