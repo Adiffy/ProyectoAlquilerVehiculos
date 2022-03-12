@@ -1,6 +1,14 @@
 package clasesObjetos;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
+
+import comparadores.ComparaClientePorNombre;
+import comparadores.ComparaEmpleadoPorNombre;
+import exceptions.CodigoPostalException;
+import exceptions.LicenciaNoValidaException;
+import exceptions.LongitudCadenaNoValidaException;
+import exceptions.LongitudNoValidaException;
 
 public class Empresa {
 
@@ -79,6 +87,70 @@ public class Empresa {
 	public void nuevoEmpleado(Empleado emple) //Equivale a un put
 	{
 		Empleados.put(emple.dni, emple);
+	}
+	public void despedirEmpleado(Empleado emple)
+	{
+		Empleados.remove(emple.dni);
+	}
+	public void despedirEmpleado(String dni)
+	{
+		Empleados.remove(dni);
+	}
+	
+	public void ListarEmpleadoNombre() throws LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		boolean PrimeraVez = true;	//Para recorrerlo
+		
+		ArrayList<Empleado> empleados = metodos.TreeMapToArrayList.listarEmpleados(Empleados);//PASAMOS DE TREEMAP A ARRAYLIST
+		//Creamos un empleado con el constructor mínimo para luego intercambiarlo con el empleado anterior al comparar en el bucle:
+		Empleado b = new Empleado("Nombre","Apellido1", "Apellido2", "78280774k", null, new Oficina("23009","", new Direccion("Calle","12", "23009", "Jaén"), "", "", true));
+		
+		for (Empleado a:empleados)
+		{
+			if (PrimeraVez)
+			{
+				b = a;
+				PrimeraVez = false;
+			}else {
+				ComparaEmpleadoPorNombre c = new ComparaEmpleadoPorNombre();
+				c.compare(a, b);
+				b = a;
+			}
+			
+		}
+		
+	}
+
+	public void ListarClienteNombre() throws LicenciaNoValidaException {
+		
+		boolean PrimeraVez = true;	//Para recorrerlo
+		
+		ArrayList<Cliente> clientes = metodos.TreeMapToArrayList.listarClientes(Clientes);//PASAMOS DE TREEMAP A ARRAYLIST
+		//Creamos un empleado con el constructor mínimo para luego intercambiarlo con el empleado anterior al comparar en el bucle:
+		Cliente b = new Cliente("Nombre", "Ap1", "Ap2", "78280774k", "A1", 0);//Las tarjetas de los clientes de verdad no empezarán en 0 sino en 1
+				
+		for (Cliente a:clientes)
+		{
+			if (PrimeraVez)
+			{
+				b = a;
+				PrimeraVez = false;
+			}else {
+				ComparaClientePorNombre c = new ComparaClientePorNombre();
+				c.compare(a, b);
+				b = a;
+			}
+			
+		}
+		
+	}
+	public void eliminarOficina(Oficina ofi) //Equivale a un remove
+	{
+		Oficinas.remove(ofi.getCódigo());
+	}
+	public void eliminarOficina(String ClaveOfi) //Equivale a un remove
+	{
+		Oficinas.remove(ClaveOfi);
 	}
 	
 	//Constructor

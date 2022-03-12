@@ -39,6 +39,7 @@ public class Serializar {
 			try 
 			{
 				FileInputStream file = new FileInputStream("empresa.ser");
+				@SuppressWarnings("resource")	//Quitamos el Warning para evitar errores al exportar
 				ObjectInputStream input = new ObjectInputStream(file);
 				empresa = (Empresa) input.readObject();
 			}catch (ClassNotFoundException e)

@@ -2,15 +2,15 @@ package principal;
 
 import java.util.Scanner;
 
-import InterfazUsuario.BarraDeCarga;
-import InterfazUsuario.PideDato;
-import clasesObjetos.*;
+import InterfazUsuario.Menus;
+import clasesObjetos.Empresa;
 import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.CilindradaNoValidaException;
 import exceptions.CodigoPostalException;
 import exceptions.ConsumoNoValidoException;
 import exceptions.EmisionesNoValidasException;
 import exceptions.LetrasMatriculaNoValidasException;
+import exceptions.LicenciaNoValidaException;
 import exceptions.LongitudCadenaNoValidaException;
 import exceptions.LongitudNoValidaException;
 import exceptions.NumPlazasNoValidoException;
@@ -20,7 +20,6 @@ import exceptions.PotenciaNoValidaException;
 import exceptions.RecargoNoValidoException;
 import exceptions.TiempoRecargaNoValidoException;
 import exceptions.TipoNoValidoException;
-import metodos.Menus;
 
 public class Principal {
 
@@ -32,7 +31,17 @@ public class Principal {
 	
 		//	String errorCrear = "Error al crear vehículo - "+ Object.class;
 		
-		Menus.principal(empresa, lector);
+		try {
+			Menus.principal(empresa, lector);
+		} catch (TipoNoValidoException | TiempoRecargaNoValidoException | LicenciaNoValidaException
+				| EmisionesNoValidasException | ConsumoNoValidoException | PotenciaNoValidaException
+				| RecargoNoValidoException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException
+				| NumPlazasNoValidoException | LongitudNoValidaException | PlantaNoValidaException
+				| CodigoPostalException | LongitudCadenaNoValidaException | CilindradaNoValidaException
+				| CarnetRequeridoInvalidoException e) {
+			
+			e.printStackTrace();
+		}
 		
 		
 		
