@@ -83,12 +83,16 @@ public class Menus {
 				{
 				case "1":
 					Menus.flotaVehicular(empresa, lector);
+					break;
 				case "2":
 					Menus.clientes(empresa, lector);
+					break;
 				case "3":
 					Menus.MenuListados(empresa, lector);
+					break;
 				case "4":
 					Menus.MenuOficinas(empresa, lector);
+					break;
 				case "5":
 					sale = true;
 					break;
