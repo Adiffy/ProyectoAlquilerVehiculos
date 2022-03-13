@@ -417,17 +417,14 @@ public class Menus {
 	}
 	private static void eliminar(Empresa empresa, Scanner lector)
 	{
-		String elegida;
-		System.out.println("Elija la matrícula del vehículo a eliminar:");
-		Menus.listarVehiculos(empresa);//Los listamos
-		elegida = lector.nextLine();
+		/*
+		String menError = "Seleccione una opción válida. Puede ser:"; //El mensaje que aparecerá si el usuario elige una opción inválida
+		ArrayList<Vehiculo> lista = TreeMapToArrayList.listar(((Empresa) empresa).getGaraje()); //Pasamos el TreeMap a ArrayList
+		String[] listas = (String[]) lista.toArray();	//Pasamso el ArrayList a String[] (lo que necesita el menu)
+		String validas = TreeMapToArrayList.numVehiculosCadena(((Empresa) empresa).getGaraje());	//Sacamos el número de opciones 
+		*/
 		
-		if (empresa.getOficinas().containsKey(elegida))
-		{
-			empresa.eliminarOficina(elegida);
-			Serializar.grabaEmpresa(empresa);
-		}
-		
+		//TODO el problema es q no sabemos cuantos vehiculos hay por lo que no podemos usar un SWITCH
 		
 	}
 	
@@ -448,16 +445,6 @@ public class Menus {
 			break;
 		}
 			
-	}
-	
-	private static void listarVehiculos(Empresa empresa)
-	{
-		
-		ArrayList<Vehiculo> flota = new ArrayList<Vehiculo>(empresa.getGaraje().values());
-		for (Vehiculo a:flota)
-		{
-			System.out.println(a);
-		}
 	}
 	
 	private static void electrico(Empresa empresa, Scanner lector) throws TiempoRecargaNoValidoException, TipoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
@@ -520,7 +507,6 @@ public class Menus {
 			empresa.nuevoCliente(nuevo);
 			Serializar.grabaEmpresa(empresa);
 		case "B","b":	//Eliminamos clientes de la empresa
-			Menus.eliminaCliente(empresa, lector);
 			/*
 			 * 1- Listar empleados
 			 * 2- Buscar por clave principal
@@ -529,31 +515,6 @@ public class Menus {
 		case "C","c":
 			break;
 		}
-	}
-	private static void ListarClientes(Empresa empresa)
-	{
-		ArrayList<Cliente> clientes = new ArrayList<Cliente>(empresa.getClientes().values());
-		for (Cliente nuevo:clientes)
-		{
-			System.out.printf("Cliente:"+nuevo+"DNI:"+nuevo.getDni());
-		}
-	}
-	private static void eliminaCliente(Empresa empresa, Scanner lector)
-	{
-		String elegida;
-		boolean bien = false;
-		System.out.println("Elija el DNI del cliente a eliminar:");
-		
-		do{
-			Menus.ListarClientes(empresa);
-			elegida = lector.nextLine();
-			if (empresa.getOficinas().containsKey(elegida))
-			{
-				empresa.eliminarOficina(elegida);
-				Serializar.grabaEmpresa(empresa);
-				bien = true;
-			}
-		}while(!bien);
 	}
 	
 	private static void oficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException

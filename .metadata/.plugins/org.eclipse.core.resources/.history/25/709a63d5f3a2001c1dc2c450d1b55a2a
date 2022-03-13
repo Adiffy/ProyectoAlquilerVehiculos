@@ -541,19 +541,17 @@ public class Menus {
 	private static void eliminaCliente(Empresa empresa, Scanner lector)
 	{
 		String elegida;
-		boolean bien = false;
 		System.out.println("Elija el DNI del cliente a eliminar:");
+		Menus.ListarClientes(empresa);
+		elegida = lector.nextLine();
 		
-		do{
-			Menus.ListarClientes(empresa);
-			elegida = lector.nextLine();
-			if (empresa.getOficinas().containsKey(elegida))
-			{
-				empresa.eliminarOficina(elegida);
-				Serializar.grabaEmpresa(empresa);
-				bien = true;
-			}
-		}while(!bien);
+		if (empresa.getOficinas().containsKey(elegida))
+		{
+			empresa.eliminarOficina(elegida);
+			Serializar.grabaEmpresa(empresa);
+		}
+		
+		
 	}
 	
 	private static void oficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException

@@ -2,8 +2,17 @@ package InterfazUsuario;
 
 import java.util.GregorianCalendar;
 import java.util.Scanner;
-
-import clasesObjetos.*;
+import clasesObjetos.Categoria;
+import clasesObjetos.Cliente;
+import clasesObjetos.CocheCombustion;
+import clasesObjetos.CocheElectrico;
+import clasesObjetos.Direccion;
+import clasesObjetos.Empleado;
+import clasesObjetos.Empresa;
+import clasesObjetos.Furgoneta;
+import clasesObjetos.Matricula;
+import clasesObjetos.Moto;
+import clasesObjetos.Oficina;
 import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.CilindradaNoValidaException;
 import exceptions.CodigoPostalException;
@@ -297,7 +306,7 @@ public class PideDato {
 		ubi = PideDato.direccion(l);
 		do 
 		{
-			codigo = PideDato.cadena("Código", l);
+			codigo = PideDato.cadena("Código | Con estructura: JA01", l);
 		}while (Validadores.codigoValidado(codigo)); //Pedirá el codigo mientras sea inválido
 		Descripcion = PideDato.cadena("Descripción de la oficina","Tiene un límite de 40 caracteres",0,40,l);
 		Provincia = menuProvincias(l);
@@ -314,7 +323,7 @@ public class PideDato {
 		}
 		return new Oficina(codigo, Descripcion, ubi, Provincia, Localidad, deAeropuerto);
 	}
-	public static Empleado empleado(Scanner l) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	public static Empleado empleado(Empresa empresa,Scanner l) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
 		GregorianCalendar fechaAlta;
 		Oficina trabajo;	//Oficina en la que trabaja
@@ -323,6 +332,8 @@ public class PideDato {
 		String ap1;
 		String ap2;
 		String dni;
+		String elegida;
+		boolean bien = false;
 		
 		Metodos.pintaSubrayado("Nuevo Cliente");
 		
@@ -331,7 +342,19 @@ public class PideDato {
 		ap1 = PideDato.cadena("Primer apellido:",l);
 		ap2 = PideDato.cadena("Segundo apellido:", l);
 		
-		trabajo = PideDato.oficina(l);
+		do {
+			Menus.ListadoOficinas(empresa, l);	//Listamos las oficinas
+			elegida = l.nextLine();
+			if (empresa.getOficinas().containsKey(elegida))		//Cuando elige una clave válida
+			{
+				bien = true;
+				
+			}
+			
+		}while (!bien);
+		
+		
+			trabajo = empresa.getOficinas().get(elegida);//Metemos la oficina correspondiente
 		fechaAlta = PideDato.fecha("Fecha de alta del trabajador:", l);
 		
 		return new Empleado(nombre, ap1, ap2, dni,fechaAlta, trabajo);
@@ -359,7 +382,7 @@ public class PideDato {
 		return new Cliente(nombre, ap1, ap2, dni, licencia, tarjeta);
 	}
 	
-	public static CocheCombustion cocheCombustion(Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException 
+	public static CocheCombustion cocheCombustion(Empresa empresa,Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException 
 	{
 		Oficina oficina;		
 //		l.next(); //Limpiamos el Scanner
@@ -372,6 +395,8 @@ public class PideDato {
 		String marca = l.nextLine();	
 		String model = PideDato.cadena("Modelo del coche", "Longitud no válida", 0, 25, l);
 		Categoria cat = null;
+		String elegida;
+		boolean bien=false;
 		
 			cat = PideDato.categoria(l);
 		
@@ -398,7 +423,19 @@ public class PideDato {
 //		{
 //			oficina = null;
 //		}else {
-			oficina = PideDato.oficina(l);
+		do {
+			Menus.ListadoOficinas(empresa, l);	//Listamos las oficinas
+			elegida = l.nextLine();
+			if (empresa.getOficinas().containsKey(elegida))		//Cuando elige una clave válida
+			{
+				bien = true;
+				
+			}
+			
+		}while (!bien);
+		
+		
+			oficina = empresa.getOficinas().get(elegida);//Metemos la oficina correspondiente;
 		//}
 		
 		return new CocheCombustion(mat, marca, model, cat, color, fechaAlta, oficina, kms, plazas, consumo, tipoCoche, potencia, emisiones, potencia);
@@ -406,7 +443,7 @@ public class PideDato {
 		
 	}
 	
-	public static CocheElectrico cocheElectrico(Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TiempoRecargaNoValidoException, TipoNoValidoException 
+	public static CocheElectrico cocheElectrico(Empresa empresa,Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TiempoRecargaNoValidoException, TipoNoValidoException 
 	{
 		Oficina oficina;		
 //		l.nextLine(); //Limpiamos el Scanner
@@ -415,6 +452,7 @@ public class PideDato {
 		int autonomia; //(kms)
 		int TiempoRecarga; //(min)
 		int numPlazas;
+		String elegida;
 		
 			mat = PideDato.matricula(l);
 		
@@ -422,6 +460,7 @@ public class PideDato {
 		String marca = l.nextLine();	
 		String model = PideDato.cadena("Modelo del coche", "Longitud no válida", 0, 25, l);
 		Categoria cat = null;
+		boolean bien = false; 
 		
 			cat = PideDato.categoria(l);
 		
@@ -446,11 +485,23 @@ public class PideDato {
 		TiempoRecarga = PideDato.numerico("Tiempo de recarga promedio (en minutos):", l);
 		
 		
-		//if(alquilado)
-		//{
-		//	oficina = null;
-		//}else {
-			oficina = PideDato.oficina(l);
+//		if(alquilado)
+//		{
+//			oficina = null;
+//		}else 
+		do {
+			Menus.ListadoOficinas(empresa, l);	//Listamos las oficinas
+			elegida = l.nextLine();
+			if (empresa.getOficinas().containsKey(elegida))		//Cuando elige una clave válida
+			{
+				bien = true;
+				
+			}
+			
+		}while (!bien);
+		
+		
+			oficina = empresa.getOficinas().get(elegida);//Metemos la oficina correspondiente
 		//}
 		
 		return new CocheElectrico(mat, marca, model, cat, color, fechaAlta, oficina, kms, autonomia, TiempoRecarga, tipoCoche, numPlazas);

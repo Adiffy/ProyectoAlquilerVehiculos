@@ -31,7 +31,6 @@ import exceptions.PotenciaNoValidaException;
 import exceptions.RecargoNoValidoException;
 import exceptions.TiempoRecargaNoValidoException;
 import exceptions.TipoNoValidoException;
-import metodosMenu.Metodos;
 
 public class Menus {
 
@@ -96,25 +95,6 @@ public class Menus {
 			}
 		}while(!sale);
 		
-	}
-	@SuppressWarnings("null")
-	public static void ListadoOficinas(Empresa empresa, Scanner l)
-	{
-//		String elegida = null;
-		
-//		String claves = metodos.TreeMapToArrayList.CodigoOficinas(empresa.getOficinas());
-		ArrayList<Oficina>ofis = new ArrayList<Oficina>(empresa.getOficinas().values());//Metemos los valores del treeMap en el ArrayList
-		Metodos.pintaSubrayado("Listado de oficinas");
-		for (Oficina ofi:ofis)
-		{
-//			opc[i]=ofi.toString();
-//			i++;
-			System.out.println(ofi);
-		}
-//		elegida = l.nextLine();
-//		switch (Metodos.menu(opc, claves, "Escribe un código de oficina de la siguiente lista", errorLetras, l))
-		
-//		return elegida;
 	}
 	private static void MenuListados(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, PlantaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException
 	{
@@ -417,17 +397,14 @@ public class Menus {
 	}
 	private static void eliminar(Empresa empresa, Scanner lector)
 	{
-		String elegida;
-		System.out.println("Elija la matrícula del vehículo a eliminar:");
-		Menus.listarVehiculos(empresa);//Los listamos
-		elegida = lector.nextLine();
+		/*
+		String menError = "Seleccione una opción válida. Puede ser:"; //El mensaje que aparecerá si el usuario elige una opción inválida
+		ArrayList<Vehiculo> lista = TreeMapToArrayList.listar(((Empresa) empresa).getGaraje()); //Pasamos el TreeMap a ArrayList
+		String[] listas = (String[]) lista.toArray();	//Pasamso el ArrayList a String[] (lo que necesita el menu)
+		String validas = TreeMapToArrayList.numVehiculosCadena(((Empresa) empresa).getGaraje());	//Sacamos el número de opciones 
+		*/
 		
-		if (empresa.getOficinas().containsKey(elegida))
-		{
-			empresa.eliminarOficina(elegida);
-			Serializar.grabaEmpresa(empresa);
-		}
-		
+		//TODO el problema es q no sabemos cuantos vehiculos hay por lo que no podemos usar un SWITCH
 		
 	}
 	
@@ -448,16 +425,6 @@ public class Menus {
 			break;
 		}
 			
-	}
-	
-	private static void listarVehiculos(Empresa empresa)
-	{
-		
-		ArrayList<Vehiculo> flota = new ArrayList<Vehiculo>(empresa.getGaraje().values());
-		for (Vehiculo a:flota)
-		{
-			System.out.println(a);
-		}
 	}
 	
 	private static void electrico(Empresa empresa, Scanner lector) throws TiempoRecargaNoValidoException, TipoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
@@ -520,7 +487,6 @@ public class Menus {
 			empresa.nuevoCliente(nuevo);
 			Serializar.grabaEmpresa(empresa);
 		case "B","b":	//Eliminamos clientes de la empresa
-			Menus.eliminaCliente(empresa, lector);
 			/*
 			 * 1- Listar empleados
 			 * 2- Buscar por clave principal
@@ -529,31 +495,6 @@ public class Menus {
 		case "C","c":
 			break;
 		}
-	}
-	private static void ListarClientes(Empresa empresa)
-	{
-		ArrayList<Cliente> clientes = new ArrayList<Cliente>(empresa.getClientes().values());
-		for (Cliente nuevo:clientes)
-		{
-			System.out.printf("Cliente:"+nuevo+"DNI:"+nuevo.getDni());
-		}
-	}
-	private static void eliminaCliente(Empresa empresa, Scanner lector)
-	{
-		String elegida;
-		boolean bien = false;
-		System.out.println("Elija el DNI del cliente a eliminar:");
-		
-		do{
-			Menus.ListarClientes(empresa);
-			elegida = lector.nextLine();
-			if (empresa.getOficinas().containsKey(elegida))
-			{
-				empresa.eliminarOficina(elegida);
-				Serializar.grabaEmpresa(empresa);
-				bien = true;
-			}
-		}while(!bien);
 	}
 	
 	private static void oficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
@@ -634,7 +575,7 @@ public class Menus {
 		switch (metodosMenu.Metodos.menu(opcc, Validas, "GESTOR DE EMPLEADOS", errorLetras, lector))
 		{
 		case "A","a": //Añadir empleado 
-			Empleado emple = PideDato.empleado(empresa, lector); //Creamos empleado
+			Empleado emple = PideDato.empleado(lector); //Creamos empleado
 			empresa.nuevoEmpleado(emple);	//Añadimos el empleado al TreeMap
 			Serializar.grabaEmpresa(empresa);
 		case "B","b":	//Eliminar empleado
@@ -647,7 +588,7 @@ public class Menus {
 	private static void creaCocheCombustion(Empresa empresa, Scanner lector) throws TipoNoValidoException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
 		
-			CocheCombustion nuevo = PideDato.cocheCombustion(empresa, lector);
+			CocheCombustion nuevo = PideDato.cocheCombustion(lector);
 			empresa.addAlGaraje(nuevo);
 			Serializar.grabaEmpresa(empresa);//Guardamos cambios
 		
@@ -656,7 +597,7 @@ public class Menus {
 	private static void creaCocheElectrico(Empresa empresa, Scanner lector) throws TiempoRecargaNoValidoException, TipoNoValidoException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
 		
-			CocheElectrico nuevo = PideDato.cocheElectrico(empresa, lector);
+			CocheElectrico nuevo = PideDato.cocheElectrico(lector);
 			empresa.addAlGaraje(nuevo);
 			Serializar.grabaEmpresa(empresa);//Guardamos cambios
 		

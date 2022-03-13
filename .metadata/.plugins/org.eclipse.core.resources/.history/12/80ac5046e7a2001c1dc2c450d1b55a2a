@@ -9,7 +9,6 @@ import clasesObjetos.Electrico;
 import clasesObjetos.Empleado;
 import clasesObjetos.Matricula;
 import clasesObjetos.Moto;
-import clasesObjetos.Oficina;
 import clasesObjetos.Vehiculo;
 
 public class TreeMapToArrayList {
@@ -53,11 +52,6 @@ public class TreeMapToArrayList {
 		Set<String> a = treemap.keySet();
 		return a.toString();
 	}
-	public static String CodigoOficinas(TreeMap<String,Oficina> treemap)
-	{
-		Set<String> a = treemap.keySet();
-		return a.toString();
-	}
 	public static ArrayList<Cliente> listarClientes(TreeMap<String, Cliente> treemap) {
 		ArrayList<Cliente> lista = new ArrayList<Cliente>(treemap.values());
 		return lista;
@@ -75,7 +69,7 @@ public class TreeMapToArrayList {
 				 lista.add((Electrico) a);
 			}
 	}
-		return lista;//devuelve la lista completa
+		return lista;
 	}
 	@SuppressWarnings("null")
 	public static ArrayList<CocheElectrico> listarCocheElectrico(TreeMap<Matricula, Vehiculo> treemap) {

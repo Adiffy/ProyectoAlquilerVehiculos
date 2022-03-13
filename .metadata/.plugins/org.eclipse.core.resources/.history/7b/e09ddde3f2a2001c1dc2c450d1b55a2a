@@ -424,10 +424,10 @@ public class Menus {
 		
 		if (empresa.getOficinas().containsKey(elegida))
 		{
-			empresa.eliminarOficina(elegida);
-			Serializar.grabaEmpresa(empresa);
+			empresa.getOficinas().get(elegida);
 		}
 		
+		//TODO el problema es q no sabemos cuantos vehiculos hay por lo que no podemos usar un SWITCH
 		
 	}
 	
@@ -520,7 +520,6 @@ public class Menus {
 			empresa.nuevoCliente(nuevo);
 			Serializar.grabaEmpresa(empresa);
 		case "B","b":	//Eliminamos clientes de la empresa
-			Menus.eliminaCliente(empresa, lector);
 			/*
 			 * 1- Listar empleados
 			 * 2- Buscar por clave principal
@@ -529,31 +528,6 @@ public class Menus {
 		case "C","c":
 			break;
 		}
-	}
-	private static void ListarClientes(Empresa empresa)
-	{
-		ArrayList<Cliente> clientes = new ArrayList<Cliente>(empresa.getClientes().values());
-		for (Cliente nuevo:clientes)
-		{
-			System.out.printf("Cliente:"+nuevo+"DNI:"+nuevo.getDni());
-		}
-	}
-	private static void eliminaCliente(Empresa empresa, Scanner lector)
-	{
-		String elegida;
-		boolean bien = false;
-		System.out.println("Elija el DNI del cliente a eliminar:");
-		
-		do{
-			Menus.ListarClientes(empresa);
-			elegida = lector.nextLine();
-			if (empresa.getOficinas().containsKey(elegida))
-			{
-				empresa.eliminarOficina(elegida);
-				Serializar.grabaEmpresa(empresa);
-				bien = true;
-			}
-		}while(!bien);
 	}
 	
 	private static void oficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException

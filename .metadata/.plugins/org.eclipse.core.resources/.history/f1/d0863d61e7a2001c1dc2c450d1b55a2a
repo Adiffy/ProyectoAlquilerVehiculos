@@ -9,7 +9,6 @@ import clasesObjetos.Electrico;
 import clasesObjetos.Empleado;
 import clasesObjetos.Matricula;
 import clasesObjetos.Moto;
-import clasesObjetos.Oficina;
 import clasesObjetos.Vehiculo;
 
 public class TreeMapToArrayList {
@@ -49,11 +48,6 @@ public class TreeMapToArrayList {
 			return lista;
 	}
 	public static String DNIsEmpleados(TreeMap<String,Empleado> treemap)
-	{
-		Set<String> a = treemap.keySet();
-		return a.toString();
-	}
-	public static String CodigoOficinas(TreeMap<String,Oficina> treemap)
 	{
 		Set<String> a = treemap.keySet();
 		return a.toString();
