@@ -14,8 +14,9 @@
     <fullyQualifiedTypeName name="clasesObjetos.Moto"/>
     <fullyQualifiedTypeName name="clasesObjetos.Vehiculo"/>
     <fullyQualifiedTypeName name="metodosMenu.Metodos"/>
-    <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
     <fullyQualifiedTypeName name="comparadores.ComparaVehiculoPorCategoria"/>
     <fullyQualifiedTypeName name="clasesObjetos.Electrico"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
+    <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
 </qualifiedTypeNameHistroy>

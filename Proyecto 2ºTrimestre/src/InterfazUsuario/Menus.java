@@ -97,7 +97,6 @@ public class Menus {
 		}while(!sale);
 		
 	}
-	@SuppressWarnings("null")
 	public static void ListadoOficinas(Empresa empresa, Scanner l)
 	{
 //		String elegida = null;
@@ -607,21 +606,26 @@ public class Menus {
 		 */
 		Menus.ListarTreeMapEmpleadoDNI(empresa.getEmpleados());
 		String[] opcion = {""};
-		
+		boolean sale = false;
 		
 		respuesta = metodosMenu.Metodos.menu(opcion, metodos.TreeMapToArrayList.DNIsEmpleados(empresa.getEmpleados()),"Escriba el DNI del empleado a borrar", errorLetras, lector);
 		if (empresa.getEmpleados().containsKey(respuesta))	//Si alguien usa esa clave principal
 		{
 			String[] lista = {"S.- Sí", "N.- No"};
 			String valor = "SN";
-			switch (metodosMenu.Metodos.menu(lista, valor,"El empleado se borrará ¿Está seguro?", errorLetras,  lector))
+			do
 			{
-			case "S":
-				empresa.despedirEmpleado(respuesta);
-				Serializar.grabaEmpresa(empresa); 	//Guardamos 
-			case "N":
-				break; 	//Sale sin tocar nada
-			}
+				switch (metodosMenu.Metodos.menu(lista, valor,"El empleado se borrará ¿Está seguro?", errorLetras,  lector))
+				{
+				case "S":
+					empresa.despedirEmpleado(respuesta);
+					Serializar.grabaEmpresa(empresa); 	//Guardamos 
+					break;
+				case "N":
+					sale = true;
+					break; 	//Sale sin tocar nada
+				}
+			}while(!sale);
 		}
 	}
 	
