@@ -3,16 +3,18 @@ package metodos;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeMap;
-
 import clasesObjetos.Cliente;
+import clasesObjetos.CocheElectrico;
+import clasesObjetos.Electrico;
 import clasesObjetos.Empleado;
 import clasesObjetos.Matricula;
+import clasesObjetos.Moto;
 import clasesObjetos.Vehiculo;
 
 public class TreeMapToArrayList {
 
 	
-	public static ArrayList<Vehiculo> listar(TreeMap<Matricula,Vehiculo> treemap) {
+	public static ArrayList<Vehiculo> listarGaraje(TreeMap<Matricula,Vehiculo> treemap) {
 		
 		ArrayList<Vehiculo> lista = new ArrayList<Vehiculo>(treemap.values());
 		return lista;
@@ -54,4 +56,51 @@ public class TreeMapToArrayList {
 		ArrayList<Cliente> lista = new ArrayList<Cliente>(treemap.values());
 		return lista;
 	}
+	
+	@SuppressWarnings("null")
+	public static ArrayList<Electrico> listarElectricos(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<Electrico> lista = null;
+		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
+		for (Vehiculo a:listado)
+		{	//Si viene de electrico
+			if (a.getClass().getSimpleName().compareToIgnoreCase("Moto")==0 || a.getClass().getSimpleName().compareToIgnoreCase("CocheElectrico")==0)	
+			{
+				//Lo añadimos a la lista
+				 lista.add((Electrico) a);
+			}
+	}
+		return lista;
+	}
+	@SuppressWarnings("null")
+	public static ArrayList<CocheElectrico> listarCocheElectrico(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<CocheElectrico> lista = null;
+		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
+		for (Vehiculo a:listado)
+		{	//Si viene de electrico
+			if (a.getClass().getSimpleName().compareToIgnoreCase("CocheElectrico")==0)	
+			{
+				//Lo añadimos a la lista
+				 lista.add((CocheElectrico) a);
+			}
+	}
+		return lista;
+	}
+	
+	@SuppressWarnings("null")
+	public static ArrayList<Moto> listarMotos(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<Moto> lista = null;
+		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
+		for (Vehiculo a:listado)
+		{	//Si viene de electrico
+			if (a.getClass().getSimpleName().compareToIgnoreCase("Moto")==0)	
+			{
+				//Lo añadimos a la lista
+				 lista.add((Moto) a);
+			}
+	}
+		return lista;
+	}
+	
+	
+	
 }

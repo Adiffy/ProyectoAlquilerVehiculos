@@ -105,3 +105,1698 @@ java.lang.Error: SWT Resource was not properly disposed
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:659)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:596)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1467)
+!SESSION 2022-03-13 12:29:35.367 -----------------------------------------------
+eclipse.buildId=4.21.0.I20210906-0500
+java.version=17.0.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.oomph.p2.core 2 0 2022-03-13 12:29:36.859
+!MESSAGE Failed to register the thread safe credentials providers: 'java.util.Map org.eclipse.core.internal.runtime.AdapterManager.getFactories()'
+
+!ENTRY org.eclipse.jface 2 0 2022-03-13 12:31:46.808
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2022-03-13 12:31:46.808
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@534c3b9d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@69b436a7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2022-03-13 12:31:46.808
+!MESSAGE A conflict occurred for ALT+SHIFT+R:
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.edit.text.java.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.jdt.ui.category.refactoring,Refactor - Java,Java Refactoring Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5dfd4fac,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.ui.edit.rename,Rename,
+		Rename the selected item,
+		Category(org.eclipse.ui.category.file,File,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1d2aa638,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2022-03-13 12:31:51.075
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Victor'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.core.net 4 0 2022-03-13 12:31:51.270
+!MESSAGE WinHttp.GetProxyForUrl for pac failed with error 'Controlador no válido.
+' #6.
+
+!ENTRY org.eclipse.jdt.core 4 4 2022-03-13 13:57:57.076
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package metodos;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+import java.util.TreeMap;
+
+import clasesObjetos.Cliente;
+import clasesObjetos.Electrico;
+import clasesObjetos.Empleado;
+import clasesObjetos.Matricula;
+import clasesObjetos.Vehiculo;
+
+public class TreeMapToArrayList {
+
+	
+	public static ArrayList<Vehiculo> listarGaraje(TreeMap<Matricula,Vehiculo> treemap) {
+		
+		ArrayList<Vehiculo> lista = new ArrayList<Vehiculo>(treemap.values());
+		return lista;
+	
+	}
+	public static ArrayList<Empleado> listarEmpleados(TreeMap<String,Empleado> treemap) {
+		
+		ArrayList<Empleado> lista = new ArrayList<Empleado>(treemap.values());
+		return lista;
+	
+	}
+	
+	public static ArrayList<Integer> numVehiculos(TreeMap<Matricula,Vehiculo> treemap)
+	{
+			ArrayList<Integer> numVehiculos = new ArrayList<Integer>(treemap.size());
+			return numVehiculos;
+	}
+	public static String numVehiculosCadena(TreeMap<Matricula,Vehiculo> treemap)
+	{
+			String lista = TreeMapToArrayList.numVehiculos(treemap).toString();
+			return lista;
+	}
+	public static ArrayList<Integer> numEmpleados(TreeMap<String,Empleado> treemap)
+	{
+			ArrayList<Integer> numVehiculos = new ArrayList<Integer>(treemap.size());
+			return numVehiculos;
+	}
+	public static String numEmpleadosCadena(TreeMap<String,Empleado> treemap)
+	{
+			String lista = TreeMapToArrayList.numEmpleados(treemap).toString();
+			return lista;
+	}
+	public static String DNIsEmpleados(TreeMap<String,Empleado> treemap)
+	{
+		Set<String> a = treemap.keySet();
+		return a.toString();
+	}
+	public static ArrayList<Cliente> listarClientes(TreeMap<String, Cliente> treemap) {
+		ArrayList<Cliente> lista = new ArrayList<Cliente>(treemap.values());
+		return lista;
+	}
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Electrico> listarElectricos(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<Electrico> lista = null;
+		for ()
+		if (treemap.getClass().getSimpleName().compareToIgnoreCase("Moto")==0 || treemap.getClass().getSimpleName().compareToIgnoreCase("CocheElectrico")==0)	//Si viene de electrico
+		{
+			lista = new ArrayList<Electrico>();
+			lista.add(treemap);
+		}
+		
+		return lista;
+	}
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2022-03-13 13:57:57.106
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2022-03-13 13:57:57.107
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.core 4 4 2022-03-13 13:57:57.242
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package metodos;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+import java.util.TreeMap;
+
+import clasesObjetos.Cliente;
+import clasesObjetos.Electrico;
+import clasesObjetos.Empleado;
+import clasesObjetos.Matricula;
+import clasesObjetos.Vehiculo;
+
+public class TreeMapToArrayList {
+
+	
+	public static ArrayList<Vehiculo> listarGaraje(TreeMap<Matricula,Vehiculo> treemap) {
+		
+		ArrayList<Vehiculo> lista = new ArrayList<Vehiculo>(treemap.values());
+		return lista;
+	
+	}
+	public static ArrayList<Empleado> listarEmpleados(TreeMap<String,Empleado> treemap) {
+		
+		ArrayList<Empleado> lista = new ArrayList<Empleado>(treemap.values());
+		return lista;
+	
+	}
+	
+	public static ArrayList<Integer> numVehiculos(TreeMap<Matricula,Vehiculo> treemap)
+	{
+			ArrayList<Integer> numVehiculos = new ArrayList<Integer>(treemap.size());
+			return numVehiculos;
+	}
+	public static String numVehiculosCadena(TreeMap<Matricula,Vehiculo> treemap)
+	{
+			String lista = TreeMapToArrayList.numVehiculos(treemap).toString();
+			return lista;
+	}
+	public static ArrayList<Integer> numEmpleados(TreeMap<String,Empleado> treemap)
+	{
+			ArrayList<Integer> numVehiculos = new ArrayList<Integer>(treemap.size());
+			return numVehiculos;
+	}
+	public static String numEmpleadosCadena(TreeMap<String,Empleado> treemap)
+	{
+			String lista = TreeMapToArrayList.numEmpleados(treemap).toString();
+			return lista;
+	}
+	public static String DNIsEmpleados(TreeMap<String,Empleado> treemap)
+	{
+		Set<String> a = treemap.keySet();
+		return a.toString();
+	}
+	public static ArrayList<Cliente> listarClientes(TreeMap<String, Cliente> treemap) {
+		ArrayList<Cliente> lista = new ArrayList<Cliente>(treemap.values());
+		return lista;
+	}
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Electrico> listarElectricos(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<Electrico> lista = null;
+		for ()
+		if (treemap.getClass().getSimpleName().compareToIgnoreCase("Moto")==0 || treemap.getClass().getSimpleName().compareToIgnoreCase("CocheElectrico")==0)	//Si viene de electrico
+		{
+			lista = new ArrayList<Electrico>();
+			lista.add(treemap);
+		}
+		
+		return lista;
+	}
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2022-03-13 13:57:57.243
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2022-03-13 13:57:57.244
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core 4 4 2022-03-13 13:58:03.129
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package metodos;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+import java.util.TreeMap;
+
+import clasesObjetos.Cliente;
+import clasesObjetos.Electrico;
+import clasesObjetos.Empleado;
+import clasesObjetos.Matricula;
+import clasesObjetos.Vehiculo;
+
+public class TreeMapToArrayList {
+
+	
+	public static ArrayList<Vehiculo> listarGaraje(TreeMap<Matricula,Vehiculo> treemap) {
+		
+		ArrayList<Vehiculo> lista = new ArrayList<Vehiculo>(treemap.values());
+		return lista;
+	
+	}
+	public static ArrayList<Empleado> listarEmpleados(TreeMap<String,Empleado> treemap) {
+		
+		ArrayList<Empleado> lista = new ArrayList<Empleado>(treemap.values());
+		return lista;
+	
+	}
+	
+	public static ArrayList<Integer> numVehiculos(TreeMap<Matricula,Vehiculo> treemap)
+	{
+			ArrayList<Integer> numVehiculos = new ArrayList<Integer>(treemap.size());
+			return numVehiculos;
+	}
+	public static String numVehiculosCadena(TreeMap<Matricula,Vehiculo> treemap)
+	{
+			String lista = TreeMapToArrayList.numVehiculos(treemap).toString();
+			return lista;
+	}
+	public static ArrayList<Integer> numEmpleados(TreeMap<String,Empleado> treemap)
+	{
+			ArrayList<Integer> numVehiculos = new ArrayList<Integer>(treemap.size());
+			return numVehiculos;
+	}
+	public static String numEmpleadosCadena(TreeMap<String,Empleado> treemap)
+	{
+			String lista = TreeMapToArrayList.numEmpleados(treemap).toString();
+			return lista;
+	}
+	public static String DNIsEmpleados(TreeMap<String,Empleado> treemap)
+	{
+		Set<String> a = treemap.keySet();
+		return a.toString();
+	}
+	public static ArrayList<Cliente> listarClientes(TreeMap<String, Cliente> treemap) {
+		ArrayList<Cliente> lista = new ArrayList<Cliente>(treemap.values());
+		return lista;
+	}
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Electrico> listarElectricos(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<Electrico> lista = null;
+		for ()
+		if (treemap.getClass().getSimpleName().compareToIgnoreCase("Moto")==0 || treemap.getClass().getSimpleName().compareToIgnoreCase("CocheElectrico")==0)	//Si viene de electrico
+		{
+			lista = new ArrayList<Electrico>();
+			lista.add(treemap);
+		}
+		
+		return lista;
+	}
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2022-03-13 13:58:03.130
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2022-03-13 13:58:03.130
+!MESSAGE Error in JDT Core during reconcile
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.AST.convertCompilationUnit(AST.java:501)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:201)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.core 4 4 2022-03-13 13:58:03.136
+!MESSAGE Exception occurred during compilation unit conversion:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package metodos;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+import java.util.TreeMap;
+
+import clasesObjetos.Cliente;
+import clasesObjetos.Electrico;
+import clasesObjetos.Empleado;
+import clasesObjetos.Matricula;
+import clasesObjetos.Vehiculo;
+
+public class TreeMapToArrayList {
+
+	
+	public static ArrayList<Vehiculo> listarGaraje(TreeMap<Matricula,Vehiculo> treemap) {
+		
+		ArrayList<Vehiculo> lista = new ArrayList<Vehiculo>(treemap.values());
+		return lista;
+	
+	}
+	public static ArrayList<Empleado> listarEmpleados(TreeMap<String,Empleado> treemap) {
+		
+		ArrayList<Empleado> lista = new ArrayList<Empleado>(treemap.values());
+		return lista;
+	
+	}
+	
+	public static ArrayList<Integer> numVehiculos(TreeMap<Matricula,Vehiculo> treemap)
+	{
+			ArrayList<Integer> numVehiculos = new ArrayList<Integer>(treemap.size());
+			return numVehiculos;
+	}
+	public static String numVehiculosCadena(TreeMap<Matricula,Vehiculo> treemap)
+	{
+			String lista = TreeMapToArrayList.numVehiculos(treemap).toString();
+			return lista;
+	}
+	public static ArrayList<Integer> numEmpleados(TreeMap<String,Empleado> treemap)
+	{
+			ArrayList<Integer> numVehiculos = new ArrayList<Integer>(treemap.size());
+			return numVehiculos;
+	}
+	public static String numEmpleadosCadena(TreeMap<String,Empleado> treemap)
+	{
+			String lista = TreeMapToArrayList.numEmpleados(treemap).toString();
+			return lista;
+	}
+	public static String DNIsEmpleados(TreeMap<String,Empleado> treemap)
+	{
+		Set<String> a = treemap.keySet();
+		return a.toString();
+	}
+	public static ArrayList<Cliente> listarClientes(TreeMap<String, Cliente> treemap) {
+		ArrayList<Cliente> lista = new ArrayList<Cliente>(treemap.values());
+		return lista;
+	}
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Electrico> listarElectricos(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<Electrico> lista = null;
+		for ()
+		if (treemap.getClass().getSimpleName().compareToIgnoreCase("Moto")==0 || treemap.getClass().getSimpleName().compareToIgnoreCase("CocheElectrico")==0)	//Si viene de electrico
+		{
+			lista = new ArrayList<Electrico>();
+			lista.add(treemap);
+		}
+		
+		return lista;
+	}
+}
+
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:187)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2022-03-13 13:58:03.137
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:187)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2022-03-13 13:58:03.137
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.IllegalArgumentException
+	at org.eclipse.jdt.core.dom.InfixExpression.setOperator(InfixExpression.java:383)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2666)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2027)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToParenthesizedExpression(ASTConverter.java:3797)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1945)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1204)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1976)
+	at org.eclipse.jdt.core.dom.ASTConverter.convertToExpression(ASTConverter.java:3649)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2187)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:2993)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:751)
+	at org.eclipse.jdt.core.dom.ASTConverter.buildBodyDeclarations(ASTConverter.java:208)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:3349)
+	at org.eclipse.jdt.core.dom.ASTConverter.convert(ASTConverter.java:1526)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.convert(CompilationUnitResolver.java:323)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1279)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:187)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core 4 4 2022-03-13 15:09:17.670
+!MESSAGE Exception occurred during problem detection:
+----------------------------------- SOURCE BEGIN -------------------------------------
+package InterfazUsuario;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+import accesoADatos.Serializar;
+import clasesObjetos.Cliente;
+import clasesObjetos.CocheCombustion;
+import clasesObjetos.CocheElectrico;
+import clasesObjetos.Empleado;
+import clasesObjetos.Empresa;
+import clasesObjetos.Furgoneta;
+import clasesObjetos.Matricula;
+import clasesObjetos.Moto;
+import clasesObjetos.Oficina;
+import clasesObjetos.Vehiculo;
+import comparadores.ComparaVehiculoPorCategoria;
+import exceptions.CarnetRequeridoInvalidoException;
+import exceptions.CilindradaNoValidaException;
+import exceptions.CodigoPostalException;
+import exceptions.ConsumoNoValidoException;
+import exceptions.EmisionesNoValidasException;
+import exceptions.LetrasMatriculaNoValidasException;
+import exceptions.LicenciaNoValidaException;
+import exceptions.LongitudCadenaNoValidaException;
+import exceptions.LongitudNoValidaException;
+import exceptions.NumPlazasNoValidoException;
+import exceptions.NumeroMatriculaNoValidoException;
+import exceptions.PlantaNoValidaException;
+import exceptions.PotenciaNoValidaException;
+import exceptions.RecargoNoValidoException;
+import exceptions.TiempoRecargaNoValidoException;
+import exceptions.TipoNoValidoException;
+
+public class Menus {
+
+	//Variables que se reutilizan en muchos de los métodos de esta clase
+	private static String menError = "Seleccione una opción válida. Puede ser:"; //El mensaje que aparecerá si el usuario elige una opción inválida
+	private static String mensaje = "Introduzca una de las siguientes opciones:";
+	private static String errorLetras = "Debe elegir una opción válida pulsando:"; //Error en los menús no-numéricos
+	
+	public static void principal(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
+	{
+		
+		String[] opciones = {"1.- Ficheros maestros", "2.- Gestión de oficinas", "3.- Mostrar listados", "4.- Salir"};
+		String opcValidas = "1234";
+		
+		
+		boolean noSale = true; //buleano para el bucle 
+		
+		do
+		{
+			switch (metodosMenu.Metodos.menu(opciones, opcValidas, "MENÚ PRINCIPAL", menError, lector))
+			{
+			case "1":
+				Menus.ficherosMaestros(empresa, lector);
+			case "2"://Gestión de oficinas
+				Menus.oficinas(empresa, lector);
+			case "3":	//Listados
+				Menus.MenuListados(empresa, lector);
+			case "4": //SALIR DE VERDAD
+				BarraDeCarga.pintar();
+				noSale = false;
+				break;
+			}
+		}while(noSale);
+	}
+	
+	private static void ficherosMaestros(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException 
+	{
+		String[] opciones = {"1.- Ficheros maestros", "2.- Gestión de oficinas", "3.- Mostrar listados", "4.- Salir"};
+		String opcValidas = "1234";
+			
+		switch (metodosMenu.Metodos.menu(opciones, opcValidas, "Ficheros maestros", menError, lector))
+		{
+		case "1":
+			String[] opc = {"1.- Añadir / eliminar vehículos a la flota","2.- Modificar listado de clientes", "3.- Modificar listado de empleados", "4.- Modificar listado de oficinas","5.- Salir"};
+			String OPC = "12345";
+			switch (metodosMenu.Metodos.menu(opc, OPC, "Gestión de ficheros maestros", menError, lector))
+			{
+			case "1":
+				Menus.flotaVehicular(empresa, lector);
+			case "2":
+				Menus.clientes(empresa, lector);
+			case "3":
+				Menus.MenuListados(empresa, lector);
+			case "4":
+				Menus.MenuOficinas(empresa, lector);
+			case "5":
+				break;
+			}
+		}
+		
+	}
+	private static void MenuListados(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, PlantaNoValidaException
+	{
+		String[] list = {"1.- Listar vehículos","2.- Listar Personas", "3.- Listar Oficinas","4.- Salir"};
+		String posibilidades = "1234";
+		
+		switch (metodosMenu.Metodos.menu(list, posibilidades, "LISTADOS",mensaje, lector))
+		{
+		case "1": 	//Vehiculos
+			Menus.listadoVehiculos(empresa, lector);
+		case "2":	//Personas
+			Menus.listadoPersonas(empresa, lector);
+		case "3":	//Oficinas
+			Menus
+		case "4": //Salir
+			break;
+		}
+	}
+	private static void listadoPersonas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		String[] elecc = {"1.- Empleados","2.- Clientes","3.- Atrás (Salir)"};
+		String posib = "123";
+		String error = "Seleccione una opción de este conjunto:";
+		switch (metodosMenu.Metodos.menu(elecc, posib, "TIPOS DE PERSONAS A LISTAR", error, lector))
+		{
+		case "1":	//Empleados
+			Menus.listadoPersonasPor(empresa, "Empleado", lector);
+		case "2":	//Clientes
+			Menus.listadoPersonasPor(empresa, "Clientes", lector);
+		case "3": //Salir 
+			break;
+		}
+	}
+	
+	private static void listadoVehiculos(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, PlantaNoValidaException
+	{
+		String[] elecc = {"1.- De combustión","2.- Eléctricos","3.- Atrás (Salir)"};
+		String posib = "123";
+		String error = "Seleccione una opción de este conjunto:";
+		switch (metodosMenu.Metodos.menu(elecc, posib, "TIPOS DE PERSONAS A LISTAR", error, lector))
+		{
+		case "1":	//De combustión
+			Menus.combustion(empresa, lector);
+		case "2":	//Eléctricos
+			Menus.listaElectrico(empresa, lector);
+		case "3": //Salir 
+			break;
+		}
+	}
+	
+	private static void listadoOficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		String[] elecc = {"1.- Empleados","2.- Clientes","3.- Atrás (Salir)"};
+		String posib = "123";
+		String error = "Seleccione una opción de este conjunto:";
+		switch (metodosMenu.Metodos.menu(elecc, posib, "TIPOS DE PERSONAS A LISTAR", error, lector))
+		{
+		case "1":	//Empleados
+			Menus.listadoPersonasPor(empresa, "Empleado", lector);
+		case "2":	//Clientes	//TODO
+			Menus.listadoPersonasPor(empresa, "Clientes", lector);
+		case "3": //Salir 
+			break;
+		}
+	}
+	private static void listaElectrico(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
+	{
+		String[] tipo = {"1.- Coche eléctrico", "2.- Moto eléctrica", "3.- Atrás (Salir)"};
+		String opcio = "123";
+		switch (metodosMenu.Metodos.menu(tipo, opcio, "LISTAR VEHÍCULOS ELÉCTRICOS", errorLetras, lector))
+		{
+		case "1":	//Coche eléctrico
+			
+				Menus.listadosElectricos(empresa, "CocheElectrico", lector);
+			
+		case "2":	//Moto
+				Menus.listadosElectricos(empresa, "Moto", lector);
+		case "3":
+			break;
+		}
+	}
+	private static void listadosElectricos(Empresa empresa,String tipoVehiculo, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
+	{
+		String error = "Seleccione una opción de este conjunto:";
+		String[] a = {"1.- Por Matrícula","2.- Por categoría","3.- Atrás (Salir)"};
+		String b = "123";
+		switch (metodosMenu.Metodos.menu(a, b, "Listar"+ tipoVehiculo +"por", error, lector))
+		{
+		case "1":	//Listar por Matrícula
+			ArrayList <Moto> lista = null;
+			ArrayList <CocheElectrico> lista2 = null;
+			boolean Moto;	//Sabremos si es Moto o no 
+			
+			if (tipoVehiculo.compareToIgnoreCase("Moto")==0  )
+			{
+				Moto = true;
+				lista = metodos.TreeMapToArrayList.listarMotos(empresa.getGaraje());
+				
+			}else {
+				Moto = false;
+				lista2 = metodos.TreeMapToArrayList.listarCocheElectrico(empresa.getGaraje());
+			}
+			//Ahora mostramos los listados
+			if (Moto)
+			{
+				for (Vehiculo aux: lista)
+				{
+					System.out.printf("Con Matrícula: "+ aux.getMatricula() +" - " + aux.toString());
+				}
+			}else {
+				for (Vehiculo aux: lista2)
+				{
+					System.out.printf("Con Matrícula: "+ aux.getMatricula() +" - " + aux.toString());
+				}
+			}
+			
+		case "2":	//Listar por categoria
+			
+			if (tipoVehiculo.compareToIgnoreCase("Moto")==0  )
+			{
+				Moto = true;
+				lista = metodos.TreeMapToArrayList.listarMotos(empresa.getGaraje());
+				
+			}else {
+				Moto = false;
+				lista2 = metodos.TreeMapToArrayList.listarCocheElectrico(empresa.getGaraje());
+			}			
+			//Ahora mostramos los listados
+			if (Moto)
+			{
+				empresa.ListarMotosPorCategoria(lista);
+			}else {
+				empresa.ListarEmpleadoNombre();
+			}
+		case "3":	//SALIR
+			break;
+		}
+	}
+	private void ListarMotosPorCategoria(ArrayList<Moto> flota) 
+	{
+		
+		ComparaVehiculoPorCategoria c = new ComparaVehiculoPorCategoria(); 
+		flota.sort(c);
+		for (Vehiculo auxiliar: flota)
+		{
+			System.out.printf("Moto: "+public void ListarMotosPorCategoria(ArrayList<Moto> flota) 
+			{
+				
+				ComparaVehiculoPorCategoria c = new ComparaVehiculoPorCategoria(); 
+				flota.sort(c);
+				for (Vehiculo auxiliar: flota)
+				{
+					System.out.println();
+				}
+			});
+		}
+	}
+	private static void listadoPersonasPor(Empresa empresa,String tipoPersona, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		String error = "Seleccione una opción de este conjunto:";
+		String[] a = {"1.- Por DNI","2.- Por nombre","3.- Atrás (Salir)"};
+		String b = "123";
+		switch (metodosMenu.Metodos.menu(a, b, "Listar"+ tipoPersona +"por", error, lector))
+		{
+		case "1":	//Listar por DNI
+			TreeMap<String, Cliente> lista = null;
+			TreeMap<String, Empleado> lista2 = null;
+			boolean Cliente;	//Sabremos si es Cliente o no 
+			if (tipoPersona.compareToIgnoreCase("Cliente")==0 || tipoPersona.compareToIgnoreCase("Clientes")==0 )
+			{
+				Cliente = true;
+				lista = empresa.getClientes();
+			}else {
+				Cliente = false;
+				lista2 = empresa.getEmpleados();
+			}
+			//Ahora mostramos los listados
+			if (Cliente)
+			{
+				Menus.ListarTreeMapClienteDNI(lista);
+			}else {
+				Menus.ListarTreeMapEmpleadoDNI(lista2);
+			}
+			
+		case "2":	//Listar por nombre
+			 
+			if (tipoPersona.compareToIgnoreCase("Cliente")==0 || tipoPersona.compareToIgnoreCase("Clientes")==0 )
+			{
+				Cliente = true;
+				
+			}else {
+				Cliente = false;
+				
+			}
+			//Ahora mostramos los listados
+			if (Cliente)
+			{
+				empresa.ListarClienteNombre();
+			}else {
+				empresa.ListarEmpleadoNombre();
+			}
+		case "3":	//SALIR
+			break;
+		}
+	}
+	
+	private static void eliminaOficina(Empresa empresa, Scanner lector)
+	{
+		Menus.ListarTreeMapOficinas(empresa.getOficinas());
+		String[] opcion = {""};
+		String respuesta;
+		
+		respuesta = metodosMenu.Metodos.menu(opcion, metodos.TreeMapToArrayList.DNIsEmpleados(empresa.getEmpleados()),"Escriba el DNI del empleado a borrar", menError, lector);
+		if (empresa.getEmpleados().containsKey(respuesta))	//Si alguien usa esa clave principal
+		{
+			String[] lista = {"S.- Sí", "N.- No"};
+			String valor = "SN";
+			switch (metodosMenu.Metodos.menu(lista, valor,"El empleado se borrará ¿Está seguro?", menError,  lector))
+			{
+			case "S":
+				empresa.eliminarOficina(respuesta);
+				Serializar.grabaEmpresa(empresa);
+			case "N":
+				break; 	//Sale sin tocar nada
+			}
+		}
+	
+	}
+	
+	private static void MenuOficinas(Empresa empresa, Scanner lector) throws LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		String[] opciom = {"A.- Nueva oficina", "B.- Eliminar oficina", "C.- Salir"};
+		String validad = "ABC";
+		
+
+		switch (metodosMenu.Metodos.menu(opciom, validad, "GESTOR DE OFICINAS", menError, lector))
+		{
+		case "A":	//Añadir
+			Oficina nueva = PideDato.oficina(lector);
+			empresa.nuevaOficina(nueva);	//Metemos la oficina
+			Serializar.grabaEmpresa(empresa); 	//Guardamos 
+		case "B":	//Eliminar
+			Menus.eliminaOficina(empresa, lector);
+		case "C": //Salir
+			break;
+		}
+		
+	}
+	private static void eliminar(Empresa empresa, Scanner lector)
+	{
+		/*
+		String menError = "Seleccione una opción válida. Puede ser:"; //El mensaje que aparecerá si el usuario elige una opción inválida
+		ArrayList<Vehiculo> lista = TreeMapToArrayList.listar(((Empresa) empresa).getGaraje()); //Pasamos el TreeMap a ArrayList
+		String[] listas = (String[]) lista.toArray();	//Pasamso el ArrayList a String[] (lo que necesita el menu)
+		String validas = TreeMapToArrayList.numVehiculosCadena(((Empresa) empresa).getGaraje());	//Sacamos el número de opciones 
+		*/
+		
+		//TODO el problema es q no sabemos cuantos vehiculos hay por lo que no podemos usar un SWITCH
+		
+	}
+	
+	private static  void combustion(Empresa empresa, Scanner lector) throws TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		
+		String[] combustion = {"1.- Coche","2.- Furgoneta", "3.- Volver"};
+		String opcValidas = "1234";
+		
+			
+		switch (metodosMenu.Metodos.menu(combustion, opcValidas, "Vehiculos de combustión", menError, lector))
+		{
+		case "1":	//Coche
+			Menus.creaCocheCombustion(empresa, lector);												
+		case "2":	//Furgoneta
+			Menus.creaFurgoneta(empresa, lector);
+		case "3":	//Salir
+			break;
+		}
+			
+	}
+	
+	private static void electrico(Empresa empresa, Scanner lector) throws TiempoRecargaNoValidoException, TipoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		
+		String[] electrico = {"1.- Coche","2.- Moto", "3.- Volver"};
+		String opcValidas = "1234";
+		
+		
+		switch (metodosMenu.Metodos.menu(electrico, opcValidas, "Vehiculos eléctricos", menError, lector))
+		{
+		case "1":	//Coche
+			Menus.creaCocheElectrico(empresa, lector);
+		case "2":	//Moto
+			Menus.creaMoto(empresa, lector);
+		case "3":	//Salir
+			break;
+		}
+	}
+	private static void add(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
+	{
+		String[] elec = {"A.- De combustión","B.- Eléctrico","C.- Salir"}; //elec de Elección
+		String validas = "ABC";
+		
+		switch (metodosMenu.Metodos.menu(elec, validas, "TIPO DE VEHÍCULO",errorLetras, lector))
+		{
+		case "A","a":	//Combustion
+			Menus.combustion(empresa, lector);
+		case "B","b":	//Electrico
+			Menus.electrico(empresa, lector);
+		case "C","c": //SALIR
+			break;
+		}
+	}
+	private static void flotaVehicular(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
+	{
+		String[] elec = {"A.- AÑADIR VEHÍCULO","B.- ELIMINAR VEHÍCULO","C.- SALIR"}; //elec de Elección
+		String validas = "ABC";
+		 
+		
+		switch (metodosMenu.Metodos.menu(elec, validas, "FLOTA DE VEHÍCULOS",errorLetras, lector))
+		{				
+		case "A","a": //Lo hacemos tolerante a mayúsculas y minúsculas
+			Menus.add(empresa, lector);
+		case "B","b":	//Eliminar vehículo
+			Menus.eliminar(empresa, lector);
+		case "C","c": //SALIR
+			break;
+		}
+	}
+	private static void clientes(Empresa empresa, Scanner lector) throws LicenciaNoValidaException
+	{
+		String[] opcioness = {"A.- Añadir cliente", "B.- Dar de baja", "C.- Salir"};
+		String Validas = "ABC";
+		
+		switch (metodosMenu.Metodos.menu(opcioness, Validas, "GESTIÓN DE CLIENTES",errorLetras, lector))
+		{
+		case "A","a": 	//Damos de alta nuevos clientes
+			Cliente nuevo =InterfazUsuario.PideDato.cliente(lector);
+			empresa.nuevoCliente(nuevo);
+			Serializar.grabaEmpresa(empresa);
+		case "B","b":	//Eliminamos clientes de la empresa
+			/*
+			 * 1- Listar empleados
+			 * 2- Buscar por clave principal
+			 * 3- Eliminar
+			 */
+		case "C","c":
+			break;
+		}
+	}
+	
+	private static void oficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		String[] opcioness = {"A.- Empleados", "B.- Oficinas", "C.- Salir"};
+		String Validas = "ABC";
+		
+		switch (metodosMenu.Metodos.menu(opcioness, Validas, "GESTIÓN DE OFICINAS",errorLetras, lector))
+		{
+		case "A","a":	//Añadir o eliminar empleados
+			Menus.MenuEmpleado(empresa,lector);
+		case "B","b":	//Añadir o eliminar oficinas
+			Menus.MenuOficinas(empresa, lector);
+		case "C","c":	
+			break;	//Salir		
+		}
+	}
+	
+	private static void ListarTreeMapEmpleadoDNI(TreeMap<String,Empleado> map)
+	{
+		map.entrySet().forEach((entry) -> {
+            System.out.printf("Con DNI: %s - Empleado: %s %n", entry.getKey(), entry.getValue());
+        });
+	}
+	private static void ListarTreeMapOficinas(TreeMap<String,Oficina> map)
+	{
+		map.entrySet().forEach((entry) -> {
+            System.out.printf("Con Código: %s - Oficina: %s %n", entry.getKey(), entry.getValue());
+        });
+	}
+	private static void ListarTreeMapClienteDNI(TreeMap<String,Cliente> map)
+	{
+		map.entrySet().forEach((entry) -> {
+            System.out.printf("Con DNI: %s - Cliente: %s %n", entry.getKey(), entry.getValue());
+        });
+	}
+	
+	private static void eliminaEmpleado(Empresa empresa, Scanner lector)
+	{
+		String respuesta;
+		/*
+		 * 1- Listar empleados
+		 * 2- Buscar por clave principal
+		 * 3- Eliminar
+		 */
+		Menus.ListarTreeMapEmpleadoDNI(empresa.getEmpleados());
+		String[] opcion = {""};
+		
+		
+		respuesta = metodosMenu.Metodos.menu(opcion, metodos.TreeMapToArrayList.DNIsEmpleados(empresa.getEmpleados()),"Escriba el DNI del empleado a borrar", errorLetras, lector);
+		if (empresa.getEmpleados().containsKey(respuesta))	//Si alguien usa esa clave principal
+		{
+			String[] lista = {"S.- Sí", "N.- No"};
+			String valor = "SN";
+			switch (metodosMenu.Metodos.menu(lista, valor,"El empleado se borrará ¿Está seguro?", errorLetras,  lector))
+			{
+			case "S":
+				empresa.despedirEmpleado(respuesta);
+				Serializar.grabaEmpresa(empresa); 	//Guardamos 
+			case "N":
+				break; 	//Sale sin tocar nada
+			}
+		}
+	}
+	
+	private static void MenuEmpleado(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		String[] opcc = {"A.- Añadir nuevo empleado","B.- Dar de baja un empleado","C.- Salir"};
+		String Validas = "ABC";
+
+		
+		switch (metodosMenu.Metodos.menu(opcc, Validas, "GESTOR DE EMPLEADOS", errorLetras, lector))
+		{
+		case "A","a": //Añadir empleado 
+			Empleado emple = PideDato.empleado(lector); //Creamos empleado
+			empresa.nuevoEmpleado(emple);	//Añadimos el empleado al TreeMap
+			Serializar.grabaEmpresa(empresa);
+		case "B","b":	//Eliminar empleado
+			Menus.eliminaEmpleado(empresa, lector);
+		case "C","c":
+			break;	//Salir
+		}
+	}
+	
+	private static void creaCocheCombustion(Empresa empresa, Scanner lector) throws TipoNoValidoException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		
+			CocheCombustion nuevo = PideDato.cocheCombustion(lector);
+			empresa.addAlGaraje(nuevo);
+			Serializar.grabaEmpresa(empresa);//Guardamos cambios
+		
+	}
+	
+	private static void creaCocheElectrico(Empresa empresa, Scanner lector) throws TiempoRecargaNoValidoException, TipoNoValidoException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	{
+		
+			CocheElectrico nuevo = PideDato.cocheElectrico(lector);
+			empresa.addAlGaraje(nuevo);
+			Serializar.grabaEmpresa(empresa);//Guardamos cambios
+		
+	}
+	
+	private static void creaMoto(Empresa empresa, Scanner lector) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
+	{
+		
+			Moto nueva = PideDato.moto(lector);
+			empresa.addAlGaraje(nueva);
+			Serializar.grabaEmpresa(empresa);//Guardamos cambios
+		
+		
+	}
+	private static void creaFurgoneta(Empresa empresa, Scanner lector) throws EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
+	{
+		
+			Furgoneta furgo = PideDato.furgoneta(lector);
+			empresa.addAlGaraje(furgo);
+			Serializar.grabaEmpresa(empresa);//Guardamos cambios
+		
+	}
+	
+	
+		
+	
+	
+	}
+----------------------------------- SOURCE END -------------------------------------
+!STACK 0
+java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolvePatternVariable(InstanceOfExpression.java:261)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:318)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:323)
+	at org.eclipse.jdt.internal.compiler.ast.MessageSend.resolveType(MessageSend.java:790)
+	at org.eclipse.jdt.internal.compiler.ast.Expression.resolve(Expression.java:1113)
+	at org.eclipse.jdt.internal.compiler.ast.Block.resolve(Block.java:131)
+	at org.eclipse.jdt.internal.compiler.ast.ForeachStatement.resolve(ForeachStatement.java:668)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolveStatements(AbstractMethodDeclaration.java:661)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.resolveStatements(MethodDeclaration.java:362)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(AbstractMethodDeclaration.java:570)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1503)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1628)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.resolve(CompilationUnitDeclaration.java:667)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1066)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:274)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:193)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 2 2022-03-13 15:09:17.671
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.ui".
+!STACK 1
+Java Model Exception: java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:326)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:193)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+Caused by: java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolvePatternVariable(InstanceOfExpression.java:261)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:318)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:323)
+	at org.eclipse.jdt.internal.compiler.ast.MessageSend.resolveType(MessageSend.java:790)
+	at org.eclipse.jdt.internal.compiler.ast.Expression.resolve(Expression.java:1113)
+	at org.eclipse.jdt.internal.compiler.ast.Block.resolve(Block.java:131)
+	at org.eclipse.jdt.internal.compiler.ast.ForeachStatement.resolve(ForeachStatement.java:668)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolveStatements(AbstractMethodDeclaration.java:661)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.resolveStatements(MethodDeclaration.java:362)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(AbstractMethodDeclaration.java:570)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1503)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1628)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.resolve(CompilationUnitDeclaration.java:667)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1066)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:274)
+	... 18 more
+Caused by: java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolvePatternVariable(InstanceOfExpression.java:261)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:318)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:323)
+	at org.eclipse.jdt.internal.compiler.ast.MessageSend.resolveType(MessageSend.java:790)
+	at org.eclipse.jdt.internal.compiler.ast.Expression.resolve(Expression.java:1113)
+	at org.eclipse.jdt.internal.compiler.ast.Block.resolve(Block.java:131)
+	at org.eclipse.jdt.internal.compiler.ast.ForeachStatement.resolve(ForeachStatement.java:668)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolveStatements(AbstractMethodDeclaration.java:661)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.resolveStatements(MethodDeclaration.java:362)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(AbstractMethodDeclaration.java:570)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1503)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1628)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.resolve(CompilationUnitDeclaration.java:667)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1066)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:274)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:193)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+!SUBENTRY 1 org.eclipse.jdt.core 4 1005 2022-03-13 15:09:17.672
+!MESSAGE Cannot read field "modifiers" because "this.elementVariable.binding" is null
+!STACK 0
+java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolvePatternVariable(InstanceOfExpression.java:261)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:318)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:323)
+	at org.eclipse.jdt.internal.compiler.ast.MessageSend.resolveType(MessageSend.java:790)
+	at org.eclipse.jdt.internal.compiler.ast.Expression.resolve(Expression.java:1113)
+	at org.eclipse.jdt.internal.compiler.ast.Block.resolve(Block.java:131)
+	at org.eclipse.jdt.internal.compiler.ast.ForeachStatement.resolve(ForeachStatement.java:668)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolveStatements(AbstractMethodDeclaration.java:661)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.resolveStatements(MethodDeclaration.java:362)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(AbstractMethodDeclaration.java:570)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1503)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1628)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.resolve(CompilationUnitDeclaration.java:667)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1066)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:274)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:193)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+!SUBENTRY 1 org.eclipse.jdt.core 4 1005 2022-03-13 15:09:17.672
+!MESSAGE Cannot read field "modifiers" because "this.elementVariable.binding" is null
+!STACK 0
+java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolvePatternVariable(InstanceOfExpression.java:261)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:318)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:323)
+	at org.eclipse.jdt.internal.compiler.ast.MessageSend.resolveType(MessageSend.java:790)
+	at org.eclipse.jdt.internal.compiler.ast.Expression.resolve(Expression.java:1113)
+	at org.eclipse.jdt.internal.compiler.ast.Block.resolve(Block.java:131)
+	at org.eclipse.jdt.internal.compiler.ast.ForeachStatement.resolve(ForeachStatement.java:668)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolveStatements(AbstractMethodDeclaration.java:661)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.resolveStatements(MethodDeclaration.java:362)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(AbstractMethodDeclaration.java:570)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1503)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1628)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.resolve(CompilationUnitDeclaration.java:667)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1066)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:274)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:193)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.ui 4 0 2022-03-13 15:09:17.672
+!MESSAGE Error in JDT Core during reconcile
+!STACK 1
+Java Model Exception: java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:326)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:193)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+Caused by: java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolvePatternVariable(InstanceOfExpression.java:261)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:318)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:323)
+	at org.eclipse.jdt.internal.compiler.ast.MessageSend.resolveType(MessageSend.java:790)
+	at org.eclipse.jdt.internal.compiler.ast.Expression.resolve(Expression.java:1113)
+	at org.eclipse.jdt.internal.compiler.ast.Block.resolve(Block.java:131)
+	at org.eclipse.jdt.internal.compiler.ast.ForeachStatement.resolve(ForeachStatement.java:668)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolveStatements(AbstractMethodDeclaration.java:661)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.resolveStatements(MethodDeclaration.java:362)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(AbstractMethodDeclaration.java:570)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1503)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1628)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.resolve(CompilationUnitDeclaration.java:667)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1066)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:274)
+	... 18 more
+Caused by: java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolvePatternVariable(InstanceOfExpression.java:261)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:318)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:323)
+	at org.eclipse.jdt.internal.compiler.ast.MessageSend.resolveType(MessageSend.java:790)
+	at org.eclipse.jdt.internal.compiler.ast.Expression.resolve(Expression.java:1113)
+	at org.eclipse.jdt.internal.compiler.ast.Block.resolve(Block.java:131)
+	at org.eclipse.jdt.internal.compiler.ast.ForeachStatement.resolve(ForeachStatement.java:668)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolveStatements(AbstractMethodDeclaration.java:661)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.resolveStatements(MethodDeclaration.java:362)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(AbstractMethodDeclaration.java:570)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1503)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1628)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.resolve(CompilationUnitDeclaration.java:667)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1066)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:274)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:193)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+!SUBENTRY 1 org.eclipse.jdt.core 4 1005 2022-03-13 15:09:17.673
+!MESSAGE Cannot read field "modifiers" because "this.elementVariable.binding" is null
+!STACK 0
+java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolvePatternVariable(InstanceOfExpression.java:261)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:318)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:323)
+	at org.eclipse.jdt.internal.compiler.ast.MessageSend.resolveType(MessageSend.java:790)
+	at org.eclipse.jdt.internal.compiler.ast.Expression.resolve(Expression.java:1113)
+	at org.eclipse.jdt.internal.compiler.ast.Block.resolve(Block.java:131)
+	at org.eclipse.jdt.internal.compiler.ast.ForeachStatement.resolve(ForeachStatement.java:668)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolveStatements(AbstractMethodDeclaration.java:661)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.resolveStatements(MethodDeclaration.java:362)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(AbstractMethodDeclaration.java:570)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1503)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1628)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.resolve(CompilationUnitDeclaration.java:667)
+	at org.eclipse.jdt.internal.compiler.Compiler.resolve(Compiler.java:1066)
+	at org.eclipse.jdt.internal.core.CompilationUnitProblemFinder.process(CompilationUnitProblemFinder.java:274)
+	at org.eclipse.jdt.internal.core.CompilationUnit.buildStructure(CompilationUnit.java:193)
+	at org.eclipse.jdt.internal.core.Openable.generateInfos(Openable.java:266)
+	at org.eclipse.jdt.internal.core.JavaElement.openWhenClosed(JavaElement.java:597)
+	at org.eclipse.jdt.internal.core.CompilationUnit.makeConsistent(CompilationUnit.java:1142)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.makeConsistent(ReconcileWorkingCopyOperation.java:173)
+	at org.eclipse.jdt.internal.core.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:94)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.run(JavaModelOperation.java:740)
+	at org.eclipse.jdt.internal.core.JavaModelOperation.runOperation(JavaModelOperation.java:806)
+	at org.eclipse.jdt.internal.core.CompilationUnit.reconcile(CompilationUnit.java:1319)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:131)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy$1.run(JavaReconcilingStrategy.java:93)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:90)
+	at org.eclipse.jdt.internal.ui.text.java.JavaReconcilingStrategy.reconcile(JavaReconcilingStrategy.java:157)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:94)
+	at org.eclipse.jdt.internal.ui.text.JavaCompositeReconcilingStrategy.reconcile(JavaCompositeReconcilingStrategy.java:107)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:76)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:210)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 2 2022-03-13 15:09:17.845
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.jdt.core.manipulation".
+!STACK 0
+java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolvePatternVariable(InstanceOfExpression.java:261)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:318)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:323)
+	at org.eclipse.jdt.internal.compiler.ast.MessageSend.resolveType(MessageSend.java:790)
+	at org.eclipse.jdt.internal.compiler.ast.Expression.resolve(Expression.java:1113)
+	at org.eclipse.jdt.internal.compiler.ast.Block.resolve(Block.java:131)
+	at org.eclipse.jdt.internal.compiler.ast.ForeachStatement.resolve(ForeachStatement.java:668)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolveStatements(AbstractMethodDeclaration.java:661)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.resolveStatements(MethodDeclaration.java:362)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(AbstractMethodDeclaration.java:570)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1503)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1628)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.resolve(CompilationUnitDeclaration.java:667)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.resolve(CompilationUnitResolver.java:1240)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.resolve(CompilationUnitResolver.java:712)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1253)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.jdt.core.manipulation 4 0 2022-03-13 15:09:17.846
+!MESSAGE Error in JDT Core during AST creation
+!STACK 0
+java.lang.NullPointerException: Cannot read field "modifiers" because "this.elementVariable.binding" is null
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolvePatternVariable(InstanceOfExpression.java:261)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:318)
+	at org.eclipse.jdt.internal.compiler.ast.InstanceOfExpression.resolveType(InstanceOfExpression.java:323)
+	at org.eclipse.jdt.internal.compiler.ast.MessageSend.resolveType(MessageSend.java:790)
+	at org.eclipse.jdt.internal.compiler.ast.Expression.resolve(Expression.java:1113)
+	at org.eclipse.jdt.internal.compiler.ast.Block.resolve(Block.java:131)
+	at org.eclipse.jdt.internal.compiler.ast.ForeachStatement.resolve(ForeachStatement.java:668)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolveStatements(AbstractMethodDeclaration.java:661)
+	at org.eclipse.jdt.internal.compiler.ast.MethodDeclaration.resolveStatements(MethodDeclaration.java:362)
+	at org.eclipse.jdt.internal.compiler.ast.AbstractMethodDeclaration.resolve(AbstractMethodDeclaration.java:570)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1503)
+	at org.eclipse.jdt.internal.compiler.ast.TypeDeclaration.resolve(TypeDeclaration.java:1628)
+	at org.eclipse.jdt.internal.compiler.ast.CompilationUnitDeclaration.resolve(CompilationUnitDeclaration.java:667)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.resolve(CompilationUnitResolver.java:1240)
+	at org.eclipse.jdt.core.dom.CompilationUnitResolver.resolve(CompilationUnitResolver.java:712)
+	at org.eclipse.jdt.core.dom.ASTParser.internalCreateAST(ASTParser.java:1253)
+	at org.eclipse.jdt.core.dom.ASTParser.createAST(ASTParser.java:868)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider$1.run(CoreASTProvider.java:272)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.createAST(CoreASTProvider.java:264)
+	at org.eclipse.jdt.core.manipulation.CoreASTProvider.getAST(CoreASTProvider.java:197)
+	at org.eclipse.jdt.core.manipulation.SharedASTProviderCore.getAST(SharedASTProviderCore.java:138)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup.calculateASTandInform(SelectionListenerWithASTManager.java:166)
+	at org.eclipse.jdt.internal.ui.viewsupport.SelectionListenerWithASTManager$PartListenerGroup$1.run(SelectionListenerWithASTManager.java:151)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

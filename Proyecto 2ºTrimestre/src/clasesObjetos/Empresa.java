@@ -5,6 +5,7 @@ import java.util.TreeMap;
 
 import comparadores.ComparaClientePorNombre;
 import comparadores.ComparaEmpleadoPorNombre;
+import comparadores.ComparaVehiculoPorCategoria;
 import exceptions.CodigoPostalException;
 import exceptions.LicenciaNoValidaException;
 import exceptions.LongitudCadenaNoValidaException;
@@ -105,38 +106,42 @@ public class Empresa {
 		Empleados.remove(dni);
 	}
 	
-	public void ListarEmpleadoNombre() throws LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	public ArrayList<Empleado> ListarEmpleadoNombre() throws LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
-		boolean PrimeraVez = true;	//Para recorrerlo
+		//boolean PrimeraVez = true;	//Para recorrerlo
 		
 		ArrayList<Empleado> empleados = metodos.TreeMapToArrayList.listarEmpleados(Empleados);//PASAMOS DE TREEMAP A ARRAYLIST
+		ComparaEmpleadoPorNombre c = new ComparaEmpleadoPorNombre();
+		empleados.sort(c);
 		//Creamos un empleado con el constructor mínimo para luego intercambiarlo con el empleado anterior al comparar en el bucle:
-		Empleado b = new Empleado("Nombre","Apellido1", "Apellido2", "78280774k", null, new Oficina("23009","", new Direccion("Calle","12", "23009", "Jaén"), "", "", true));
-		
-		for (Empleado a:empleados)
-		{
-			if (PrimeraVez)
-			{
-				b = a;
-				PrimeraVez = false;
-			}else {
-				ComparaEmpleadoPorNombre c = new ComparaEmpleadoPorNombre();
-				c.compare(a, b);
-				b = a;
-			}
-			
-		}
-		
+//		Empleado b = new Empleado("Nombre","Apellido1", "Apellido2", "78280774k", null, new Oficina("23009","", new Direccion("Calle","12", "23009", "Jaén"), "", "", true));
+//		
+//		for (Empleado a:empleados)
+//		{
+//			if (PrimeraVez)
+//			{
+//				b = a;
+//				PrimeraVez = false;
+//			}else {
+//				ComparaEmpleadoPorNombre c = new ComparaEmpleadoPorNombre();
+//				c.compare(a, b);
+//				b = a;
+//			}
+//			
+//		}
+		return empleados;
 	}
 
-	public void ListarClienteNombre() throws LicenciaNoValidaException {
+	public ArrayList<Cliente> ListarClienteNombre() throws LicenciaNoValidaException {
 		
-		boolean PrimeraVez = true;	//Para recorrerlo
+		//boolean PrimeraVez = true;	//Para recorrerlo
 		
 		ArrayList<Cliente> clientes = metodos.TreeMapToArrayList.listarClientes(Clientes);//PASAMOS DE TREEMAP A ARRAYLIST
 		//Creamos un empleado con el constructor mínimo para luego intercambiarlo con el empleado anterior al comparar en el bucle:
-		Cliente b = new Cliente("Nombre", "Ap1", "Ap2", "78280774k", "A1", 0);//Las tarjetas de los clientes de verdad no empezarán en 0 sino en 1
-				
+		//Cliente b = new Cliente("Nombre", "Ap1", "Ap2", "78280774k", "A1", 0);//Las tarjetas de los clientes de verdad no empezarán en 0 sino en 1
+		ComparaClientePorNombre c = new ComparaClientePorNombre();
+		clientes.sort(c);
+/*
 		for (Cliente a:clientes)
 		{
 			if (PrimeraVez)
@@ -144,13 +149,24 @@ public class Empresa {
 				b = a;
 				PrimeraVez = false;
 			}else {
-				ComparaClientePorNombre c = new ComparaClientePorNombre();
-				c.compare(a, b);
-				b = a;
+				
+				if (c.compare(a, b)<0)	//Si el segundo es mayor devuelve un negativo
+				{
+					a=b;
+				}
+				b = a;	//Para que compare con el anterior
 			}
-			
-		}
+		}*/
+		return clientes;
 		
+	}
+	
+	public ArrayList<Electrico> ListarVehiculoElectricoPorCategoria(TreeMap<Matricula, Vehiculo> flota) 
+	{
+		ArrayList<Electrico> vehiculos = metodos.TreeMapToArrayList.listarElectricos(flota);	//Pasamos a ArrayList
+		ComparaVehiculoPorCategoria c = new ComparaVehiculoPorCategoria(); 
+		vehiculos.sort(c);
+		return vehiculos;
 	}
 	public void eliminarOficina(Oficina ofi) //Equivale a un remove
 	{
@@ -160,6 +176,7 @@ public class Empresa {
 	{
 		Oficinas.remove(ClaveOfi);
 	}
+	
 	
 	//Constructor
 	@SuppressWarnings("unused")		//Quitamos los Warnings para evitar errores al exportar
