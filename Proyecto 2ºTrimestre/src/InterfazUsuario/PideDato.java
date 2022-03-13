@@ -67,7 +67,7 @@ public class PideDato {
 	public static int numerico( String mensaje,String mensajeError,int limiteBajo, int limite,Scanner l) {
 		int num = -1;
 		boolean DatoMalo = true;
-		l.next(); //Limpiamos el Scanner
+//		l.next(); //Limpiamos el Scanner
 		do {
 			System.out.println(mensaje);
 			num = l.nextInt();
@@ -111,19 +111,29 @@ public class PideDato {
 	public static double real(String mensaje, int limiteBajo,int limite,Scanner l) {
 		double num = 0.0;
 		boolean DatoMalo = true;
-		l.nextLine(); //Limpiamos el Buffer
+//		l.nextLine(); //Limpiamos el Buffer
 		do {
 			System.out.println(mensaje);
 			num = l.nextDouble();
 			l.nextLine();
+			if (num>limiteBajo && num<limite)
+			{
+				DatoMalo = false;	//el dato es válido
+			}
 		}while (DatoMalo);
 		
 		return num;
 	}
 	
+	/**
+	 * El número estará entre 0 y 100
+	 * @param mensaje	El {@code String} que se imprime por pantalla antes que el usuario escriba
+	 * @param l	El {@code Scanner}
+	 * @return	El {@code double} que escribe el usuario 
+	 */
 	public static double real(String mensaje, Scanner l)
 	{
-		return PideDato.real(mensaje,0,10 ,l);
+		return PideDato.real(mensaje,0,100 ,l);
 	}
 	
 	/**
@@ -140,7 +150,7 @@ public class PideDato {
 	{
 		String resultado;
 		boolean DatoMalo = true;
-		l.next(); //Limpiamos el Buffer
+//		l.next(); //Limpiamos el Buffer
 		do {
 			System.out.println(mensaje);
 			resultado = l.nextLine();
@@ -164,7 +174,8 @@ public class PideDato {
 	 */
 	public static String cadena(String mensaje, Scanner l)
 	{
-		return PideDato.cadena(mensaje, "Longitud no válida / Tipo de dato no válido", 0, 25, l);
+		String error = "Longitud no válida / Tipo de dato no válido";
+		return PideDato.cadena(mensaje, error, 0, 25, l);
 	}
 	
 	/**
@@ -187,7 +198,7 @@ public class PideDato {
 	 */
 	public static Matricula matricula(Scanner l) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException 
 	{
-		l.next(); //Limpiamos el buffer por si acaso
+//		l.next(); //Limpiamos el buffer por si acaso
 		System.out.println("Escribe:");
 		System.out.print("2.- Los números de la matrícula:");
 		int numeros= PideDato.numerico("", "Sólo datos numéricos admitidos", 0, 99999999, l);
@@ -213,13 +224,14 @@ public class PideDato {
 	public static GregorianCalendar fecha(String mensaje, Scanner l)
 	{
 		System.out.println(mensaje);
-		l.next(); //Limpiamos el Scanner para evitar errores
+//		l.next(); //Limpiamos el Scanner para evitar errores
 		System.out.print("Día:");
 		int dia = l.nextInt();
 		l.nextLine();
 		System.out.println("Mes:");
 		int mes = l.nextInt();
 		l.nextLine();
+		System.out.println("Año:");
 		int anno = l.nextInt();
 		l.nextLine();
 		return  new GregorianCalendar(anno,mes,dia);	//Creamos el GregorianCalendar con los datos introducidos
@@ -242,7 +254,7 @@ public class PideDato {
 	
 	public static Direccion direccion(Scanner l) throws LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException 
 	{
-		l.next(); //Eliminamos un posible Enter
+//		l.next(); //Eliminamos un posible Enter
 		
 		boolean DatoBueno = false; //A priori es falso
 		String nombreVia;
@@ -272,7 +284,7 @@ public class PideDato {
 	}
 	public static Oficina oficina(Scanner l) throws LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
-		l.next(); //Limpieamos el buffer
+//		l.next(); //Limpieamos el buffer
 		String codigo; //(es un alfanumérico de 4 letras : JA01, MA10…)
 		String Descripcion; //(“Jaén estación de trenes”, “Málaga principal”
 		String Localidad;
@@ -350,7 +362,7 @@ public class PideDato {
 	public static CocheCombustion cocheCombustion(Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException 
 	{
 		Oficina oficina;		
-		l.next(); //Limpiamos el Scanner
+//		l.next(); //Limpiamos el Scanner
 		System.out.println("Matrícula del coche");
 		Matricula mat = null;
 		
@@ -397,7 +409,7 @@ public class PideDato {
 	public static CocheElectrico cocheElectrico(Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TiempoRecargaNoValidoException, TipoNoValidoException 
 	{
 		Oficina oficina;		
-		l.nextLine(); //Limpiamos el Scanner
+//		l.nextLine(); //Limpiamos el Scanner
 		System.out.println("Matrícula del coche");
 		Matricula mat = null;
 		int autonomia; //(kms)
@@ -450,7 +462,7 @@ public class PideDato {
 	{
 		int cilindrada;
 		String carnet; //Carnet requerido (AM/A1/A2)
-		l.next(); //Limpiamos el Scanner
+//		l.next(); //Limpiamos el Scanner
 		
 		Metodos.pintaSubrayado("Nueva Moto");
 		
