@@ -532,8 +532,8 @@ public class Menus {
 				{
 					System.out.println(emple);
 				}
+				break;
 			}
-			break;
 		case "3":	//SALIR
 			break;
 		}

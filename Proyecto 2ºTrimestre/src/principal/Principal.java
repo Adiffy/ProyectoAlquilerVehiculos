@@ -42,6 +42,10 @@ public class Principal {
 				| CarnetRequeridoInvalidoException | FechaNoValidaException e) {
 			
 			e.printStackTrace();
+		}catch (NullPointerException a)	//Error de TreeMap vacio
+		{
+			System.out.println("Contenido de la lista nulo");
+			a.getLocalizedMessage();
 		}
 		
 		
