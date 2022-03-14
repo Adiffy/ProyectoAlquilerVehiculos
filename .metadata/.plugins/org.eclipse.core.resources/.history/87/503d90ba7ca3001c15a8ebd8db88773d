@@ -687,10 +687,10 @@ public class Menus {
 			{				
 			case "A","a": //Lo hacemos tolerante a mayúsculas y minúsculas
 				Menus.add(empresa, lector);
-				break;
+			break;
 			case "B","b":	//Eliminar vehículo
 				Menus.eliminar(empresa, lector);
-				break;
+			break;
 			case "C","c": //SALIR
 				sale = true;
 				break;
