@@ -826,7 +826,7 @@ public class Menus {
 					Serializar.grabaEmpresa(empresa); 	//Guardamos 
 					break;
 				case "N":
-					
+					sale = true;
 					break; 	//Sale sin tocar nada
 				}
 			

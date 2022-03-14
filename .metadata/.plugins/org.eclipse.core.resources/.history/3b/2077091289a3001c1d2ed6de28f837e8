@@ -811,7 +811,7 @@ public class Menus {
 		 */
 		Menus.ListarTreeMapEmpleadoDNI(empresa.getEmpleados());
 		String[] opcion = {""};
-		
+		boolean sale = false;
 		
 		respuesta = metodosMenu.Metodos.menu(opcion, metodos.TreeMapToArrayList.DNIsEmpleados(empresa.getEmpleados()),"Escriba el DNI del empleado a borrar", errorLetras, lector);
 		if (empresa.getEmpleados().containsKey(respuesta))	//Si alguien usa esa clave principal
@@ -826,7 +826,7 @@ public class Menus {
 					Serializar.grabaEmpresa(empresa); 	//Guardamos 
 					break;
 				case "N":
-					
+					sale = true;
 					break; 	//Sale sin tocar nada
 				}
 			
