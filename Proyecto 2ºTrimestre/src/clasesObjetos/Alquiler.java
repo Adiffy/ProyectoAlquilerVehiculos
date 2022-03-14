@@ -7,6 +7,7 @@ import exceptions.FechaNoValidaException;
 public class Alquiler {
 
 	//Variables que Se usarán en caso de alquiler
+		private String codigo ; 
 		private GregorianCalendar FechaInicioAlquiler = new GregorianCalendar();
 		private GregorianCalendar FechaPrevistaFinAlquiler = new GregorianCalendar();
 		private GregorianCalendar FechaDevolucion = new GregorianCalendar();
@@ -16,6 +17,16 @@ public class Alquiler {
 		
 		//Getters & Setters
 		
+		public String getCodigo() {
+			String copia = codigo;
+			return copia;
+		}
+
+		public void setCodigo(String codigo) {
+			
+			this.codigo = codigo;
+		}
+
 		public GregorianCalendar getFechaInicioAlquiler() {
 			return (GregorianCalendar) FechaInicioAlquiler.clone();
 		}
@@ -33,7 +44,7 @@ public class Alquiler {
 		}
 		
 		@SuppressWarnings("static-access")
-		private void setFechaPrevistaFinAlquiler(GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
+		public void setFechaPrevistaFinAlquiler(GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
 			if (fechaPrevistaFinAlquiler.DATE > GregorianCalendar.getInstance().DATE && (fechaPrevistaFinAlquiler.MONTH > GregorianCalendar.getInstance().MONTH || fechaPrevistaFinAlquiler.DAY_OF_YEAR > GregorianCalendar.getInstance().DAY_OF_YEAR))
 			{
 				FechaPrevistaFinAlquiler = fechaPrevistaFinAlquiler;
@@ -73,8 +84,9 @@ public class Alquiler {
 		
 		//Constructores
 		
-		public Alquiler(GregorianCalendar fechaInicioAlquiler, GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
+		public Alquiler(String codigo, GregorianCalendar fechaInicioAlquiler, GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
 			super();
+			this.setCodigo(codigo);
 			this.setFechaInicioAlquiler(fechaInicioAlquiler);
 			this.setFechaPrevistaFinAlquiler(fechaPrevistaFinAlquiler);
 		}

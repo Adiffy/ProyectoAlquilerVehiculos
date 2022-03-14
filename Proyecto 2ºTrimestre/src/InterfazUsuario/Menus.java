@@ -1,9 +1,9 @@
 package InterfazUsuario;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 import java.util.TreeMap;
-
 import accesoADatos.Serializar;
 import clasesObjetos.Alquiler;
 import clasesObjetos.Cliente;
@@ -12,6 +12,7 @@ import clasesObjetos.CocheElectrico;
 import clasesObjetos.Empleado;
 import clasesObjetos.Empresa;
 import clasesObjetos.Furgoneta;
+import clasesObjetos.Matricula;
 import clasesObjetos.Moto;
 import clasesObjetos.Oficina;
 import clasesObjetos.Vehiculo;
@@ -57,10 +58,13 @@ public class Menus {
 			{
 			case "1":
 				Menus.ficherosMaestros(empresa, lector);
+				break;
 			case "2"://Gestión de oficinas
 				Menus.oficinas(empresa, lector);
+				break;
 			case "3":	//Listados
 				Menus.MenuListados(empresa, lector);
+				break;
 			case "4": //SALIR DE VERDAD
 				BarraDeCarga.pintar();
 				noSale = false;
@@ -103,12 +107,16 @@ public class Menus {
 						break;
 					}
 				}while (!salir);
+				
 			case "2":
 				Menus.clientes(empresa, lector);
+				break;
 			case "3":
 				Menus.MenuListados(empresa, lector);
+				break;
 			case "4":
 				Menus.MenuEmpleado(empresa, lector);
+				break;
 			case "5":
 				Menus.alquileres(empresa, lector);
 				break;
@@ -119,7 +127,7 @@ public class Menus {
 		}while(!sale);
 		
 	}
-	private static void alquileres(Empresa empresa, Scanner lector) throws FechaNoValidaException
+	private static void alquileres(Empresa empresa, Scanner lector) throws FechaNoValidaException, LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, PlantaNoValidaException
 	{
 		String[] opcione = {"1.- Nuevo alquiler","2.- Modificar alquiler existente","3.- Eliminar alquiler","4.- Salir"};
 		String validadas = "1234";
@@ -136,16 +144,113 @@ public class Menus {
 				
 				empresa.nuevoAlquiler(nuevo);
 				Serializar.grabaEmpresa(empresa);
+				break;
 			case "2":	//Cambiar fechas y demás
-				
+				Menus.editaAlquiler(empresa, lector);
+				break;
 			case "3":	//Eliminar alquiler
 				Alquiler alquil = PideDato.alquiler(lector);
 				empresa.quitaAlquiler(alquil);
+				break;
 			case "4":
 				sale = true;	//sale
 				break;
 			}
 		}while(!sale);
+	}
+	private static void editaAlquiler(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, PlantaNoValidaException, FechaNoValidaException
+	{
+		String[] elecciones = {"1.- Mostrar precio alquiler","2.- Editar fecha de finalización prevista","3.- Finalizar alquiler","4.- Volver (salir)"};
+		String val = "1234";
+		boolean seSale = false;
+		Matricula respuesta = null;
+		
+		do
+		{
+			switch (Metodos.menu(elecciones, val, errorLetras, mensaje, lector))
+			{
+			case "1":	//Listamos vehículos y según PK decimos precioAlquiler
+				boolean valido = false;
+				do 
+				{
+					metodos.TreeMapToArrayList.listarGaraje(empresa.getGaraje());	//Listamos
+					System.out.println("Escribe la matrícula del vehículo a modificar");
+					respuesta = PideDato.matricula(lector);
+					//Si respuesta es una matrícula válida se acaba el bucle
+					if (empresa.getGaraje().containsKey(respuesta))
+					{
+						valido = true;
+					}
+				}while(!valido);
+				//Metemos el precio del alquiler en un double para que quede más limpio
+				double aMostrar = empresa.getGaraje().get(respuesta).PrecioAlquiler();
+				//Mostramos resultados
+				System.out.println(empresa.getGaraje().get(respuesta));
+				System.out.println(aMostrar);
+				break;
+			case "2":
+				String responde;
+				boolean siVale = false;
+				boolean sale = false;
+				
+				String[] amodificar = {"1.- Fecha inicio alquiler","2.- Fecha prevista fin","3.- Atrás (salir)"};
+				String vale = "123";
+				
+				do {
+					metodos.TreeMapToArrayList.listarAlquileres(empresa.getAlquileres());	//Listamos
+					System.out.println("Escribe el código del alquiler a modificar");
+					responde = PideDato.cadena(lector);
+					//Si respuesta es una matrícula válida se acaba el bucle
+					if (empresa.getAlquileres().containsKey(responde))
+					{
+						siVale = true;
+					}
+				}while(!siVale);
+				
+				do
+				{
+					switch (Metodos.menu(amodificar, vale,"Fecha de alquiler a modificar", menError, lector))
+					{
+					case "1":
+						GregorianCalendar nuevaFechaIni = PideDato.fecha("Nueva fecha de devolución prevista", lector);
+						empresa.getAlquileres().get(responde).setFechaInicioAlquiler(nuevaFechaIni);
+						Serializar.grabaEmpresa(empresa); 
+						break;
+					case "2":
+						GregorianCalendar nuevaFechaDev = PideDato.fecha("Nueva fecha de devolución prevista", lector);
+						empresa.getAlquileres().get(responde).setFechaPrevistaFinAlquiler(nuevaFechaDev);
+						Serializar.grabaEmpresa(empresa);
+						break;
+					case "3":
+						sale = true;
+						break;
+					}
+				}while (!sale);
+				break;
+			case "3":	//Devolver
+				String contesta;
+				boolean valida = false;
+				do 
+				{
+					metodos.TreeMapToArrayList.listarAlquileres(empresa.getAlquileres());	//Listamos
+					System.out.println("Escribe el código del alquiler a modificar");
+					contesta = PideDato.cadena(lector);
+					//Si respuesta es una matrícula válida se acaba el bucle
+					if (empresa.getAlquileres().containsKey(contesta))
+					{
+						valida = true;
+					}
+				}while(!valida);
+				
+				GregorianCalendar nuevaFecha = PideDato.fecha("Fecha de devolución", lector);
+				empresa.getAlquileres().get(contesta).setFechaDevolucion(nuevaFecha);	//Set Fecha
+				Serializar.grabaEmpresa(empresa);
+				break;
+			case "4":
+				seSale = true;
+				break;
+			}
+		}while(!seSale);
 	}
 	protected static void ListadoOficinas(Empresa empresa, Scanner l)	//Protegido porque lo queremos usar en PideDato
 	{
@@ -265,17 +370,25 @@ public class Menus {
 	{
 		String[] tipo = {"1.- Coche eléctrico", "2.- Moto eléctrica", "3.- Atrás (Salir)"};
 		String opcio = "123";
-		switch (metodosMenu.Metodos.menu(tipo, opcio, "LISTAR VEHÍCULOS ELÉCTRICOS", errorLetras, lector))
+		boolean adios = false;
+		
+		do
 		{
-		case "1":	//Coche eléctrico
-			
-				Menus.listadosElectricos(empresa, "CocheElectrico", lector);
-			
-		case "2":	//Moto
-				Menus.listadosElectricos(empresa, "Moto", lector);
-		case "3":
-			break;
-		}
+			switch (metodosMenu.Metodos.menu(tipo, opcio, "LISTAR VEHÍCULOS ELÉCTRICOS", errorLetras, lector))
+			{
+			case "1":	//Coche eléctrico
+				
+					Menus.listadosElectricos(empresa, "CocheElectrico", lector);
+					break;
+			case "2":	//Moto
+				
+					Menus.listadosElectricos(empresa, "Moto", lector);
+					break;
+			case "3":
+				adios = true;	//se va
+				break;
+			}
+		}while(!adios);
 	}
 	private static void listadosElectricos(Empresa empresa,String tipoVehiculo, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
 	{
@@ -390,6 +503,7 @@ public class Menus {
 			}else {
 				Menus.ListarTreeMapEmpleadoDNI(lista2);
 			}
+			break;
 			
 		case "2":	//Listar por nombre
 			 ArrayList<Cliente> A = new ArrayList<>();
@@ -416,6 +530,7 @@ public class Menus {
 				{
 					System.out.println(emple);
 				}
+				break;
 			}
 		case "3":	//SALIR
 			break;
@@ -438,6 +553,7 @@ public class Menus {
 			case "S":
 				empresa.eliminarOficina(respuesta);
 				Serializar.grabaEmpresa(empresa);
+				break;
 			case "N":
 				break; 	//Sale sin tocar nada
 			}
@@ -457,8 +573,10 @@ public class Menus {
 			Oficina nueva = PideDato.oficina(lector);
 			empresa.nuevaOficina(nueva);	//Metemos la oficina
 			Serializar.grabaEmpresa(empresa); 	//Guardamos 
+			break;
 		case "B":	//Eliminar
 			Menus.eliminaOficina(empresa, lector);
+			break;
 		case "C": //Salir
 			break;
 		}
@@ -490,9 +608,11 @@ public class Menus {
 		switch (metodosMenu.Metodos.menu(combustion, opcValidas, "Vehiculos de combustión", menError, lector))
 		{
 		case "1":	//Coche
-			Menus.creaCocheCombustion(empresa, lector);												
+			Menus.creaCocheCombustion(empresa, lector);		
+			break;
 		case "2":	//Furgoneta
 			Menus.creaFurgoneta(empresa, lector);
+			break;
 		case "3":	//Salir
 			break;
 		}
@@ -520,8 +640,10 @@ public class Menus {
 		{
 		case "1":	//Coche
 			Menus.creaCocheElectrico(empresa, lector);
+			break;
 		case "2":	//Moto
 			Menus.creaMoto(empresa, lector);
+			break;
 		case "3":	//Salir
 			break;
 		}
@@ -535,8 +657,10 @@ public class Menus {
 		{
 		case "A","a":	//Combustion
 			Menus.combustion(empresa, lector);
+		break;
 		case "B","b":	//Electrico
 			Menus.electrico(empresa, lector);
+		break;
 		case "C","c": //SALIR
 			break;
 		}
@@ -551,8 +675,10 @@ public class Menus {
 		{				
 		case "A","a": //Lo hacemos tolerante a mayúsculas y minúsculas
 			Menus.add(empresa, lector);
+		break;
 		case "B","b":	//Eliminar vehículo
 			Menus.eliminar(empresa, lector);
+		break;
 		case "C","c": //SALIR
 			break;
 		}
@@ -617,8 +743,10 @@ public class Menus {
 			{
 			case "A","a":	//Añadir o eliminar empleados
 				Menus.MenuEmpleado(empresa,lector);
+			break;
 			case "B","b":	//Añadir o eliminar oficinas
 				Menus.MenuOficinas(empresa, lector);
+			break;
 			case "C","c":
 				sale = true;
 				break;	//Salir		
@@ -691,8 +819,10 @@ public class Menus {
 			Empleado emple = PideDato.empleado(empresa, lector); //Creamos empleado
 			empresa.nuevoEmpleado(emple);	//Añadimos el empleado al TreeMap
 			Serializar.grabaEmpresa(empresa);
+			break;
 		case "B","b":	//Eliminar empleado
 			Menus.eliminaEmpleado(empresa, lector);
+			break;
 		case "C","c":
 			break;	//Salir
 		}

@@ -19,7 +19,7 @@ public class Empresa {
 	private TreeMap<String, Cliente> Clientes; //El String será el DNI
 	private TreeMap<String, Empleado> Empleados; //El personal de la empresa
 	private TreeMap<String, Oficina> Oficinas; //Las oficinas de la empresa
-	private TreeMap<GregorianCalendar, Alquiler> Alquileres; //Los alquileres de la empresa
+	private TreeMap<String, Alquiler> Alquileres; //Los alquileres de la empresa
 
 	//Setters & Getters
 	
@@ -31,24 +31,26 @@ public class Empresa {
 
 	
 	@SuppressWarnings("unchecked")
-	public TreeMap<GregorianCalendar, Alquiler> getAlquileres() {
+	public TreeMap<String, Alquiler> getAlquileres() {
 		
-		return (TreeMap<GregorianCalendar, Alquiler>) Alquileres.clone();
+		return (TreeMap<String, Alquiler>) Alquileres.clone();
 	}
 
 
 	@SuppressWarnings("unchecked")
-	public void setAlquileres(TreeMap<GregorianCalendar, Alquiler> alquileres) {
-		Alquileres = (TreeMap<GregorianCalendar, Alquiler>) alquileres.clone();
+	public void setAlquileres(TreeMap<String, Alquiler> alquileres) {
+		Alquileres = (TreeMap<String, Alquiler>) alquileres.clone();
 	}
 	public void nuevoAlquiler(Alquiler nuevo)	//Equivale a un put
 	{
-		Alquileres.put(nuevo.getFechaInicioAlquiler(), nuevo);
+		Alquileres.put(nuevo.getCodigo(), nuevo);
 	}
+	@SuppressWarnings("unlikely-arg-type")
 	public void quitaAlquiler(GregorianCalendar pk)	//Equivale a un remove
 	{
 		Alquileres.remove(pk);
 	}
+	@SuppressWarnings("unlikely-arg-type")
 	public void quitaAlquiler(Alquiler aQuitar)	//Equivale a un remove
 	{
 		Alquileres.remove(aQuitar.getFechaInicioAlquiler());

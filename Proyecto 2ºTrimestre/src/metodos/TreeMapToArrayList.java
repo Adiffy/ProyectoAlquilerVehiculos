@@ -3,6 +3,8 @@ package metodos;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeMap;
+
+import clasesObjetos.Alquiler;
 import clasesObjetos.Cliente;
 import clasesObjetos.CocheElectrico;
 import clasesObjetos.Electrico;
@@ -105,6 +107,19 @@ public class TreeMapToArrayList {
 			}
 	}
 		return lista;
+	}
+	public static void listarAlquileres(TreeMap<String, Alquiler> treemap) {
+		
+		ArrayList<Alquiler> listado = new ArrayList<Alquiler>(treemap.values());
+		for (Alquiler a:listado)
+		{	//Imprimimos alquileres
+				
+			System.out.printf("Código: "+a.getCodigo()+" - Alquiler "+a);
+				
+			
+		}
+		
+		
 	}
 	
 	
