@@ -271,27 +271,29 @@ public class PideDato {
 		boolean DatoBueno = false; //A priori es falso
 		String nombreVia;
 		String numVia;
-		String planta;
+//		String planta;	No tendremos en cuenta la planta
 		String codigoPostal;
-		String localidad;
+//		String localidad;	Construiremos su dirección sin localidad para no pedirla 2 veces
 		
 		do {
 			System.out.println("Dirección:");
-			System.out.println("Tipo de vía:");
+			System.out.println("Tipo de vía y nombre de la misma:"+"          Por ejemplo: Calle Francisco Soriano");
 			nombreVia = PideDato.cadena(l);
+			
 			System.out.println("Número de vía:");
 			numVia = PideDato.cadena(l);
-			System.out.println("Planta");
-			planta = PideDato.cadena(l);
+//			System.out.println("Planta");
+//			planta = PideDato.cadena(l);
 			System.out.println("Código Postal:");
 			codigoPostal = PideDato.cadena("", "Código no válido", 5, 5, l); //Un CP tiene 5 dígitos
-			System.out.println("Nombre de localidad:");
-			localidad = PideDato.cadena(l);
-			if((nombreVia.length()<=25 && nombreVia.length()>=2)&&(numVia.length()>=2 && numVia.length()<=25)&&(planta.length()<4)&&(codigoPostal.length()==5) && (localidad.length()>3 && localidad.length()<25)) {
+//			System.out.println("Nombre de localidad:");
+//			localidad = PideDato.cadena(l);																	&&(planta.length()<4)
+			if((nombreVia.length()<=25 && nombreVia.length()>=2)&&(numVia.length()>=2 && numVia.length()<=25)&&(codigoPostal.length()==5))// && (localidad.length()>3 && localidad.length()<25)) {
+			{
 				DatoBueno = true;
 			}
 		}while (!DatoBueno);
-		Direccion home = new Direccion(nombreVia,numVia,planta,codigoPostal,localidad); //Al crear una nueva direccion podemos lanzar dos Exceptions
+		Direccion home = new Direccion(nombreVia,numVia,codigoPostal); //Al crear una nueva direccion podemos lanzar dos Exceptions
 		return home;
 	}
 	public static Oficina oficina(Scanner l) throws LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
@@ -310,8 +312,9 @@ public class PideDato {
 		do 
 		{
 			codigo = PideDato.cadena("Código | Con estructura: JA01", l);
-		}while (Validadores.codigoValidado(codigo)); //Pedirá el codigo mientras sea inválido
+		}while (!Validadores.codigoValidado(codigo)); //Pedirá el codigo mientras sea inválido
 		Descripcion = PideDato.cadena("Descripción de la oficina","Tiene un límite de 40 caracteres",0,40,l);
+		//Provincia y localidad
 		Provincia = menuProvincias(l);
 		Localidad = PideDato.cadena("Localidad", l);
 		
@@ -338,7 +341,7 @@ public class PideDato {
 		String elegida;
 		boolean bien = false;
 		
-		Metodos.pintaSubrayado("Nuevo Cliente");
+		Metodos.pintaSubrayado("Nuevo empleado");
 		
 		dni = PideDato.cadena("DNI asociado:", l);
 		nombre = PideDato.cadena("Nombre:", l);
@@ -351,7 +354,6 @@ public class PideDato {
 			if (empresa.getOficinas().containsKey(elegida))		//Cuando elige una clave válida
 			{
 				bien = true;
-				
 			}
 			
 		}while (!bien);

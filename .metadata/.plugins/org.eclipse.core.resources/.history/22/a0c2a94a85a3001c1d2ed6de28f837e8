@@ -8,7 +8,7 @@ public class Validadores {
 		//{
 		//	return false;
 		//}else 
-		if (Integer.parseInt(code.substring(2))!=0) //Si tiene datos numéricos después de las dos letras. Ejemplo: JA01
+		if (Integer.parseInt(code,2)!=0) //Si tiene datos numéricos después de las dos letras. Ejemplo: JA01
 		{
 			return true;
 		}else {

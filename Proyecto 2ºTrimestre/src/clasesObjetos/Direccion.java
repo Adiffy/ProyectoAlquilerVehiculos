@@ -122,6 +122,13 @@ public class Direccion {
 		this.setCodigoPostal(codigoPostal);
 		this.setLocalidad(localidad);
 	}
+	public Direccion(String nombreVia, String numVia, String codigoPostal) throws LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException {
+		super();
+		this.setNombreVia(nombreVia);
+		this.setNumVia(numVia);
+		this.setCodigoPostal(codigoPostal);
+		
+	}
 
 	/**
 	 * Constructor de copia
