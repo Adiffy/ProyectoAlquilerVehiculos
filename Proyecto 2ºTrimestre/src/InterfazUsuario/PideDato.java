@@ -2,6 +2,8 @@ package InterfazUsuario;
 
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+
+import clasesObjetos.Alquiler;
 import clasesObjetos.Categoria;
 import clasesObjetos.Cliente;
 import clasesObjetos.CocheCombustion;
@@ -18,6 +20,7 @@ import exceptions.CilindradaNoValidaException;
 import exceptions.CodigoPostalException;
 import exceptions.ConsumoNoValidoException;
 import exceptions.EmisionesNoValidasException;
+import exceptions.FechaNoValidaException;
 import exceptions.LetrasMatriculaNoValidasException;
 import exceptions.LicenciaNoValidaException;
 import exceptions.LongitudCadenaNoValidaException;
@@ -441,6 +444,17 @@ public class PideDato {
 		return new CocheCombustion(mat, marca, model, cat, color, fechaAlta, oficina, kms, plazas, consumo, tipoCoche, potencia, emisiones, potencia);
 		
 		
+	}
+	public static Alquiler alquiler(Scanner l) throws FechaNoValidaException
+	{
+		GregorianCalendar inicio;
+		GregorianCalendar fin;
+		Metodos.pintaSubrayado("Datos de alquiler");
+	
+		inicio = PideDato.fecha("Fecha inicio", l);
+		fin = PideDato.fecha("Fecha final prevista", l);
+		
+		return new Alquiler(inicio,fin);
 	}
 	
 	public static CocheElectrico cocheElectrico(Empresa empresa,Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TiempoRecargaNoValidoException, TipoNoValidoException 

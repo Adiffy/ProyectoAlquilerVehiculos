@@ -9,6 +9,7 @@ import exceptions.CilindradaNoValidaException;
 import exceptions.CodigoPostalException;
 import exceptions.ConsumoNoValidoException;
 import exceptions.EmisionesNoValidasException;
+import exceptions.FechaNoValidaException;
 import exceptions.LetrasMatriculaNoValidasException;
 import exceptions.LicenciaNoValidaException;
 import exceptions.LongitudCadenaNoValidaException;
@@ -38,7 +39,7 @@ public class Principal {
 				| RecargoNoValidoException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException
 				| NumPlazasNoValidoException | LongitudNoValidaException | PlantaNoValidaException
 				| CodigoPostalException | LongitudCadenaNoValidaException | CilindradaNoValidaException
-				| CarnetRequeridoInvalidoException e) {
+				| CarnetRequeridoInvalidoException | FechaNoValidaException e) {
 			
 			e.printStackTrace();
 		}

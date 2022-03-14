@@ -1,6 +1,7 @@
 package clasesObjetos;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.TreeMap;
 
 import comparadores.ComparaClientePorNombre;
@@ -18,6 +19,7 @@ public class Empresa {
 	private TreeMap<String, Cliente> Clientes; //El String será el DNI
 	private TreeMap<String, Empleado> Empleados; //El personal de la empresa
 	private TreeMap<String, Oficina> Oficinas; //Las oficinas de la empresa
+	private TreeMap<GregorianCalendar, Alquiler> Alquileres; //Los alquileres de la empresa
 
 	//Setters & Getters
 	
@@ -28,6 +30,30 @@ public class Empresa {
 	}
 
 	
+	@SuppressWarnings("unchecked")
+	public TreeMap<GregorianCalendar, Alquiler> getAlquileres() {
+		
+		return (TreeMap<GregorianCalendar, Alquiler>) Alquileres.clone();
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public void setAlquileres(TreeMap<GregorianCalendar, Alquiler> alquileres) {
+		Alquileres = (TreeMap<GregorianCalendar, Alquiler>) alquileres.clone();
+	}
+	public void nuevoAlquiler(Alquiler nuevo)	//Equivale a un put
+	{
+		Alquileres.put(nuevo.getFechaInicioAlquiler(), nuevo);
+	}
+	public void quitaAlquiler(GregorianCalendar pk)	//Equivale a un remove
+	{
+		Alquileres.remove(pk);
+	}
+	public void quitaAlquiler(Alquiler aQuitar)	//Equivale a un remove
+	{
+		Alquileres.remove(aQuitar.getFechaInicioAlquiler());
+	}
+
 	@SuppressWarnings("unchecked")	//Quitamos el Warning para evitar errores al exportar
 	public void setEmpleados(TreeMap<String, Empleado> empleados) {
 		//Devolvemos un clon

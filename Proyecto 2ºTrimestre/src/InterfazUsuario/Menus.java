@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 import accesoADatos.Serializar;
+import clasesObjetos.Alquiler;
 import clasesObjetos.Cliente;
 import clasesObjetos.CocheCombustion;
 import clasesObjetos.CocheElectrico;
@@ -20,6 +21,7 @@ import exceptions.CilindradaNoValidaException;
 import exceptions.CodigoPostalException;
 import exceptions.ConsumoNoValidoException;
 import exceptions.EmisionesNoValidasException;
+import exceptions.FechaNoValidaException;
 import exceptions.LetrasMatriculaNoValidasException;
 import exceptions.LicenciaNoValidaException;
 import exceptions.LongitudCadenaNoValidaException;
@@ -40,7 +42,7 @@ public class Menus {
 	private static String mensaje = "Introduzca una de las siguientes opciones:";
 	private static String errorLetras = "Debe elegir una opción válida pulsando:"; //Error en los menús no-numéricos
 	
-	public static void principal(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
+	public static void principal(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, FechaNoValidaException
 	{
 		
 		String[] opciones = {"1.- Ficheros maestros", "2.- Gestión de oficinas", "3.- Mostrar listados", "4.- Salir"};
@@ -67,7 +69,7 @@ public class Menus {
 		}while(noSale);
 	}
 	
-	private static void ficherosMaestros(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException 
+	private static void ficherosMaestros(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, FechaNoValidaException 
 	{
 		String[] opciones = {"1.- Configurar garaje", "2.- Gestionar clientes", "3.- Mostrar listados", "4.- Configurar oficinas", "5.- Salir"};
 		String opcValidas = "12345";
@@ -77,7 +79,7 @@ public class Menus {
 			switch (metodosMenu.Metodos.menu(opciones, opcValidas, "Ficheros maestros", menError, lector))
 			{
 			case "1":
-				String[] opc = {"1.- Añadir / eliminar vehículos a la flota","2.- Modificar listado de clientes", "3.- Modificar listado de empleados", "4.- Modificar listado de oficinas","5.- Salir"};
+				String[] opc = {"1.- Añadir / eliminar vehículos a la flota","2.- Modificar listado de clientes", "3.- Modificar listado de empleados", "4.- Modificar listado de oficinas","5.- Gestionar alquileres","6.- Salir"};
 				String OPC = "12345";
 				switch (metodosMenu.Metodos.menu(opc, OPC, "Gestión de ficheros maestros", menError, lector))
 				{
@@ -94,6 +96,9 @@ public class Menus {
 					Menus.MenuOficinas(empresa, lector);
 					break;
 				case "5":
+					Menus.alquileres(empresa, lector);
+					break;
+				case "6":
 					sale = true;
 					break;
 				}
@@ -101,7 +106,35 @@ public class Menus {
 		}while(!sale);
 		
 	}
-	public static void ListadoOficinas(Empresa empresa, Scanner l)
+	private static void alquileres(Empresa empresa, Scanner lector) throws FechaNoValidaException
+	{
+		String[] opcione = {"1.- Nuevo alquiler","2.- Modificar alquiler existente","3.- Eliminar alquiler","4.- Salir"};
+		String validadas = "1234";
+		String mensajeError = "Elija una opción válida:";
+		boolean sale = false;
+		
+		do
+		{
+			switch (metodosMenu.Metodos.menu(opcione, validadas, "Gestión de alquileres", mensajeError, lector))
+			{
+			case "1"://crear un alquiler
+				Alquiler nuevo =  PideDato.alquiler(lector);	//lo pedimos
+//				new Alquiler(new GregorianCalendar(1995,12,25),new GregorianCalendar(1995,12,25)); 
+				
+				empresa.nuevoAlquiler(nuevo);
+				Serializar.grabaEmpresa(empresa);
+			case "2":	//Cambiar fechas y demás
+				
+			case "3":	//Eliminar alquiler
+				Alquiler alquil = PideDato.alquiler(lector);
+				empresa.quitaAlquiler(alquil);
+			case "4":
+				sale = true;	//sale
+				break;
+			}
+		}while(!sale);
+	}
+	protected static void ListadoOficinas(Empresa empresa, Scanner l)	//Protegido porque lo queremos usar en PideDato
 	{
 //		String elegida = null;
 		
