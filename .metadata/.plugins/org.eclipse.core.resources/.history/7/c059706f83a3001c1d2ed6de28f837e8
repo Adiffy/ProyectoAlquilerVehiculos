@@ -839,25 +839,21 @@ public class Menus {
 	{
 		String[] opcc = {"A.- Añadir nuevo empleado","B.- Dar de baja un empleado","C.- Salir"};
 		String Validas = "ABC";
-		boolean sale = false;
+
 		
-		do
+		switch (metodosMenu.Metodos.menu(opcc, Validas, "GESTOR DE EMPLEADOS", errorLetras, lector))
 		{
-			switch (metodosMenu.Metodos.menu(opcc, Validas, "GESTOR DE EMPLEADOS", errorLetras, lector))
-			{
-			case "A","a": //Añadir empleado 
-				Empleado emple = PideDato.empleado(empresa, lector); //Creamos empleado
-				empresa.nuevoEmpleado(emple);	//Añadimos el empleado al TreeMap
-				Serializar.grabaEmpresa(empresa);
-				break;
-			case "B","b":	//Eliminar empleado
-				Menus.eliminaEmpleado(empresa, lector);
-				break;
-			case "C","c":
-				sale = true;
-				break;	//Salir
-			}
-		}while(!sale);
+		case "A","a": //Añadir empleado 
+			Empleado emple = PideDato.empleado(empresa, lector); //Creamos empleado
+			empresa.nuevoEmpleado(emple);	//Añadimos el empleado al TreeMap
+			Serializar.grabaEmpresa(empresa);
+			break;
+		case "B","b":	//Eliminar empleado
+			Menus.eliminaEmpleado(empresa, lector);
+			break;
+		case "C","c":
+			break;	//Salir
+		}
 	}
 	
 	private static void creaCocheCombustion(Empresa empresa, Scanner lector) throws TipoNoValidoException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException

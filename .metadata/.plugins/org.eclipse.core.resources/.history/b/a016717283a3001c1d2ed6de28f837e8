@@ -854,7 +854,7 @@ public class Menus {
 				Menus.eliminaEmpleado(empresa, lector);
 				break;
 			case "C","c":
-				sale = true;
+				sale=true;
 				break;	//Salir
 			}
 		}while(!sale);
