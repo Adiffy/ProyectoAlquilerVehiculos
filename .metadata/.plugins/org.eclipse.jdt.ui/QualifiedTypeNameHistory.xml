@@ -13,10 +13,14 @@
     <fullyQualifiedTypeName name="clasesObjetos.CocheElectrico"/>
     <fullyQualifiedTypeName name="clasesObjetos.Moto"/>
     <fullyQualifiedTypeName name="clasesObjetos.Vehiculo"/>
-    <fullyQualifiedTypeName name="metodosMenu.Metodos"/>
     <fullyQualifiedTypeName name="comparadores.ComparaVehiculoPorCategoria"/>
     <fullyQualifiedTypeName name="clasesObjetos.Electrico"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
+    <fullyQualifiedTypeName name="metodosMenu.Metodos"/>
+    <fullyQualifiedTypeName name="InterfazUsuario.Menus"/>
+    <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
     <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Alquiler"/>
+    <fullyQualifiedTypeName name="accesoADatos.Serializar"/>
 </qualifiedTypeNameHistroy>
