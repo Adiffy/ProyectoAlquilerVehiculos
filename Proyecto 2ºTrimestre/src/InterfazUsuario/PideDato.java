@@ -3,6 +3,7 @@ package InterfazUsuario;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import accesoADatos.Serializar;
 import clasesObjetos.Alquiler;
 import clasesObjetos.Categoria;
 import clasesObjetos.Cliente;
@@ -288,7 +289,7 @@ public class PideDato {
 			codigoPostal = PideDato.cadena("", "Código no válido", 5, 5, l); //Un CP tiene 5 dígitos
 //			System.out.println("Nombre de localidad:");
 //			localidad = PideDato.cadena(l);																	&&(planta.length()<4)
-			if((nombreVia.length()<=25 && nombreVia.length()>=2)&&(numVia.length()>=2 && numVia.length()<=25)&&(codigoPostal.length()==5))// && (localidad.length()>3 && localidad.length()<25)) {
+			if((nombreVia.length()<=25 && nombreVia.length()>=2)&&(numVia.length()>=1 && numVia.length()<=25)&&(codigoPostal.length()==5))// && (localidad.length()>3 && localidad.length()<25)) {
 			{
 				DatoBueno = true;
 			}
@@ -353,6 +354,7 @@ public class PideDato {
 			elegida = l.nextLine();
 			if (empresa.getOficinas().containsKey(elegida))		//Cuando elige una clave válida
 			{
+				
 				bien = true;
 			}
 			
@@ -362,7 +364,10 @@ public class PideDato {
 			trabajo = empresa.getOficinas().get(elegida);//Metemos la oficina correspondiente
 		fechaAlta = PideDato.fecha("Fecha de alta del trabajador:", l);
 		
-		return new Empleado(nombre, ap1, ap2, dni,fechaAlta, trabajo);
+		Empleado nuevo = new Empleado(nombre, ap1, ap2, dni,fechaAlta, trabajo);
+		empresa.getOficinas().get(elegida).addEmpleado(nuevo);
+		Serializar.grabaEmpresa(empresa);
+		return nuevo;
 	}
 	public static Cliente cliente(Scanner l) throws LicenciaNoValidaException
 	{

@@ -138,7 +138,7 @@ public class Empresa {
 	{
 		//boolean PrimeraVez = true;	//Para recorrerlo
 		
-		ArrayList<Empleado> empleados = metodos.TreeMapToArrayList.listarEmpleados(Empleados);//PASAMOS DE TREEMAP A ARRAYLIST
+		ArrayList<Empleado> empleados = metodos.TreeMapToArrayList.Empleados(Empleados);//PASAMOS DE TREEMAP A ARRAYLIST
 		ComparaEmpleadoPorNombre c = new ComparaEmpleadoPorNombre();
 		empleados.sort(c);
 		//Creamos un empleado con el constructor mínimo para luego intercambiarlo con el empleado anterior al comparar en el bucle:
@@ -164,7 +164,7 @@ public class Empresa {
 		
 		//boolean PrimeraVez = true;	//Para recorrerlo
 		
-		ArrayList<Cliente> clientes = metodos.TreeMapToArrayList.listarClientes(Clientes);//PASAMOS DE TREEMAP A ARRAYLIST
+		ArrayList<Cliente> clientes = metodos.TreeMapToArrayList.Clientes(Clientes);//PASAMOS DE TREEMAP A ARRAYLIST
 		//Creamos un empleado con el constructor mínimo para luego intercambiarlo con el empleado anterior al comparar en el bucle:
 		//Cliente b = new Cliente("Nombre", "Ap1", "Ap2", "78280774k", "A1", 0);//Las tarjetas de los clientes de verdad no empezarán en 0 sino en 1
 		ComparaClientePorNombre c = new ComparaClientePorNombre();
@@ -191,7 +191,7 @@ public class Empresa {
 	
 	public ArrayList<Electrico> ListarVehiculoElectricoPorCategoria(TreeMap<Matricula, Vehiculo> flota) 
 	{
-		ArrayList<Electrico> vehiculos = metodos.TreeMapToArrayList.listarElectricos(flota);	//Pasamos a ArrayList
+		ArrayList<Electrico> vehiculos = metodos.TreeMapToArrayList.Electricos(flota);	//Pasamos a ArrayList
 		ComparaVehiculoPorCategoria c = new ComparaVehiculoPorCategoria(); 
 		vehiculos.sort(c);
 		return vehiculos;

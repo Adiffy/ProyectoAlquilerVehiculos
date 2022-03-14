@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.TreeMap;
 
-import clasesObjetos.Alquiler;
 import clasesObjetos.Cliente;
 import clasesObjetos.CocheElectrico;
+import clasesObjetos.DeCombustion;
 import clasesObjetos.Electrico;
 import clasesObjetos.Empleado;
 import clasesObjetos.Matricula;
@@ -17,15 +17,20 @@ import clasesObjetos.Vehiculo;
 public class TreeMapToArrayList {
 
 	
-	public static ArrayList<Vehiculo> listarGaraje(TreeMap<Matricula,Vehiculo> treemap) {
+	public static ArrayList<Vehiculo> Garaje(TreeMap<Matricula,Vehiculo> treemap) {
 		
 		ArrayList<Vehiculo> lista = new ArrayList<Vehiculo>(treemap.values());
 		return lista;
-	
 	}
-	public static ArrayList<Empleado> listarEmpleados(TreeMap<String,Empleado> treemap) {
+	public static ArrayList<Empleado> Empleados(TreeMap<String,Empleado> treemap) {
 		
 		ArrayList<Empleado> lista = new ArrayList<Empleado>(treemap.values());
+		return lista;
+	
+	}
+	public static ArrayList<Oficina> Oficinas(TreeMap<String,Oficina> treemap) {
+		
+		ArrayList<Oficina> lista = new ArrayList<Oficina>(treemap.values());
 		return lista;
 	
 	}
@@ -60,13 +65,26 @@ public class TreeMapToArrayList {
 		Set<String> a = treemap.keySet();
 		return a.toString();
 	}
-	public static ArrayList<Cliente> listarClientes(TreeMap<String, Cliente> treemap) {
+	public static ArrayList<Cliente> Clientes(TreeMap<String, Cliente> treemap) {
 		ArrayList<Cliente> lista = new ArrayList<Cliente>(treemap.values());
 		return lista;
 	}
-	
 	@SuppressWarnings("null")
-	public static ArrayList<Electrico> listarElectricos(TreeMap<Matricula, Vehiculo> treemap) {
+	public static ArrayList<CocheElectrico> CocheElectrico(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<CocheElectrico> lista = null;
+		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
+		for (Vehiculo a:listado)
+		{	//Si viene de electrico
+			if (a.getClass().getSimpleName().compareToIgnoreCase("CocheElectrico")==0)	
+			{
+				//Lo añadimos a la lista
+				 lista.add((CocheElectrico) a);
+			}
+	}
+		return lista;
+	}
+	@SuppressWarnings("null")
+	public static ArrayList<Electrico> Electricos(TreeMap<Matricula, Vehiculo> treemap) {
 		ArrayList<Electrico> lista = null;
 		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
 		for (Vehiculo a:listado)
@@ -80,22 +98,51 @@ public class TreeMapToArrayList {
 		return lista;//devuelve la lista completa
 	}
 	@SuppressWarnings("null")
-	public static ArrayList<CocheElectrico> listarCocheElectrico(TreeMap<Matricula, Vehiculo> treemap) {
-		ArrayList<CocheElectrico> lista = null;
+	public static ArrayList<DeCombustion> Combustion(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<DeCombustion> lista = null;
 		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
 		for (Vehiculo a:listado)
-		{	//Si viene de electrico
-			if (a.getClass().getSimpleName().compareToIgnoreCase("CocheElectrico")==0)	
+		{	//Si viene de Combustion
+			if (a.getClass().getSimpleName().compareToIgnoreCase("Furgoneta")==0 || a.getClass().getSimpleName().compareToIgnoreCase("CocheCombustion")==0)	
 			{
 				//Lo añadimos a la lista
-				 lista.add((CocheElectrico) a);
+				 lista.add((DeCombustion) a);
 			}
 	}
-		return lista;
+		return lista;//devuelve la lista completa
+	}
+	@SuppressWarnings("null")
+	public static ArrayList<DeCombustion> CocheCombustion(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<DeCombustion> lista = null;
+		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
+		for (Vehiculo a:listado)
+		{	//Si viene de Combustion
+			if (a.getClass().getSimpleName().compareToIgnoreCase("CocheCombustion")==0)	
+			{
+				//Lo añadimos a la lista
+				 lista.add((DeCombustion) a);
+			}
+	}
+		return lista;//devuelve la lista completa
+	}
+	@SuppressWarnings("null")
+	public static ArrayList<DeCombustion> Furgoneta(TreeMap<Matricula, Vehiculo> treemap) {
+		ArrayList<DeCombustion> lista = null;
+		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
+		for (Vehiculo a:listado)
+		{	//Si viene de Combustion
+			if (a.getClass().getSimpleName().compareToIgnoreCase("Furgoneta")==0)	
+			{
+				//Lo añadimos a la lista
+				 lista.add((DeCombustion) a);
+			}
+	}
+		return lista;//devuelve la lista completa
 	}
 	
+
 	@SuppressWarnings("null")
-	public static ArrayList<Moto> listarMotos(TreeMap<Matricula, Vehiculo> treemap) {
+	public static ArrayList<Moto> Motos(TreeMap<Matricula, Vehiculo> treemap) {
 		ArrayList<Moto> lista = null;
 		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
 		for (Vehiculo a:listado)
@@ -108,20 +155,6 @@ public class TreeMapToArrayList {
 	}
 		return lista;
 	}
-	public static void listarAlquileres(TreeMap<String, Alquiler> treemap) {
-		
-		ArrayList<Alquiler> listado = new ArrayList<Alquiler>(treemap.values());
-		for (Alquiler a:listado)
-		{	//Imprimimos alquileres
-				
-			System.out.printf("Código: "+a.getCodigo()+" - Alquiler "+a);
-				
-			
-		}
-		
-		
-	}
-	
 	
 	
 }

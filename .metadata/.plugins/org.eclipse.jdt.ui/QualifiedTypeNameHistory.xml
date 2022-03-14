@@ -18,9 +18,10 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
     <fullyQualifiedTypeName name="metodosMenu.Metodos"/>
-    <fullyQualifiedTypeName name="InterfazUsuario.Menus"/>
     <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
-    <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
     <fullyQualifiedTypeName name="clasesObjetos.Alquiler"/>
+    <fullyQualifiedTypeName name="InterfazUsuario.Menus"/>
+    <fullyQualifiedTypeName name="clasesObjetos.DeCombustion"/>
     <fullyQualifiedTypeName name="accesoADatos.Serializar"/>
+    <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
 </qualifiedTypeNameHistroy>

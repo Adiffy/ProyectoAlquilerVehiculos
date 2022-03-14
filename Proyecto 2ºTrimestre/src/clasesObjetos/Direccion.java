@@ -35,7 +35,7 @@ public class Direccion {
 	}
 	
 	public void setNumVia(String numVia) throws LongitudNoValidaException {
-		if (numVia.length()>=2 && numVia.length()<=25) {
+		if (numVia.length()>=1 && numVia.length()<=25) {
 			String num=numVia;
 			this.numVia=num;
 		}else {

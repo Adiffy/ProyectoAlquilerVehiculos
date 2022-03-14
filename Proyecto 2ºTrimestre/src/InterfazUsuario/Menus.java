@@ -9,6 +9,7 @@ import clasesObjetos.Alquiler;
 import clasesObjetos.Cliente;
 import clasesObjetos.CocheCombustion;
 import clasesObjetos.CocheElectrico;
+import clasesObjetos.DeCombustion;
 import clasesObjetos.Empleado;
 import clasesObjetos.Empresa;
 import clasesObjetos.Furgoneta;
@@ -34,6 +35,7 @@ import exceptions.PotenciaNoValidaException;
 import exceptions.RecargoNoValidoException;
 import exceptions.TiempoRecargaNoValidoException;
 import exceptions.TipoNoValidoException;
+import metodos.TreeMapToArrayList;
 import metodosMenu.Metodos;
 
 public class Menus {
@@ -42,12 +44,13 @@ public class Menus {
 	private static String menError = "Seleccione una opción válida. Puede ser:"; //El mensaje que aparecerá si el usuario elige una opción inválida
 	private static String mensaje = "Introduzca una de las siguientes opciones:";
 	private static String errorLetras = "Debe elegir una opción válida pulsando:"; //Error en los menús no-numéricos
+	private static String opcValidas ="1234";
 	
 	public static void principal(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, FechaNoValidaException
 	{
 		
 		String[] opciones = {"1.- Ficheros maestros", "2.- Gestión de oficinas", "3.- Mostrar listados", "4.- Salir"};
-		String opcValidas = "1234";	
+		
 		
 		boolean noSale = true; //buleano para el bucle 
 		
@@ -174,7 +177,8 @@ public class Menus {
 				boolean valido = false;
 				do 
 				{
-					metodos.TreeMapToArrayList.listarGaraje(empresa.getGaraje());	//Listamos
+					ArrayList<Vehiculo> aMostrar = metodos.TreeMapToArrayList.Garaje(empresa.getGaraje());	//Pasamos a ArrayList
+					listarVehiculos(aMostrar);	//Listamos
 					System.out.println("Escribe la matrícula del vehículo a modificar");
 					respuesta = PideDato.matricula(lector);
 					//Si respuesta es una matrícula válida se acaba el bucle
@@ -198,7 +202,7 @@ public class Menus {
 				String vale = "123";
 				
 				do {
-					metodos.TreeMapToArrayList.listarAlquileres(empresa.getAlquileres());	//Listamos
+					listarAlquileres(empresa.getAlquileres());	//Listamos
 					System.out.println("Escribe el código del alquiler a modificar");
 					responde = PideDato.cadena(lector);
 					//Si respuesta es una matrícula válida se acaba el bucle
@@ -233,7 +237,7 @@ public class Menus {
 				boolean valida = false;
 				do 
 				{
-					metodos.TreeMapToArrayList.listarAlquileres(empresa.getAlquileres());	//Listamos
+					listarAlquileres(empresa.getAlquileres());	//Listamos
 					System.out.println("Escribe el código del alquiler a modificar");
 					contesta = PideDato.cadena(lector);
 					//Si respuesta es una matrícula válida se acaba el bucle
@@ -320,46 +324,119 @@ public class Menus {
 		}while(!sale);
 	}
 	
+	private static void listarVehiculos(ArrayList <Vehiculo> aMostrar) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
+	{
+		for (Vehiculo a:aMostrar)
+		{
+			System.out.printf("Matrícula:"+a.getMatricula()+" - "+a);
+		}
+	}
+	
 	private static void listadoVehiculos(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, PlantaNoValidaException
 	{
 		String[] elecc = {"1.- De combustión","2.- Eléctricos","3.- Atrás (Salir)"};
-		String posib = "123";
+		String posib = "1234";
 		String error = "Seleccione una opción de este conjunto:";
 		boolean sale = false;
 		
 		do
 		{
-			switch (metodosMenu.Metodos.menu(elecc, posib, "TIPOS DE PERSONAS A LISTAR", error, lector))
+			switch (metodosMenu.Metodos.menu(elecc, posib, "TIPOS DE VEHÍCULOS A LISTAR", error, lector))
 			{
 			case "1":	//De combustión
-				Menus.combustion(empresa, lector);
+				Menus.listaCombustion(empresa, lector);
 				break;
 			case "2":	//Eléctricos
 				Menus.listaElectrico(empresa, lector);
 				break;
-			case "3": //Salir 
+			case "3":	//Listar todos
+				ArrayList<Vehiculo> aMostrar = TreeMapToArrayList.Garaje(empresa.getGaraje());
+				listarVehiculos(aMostrar);
+				break;
+			case "4": //Salir 
 				sale = true;
 				break;
 			}
 		}while (!sale);
 	}
+	private static void listaCombustion(Empresa empresa, Scanner lector)
+	{
+		String[] posibilidades = {"1.- Listar coches","2.- Listar Furgonetas","3.- Listar todos los vehículos de combustión","4.- Volver atrás"};
+		boolean sale = false;
+		
+		do
+		{
+			switch (Metodos.menu(posibilidades, opcValidas, "LISTAR VEHÍCULOS DE COMBUSTIÓN", mensaje, lector))
+			{
+			case "1":	//Sólo coches
+				ArrayList<DeCombustion> cocheraCoches = TreeMapToArrayList.CocheCombustion(empresa.getGaraje());
+				//Listamos
+				for (Vehiculo a:cocheraCoches)
+				{
+					System.out.println(a);
+				}
+				break;
+			case "2":	//Sólo furgonetas
+				ArrayList<DeCombustion> cocheraFurgonetas = TreeMapToArrayList.Furgoneta(empresa.getGaraje());
+				//Listamos
+				for (Vehiculo a:cocheraFurgonetas)
+				{
+					System.out.println(a);
+				}
+				break;
+			case "3":	//Listar todos los vehículos
+				ArrayList<DeCombustion> cochera = TreeMapToArrayList.Combustion(empresa.getGaraje());
+				for (Vehiculo a:cochera)
+				{
+					System.out.println(a);
+				}
+				break;
+			case "4":
+				sale = true;
+				break;
+			}
+		}while(!sale);
+	}
 	
 	private static void listadoOficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
-		String[] elecc = {"1.- Empleados","2.- Clientes","3.- Atrás (Salir)"};
+		String[] elecc = {"1.- Listar todas las oficinas","2.- Empleados","3.- Atrás (Salir)"};
 		String posib = "123";
 		String error = "Seleccione una opción de este conjunto:";
 		boolean sale = false;
 		
 		do
 		{	//No saldrá hasta que le dé explícitamente
-			switch (metodosMenu.Metodos.menu(elecc, posib, "TIPOS DE PERSONAS A LISTAR", error, lector))
+			switch (metodosMenu.Metodos.menu(elecc, posib, "LISTAR OFICINAS", error, lector))
 			{
-			case "1":	//Empleados
-				Menus.listadoPersonasPor(empresa, "Empleado", lector);
+			case "1":	//Todas las oficinas
+				ArrayList<Oficina> ofis = TreeMapToArrayList.Oficinas(empresa.getOficinas());	//Lo pasamos a ArrayList
+				for (Oficina a:ofis)
+				{
+					System.out.printf("Oficina: "+a.getCódigo()+" - "+a.getDescripción());
+				}
 				break;
-			case "2":	//Clientes	
-				Menus.listadoPersonasPor(empresa, "Clientes", lector);
+			case "2":	//Empleados
+				boolean correcto = false;
+				String codigo;
+				do
+				{
+					//Primero listamos las oficinas
+					ArrayList<Oficina> ofi = TreeMapToArrayList.Oficinas(empresa.getOficinas());	//Lo pasamos a ArrayList
+					for (Oficina a:ofi)
+					{
+						System.out.printf("Oficina: "+a.getCódigo()+" - "+a.getDescripción());
+					}
+					//Elige la clave
+					codigo = PideDato.cadena("Código de la oficina:", lector);
+					if (empresa.getOficinas().containsKey(codigo))	//Si existe alguna con ese código
+					{
+						correcto = true;
+					}else {
+						System.out.println("Oficina no encontrada");
+					}
+				}while(!correcto);
+				Menus.listadoEmpleadosPorOficina(empresa, codigo, lector);	//Listamos los empleados de dicha oficina
 				break;
 			case "3": //Salir 
 				sale = true;
@@ -367,6 +444,17 @@ public class Menus {
 			}
 		}while(!sale);
 	}
+	private static void listadoEmpleadosPorOficina(Empresa empresa, String string, Scanner lector) {
+
+			Oficina a = empresa.getOficinas().get(string);	//Si existe una oficina con esa clave
+			ArrayList<Empleado> personal = TreeMapToArrayList.Empleados(a.getPersonal());	//Lo pasamos a ArrayList
+			for (Empleado emple:personal)
+			{
+				System.out.println(emple); 	//Imprimimos por pantalla el personal
+			}
+
+	}
+
 	private static void listaElectrico(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
 	{
 		String[] tipo = {"1.- Coche eléctrico", "2.- Moto eléctrica", "3.- Atrás (Salir)"};
@@ -409,12 +497,12 @@ public class Menus {
 				
 				if (tipoVehiculo.compareToIgnoreCase("Moto")==0  )
 				{
-					Moto = true;
-					lista = metodos.TreeMapToArrayList.listarMotos(empresa.getGaraje());
+					Moto = true;	//Lo pasamos a ArrayList
+					lista = TreeMapToArrayList.Motos(empresa.getGaraje());
 					
 				}else {
-					Moto = false;
-					lista2 = metodos.TreeMapToArrayList.listarCocheElectrico(empresa.getGaraje());
+					Moto = false;	//Lo pasamos a ArrayList
+					lista2 = TreeMapToArrayList.CocheElectrico(empresa.getGaraje());
 				}
 				//Ahora mostramos los listados
 				if (Moto)
@@ -438,11 +526,11 @@ public class Menus {
 				if (tipoVehiculo.compareToIgnoreCase("Moto")==0  )
 				{
 					Moto = true;
-					lista = metodos.TreeMapToArrayList.listarMotos(empresa.getGaraje());
+					lista = TreeMapToArrayList.Motos(empresa.getGaraje());
 					
 				}else {
 					Moto = false;
-					lista2 = metodos.TreeMapToArrayList.listarCocheElectrico(empresa.getGaraje());
+					lista2 = TreeMapToArrayList.CocheElectrico(empresa.getGaraje());
 				}			
 				//Ahora mostramos los listados
 				if (Moto)
@@ -856,6 +944,22 @@ public class Menus {
 				break;	//Salir
 			}
 		}while(!sale);
+	}
+	
+
+	
+	public static void listarAlquileres(TreeMap<String, Alquiler> treemap) {
+		
+		ArrayList<Alquiler> listado = new ArrayList<Alquiler>(treemap.values());
+		for (Alquiler a:listado)
+		{	//Imprimimos alquileres
+				
+			System.out.printf("Código: "+a.getCodigo()+" - Alquiler "+a);
+				
+			
+		}
+		
+		
 	}
 	
 	private static void creaCocheCombustion(Empresa empresa, Scanner lector) throws TipoNoValidoException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
