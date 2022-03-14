@@ -71,15 +71,15 @@ public class Menus {
 	
 	private static void ficherosMaestros(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, FechaNoValidaException 
 	{
-		String[] opciones = {"1.- Configurar garaje", "2.- Gestionar clientes", "3.- Mostrar listados", "4.- Configurar oficinas", "5.- Gestionar alquileres","6.- Salir"};
-		String opcValidas = "123456";
+		String[] opciones = {"1.- Configurar garaje", "2.- Gestionar clientes", "3.- Mostrar listados", "4.- Configurar oficinas", "5.- Salir"};
+		String opcValidas = "12345";
 			boolean sale= false ;
 		do 
 		{
 			switch (metodosMenu.Metodos.menu(opciones, opcValidas, "Ficheros maestros", menError, lector))
 			{
 			case "1":
-				String[] opc = {"1.- Añadir / eliminar vehículos a la flota","2.- Modificar listado de clientes", "3.- Modificar listado de empleados", "4.- Modificar listado de oficinas","5.- Salir"};
+				String[] opc = {"1.- Añadir / eliminar vehículos a la flota","2.- Modificar listado de clientes", "3.- Modificar listado de empleados", "4.- Modificar listado de oficinas","5.- Gestionar alquileres","6.- Salir"};
 				String OPC = "12345";
 				boolean salir = false;
 				do
@@ -99,20 +99,20 @@ public class Menus {
 						Menus.MenuOficinas(empresa, lector);
 						break;
 					case "5":
+						Menus.alquileres(empresa, lector);
+						break;
+					case "6":
 						salir = true;
 						break;
 					}
 				}while (!salir);
 			case "2":
-				Menus.clientes(empresa, lector);
+				
 			case "3":
-				Menus.MenuListados(empresa, lector);
+				
 			case "4":
-				Menus.MenuEmpleado(empresa, lector);
+				
 			case "5":
-				Menus.alquileres(empresa, lector);
-				break;
-			case "6":
 				sale = true;
 				break;
 			}
