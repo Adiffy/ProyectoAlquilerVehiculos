@@ -11,7 +11,7 @@ public class Oficina {
 	private TreeMap<String, Empleado> personal;
 	  
 	 
-	private String Código; //(es un alfanumérico de 4 letras : JA01, MA10…)
+	private String Codigo; //(es un alfanumérico de 4 letras : JA01, MA10…)
 	private String Descripción; //(“Jaén estación de trenes”, “Málaga principal”
 	private String Localidad;
 	private String Provincia;
@@ -80,6 +80,7 @@ public class Oficina {
 	public Oficina(String código, String descripción, Direccion ubicacion, TreeMap<String, Empleado> personal,  
 			 String provincia, String localidad, boolean deAeropuerto) {
 		super();
+		this.setCódigo(código);
 		this.setUbicacion(ubicacion);
 		this.setPersonal(personal);
 		this.setCódigo(localidad);
@@ -92,6 +93,7 @@ public class Oficina {
 	public Oficina(String código, String descripción, Direccion ubicacion,   
 			 String provincia, String localidad, boolean deAeropuerto) {
 		super();
+		this.setCódigo(código);
 		this.setUbicacion(ubicacion);
 		this.setCódigo(localidad);
 		this.setDescripción(descripción);
@@ -109,14 +111,14 @@ public class Oficina {
 		this.deAeropuerto = SIoNO;	//Introducimos el valor que queramos T / F
 	}
 	public String getCódigo() {
-		String copiaCod = this.Código;
+		String copiaCod = Codigo;
 		return copiaCod;
 	}
 	public void setCódigo(String code) {
 		if (Validadores.codigoValidado(code))
 		{
 			String cop = code;
-			Código = cop;
+			Codigo = cop;
 		}
 		
 	}

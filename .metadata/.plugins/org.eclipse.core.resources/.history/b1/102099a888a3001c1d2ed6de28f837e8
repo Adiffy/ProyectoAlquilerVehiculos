@@ -47,7 +47,8 @@ public class Menus {
 	{
 		
 		String[] opciones = {"1.- Ficheros maestros", "2.- Gestión de oficinas", "3.- Mostrar listados", "4.- Salir"};
-		String opcValidas = "1234";	
+		String opcValidas = "1234";
+		
 		
 		boolean noSale = true; //buleano para el bucle 
 		
