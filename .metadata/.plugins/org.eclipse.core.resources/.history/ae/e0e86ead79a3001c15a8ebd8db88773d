@@ -701,30 +701,23 @@ public class Menus {
 	{
 		String[] opcioness = {"A.- Añadir cliente", "B.- Dar de baja", "C.- Salir"};
 		String Validas = "ABC";
-		boolean sale = false;
 		
-		do
+		switch (metodosMenu.Metodos.menu(opcioness, Validas, "GESTIÓN DE CLIENTES",errorLetras, lector))
 		{
-			switch (metodosMenu.Metodos.menu(opcioness, Validas, "GESTIÓN DE CLIENTES",errorLetras, lector))
-			{
-			case "A","a": 	//Damos de alta nuevos clientes
-				Cliente nuevo =InterfazUsuario.PideDato.cliente(lector);
-				empresa.nuevoCliente(nuevo);
-				Serializar.grabaEmpresa(empresa);
-				break;
-			case "B","b":	//Eliminamos clientes de la empresa
-				Menus.eliminaCliente(empresa, lector);
-				/*
-				 * 1- Listar empleados
-				 * 2- Buscar por clave principal
-				 * 3- Eliminar
-				 */
-				break;
-			case "C","c":
-				break;
-			}
-		}while(!sale);
-		
+		case "A","a": 	//Damos de alta nuevos clientes
+			Cliente nuevo =InterfazUsuario.PideDato.cliente(lector);
+			empresa.nuevoCliente(nuevo);
+			Serializar.grabaEmpresa(empresa);
+		case "B","b":	//Eliminamos clientes de la empresa
+			Menus.eliminaCliente(empresa, lector);
+			/*
+			 * 1- Listar empleados
+			 * 2- Buscar por clave principal
+			 * 3- Eliminar
+			 */
+		case "C","c":
+			break;
+		}
 	}
 	private static void ListarClientes(Empresa empresa)
 	{
@@ -764,10 +757,10 @@ public class Menus {
 			{
 			case "A","a":	//Añadir o eliminar empleados
 				Menus.MenuEmpleado(empresa,lector);
-				break;
+			break;
 			case "B","b":	//Añadir o eliminar oficinas
 				Menus.MenuOficinas(empresa, lector);
-				break;
+			break;
 			case "C","c":
 				sale = true;
 				break;	//Salir		

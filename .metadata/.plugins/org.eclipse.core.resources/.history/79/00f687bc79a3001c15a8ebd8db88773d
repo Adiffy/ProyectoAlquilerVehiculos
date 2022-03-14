@@ -764,10 +764,10 @@ public class Menus {
 			{
 			case "A","a":	//Añadir o eliminar empleados
 				Menus.MenuEmpleado(empresa,lector);
-				break;
+			break;
 			case "B","b":	//Añadir o eliminar oficinas
 				Menus.MenuOficinas(empresa, lector);
-				break;
+			break;
 			case "C","c":
 				sale = true;
 				break;	//Salir		

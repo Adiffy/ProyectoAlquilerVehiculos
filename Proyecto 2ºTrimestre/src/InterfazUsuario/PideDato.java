@@ -449,12 +449,16 @@ public class PideDato {
 	{
 		GregorianCalendar inicio;
 		GregorianCalendar fin;
+		String cod;
+		
 		Metodos.pintaSubrayado("Datos de alquiler");
 	
+		cod = PideDato.cadena("Código del alquiler", l);
+		
 		inicio = PideDato.fecha("Fecha inicio", l);
 		fin = PideDato.fecha("Fecha final prevista", l);
 		
-		return new Alquiler(inicio,fin);
+		return new Alquiler(cod, inicio,fin);
 	}
 	
 	public static CocheElectrico cocheElectrico(Empresa empresa,Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TiempoRecargaNoValidoException, TipoNoValidoException 

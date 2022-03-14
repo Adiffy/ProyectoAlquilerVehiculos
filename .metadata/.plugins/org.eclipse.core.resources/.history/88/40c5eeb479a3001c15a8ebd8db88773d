@@ -711,7 +711,6 @@ public class Menus {
 				Cliente nuevo =InterfazUsuario.PideDato.cliente(lector);
 				empresa.nuevoCliente(nuevo);
 				Serializar.grabaEmpresa(empresa);
-				break;
 			case "B","b":	//Eliminamos clientes de la empresa
 				Menus.eliminaCliente(empresa, lector);
 				/*
@@ -764,10 +763,10 @@ public class Menus {
 			{
 			case "A","a":	//Añadir o eliminar empleados
 				Menus.MenuEmpleado(empresa,lector);
-				break;
+			break;
 			case "B","b":	//Añadir o eliminar oficinas
 				Menus.MenuOficinas(empresa, lector);
-				break;
+			break;
 			case "C","c":
 				sale = true;
 				break;	//Salir		
