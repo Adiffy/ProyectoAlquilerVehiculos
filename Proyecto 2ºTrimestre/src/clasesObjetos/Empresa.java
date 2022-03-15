@@ -210,10 +210,10 @@ public class Empresa {
 	@SuppressWarnings("unused")		//Quitamos los Warnings para evitar errores al exportar
 	public Empresa()
 	{
-		TreeMap<String, Oficina> Oficinas = new TreeMap<String,Oficina>();
-		TreeMap<String, Cliente> clientes = new TreeMap<String,Cliente>();
-		TreeMap<String, Empleado> Empleados = new TreeMap<String, Empleado>();
-		TreeMap<Matricula, Vehiculo> Stock = new TreeMap<Matricula, Vehiculo>();
+		this.Oficinas = new TreeMap<String,Oficina>();
+		this.Clientes = new TreeMap<String,Cliente>();
+		this.Empleados = new TreeMap<String, Empleado>();
+		this.Stock = new TreeMap<Matricula, Vehiculo>();
 		
 	}
 }

@@ -56,7 +56,6 @@ public class Alquiler {
 		}
 		@SuppressWarnings("static-access")
 		public GregorianCalendar getFechaDevolucion() {
-			//Creamos y devolvemos una copia
 			return new GregorianCalendar (FechaDevolucion.YEAR, FechaDevolucion.MONTH, FechaDevolucion.DAY_OF_MONTH);
 		}
 		public Oficina getOficinaRecogida() {

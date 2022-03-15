@@ -45,7 +45,7 @@ public class Alquiler {
 		
 		@SuppressWarnings("static-access")
 		public void setFechaPrevistaFinAlquiler(GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
-			if ((fechaPrevistaFinAlquiler.DAY_OF_YEAR > GregorianCalendar.getInstance().DAY_OF_YEAR || fechaPrevistaFinAlquiler.YEAR > GregorianCalendar.getInstance().YEAR))
+			if (fechaPrevistaFinAlquiler.DATE > GregorianCalendar.getInstance().DATE && (fechaPrevistaFinAlquiler.MONTH > GregorianCalendar.getInstance().MONTH || fechaPrevistaFinAlquiler.DAY_OF_YEAR > GregorianCalendar.getInstance().DAY_OF_YEAR))
 			{
 				FechaPrevistaFinAlquiler = fechaPrevistaFinAlquiler;
 			}else 
@@ -56,7 +56,6 @@ public class Alquiler {
 		}
 		@SuppressWarnings("static-access")
 		public GregorianCalendar getFechaDevolucion() {
-			//Creamos y devolvemos una copia
 			return new GregorianCalendar (FechaDevolucion.YEAR, FechaDevolucion.MONTH, FechaDevolucion.DAY_OF_MONTH);
 		}
 		public Oficina getOficinaRecogida() {
