@@ -3,7 +3,6 @@
     <fullyQualifiedTypeName name="exceptions.LongitudNoValidaException"/>
     <fullyQualifiedTypeName name="comparadores.ComparaEmpleadoPorNombre"/>
     <fullyQualifiedTypeName name="exceptions.CodigoPostalException"/>
-    <fullyQualifiedTypeName name="exceptions.LongitudCadenaNoValidaException"/>
     <fullyQualifiedTypeName name="clasesObjetos.Cliente"/>
     <fullyQualifiedTypeName name="clasesObjetos.Empleado"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
@@ -15,13 +14,17 @@
     <fullyQualifiedTypeName name="clasesObjetos.Vehiculo"/>
     <fullyQualifiedTypeName name="comparadores.ComparaVehiculoPorCategoria"/>
     <fullyQualifiedTypeName name="clasesObjetos.Electrico"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
-    <fullyQualifiedTypeName name="metodosMenu.Metodos"/>
     <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
     <fullyQualifiedTypeName name="clasesObjetos.Alquiler"/>
     <fullyQualifiedTypeName name="InterfazUsuario.Menus"/>
     <fullyQualifiedTypeName name="clasesObjetos.DeCombustion"/>
     <fullyQualifiedTypeName name="accesoADatos.Serializar"/>
+    <fullyQualifiedTypeName name="exceptions.FechaNoValidaException"/>
+    <fullyQualifiedTypeName name="exceptions.CarnetRequeridoInvalidoException"/>
+    <fullyQualifiedTypeName name="exceptions.LongitudCadenaNoValidaException"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="metodosMenu.Metodos"/>
     <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

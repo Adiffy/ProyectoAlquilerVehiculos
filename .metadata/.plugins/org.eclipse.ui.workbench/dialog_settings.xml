@@ -14,6 +14,7 @@
 		<item key="WizardZipFileResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="true"/>
 		<item key="WizardZipFileResourceExportPage1.STORE_COMPRESS_CONTENTS_ID" value="true"/>
 		<list key="WizardZipFileResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\usuario\OneDrive\Documentos\GitHub\ProyectoAlquilerVehiculos\Proyecto 2ºTrimestre.zip"/>
 			<item value="C:\Users\Victor\Desktop\ESQUINAS_GARCIA_VICTORJESUS.zip"/>
 		</list>
 	</section>
