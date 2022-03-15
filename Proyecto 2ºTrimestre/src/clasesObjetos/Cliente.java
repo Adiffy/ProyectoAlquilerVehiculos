@@ -1,6 +1,8 @@
 package clasesObjetos;
 
+import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.LicenciaNoValidaException;
+import exceptions.LongitudCadenaNoValidaException;
 
 public class Cliente extends Persona{
 
@@ -36,7 +38,7 @@ public class Cliente extends Persona{
 		}
 	}
 
-	public Cliente(String nombre, String apellido1, String apellido2, String dni, String carnet, int tarjeta) throws LicenciaNoValidaException {
+	public Cliente(String nombre, String apellido1, String apellido2, String dni, String carnet, int tarjeta) throws LicenciaNoValidaException, CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException {
 		super(nombre, apellido1, apellido2, dni);
 		this.setLicencia(carnet);
 		this.setTarjeta(tarjeta);

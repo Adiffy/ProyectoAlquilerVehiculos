@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Victor/Documents/GitHub/ProyectoAlquilerVehiculos/Libreria/LibreriaMenu.jar"/>
+	<classpathentry kind="lib" path="C:/Users/usuario/OneDrive/Documentos/GitHub/ProyectoAlquilerVehiculos/Libreria/LibreriaMenu.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

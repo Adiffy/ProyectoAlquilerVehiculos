@@ -790,7 +790,7 @@ public class Menus {
 			}
 		}while(!sale);
 	}
-	private static void clientes(Empresa empresa, Scanner lector) throws LicenciaNoValidaException
+	private static void clientes(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException
 	{
 		String[] opcioness = {"A.- Añadir cliente", "B.- Dar de baja", "C.- Salir"};
 		String Validas = "ABC";
@@ -846,7 +846,7 @@ public class Menus {
 		}while(!bien);
 	}
 	
-	private static void oficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	private static void oficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CarnetRequeridoInvalidoException
 	{
 		String[] opcioness = {"A.- Empleados", "B.- Oficinas", "C.- Salir"};
 		String Validas = "ABC";
@@ -921,7 +921,7 @@ public class Menus {
 		}
 	}
 	
-	private static void MenuEmpleado(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	private static void MenuEmpleado(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CarnetRequeridoInvalidoException
 	{
 		String[] opcc = {"A.- Añadir nuevo empleado","B.- Dar de baja un empleado","C.- Salir"};
 		String Validas = "ABC";

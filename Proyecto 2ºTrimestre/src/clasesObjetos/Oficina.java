@@ -2,6 +2,8 @@ package clasesObjetos;
 
 import java.util.TreeMap;
 
+import exceptions.CarnetRequeridoInvalidoException;
+import exceptions.LongitudCadenaNoValidaException;
 import metodos.Validadores;
 
 public class Oficina {
@@ -285,7 +287,7 @@ public class Oficina {
 	public void setPersonal(TreeMap<String, Empleado> personal) {
 		this.personal = personal;
 	}
-	public void addEmpleado(Empleado contratado)
+	public void addEmpleado(Empleado contratado) throws CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException
 	{
 		String clavePrincipal = contratado.getDni() ;
 		this.personal.put(clavePrincipal, new Empleado(contratado)); //Lo añadimos

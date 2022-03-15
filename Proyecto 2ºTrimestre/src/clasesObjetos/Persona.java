@@ -1,5 +1,7 @@
 package clasesObjetos;
 
+import exceptions.CarnetRequeridoInvalidoException;
+import exceptions.LongitudCadenaNoValidaException;
 import metodos.*;
 
 public abstract class Persona implements Comparable<Persona>{
@@ -26,36 +28,42 @@ public abstract class Persona implements Comparable<Persona>{
 	public String getApellido1() {
 		return apellido1;
 	}
-	public void setApellido1(String apellido1) {
+	public void setApellido1(String apellido1) throws LongitudCadenaNoValidaException {
 		if (apellido1.length()>=2 && apellido1.length()<=25) {
 			this.apellido1 = apellido1;
+		}else {
+			throw new LongitudCadenaNoValidaException("El primer apellido es demasiado largo");
 		}
 	}
 	public String getApellido2() {
 		return apellido2;
 	}
-	public void setApellido2(String apellido2) {
+	public void setApellido2(String apellido2) throws LongitudCadenaNoValidaException {
 		if (apellido2.length()>=2 && apellido2.length()<=25) {
 			this.apellido2 = apellido2;
+		}else {
+			throw new LongitudCadenaNoValidaException("El segundo apellido es demasiado largo");
 		}
 	}
 	public String getDni() {
 		return dni;
 	}
-	protected void setDni(String dni) {
+	protected void setDni(String dni) throws CarnetRequeridoInvalidoException {
 		if(MetodoDni.DNIvalido(dni)) {
 			this.dni=dni;
+		}else {
+			throw new CarnetRequeridoInvalidoException("DNI inválido");
 		}
-		this.dni = dni;
+		
 	}
 	
 	//Constructores 
-	public Persona( String dni) {
+	public Persona( String dni) throws CarnetRequeridoInvalidoException {
 		super();
 		this.setDni(dni);
 	}
 	
-	public Persona(String nombre, String apellido1, String apellido2, String dni) {
+	public Persona(String nombre, String apellido1, String apellido2, String dni) throws CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException {
 		super();
 		this.setNombre(nombre);
 		this.setApellido1(apellido1);
@@ -63,7 +71,7 @@ public abstract class Persona implements Comparable<Persona>{
 		this.setDni(dni);
 	}
 	
-	public Persona(String nombre, String apellido1,  String dni) {
+	public Persona(String nombre, String apellido1,  String dni) throws CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException {
 		super();
 		this.setNombre(nombre);
 		this.setApellido1(apellido1);

@@ -330,7 +330,7 @@ public class PideDato {
 		}
 		return new Oficina(codigo, Descripcion, ubi, Provincia, Localidad, deAeropuerto);
 	}
-	public static Empleado empleado(Empresa empresa,Scanner l) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	public static Empleado empleado(Empresa empresa,Scanner l) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CarnetRequeridoInvalidoException
 	{
 		GregorianCalendar fechaAlta;
 		Oficina trabajo;	//Oficina en la que trabaja
@@ -369,7 +369,7 @@ public class PideDato {
 		Serializar.grabaEmpresa(empresa);
 		return nuevo;
 	}
-	public static Cliente cliente(Scanner l) throws LicenciaNoValidaException
+	public static Cliente cliente(Scanner l) throws LicenciaNoValidaException, CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException
 	{
 		String licencia;
 		int tarjeta;	//Nº de tarjeta de cliente habitual

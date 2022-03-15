@@ -78,8 +78,17 @@ public class Alquiler {
 			OficinaEntrega = copia ;
 		}
 
-		public void setFechaDevolucion(GregorianCalendar fechaDevolucion) {
-			FechaDevolucion = fechaDevolucion;
+		@SuppressWarnings("static-access")
+		public void setFechaDevolucion(GregorianCalendar fechaDevolucion) throws FechaNoValidaException {
+			
+			//O es mayor el mes o el año de la fecha de devolución respecto la de inicio alquiler
+			if (fechaDevolucion.MONTH > this.FechaInicioAlquiler.MONTH || fechaDevolucion.YEAR > this.FechaInicioAlquiler.YEAR)	
+			{
+				FechaDevolucion = fechaDevolucion;
+			}else {
+				throw new FechaNoValidaException("Fecha de devolución anterior a la fecha de inicio del alquiler");
+			}
+			
 		}
 		
 		//Constructores

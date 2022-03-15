@@ -2,6 +2,9 @@ package clasesObjetos;
 
 import java.util.GregorianCalendar;
 
+import exceptions.CarnetRequeridoInvalidoException;
+import exceptions.LongitudCadenaNoValidaException;
+
 public class Empleado extends Persona{
 	
 	//Propiedades
@@ -37,8 +40,10 @@ public class Empleado extends Persona{
 	 * @param dni Un {@code String} a modo de DNI (que será validado por el set)
 	 * @param fechaAlta Un {@code GregorianCalendar} que indicará cuando se dió de alta el {@code Empleado}
 	 * @param oficinaTrabajo	La {@code Oficina} donde trabaja el {@code Empleado}
+	 * @throws CarnetRequeridoInvalidoException 
+	 * @throws LongitudCadenaNoValidaException 
 	 */
-	public Empleado(String nombre, String apellido1, String apellido2, String dni, GregorianCalendar fechaAlta, Oficina oficinaTrabajo) {
+	public Empleado(String nombre, String apellido1, String apellido2, String dni, GregorianCalendar fechaAlta, Oficina oficinaTrabajo) throws CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException {
 		super(nombre, apellido1, apellido2, dni);
 		this.setFechaAlta(fechaAlta);
 		this.setOficina(oficinaTrabajo);
@@ -46,8 +51,10 @@ public class Empleado extends Persona{
 	/**
 	 * Constructor de copia
 	 * @param contratado	El {@code Empleado} a copiar
+	 * @throws CarnetRequeridoInvalidoException 
+	 * @throws LongitudCadenaNoValidaException 
 	 */
-	public Empleado(Empleado contratado) {
+	public Empleado(Empleado contratado) throws CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException {
 		super(contratado.getNombre(),contratado.getApellido2(),contratado.getDni());
 		this.setOficina(contratado.getOficina());
 		this.setFechaAlta(contratado.getFechaAlta());
