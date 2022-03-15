@@ -1,5 +1,6 @@
 package clasesObjetos;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 
 import clasesObjetosInterfaces.Alquilable;
@@ -8,8 +9,13 @@ import exceptions.NumeroMatriculaNoValidoException;
 import exceptions.RecargoNoValidoException;
 
 
-public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable {
+public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	//Propiedades
 	protected Matricula matricula; //Matrícula del vehículo
 	private String marca;	//Marca del coche. Ejemplo: "Renault"

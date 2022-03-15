@@ -8,6 +8,12 @@ import exceptions.PotenciaNoValidaException;
 
 public abstract class DeCombustion extends Vehiculo {
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	//Propiedades
 	private double consumo; //Litros por cada 100km
 	private int potencia; //medida en CV

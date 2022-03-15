@@ -69,9 +69,9 @@ public class TreeMapToArrayList {
 		ArrayList<Cliente> lista = new ArrayList<Cliente>(treemap.values());
 		return lista;
 	}
-	@SuppressWarnings("null")
+	
 	public static ArrayList<CocheElectrico> CocheElectrico(TreeMap<Matricula, Vehiculo> treemap) {
-		ArrayList<CocheElectrico> lista = null;
+		ArrayList<CocheElectrico> lista = new ArrayList<CocheElectrico>();
 		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
 		for (Vehiculo a:listado)
 		{	//Si viene de electrico
@@ -83,9 +83,9 @@ public class TreeMapToArrayList {
 	}
 		return lista;
 	}
-	@SuppressWarnings("null")
+	
 	public static ArrayList<Electrico> Electricos(TreeMap<Matricula, Vehiculo> treemap) {
-		ArrayList<Electrico> lista = null;
+		ArrayList<Electrico> lista = new ArrayList<Electrico>();
 		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
 		for (Vehiculo a:listado)
 		{	//Si viene de electrico
@@ -97,9 +97,9 @@ public class TreeMapToArrayList {
 	}
 		return lista;//devuelve la lista completa
 	}
-	@SuppressWarnings("null")
+
 	public static ArrayList<DeCombustion> Combustion(TreeMap<Matricula, Vehiculo> treemap) {
-		ArrayList<DeCombustion> lista = null;
+		ArrayList<DeCombustion> lista = new ArrayList<DeCombustion>();
 		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
 		for (Vehiculo a:listado)
 		{	//Si viene de Combustion
@@ -111,9 +111,9 @@ public class TreeMapToArrayList {
 	}
 		return lista;//devuelve la lista completa
 	}
-	@SuppressWarnings("null")
+	
 	public static ArrayList<DeCombustion> CocheCombustion(TreeMap<Matricula, Vehiculo> treemap) {
-		ArrayList<DeCombustion> lista = null;
+		ArrayList<DeCombustion> lista = new ArrayList<DeCombustion>();
 		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
 		for (Vehiculo a:listado)
 		{	//Si viene de Combustion
@@ -125,9 +125,9 @@ public class TreeMapToArrayList {
 	}
 		return lista;//devuelve la lista completa
 	}
-	@SuppressWarnings("null")
+	
 	public static ArrayList<DeCombustion> Furgoneta(TreeMap<Matricula, Vehiculo> treemap) {
-		ArrayList<DeCombustion> lista = null;
+		ArrayList<DeCombustion> lista = new ArrayList<DeCombustion>();
 		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
 		for (Vehiculo a:listado)
 		{	//Si viene de Combustion
@@ -141,9 +141,9 @@ public class TreeMapToArrayList {
 	}
 	
 
-	@SuppressWarnings("null")
+	
 	public static ArrayList<Moto> Motos(TreeMap<Matricula, Vehiculo> treemap) {
-		ArrayList<Moto> lista = null;
+		ArrayList<Moto> lista = new ArrayList<Moto>();
 		ArrayList<Vehiculo> listado = new ArrayList<Vehiculo>(treemap.values());
 		for (Vehiculo a:listado)
 		{	//Si viene de electrico

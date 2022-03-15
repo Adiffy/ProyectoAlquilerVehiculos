@@ -1,12 +1,18 @@
 package clasesObjetos;
 
+import java.io.Serializable;
+
 import exceptions.CodigoPostalException;
 import exceptions.LongitudCadenaNoValidaException;
 import exceptions.LongitudNoValidaException;
 import exceptions.PlantaNoValidaException;
 
-public class Direccion {
-
+public class Direccion implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	//Propiedades
 				//private String tipoVia;

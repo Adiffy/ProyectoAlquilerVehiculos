@@ -7,6 +7,11 @@ import exceptions.LongitudCadenaNoValidaException;
 
 public class Empleado extends Persona{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	//Propiedades
 	private GregorianCalendar fechaAlta;
 	private Oficina oficina;

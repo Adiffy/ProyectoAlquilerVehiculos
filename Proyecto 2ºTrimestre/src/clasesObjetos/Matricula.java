@@ -1,12 +1,18 @@
 package clasesObjetos;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import exceptions.LetrasMatriculaNoValidasException;
 import exceptions.NumeroMatriculaNoValidoException;
 
-public class Matricula {
+public class Matricula implements Comparable<Matricula>, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	//Propiedades
 	private int numeros; //Los nº de la matrícula 
 	private String letras; //Las letras al final de cada matrícula 
@@ -92,6 +98,14 @@ public class Matricula {
 		super();
 		this.setLetras(letras);
 		this.setNumeros(numeros);
+	}
+
+	
+	@Override
+	public int compareTo(Matricula o) {
+		String matricula1 = this.toString();
+		String matricula2 = o.toString();
+		return matricula1.compareToIgnoreCase(matricula2);
 	}
 	
 	

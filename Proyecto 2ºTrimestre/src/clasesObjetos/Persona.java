@@ -1,12 +1,18 @@
 package clasesObjetos;
 
+import java.io.Serializable;
+
 import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.LongitudCadenaNoValidaException;
 import metodos.*;
 
-public abstract class Persona implements Comparable<Persona>{
+public abstract class Persona implements Comparable<Persona>, Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	//Propiedades
 	private String nombre;
@@ -20,9 +26,11 @@ public abstract class Persona implements Comparable<Persona>{
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws LongitudCadenaNoValidaException {
 		if (nombre.length()<=25 && nombre.length()>=2) {
 			this.nombre = nombre;
+		}else {
+			throw new LongitudCadenaNoValidaException("Longitud de nombre no válida");
 		}
 	}
 	public String getApellido1() {

@@ -1,13 +1,19 @@
 package clasesObjetos;
 
+import java.io.Serializable;
 import java.util.TreeMap;
 
 import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.LongitudCadenaNoValidaException;
 import metodos.Validadores;
 
-public class Oficina {
+public class Oficina implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	//Propiedades
 	private Direccion ubicacion;
 	private TreeMap<String, Empleado> personal;

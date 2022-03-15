@@ -3,6 +3,7 @@ package principal;
 import java.util.Scanner;
 
 import InterfazUsuario.Menus;
+import accesoADatos.Serializar;
 import clasesObjetos.Empresa;
 import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.CilindradaNoValidaException;
@@ -27,7 +28,11 @@ public class Principal {
 	
 	public static void main(String[] args) throws TipoNoValidoException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TiempoRecargaNoValidoException {
 		
-		Empresa empresa = new Empresa();	//Creamos una empresa
+		
+		Empresa empresa = Serializar.LeeEmpresa();	//intenta leer y si no puede crea la empresa
+		
+//			Empresa empresa = new Empresa();	//Creamos una empresa
+		
 		Scanner lector = new Scanner(System.in);
 	
 		//	String errorCrear = "Error al crear vehículo - "+ Object.class;
@@ -45,7 +50,8 @@ public class Principal {
 		}catch (NullPointerException a)	//Error de TreeMap vacio
 		{
 			System.out.println("ERROR | Contenido de la lista nulo");
-			a.getLocalizedMessage();
+			a.printStackTrace();
+//			a.getLocalizedMessage();
 		}
 		
 		

@@ -19,12 +19,15 @@
     <fullyQualifiedTypeName name="clasesObjetos.Alquiler"/>
     <fullyQualifiedTypeName name="InterfazUsuario.Menus"/>
     <fullyQualifiedTypeName name="clasesObjetos.DeCombustion"/>
-    <fullyQualifiedTypeName name="accesoADatos.Serializar"/>
-    <fullyQualifiedTypeName name="exceptions.FechaNoValidaException"/>
     <fullyQualifiedTypeName name="exceptions.CarnetRequeridoInvalidoException"/>
-    <fullyQualifiedTypeName name="exceptions.LongitudCadenaNoValidaException"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="metodosMenu.Metodos"/>
     <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
+    <fullyQualifiedTypeName name="exceptions.FechaNoValidaException"/>
+    <fullyQualifiedTypeName name="exceptions.LongitudCadenaNoValidaException"/>
+    <fullyQualifiedTypeName name="accesoADatos.Serializar"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Categoria"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="InterfazUsuario.PideDato"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

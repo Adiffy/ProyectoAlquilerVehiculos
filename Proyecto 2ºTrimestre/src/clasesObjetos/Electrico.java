@@ -6,13 +6,17 @@ import exceptions.TiempoRecargaNoValidoException;
 
 public abstract class Electrico extends Vehiculo {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//Propiedades 
 	private int autonomia; //Autonomia del vehiculo (tiempo en horas)
 	private int tiempoRecarga; //Tiempo que tarda en cargarse por completo (tiempo en minutos)
 	
 	
 	//Máximos y mínimos
-	private int maxTiempoRecarga=55;
+	private int maxTiempoRecarga=200;
 	private int minTiempoRecarga=0;
 	
 	public int getTiempoRecarga() { //Tipo primitivo, no hace falta clonar

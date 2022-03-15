@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import accesoADatos.Serializar;
 import clasesObjetos.Alquiler;
+import clasesObjetos.Categoria;
 import clasesObjetos.Cliente;
 import clasesObjetos.CocheCombustion;
 import clasesObjetos.CocheElectrico;
@@ -44,12 +45,12 @@ public class Menus {
 	private static String menError = "Seleccione una opción válida. Puede ser:"; //El mensaje que aparecerá si el usuario elige una opción inválida
 	private static String mensaje = "Introduzca una de las siguientes opciones:";
 	private static String errorLetras = "Debe elegir una opción válida pulsando:"; //Error en los menús no-numéricos
-	private static String opcValidas ="1234";
+	private static String opcValidas ="123S";
 	
 	public static void principal(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, FechaNoValidaException
 	{
 		
-		String[] opciones = {"1.- Ficheros maestros", "2.- Gestión de oficinas", "3.- Mostrar listados", "4.- Salir"};
+		String[] opciones = {"1.- Ficheros maestros", "2.- Gestión de oficinas", "3.- Mostrar listados", "S.- Salir"};
 		
 		
 		boolean noSale = true; //buleano para el bucle 
@@ -67,7 +68,7 @@ public class Menus {
 			case "3":	//Listados
 				Menus.MenuListados(empresa, lector);
 				break;
-			case "4": //SALIR DE VERDAD
+			case "S": //SALIR DE VERDAD
 				BarraDeCarga.pintar();
 				noSale = false;
 				break;
@@ -77,16 +78,16 @@ public class Menus {
 	
 	private static void ficherosMaestros(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, FechaNoValidaException 
 	{
-		String[] opciones = {"1.- Configurar garaje", "2.- Gestionar clientes", "3.- Mostrar listados", "4.- Configurar oficinas", "5.- Gestionar alquileres","6.- Salir"};
-		String opcValidas = "123456";
+		String[] opciones = {"1.- Configurar garaje", "2.- Gestionar clientes", "3.- Mostrar listados", "4.- Configurar oficinas", "5.- Gestionar alquileres","S.- Salir"};
+		String opcValidas = "12345S";
 			boolean sale= false ;
 		do 
 		{
 			switch (metodosMenu.Metodos.menu(opciones, opcValidas, "Ficheros maestros", menError, lector))
 			{
 			case "1":
-				String[] opc = {"1.- Añadir / eliminar vehículos a la flota","2.- Modificar listado de clientes", "3.- Modificar listado de empleados", "4.- Modificar listado de oficinas","5.- Salir"};
-				String OPC = "12345";
+				String[] opc = {"1.- Añadir / eliminar vehículos a la flota","2.- Añadir categorías", "3.- Modificar listado de empleados", "4.- Modificar listado de oficinas","S.- Salir"};
+				String OPC = "1234S";
 				boolean salir = false;
 				do
 				{
@@ -96,7 +97,7 @@ public class Menus {
 						Menus.flotaVehicular(empresa, lector);
 						break;
 					case "2":
-						Menus.clientes(empresa, lector);
+						Menus.categorias(empresa, lector);
 						break;
 					case "3":
 						Menus.MenuListados(empresa, lector);
@@ -104,7 +105,7 @@ public class Menus {
 					case "4":
 						Menus.MenuOficinas(empresa, lector);
 						break;
-					case "5":
+					case "S":
 						salir = true;
 						break;
 					}
@@ -124,23 +125,28 @@ public class Menus {
 			case "5":
 				Menus.alquileres(empresa, lector);
 				break;
-			case "6":
+			case "S":
 				sale = true;
 				break;
 			}
 		}while(!sale);
 		
 	}
+	private static void categorias(Empresa empresa, Scanner lector) throws RecargoNoValidoException
+	{
+		Categoria nueva = PideDato.nuevaCategoria(empresa, lector);
+		empresa.addCategoria(nueva);
+		Serializar.grabaEmpresa(empresa);
+	}
 	private static void alquileres(Empresa empresa, Scanner lector) throws FechaNoValidaException, LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, PlantaNoValidaException
 	{
-		String[] opcione = {"1.- Nuevo alquiler","2.- Modificar alquiler existente","3.- Eliminar alquiler","4.- Salir"};
-		String validadas = "1234";
+		String[] opcione = {"1.- Nuevo alquiler","2.- Modificar alquiler existente","3.- Eliminar alquiler","S.- Salir"};
 		String mensajeError = "Elija una opción válida:";
 		boolean sale = false;
 		
 		do
 		{
-			switch (metodosMenu.Metodos.menu(opcione, validadas, "Gestión de alquileres", mensajeError, lector))
+			switch (metodosMenu.Metodos.menu(opcione, opcValidas, "Gestión de alquileres", mensajeError, lector))
 			{
 			case "1"://crear un alquiler
 				Alquiler nuevo =  PideDato.alquiler(lector);	//lo pedimos
@@ -156,7 +162,7 @@ public class Menus {
 				Alquiler alquil = PideDato.alquiler(lector);
 				empresa.quitaAlquiler(alquil);
 				break;
-			case "4":
+			case "S":
 				sale = true;	//sale
 				break;
 			}
@@ -164,14 +170,13 @@ public class Menus {
 	}
 	private static void editaAlquiler(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, PlantaNoValidaException, FechaNoValidaException
 	{
-		String[] elecciones = {"1.- Mostrar precio alquiler","2.- Editar fecha de finalización prevista","3.- Finalizar alquiler","4.- Volver (salir)"};
-		String val = "1234";
+		String[] elecciones = {"1.- Mostrar precio alquiler","2.- Editar fecha de finalización prevista","3.- Finalizar alquiler","S.- Volver (salir)"};
 		boolean seSale = false;
 		Matricula respuesta = null;
 		
 		do
 		{
-			switch (Metodos.menu(elecciones, val, errorLetras, mensaje, lector))
+			switch (Metodos.menu(elecciones, opcValidas, errorLetras, mensaje, lector))
 			{
 			case "1":	//Listamos vehículos y según PK decimos precioAlquiler
 				boolean valido = false;
@@ -198,8 +203,8 @@ public class Menus {
 				boolean siVale = false;
 				boolean sale = false;
 				
-				String[] amodificar = {"1.- Fecha inicio alquiler","2.- Fecha prevista fin","3.- Atrás (salir)"};
-				String vale = "123";
+				String[] amodificar = {"1.- Fecha inicio alquiler","2.- Fecha prevista fin","S.- Atrás (salir)"};
+				String vale = "12S";
 				
 				do {
 					listarAlquileres(empresa.getAlquileres());	//Listamos
@@ -226,7 +231,7 @@ public class Menus {
 						empresa.getAlquileres().get(responde).setFechaPrevistaFinAlquiler(nuevaFechaDev);
 						Serializar.grabaEmpresa(empresa);
 						break;
-					case "3":
+					case "S":
 						sale = true;
 						break;
 					}
@@ -251,7 +256,7 @@ public class Menus {
 				empresa.getAlquileres().get(contesta).setFechaDevolucion(nuevaFecha);	//Set Fecha
 				Serializar.grabaEmpresa(empresa);
 				break;
-			case "4":
+			case "S":
 				seSale = true;
 				break;
 			}
@@ -277,13 +282,12 @@ public class Menus {
 	}
 	private static void MenuListados(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, PlantaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException
 	{
-		String[] list = {"1.- Listar vehículos","2.- Listar Personas", "3.- Listar Oficinas","4.- Salir"};
-		String posibilidades = "1234";
+		String[] list = {"1.- Listar vehículos","2.- Listar Personas", "3.- Listar Oficinas","S.- Salir"};
 		boolean seVa = false;
 		
 		do 
 		{
-			switch (metodosMenu.Metodos.menu(list, posibilidades, "LISTADOS",mensaje, lector))
+			switch (metodosMenu.Metodos.menu(list, opcValidas, "LISTADOS",mensaje, lector))
 			{
 			case "1": 	//Vehiculos
 				Menus.listadoVehiculos(empresa, lector);
@@ -294,7 +298,7 @@ public class Menus {
 			case "3":	//Oficinas
 				Menus.listadoOficinas(empresa, lector);
 				break;
-			case "4": //Salir
+			case "S": //Salir
 				seVa = true;
 				break;
 			}
@@ -359,9 +363,9 @@ public class Menus {
 			}
 		}while (!sale);
 	}
-	private static void listaCombustion(Empresa empresa, Scanner lector)
+	private static void listaCombustion(Empresa empresa, Scanner lector) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
 	{
-		String[] posibilidades = {"1.- Listar coches","2.- Listar Furgonetas","3.- Listar todos los vehículos de combustión","4.- Volver atrás"};
+		String[] posibilidades = {"1.- Listar coches","2.- Listar Furgonetas","3.- Listar todos los vehículos de combustión","S.- Volver atrás"};
 		boolean sale = false;
 		
 		do
@@ -371,6 +375,7 @@ public class Menus {
 			case "1":	//Sólo coches
 				ArrayList<DeCombustion> cocheraCoches = TreeMapToArrayList.CocheCombustion(empresa.getGaraje());
 				//Listamos
+				
 				for (Vehiculo a:cocheraCoches)
 				{
 					System.out.println(a);
@@ -388,10 +393,11 @@ public class Menus {
 				ArrayList<DeCombustion> cochera = TreeMapToArrayList.Combustion(empresa.getGaraje());
 				for (Vehiculo a:cochera)
 				{
-					System.out.println(a);
+					System.out.printf("Matrícula: "+a.getMatricula()+" | "+a);
+					System.out.println("");
 				}
 				break;
-			case "4":
+			case "S":
 				sale = true;
 				break;
 			}
@@ -400,13 +406,14 @@ public class Menus {
 	
 	private static void listadoOficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
-		String[] elecc = {"1.- Listar todas las oficinas","2.- Empleados","3.- Atrás (Salir)"};
-		String posib = "123";
+		String[] elecc = {"1.- Listar todas las oficinas","2.- Empleados","S.- Atrás (Salir)"};
+		String posib = "12S";
 		String error = "Seleccione una opción de este conjunto:";
 		boolean sale = false;
 		
 		do
 		{	//No saldrá hasta que le dé explícitamente
+			
 			switch (metodosMenu.Metodos.menu(elecc, posib, "LISTAR OFICINAS", error, lector))
 			{
 			case "1":	//Todas las oficinas
@@ -414,6 +421,7 @@ public class Menus {
 				for (Oficina a:ofis)
 				{
 					System.out.printf("Oficina: "+a.getCódigo()+" - "+a.getDescripción());
+					System.out.println(""); 	//Antes de listar la siguiente oficina hacemos espacio con salto de línea
 				}
 				break;
 			case "2":	//Empleados
@@ -438,7 +446,7 @@ public class Menus {
 				}while(!correcto);
 				Menus.listadoEmpleadosPorOficina(empresa, codigo, lector);	//Listamos los empleados de dicha oficina
 				break;
-			case "3": //Salir 
+			case "S": //Salir 
 				sale = true;
 				break;
 			}
@@ -457,8 +465,8 @@ public class Menus {
 
 	private static void listaElectrico(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
 	{
-		String[] tipo = {"1.- Coche eléctrico", "2.- Moto eléctrica", "3.- Atrás (Salir)"};
-		String opcio = "123";
+		String[] tipo = {"1.- Coche eléctrico", "2.- Moto eléctrica", "S.- Atrás (Salir)"};
+		String opcio = "12S";
 		boolean adios = false;
 		
 		do
@@ -473,7 +481,7 @@ public class Menus {
 				
 					Menus.listadosElectricos(empresa, "Moto", lector);
 					break;
-			case "3":
+			case "S":
 				adios = true;	//se va
 				break;
 			}
@@ -482,8 +490,8 @@ public class Menus {
 	private static void listadosElectricos(Empresa empresa,String tipoVehiculo, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
 	{
 		String error = "Seleccione una opción de este conjunto:";
-		String[] a = {"1.- Por Matrícula","2.- Por categoría","3.- Atrás (Salir)"};
-		String b = "123";
+		String[] a = {"1.- Por Matrícula","2.- Por categoría","S.- Atrás (Salir)"};
+		String b = "12S";
 		boolean sale = false;		//A priori no se sale
 	
 		do
@@ -540,7 +548,7 @@ public class Menus {
 					ListarCocheElectricoPorCategoria(lista2);;
 				}
 				break;
-			case "3":	//SALIR
+			case "S":	//SALIR
 				sale = true;
 				break;
 			}
@@ -569,8 +577,8 @@ public class Menus {
 	private static void listadoPersonasPor(Empresa empresa,String tipoPersona, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
 		String error = "Seleccione una opción de este conjunto:";
-		String[] a = {"1.- Por DNI","2.- Por nombre","3.- Atrás (Salir)"};
-		String b = "123";
+		String[] a = {"1.- Por DNI","2.- Por nombre","S.- Atrás (Salir)"};
+		String b = "12S";
 		switch (metodosMenu.Metodos.menu(a, b, "Listar"+ tipoPersona +"por", error, lector))
 		{
 		case "1":	//Listar por DNI
@@ -621,7 +629,7 @@ public class Menus {
 				}
 			}
 			break;
-		case "3":	//SALIR
+		case "S":	//SALIR
 			break;
 		}
 	}
@@ -632,7 +640,7 @@ public class Menus {
 		String[] opcion = {""};
 		String respuesta;
 		
-		respuesta = metodosMenu.Metodos.menu(opcion, metodos.TreeMapToArrayList.DNIsEmpleados(empresa.getEmpleados()),"Escriba el DNI del empleado a borrar", menError, lector);
+		respuesta = metodosMenu.Metodos.menu(opcion, metodos.TreeMapToArrayList.DNIsEmpleados(empresa.getEmpleados()),"Escriba el identificador de la oficina a eliminar", menError, lector);
 		if (empresa.getEmpleados().containsKey(respuesta))	//Si alguien usa esa clave principal
 		{
 			String[] lista = {"S.- Sí", "N.- No"};
@@ -652,8 +660,8 @@ public class Menus {
 	
 	private static void MenuOficinas(Empresa empresa, Scanner lector) throws LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
-		String[] opciom = {"A.- Nueva oficina", "B.- Eliminar oficina", "C.- Salir"};
-		String validad = "ABC";
+		String[] opciom = {"A.- Nueva oficina", "B.- Eliminar oficina", "S.- Salir"};
+		String validad = "ABS";
 		boolean sale = false;
 
 		do
@@ -668,7 +676,7 @@ public class Menus {
 			case "B":	//Eliminar
 				Menus.eliminaOficina(empresa, lector);
 				break;
-			case "C": //Salir
+			case "S": //Salir
 				sale = true;	//Termina el bucle
 				break;
 			}
@@ -678,15 +686,20 @@ public class Menus {
 	private static void eliminar(Empresa empresa, Scanner lector)
 	{
 		String elegida;
-		System.out.println("Elija la matrícula del vehículo a eliminar:");
-		Menus.listarVehiculos(empresa);//Los listamos
-		elegida = lector.nextLine();
-		
-		if (empresa.getOficinas().containsKey(elegida))
+		boolean encontrado = false;
+		do 
 		{
-			empresa.eliminarOficina(elegida);
-			Serializar.grabaEmpresa(empresa);
-		}
+			System.out.println("Elija la matrícula del vehículo a eliminar:");
+			Menus.listarVehiculos(empresa);//Los listamos
+			elegida = PideDato.cadena(lector);
+
+			if (empresa.getOficinas().containsKey(elegida))
+			{
+				empresa.eliminarOficina(elegida);
+				Serializar.grabaEmpresa(empresa);
+				encontrado = true;
+			}
+		}while (!encontrado);
 		
 		
 	}
@@ -694,8 +707,8 @@ public class Menus {
 	private static  void combustion(Empresa empresa, Scanner lector) throws TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
 		
-		String[] combustion = {"1.- Coche","2.- Furgoneta", "3.- Volver"};
-		String opcValidas = "1234";
+		String[] combustion = {"1.- Coche","2.- Furgoneta", "S.- Volver"};
+		String opcValidas = "12S";
 		
 			
 		switch (metodosMenu.Metodos.menu(combustion, opcValidas, "Vehiculos de combustión", menError, lector))
@@ -706,7 +719,7 @@ public class Menus {
 		case "2":	//Furgoneta
 			Menus.creaFurgoneta(empresa, lector);
 			break;
-		case "3":	//Salir
+		case "S":	//Salir
 			break;
 		}
 			
@@ -725,8 +738,8 @@ public class Menus {
 	private static void electrico(Empresa empresa, Scanner lector) throws TiempoRecargaNoValidoException, TipoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
 		
-		String[] electrico = {"1.- Coche","2.- Moto", "3.- Volver"};
-		String opcValidas = "1234";
+		String[] electrico = {"1.- Coche","2.- Moto", "S.- Volver"};
+		String opcValidas = "12S";
 		boolean adios = false;
 		
 		do
@@ -739,7 +752,7 @@ public class Menus {
 			case "2":	//Moto
 				Menus.creaMoto(empresa, lector);
 				break;
-			case "3":	//Salir
+			case "S","s": //SALIR
 				adios = true;
 				break;
 			}
@@ -748,8 +761,8 @@ public class Menus {
 	}
 	private static void add(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
 	{
-		String[] elec = {"A.- De combustión","B.- Eléctrico","C.- Salir"}; //elec de Elección
-		String validas = "ABC";
+		String[] elec = {"A.- De combustión","B.- Eléctrico","S.- Salir"}; //elec de Elección
+		String validas = "ABS";
 		boolean sale = false;
 		
 		do
@@ -762,7 +775,7 @@ public class Menus {
 			case "B","b":	//Electrico
 				Menus.electrico(empresa, lector);
 				break;
-			case "C","c": //SALIR
+			case "S","s": //SALIR
 				sale = true;
 				break;
 			}
@@ -770,8 +783,8 @@ public class Menus {
 	}
 	private static void flotaVehicular(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
 	{
-		String[] elec = {"A.- AÑADIR VEHÍCULO","B.- ELIMINAR VEHÍCULO","C.- SALIR"}; //elec de Elección
-		String validas = "ABC";
+		String[] elec = {"A.- AÑADIR VEHÍCULO","B.- ELIMINAR VEHÍCULO","S.- SALIR"}; //elec de Elección
+		String validas = "ABS";
 		boolean sale = false;
 		
 		do
@@ -784,7 +797,7 @@ public class Menus {
 			case "B","b":	//Eliminar vehículo
 				Menus.eliminar(empresa, lector);
 				break;
-			case "C","c": //SALIR
+			case "S","s": //SALIR
 				sale = true;
 				break;
 			}
@@ -792,8 +805,8 @@ public class Menus {
 	}
 	private static void clientes(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException
 	{
-		String[] opcioness = {"A.- Añadir cliente", "B.- Dar de baja", "C.- Salir"};
-		String Validas = "ABC";
+		String[] opcioness = {"A.- Añadir cliente", "B.- Dar de baja", "S.- Salir"};
+		String Validas = "ABS";
 		boolean sale = false;
 		
 		do
@@ -813,8 +826,8 @@ public class Menus {
 				 * 3- Eliminar
 				 */
 				break;
-			case "C","c":
-				sale=true;
+			case "S","s": //SALIR
+				sale = true;
 				break;
 			}
 		}while(!sale);
@@ -848,8 +861,8 @@ public class Menus {
 	
 	private static void oficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CarnetRequeridoInvalidoException
 	{
-		String[] opcioness = {"A.- Empleados", "B.- Oficinas", "C.- Salir"};
-		String Validas = "ABC";
+		String[] opcioness = {"A.- Empleados", "B.- Oficinas", "S.- Salir"};
+		String Validas = "ABS";
 		boolean sale = false;
 		
 		do 
@@ -862,9 +875,9 @@ public class Menus {
 			case "B","b":	//Añadir o eliminar oficinas
 				Menus.MenuOficinas(empresa, lector);
 				break;
-			case "C","c":
+			case "S","s": //SALIR
 				sale = true;
-				break;	//Salir		
+				break;	
 			}
 		}while(!sale);
 		
@@ -923,8 +936,8 @@ public class Menus {
 	
 	private static void MenuEmpleado(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CarnetRequeridoInvalidoException
 	{
-		String[] opcc = {"A.- Añadir nuevo empleado","B.- Dar de baja un empleado","C.- Salir"};
-		String Validas = "ABC";
+		String[] opcc = {"A.- Añadir nuevo empleado","B.- Dar de baja un empleado","S.- Salir"};
+		String Validas = "ABS";
 		boolean sale = false;
 		
 		do
@@ -939,9 +952,9 @@ public class Menus {
 			case "B","b":	//Eliminar empleado
 				Menus.eliminaEmpleado(empresa, lector);
 				break;
-			case "C","c":
+			case "S","s": //SALIR
 				sale = true;
-				break;	//Salir
+				break;
 			}
 		}while(!sale);
 	}

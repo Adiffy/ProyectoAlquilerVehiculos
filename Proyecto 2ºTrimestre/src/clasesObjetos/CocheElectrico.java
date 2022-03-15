@@ -8,10 +8,15 @@ import exceptions.EmisionesNoValidasException;
 import exceptions.NumPlazasNoValidoException;
 import exceptions.TiempoRecargaNoValidoException;
 import exceptions.TipoNoValidoException;
-@SuppressWarnings("serial")
+
 public class CocheElectrico extends Electrico implements Serializable, Coche {
 
-
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	//Propiedades
 	int autonomia; //(kms)
 	int TiempoRecarga; //(min)

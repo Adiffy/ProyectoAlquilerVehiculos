@@ -10,10 +10,13 @@ import exceptions.NumPlazasNoValidoException;
 import exceptions.PotenciaNoValidaException;
 import exceptions.TipoNoValidoException;
 
-@SuppressWarnings("serial")
-public final class CocheCombustion extends DeCombustion implements Coche, Serializable{
 
+public final class CocheCombustion extends DeCombustion implements Coche, Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	//Propiedades
 	int numPlazas = 1; //numero de plazas que tiene el coche

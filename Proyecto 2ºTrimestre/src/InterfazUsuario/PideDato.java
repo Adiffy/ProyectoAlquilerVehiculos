@@ -214,7 +214,7 @@ public class PideDato {
 	{
 //		l.next(); //Limpiamos el buffer por si acaso
 		System.out.println("Escribe:");
-		System.out.print("2.- Los números de la matrícula:");
+		System.out.print("1.- Los números de la matrícula:");
 		int numeros= PideDato.numerico("", "Sólo datos numéricos admitidos", 0, 99999999, l);
 		System.out.print("2.- Las letras de la matrícula:");
 		String letras = PideDato.cadena(l);
@@ -250,40 +250,48 @@ public class PideDato {
 		l.nextLine();
 		return  new GregorianCalendar(anno,mes,dia);	//Creamos el GregorianCalendar con los datos introducidos
 	}
+	public static Categoria nuevaCategoria(Empresa empresa, Scanner l) throws RecargoNoValidoException
+	{
+		String titulo = "Nueva Categoría";
+		metodosMenu.Metodos.pintaSubrayado(titulo.toUpperCase());
+			String cod = PideDato.cadena("Código",l);
+			String desc = PideDato.cadena("Descripción","La descripción debe ser breve",0,30,l);
+			double recargo = PideDato.real("Porcentaje de recargo", l);
+			return new Categoria(cod,desc,recargo);
+		
+	}
+	
 	public static Categoria categoria(Empresa empresa, Scanner l) throws RecargoNoValidoException
 	{
 		String titulo = "Categoría";
 		metodosMenu.Metodos.pintaSubrayado(titulo.toUpperCase());
-		String[] opciones = {"A.- Elegir una categoría existente","2.- Nueva categoría"};
+		String[] opciones = {"A.- Elegir una categoría existente","B.- Nueva categoría"};
 		String elegible = "AB";
 		switch(Metodos.menu(opciones, elegible,"¿Crear categoría o elegir una existente?", titulo, l))
 		{
 		case "A","a":
-			ArrayList<Categoria> categorias = new ArrayList<Categoria>(empresa.getCategorias().values());
+			ArrayList<Categoria> categorias = new ArrayList<Categoria>(empresa.getCategorias().values());	//Pasamos el TreeMap a ArrayList
 			Categoria b = null;
 			boolean DatoMalo = true;
 			String elige;
 		do
 		{
-			for (Categoria a:categorias)
+			for (Categoria a:categorias)	//Listamos las categorías recorriendo el ArrayList
 			{
 				System.out.println(a);
 			}
 			
-			elige = PideDato.cadena("Código de categoría", l);
-			if (empresa.getCategorias().containsKey(elige))
+			elige = PideDato.cadena("Código de categoría", l);	//El usuario escribe el código
+			if (empresa.getCategorias().containsKey(elige))	//Si el código existe DatoMalo = false (rompe el bucle)
 			{
 				DatoMalo = false;
-				b = empresa.getCategorias().get(elige);
+				b = empresa.getCategorias().get(elige);	//Seleccionamos la categoría que buscamos
 			}
 		}while(DatoMalo);
-			return b;
+			return b;	//Devolvemos la categoría
 			
 		case "B","b":
-			String cod = PideDato.cadena("Código",l);
-			String desc = PideDato.cadena("Descripción","La descripción debe ser breve",0,30,l);
-			double recargo = PideDato.real("Porcentaje de recargo", l);
-			return new Categoria(cod,desc,recargo);
+			return PideDato.nuevaCategoria(empresa, l);
 			
 		default:	//imposible que pase esto
 			return null;
@@ -628,7 +636,7 @@ public class PideDato {
 	 * @param capacidadCarga	El {@code int} 
 	 * @param carnetRequerido
  */
-		l.next(); //Limpiamos el Scanner
+//		l.next(); //Limpiamos el Scanner
 		Metodos.pintaSubrayado("Nueva furgoneta");
 		System.out.println("Matrícula de la furgoneta");
 		Matricula mat = null;

@@ -1,13 +1,19 @@
 package clasesObjetos;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 import exceptions.FechaNoValidaException;
 
-public class Alquiler {
+public class Alquiler implements Serializable {
 
-	//Variables que Se usarán en caso de alquiler
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+		//Variables que Se usarán en caso de alquiler
 		private String codigo ; 
 		private GregorianCalendar FechaInicioAlquiler = new GregorianCalendar();
 		private GregorianCalendar FechaPrevistaFinAlquiler = new GregorianCalendar();
@@ -45,10 +51,12 @@ public class Alquiler {
 		}
 		
 		@SuppressWarnings("static-access")
-		public void setFechaInicioAlquiler(GregorianCalendar fechaInicioAlquiler) {
-			if (fechaInicioAlquiler.DATE >= GregorianCalendar.getInstance().DATE && (fechaInicioAlquiler.MONTH >= GregorianCalendar.getInstance().MONTH || fechaInicioAlquiler.DAY_OF_YEAR >= GregorianCalendar.getInstance().DAY_OF_YEAR))
+		public void setFechaInicioAlquiler(GregorianCalendar fechaInicioAlquiler) throws FechaNoValidaException {
+			if ((fechaInicioAlquiler.MONTH >= GregorianCalendar.getInstance().MONTH || fechaInicioAlquiler.DAY_OF_YEAR >= GregorianCalendar.getInstance().DAY_OF_YEAR))
 			{
 				FechaInicioAlquiler = (GregorianCalendar) fechaInicioAlquiler.clone();
+			}else {
+				throw new FechaNoValidaException("Fecha de inicio de alquiler no válida");
 			}
 			
 		}
@@ -58,13 +66,16 @@ public class Alquiler {
 		
 		@SuppressWarnings("static-access")
 		public void setFechaPrevistaFinAlquiler(GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
-			if ((fechaPrevistaFinAlquiler.DAY_OF_YEAR > GregorianCalendar.getInstance().DAY_OF_YEAR || fechaPrevistaFinAlquiler.YEAR > GregorianCalendar.getInstance().YEAR))
-			{
+//			LocalDate fin = LocalDate.of(fechaPrevistaFinAlquiler.YEAR, fechaPrevistaFinAlquiler.MONTH, fechaPrevistaFinAlquiler.DAY_OF_MONTH);
+//			LocalDate inicio = LocalDate.of(FechaInicioAlquiler.YEAR, FechaInicioAlquiler.MONTH, FechaInicioAlquiler.DAY_OF_MONTH);
+			
+//			if ((fin.compareTo(inicio)>0))
+//			{
 				FechaPrevistaFinAlquiler = fechaPrevistaFinAlquiler;
-			}else 
-			{
-				throw new FechaNoValidaException("Fecha anterior a la actual");
-			}
+//			}else 
+//			{
+//				throw new FechaNoValidaException("Fecha anterior a la fecha de inicio");
+//			}
 			
 		}
 		@SuppressWarnings("static-access")

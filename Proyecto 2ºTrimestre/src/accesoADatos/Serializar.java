@@ -52,7 +52,6 @@ public class Serializar {
 		}else //Si no existe el archivo lo crea con el constructor más básico 
 		{
 																												//Scanner lector = new Scanner(System.in);	//Para crear la empresa el método PideDato necesita un Scanner
-			
 			empresa = new Empresa();
 			grabaEmpresa(empresa);
 		}

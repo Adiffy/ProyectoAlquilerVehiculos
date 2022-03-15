@@ -6,6 +6,11 @@ import exceptions.LongitudCadenaNoValidaException;
 
 public class Cliente extends Persona{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	//Propiedades
 	private String licencia;
 	private int tarjeta;	//Nº de tarjeta de cliente habitual

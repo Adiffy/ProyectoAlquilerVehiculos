@@ -11,7 +11,11 @@ import exceptions.PotenciaNoValidaException;
 import exceptions.TipoCarnetNoValidoException;
 
 public class Furgoneta extends DeCombustion {
-
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -622124846681716489L;
 	//Propiedades
 	private int capacidadCarga; //En metros cúbicos
 	private String carnetRequerido; //Puede ser  B / C / D

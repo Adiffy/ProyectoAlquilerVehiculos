@@ -1,9 +1,18 @@
 package clasesObjetos;
 
+import java.io.Serializable;
+
 import exceptions.RecargoNoValidoException;
 
-public class Categoria {
+public class Categoria implements Serializable {
 
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5699769566069424880L;
+	
 	//Propiedades
 	private String codigo;
 	private String descripcion;
@@ -15,7 +24,7 @@ public class Categoria {
 		return codigo;
 	}
 	public void setCodigo(String codigo) {
-		if (codigo.equalsIgnoreCase("A") || codigo.equalsIgnoreCase("B") || codigo.equalsIgnoreCase("C"))
+//		if (codigo.equalsIgnoreCase("A") || codigo.equalsIgnoreCase("B") || codigo.equalsIgnoreCase("C"))	El código de la categoría no será limitado
 		{
 			String code=codigo; //Creamos la copia
 			this.codigo = code;
@@ -26,27 +35,27 @@ public class Categoria {
 		return desc;
 	}
 	public void setDescripcion(String descripcion) {
-		if (descripcion.equalsIgnoreCase("ECONOMICO") || descripcion.equalsIgnoreCase("MEDIO") || descripcion.equalsIgnoreCase("PREMIUM"))
+//		if (descripcion.equalsIgnoreCase("ECONOMICO") || descripcion.equalsIgnoreCase("MEDIO") || descripcion.equalsIgnoreCase("PREMIUM")) La descripción no será limitada
 		{
 			String desc = descripcion; //clonamos
 			this.descripcion = desc;
 			//Ahora según la descripción pondremos un porcentaje de recargo u otro
 			
-			switch (desc.toUpperCase()) { //TODO revisar los porcentajes 
-			case "A":
-				this.recargo=15;
-			case "B":
-				this.recargo=20;
-			case "C":
-				this.recargo=25;
-			} 
+//			switch (desc.toUpperCase()) { //TODO revisar los porcentajes 
+//			case "A":
+//				this.recargo=15;
+//			case "B":
+//				this.recargo=20;
+//			case "C":
+//				this.recargo=25;
+//			} 
 		}
 	}
 	private void setRecargo(double recargo) throws RecargoNoValidoException {
 		if (recargo>=0 && recargo<=100)	//No puede ser un recargo del 100% pero sí puede ser nulo (0)
 		{
 			double cop = recargo; //Copia
-			this.recargo = cop;
+			this.recargo=cop;
 		}else {
 			if (recargo >100) // Comprobamos si se ha pasado por ser mayor que 100 o no
 			{

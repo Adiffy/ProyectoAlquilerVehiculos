@@ -1,5 +1,6 @@
 package clasesObjetos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.TreeMap;
@@ -11,9 +12,15 @@ import exceptions.CodigoPostalException;
 import exceptions.LicenciaNoValidaException;
 import exceptions.LongitudCadenaNoValidaException;
 import exceptions.LongitudNoValidaException;
+import exceptions.RecargoNoValidoException;
 
-public class Empresa {
+public class Empresa implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	//Propiedades
 	private TreeMap<Matricula, Vehiculo> Stock;
 	private TreeMap<String, Cliente> Clientes; //El String será el DNI
@@ -39,6 +46,10 @@ public class Empresa {
 	@SuppressWarnings("unchecked")
 	public void setCategorias(TreeMap<String, Categoria> categorias) {
 		Categorias = (TreeMap<String, Categoria>) categorias.clone();
+	}
+	public void addCategoria(Categoria categoria) throws RecargoNoValidoException {
+		Categoria copia = new Categoria(categoria);
+		Categorias.put(copia.getCodigo(), copia);
 	}
 
 
@@ -83,6 +94,7 @@ public class Empresa {
 
 	public void addAlGaraje( Vehiculo nuevo ) 
 	{
+		
 		this.Stock.put(nuevo.matricula, nuevo);
 	}
 	
@@ -232,6 +244,8 @@ public class Empresa {
 		this.Clientes = new TreeMap<String,Cliente>();
 		this.Empleados = new TreeMap<String, Empleado>();
 		this.Stock = new TreeMap<Matricula, Vehiculo>();
+		this.Categorias = new TreeMap<String,Categoria>();
+		this.Alquileres = new TreeMap<String,Alquiler>();
 		
 	}
 }
