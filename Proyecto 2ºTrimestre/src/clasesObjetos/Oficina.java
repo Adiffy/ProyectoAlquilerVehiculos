@@ -292,4 +292,10 @@ public class Oficina {
 		String clavePrincipal = contratado.getDni() ;
 		this.personal.put(clavePrincipal, new Empleado(contratado)); //Lo añadimos
 	}
+	
+	@Override
+	public String toString()
+	{
+		return ""+this.getCódigo()+" | "+this.getDescripción() + " - "+this.getProvincia()+","+this.getLocalidad();
+	}
 }

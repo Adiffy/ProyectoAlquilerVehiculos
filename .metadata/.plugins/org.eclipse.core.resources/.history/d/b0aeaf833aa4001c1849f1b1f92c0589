@@ -966,7 +966,7 @@ public class Menus {
 	{
 		
 			CocheCombustion nuevo = PideDato.cocheCombustion(empresa, lector);
-			empresa.addAlGaraje(nuevo);	//Añadimos el vehículo
+			empresa.addAlGaraje(nuevo);
 			Serializar.grabaEmpresa(empresa);//Guardamos cambios
 		
 	}
@@ -975,7 +975,7 @@ public class Menus {
 	{
 		
 			CocheElectrico nuevo = PideDato.cocheElectrico(empresa, lector);
-			empresa.addAlGaraje(nuevo);	//Añadimos el vehículo
+			empresa.addAlGaraje(nuevo);
 			Serializar.grabaEmpresa(empresa);//Guardamos cambios
 		
 	}
@@ -984,7 +984,7 @@ public class Menus {
 	{
 		
 			Moto nueva = PideDato.moto(lector);
-			empresa.addAlGaraje(nueva);	//Añadimos el vehículo
+			empresa.addAlGaraje(nueva);
 			Serializar.grabaEmpresa(empresa);//Guardamos cambios
 		
 		
@@ -992,7 +992,7 @@ public class Menus {
 	private static void creaFurgoneta(Empresa empresa, Scanner lector) throws EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
 	{
 		
-			Furgoneta furgo = PideDato.furgoneta(empresa, lector);
+			Furgoneta furgo = PideDato.furgoneta(lector);
 			empresa.addAlGaraje(furgo);
 			Serializar.grabaEmpresa(empresa);//Guardamos cambios
 		

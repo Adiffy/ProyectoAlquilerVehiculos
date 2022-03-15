@@ -121,6 +121,7 @@ public class Alquiler {
 		@SuppressWarnings("static-access")
 		public int getNumDias()
 		{
+			@SuppressWarnings("static-access")
 			LocalDate inicio = LocalDate.of(this.FechaInicioAlquiler.YEAR, this.FechaInicioAlquiler.MONTH, this.FechaInicioAlquiler.DAY_OF_MONTH);
 			LocalDate fin = LocalDate.of(this.FechaDevolucion.YEAR, this.FechaDevolucion.MONTH, this.FechaDevolucion.DAY_OF_MONTH);
 			LocalDate resultado = fin.minusDays(inicio.getDayOfYear());

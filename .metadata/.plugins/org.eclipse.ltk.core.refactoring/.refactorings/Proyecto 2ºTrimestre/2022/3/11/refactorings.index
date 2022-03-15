@@ -2,3 +2,5 @@
 1647248476092	Encapsulate field 'codigo'
 1647256173132	Rename field 'Código'
 1647268431787	Delete element
+1647333452862	Encapsulate field 'PrecioAlquiler'
+1647334512969	Encapsulate field 'Categorias'

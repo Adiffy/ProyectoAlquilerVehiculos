@@ -1,5 +1,6 @@
 package InterfazUsuario;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -249,14 +250,48 @@ public class PideDato {
 		l.nextLine();
 		return  new GregorianCalendar(anno,mes,dia);	//Creamos el GregorianCalendar con los datos introducidos
 	}
-	public static Categoria categoria(Scanner l) throws RecargoNoValidoException
+	public static Categoria categoria(Empresa empresa, Scanner l) throws RecargoNoValidoException
 	{
 		String titulo = "Categoría";
 		metodosMenu.Metodos.pintaSubrayado(titulo.toUpperCase());
-		String cod = PideDato.cadena("Código",l);
-		String desc = PideDato.cadena("Descripción","La descripción debe ser breve",0,30,l);
-		double recargo = PideDato.real("Porcentaje de recargo", l);
-		return new Categoria(cod,desc,recargo);
+		String[] opciones = {"A.- Elegir una categoría existente","2.- Nueva categoría"};
+		String elegible = "AB";
+		switch(Metodos.menu(opciones, elegible,"¿Crear categoría o elegir una existente?", titulo, l))
+		{
+		case "A","a":
+			ArrayList<Categoria> categorias = new ArrayList<Categoria>(empresa.getCategorias().values());
+			Categoria b = null;
+			boolean DatoMalo = true;
+			String elige;
+		do
+		{
+			for (Categoria a:categorias)
+			{
+				System.out.println(a);
+			}
+			
+			elige = PideDato.cadena("Código de categoría", l);
+			if (empresa.getCategorias().containsKey(elige))
+			{
+				DatoMalo = false;
+				b = empresa.getCategorias().get(elige);
+			}
+		}while(DatoMalo);
+			return b;
+			
+		case "B","b":
+			String cod = PideDato.cadena("Código",l);
+			String desc = PideDato.cadena("Descripción","La descripción debe ser breve",0,30,l);
+			double recargo = PideDato.real("Porcentaje de recargo", l);
+			return new Categoria(cod,desc,recargo);
+			
+		default:	//imposible que pase esto
+			return null;
+			
+		}
+		
+		
+		
 	}
 	
 	public static GregorianCalendar fecha(Scanner l)
@@ -408,7 +443,7 @@ public class PideDato {
 		String elegida;
 		boolean bien=false;
 		
-			cat = PideDato.categoria(l);
+			cat = PideDato.categoria(empresa, l);
 		
 		String color = PideDato.cadena("Color del coche", l);
 		GregorianCalendar fechaAlta = PideDato.fecha("Fecha de alta del vehículo", l);
@@ -487,7 +522,7 @@ public class PideDato {
 		Categoria cat = null;
 		boolean bien = false; 
 		
-			cat = PideDato.categoria(l);
+			cat = PideDato.categoria(empresa, l);
 		
 		String color = PideDato.cadena("Color del coche", l);
 		GregorianCalendar fechaAlta = PideDato.fecha("Fecha de alta del vehículo", l);
@@ -552,7 +587,7 @@ public class PideDato {
 		String model = PideDato.cadena("Modelo de la moto", "Longitud no válida", 0, 25, l);
 		Categoria cat = null;
 		
-			cat = PideDato.categoria(l);
+			cat = PideDato.categoria(null, l);
 		
 		String color = PideDato.cadena("Color:", l);
 		GregorianCalendar fechaAlta = PideDato.fecha("Fecha de alta del vehículo", l);
@@ -576,7 +611,7 @@ public class PideDato {
 			return new Moto(mat, marca, model, cat, color, fechaAlta, null, kms, consumo, potencia, emisiones, cilindrada, carnet);
 	}
 	
-	public static Furgoneta furgoneta(Scanner l) throws EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException 
+	public static Furgoneta furgoneta(Empresa empresa, Scanner l) throws EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException 
 	{
 /*
  * * @param matricula	Objeto tipo {@code Matricula} 
@@ -605,7 +640,7 @@ public class PideDato {
 		String model = PideDato.cadena("Modelo de la furgoneta", "Longitud no válida", 0, 25, l);
 		Categoria cat = null;
 		
-			cat = PideDato.categoria(l);
+			cat = PideDato.categoria(empresa, l);
 		
 		String color = PideDato.cadena("Color:", l);
 		GregorianCalendar fechaAlta = PideDato.fecha("Fecha de alta del vehículo", l);

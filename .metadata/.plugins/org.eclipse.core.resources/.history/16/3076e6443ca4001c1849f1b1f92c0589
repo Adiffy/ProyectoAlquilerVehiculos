@@ -1,6 +1,5 @@
 package clasesObjetos;
 
-import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
 import exceptions.FechaNoValidaException;
@@ -30,9 +29,8 @@ public class Alquiler {
 			return this.PrecioAlquiler;
 		}
 
-		public void setPrecioAlquiler(Vehiculo coche) {
-			int dias = this.getNumDias();
-			PrecioAlquiler = dias*coche.PrecioAlquiler();
+		public void setPrecioAlquiler(double precioAlquiler) {
+			PrecioAlquiler = precioAlquiler;
 		}
 
 		public void setCodigo(String codigo) {
@@ -118,13 +116,11 @@ public class Alquiler {
 		/**
 		 * @return El nº de días que el vehículo está alquilado
 		 */
-		@SuppressWarnings("static-access")
 		public int getNumDias()
 		{
-			LocalDate inicio = LocalDate.of(this.FechaInicioAlquiler.YEAR, this.FechaInicioAlquiler.MONTH, this.FechaInicioAlquiler.DAY_OF_MONTH);
-			LocalDate fin = LocalDate.of(this.FechaDevolucion.YEAR, this.FechaDevolucion.MONTH, this.FechaDevolucion.DAY_OF_MONTH);
-			LocalDate resultado = fin.minusDays(inicio.getDayOfYear());
-			return resultado.getDayOfYear();
+			@SuppressWarnings("static-access")
+			int num = ((this.FechaDevolucion.MONTH - this.FechaInicioAlquiler.MONTH) + (this.FechaDevolucion.DATE - this.FechaInicioAlquiler.DATE));
+			return num;
 		}
 		
 		public boolean isAcabado()

@@ -20,9 +20,28 @@ public class Empresa {
 	private TreeMap<String, Empleado> Empleados; //El personal de la empresa
 	private TreeMap<String, Oficina> Oficinas; //Las oficinas de la empresa
 	private TreeMap<String, Alquiler> Alquileres; //Los alquileres de la empresa
+	private TreeMap<String, Categoria> Categorias;	//Las categorias
 
 	//Setters & Getters
 	
+	/**
+	 * @return las categorias
+	 */
+	@SuppressWarnings("unchecked")
+	public TreeMap<String, Categoria> getCategorias() {
+		return (TreeMap<String, Categoria>) Categorias.clone();
+	}
+
+
+	/**
+	 * @param categorias las categorias a guardar
+	 */
+	@SuppressWarnings("unchecked")
+	public void setCategorias(TreeMap<String, Categoria> categorias) {
+		Categorias = (TreeMap<String, Categoria>) categorias.clone();
+	}
+
+
 	@SuppressWarnings("unchecked")	//Quitamos el Warning para evitar errores al exportar
 	public TreeMap<String, Empleado> getEmpleados() {
 		//Devolvemos un clon
@@ -207,7 +226,6 @@ public class Empresa {
 	
 	
 	//Constructor
-	@SuppressWarnings("unused")		//Quitamos los Warnings para evitar errores al exportar
 	public Empresa()
 	{
 		this.Oficinas = new TreeMap<String,Oficina>();

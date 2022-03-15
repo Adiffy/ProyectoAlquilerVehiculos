@@ -992,7 +992,7 @@ public class Menus {
 	private static void creaFurgoneta(Empresa empresa, Scanner lector) throws EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
 	{
 		
-			Furgoneta furgo = PideDato.furgoneta(empresa, lector);
+			Furgoneta furgo = PideDato.furgoneta(lector);
 			empresa.addAlGaraje(furgo);
 			Serializar.grabaEmpresa(empresa);//Guardamos cambios
 		
