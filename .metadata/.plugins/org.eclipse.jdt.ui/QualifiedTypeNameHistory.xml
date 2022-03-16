@@ -17,7 +17,6 @@
     <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
     <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
     <fullyQualifiedTypeName name="clasesObjetos.Alquiler"/>
-    <fullyQualifiedTypeName name="InterfazUsuario.Menus"/>
     <fullyQualifiedTypeName name="clasesObjetos.DeCombustion"/>
     <fullyQualifiedTypeName name="exceptions.CarnetRequeridoInvalidoException"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
@@ -31,4 +30,5 @@
     <fullyQualifiedTypeName name="java.util.TreeMap"/>
     <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="InterfazUsuario.Menus"/>
 </qualifiedTypeNameHistroy>
