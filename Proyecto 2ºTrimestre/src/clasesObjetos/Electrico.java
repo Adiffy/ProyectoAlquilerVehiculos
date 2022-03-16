@@ -54,7 +54,7 @@ public abstract class Electrico extends Vehiculo {
 	@Override
 	public String toString()
 	{
-		return this.getMarca()+" "+this.getModelo() + "| Autonomía: " + this.getAutonomia() + " Tiempo de Recarga: "+this.getTiempoRecarga();
+		return this.matricula +" - " +this.getMarca()+" "+this.getModelo() + "| Autonomía: " + this.getAutonomia() + " Tiempo de Recarga: "+this.getTiempoRecarga();
 	}
 	
 }

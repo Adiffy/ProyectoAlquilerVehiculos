@@ -76,6 +76,6 @@ public abstract class DeCombustion extends Vehiculo {
 	@Override
 	public String toString()
 	{
-		return this.getMarca()+" "+this.getModelo() + "| Consumo: " + this.getConsumo() + " Potencia: "+this.getPotencia();
+		return this.matricula+" - "+ this.getMarca()+" "+this.getModelo() + "| Consumo: " + this.getConsumo() + " Potencia: "+this.getPotencia();
 	}
 }

@@ -276,7 +276,7 @@ public Vehiculo(Matricula matricula, String marca, String modelo, Categoria cate
 	@Override
 	public String toString()
 	{
-		return this.matricula + " - " + this.getMarca();
+		return ""+this.matricula + " - " + this.getMarca();
 	}
 	
 	

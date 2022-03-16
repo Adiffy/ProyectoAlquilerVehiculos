@@ -518,14 +518,12 @@ public class Menus {
 				{
 					for (Vehiculo aux: lista)
 					{
-						System.out.printf(">>" + aux.toString());
-						System.out.println("");
+						System.out.printf("Con Matrícula: "+ aux.getMatricula() +" - " + aux.toString());
 					}
 				}else {
 					for (Vehiculo aux: lista2)
 					{
-						System.out.printf( ">>" + aux.toString());
-						System.out.println("");
+						System.out.printf("Con Matrícula: "+ aux.getMatricula() +" - " + aux.toString());
 					}
 				}
 				break;
@@ -582,7 +580,7 @@ public class Menus {
 		String error = "Seleccione una opción de este conjunto:";
 		String[] a = {"1.- Por DNI","2.- Por nombre","S.- Atrás (Salir)"};
 		String b = "12S";
-		switch (metodosMenu.Metodos.menu(a, b, "Listar "+ tipoPersona, error, lector))
+		switch (metodosMenu.Metodos.menu(a, b, "Listar"+ tipoPersona +"por", error, lector))
 		{
 		case "1":	//Listar por DNI
 			TreeMap<String, Cliente> lista = null;
