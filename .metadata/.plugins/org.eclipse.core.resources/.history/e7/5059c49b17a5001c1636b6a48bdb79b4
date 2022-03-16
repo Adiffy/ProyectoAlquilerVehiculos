@@ -888,36 +888,21 @@ public class Menus {
 	
 	private static void ListarTreeMapEmpleadoDNI(TreeMap<String,Empleado> map)
 	{
-//		map.entrySet().forEach((entry) -> {
-//            System.out.printf("- Empleado: %s"+" %n", entry.getKey(), entry.getValue());
-//        });
-		ArrayList<Empleado> lista = new ArrayList<Empleado>(map.values());
-		for (Empleado e:lista)
-		{
-			System.out.println(e);
-		}
+		map.entrySet().forEach((entry) -> {
+            System.out.printf("Con DNI: %s - Empleado: %s %n", entry.getKey(), entry.getValue());
+        });
 	}
 	private static void ListarTreeMapOficinas(TreeMap<String,Oficina> map)
 	{
-//		map.entrySet().forEach((entry) -> {
-//            System.out.printf("Con Código: %s - Oficina: %s %n", entry.getKey(), entry.getValue());
-//        });
-		ArrayList<Oficina> lista = new ArrayList<Oficina>(map.values());
-		for (Oficina i:lista)
-		{
-			System.out.println(i);
-		}
+		map.entrySet().forEach((entry) -> {
+            System.out.printf("Con Código: %s - Oficina: %s %n", entry.getKey(), entry.getValue());
+        });
 	}
 	private static void ListarTreeMapClienteDNI(TreeMap<String,Cliente> map)
 	{
-//		map.entrySet().forEach((entry) -> {
-//            System.out.printf("- Cliente: %s %n", entry.getKey(), entry.getValue());
-//        });
-		ArrayList<Cliente> lista = new ArrayList<Cliente>(map.values());
-		for (Cliente a:lista)
-		{
-			System.out.println(a);
-		}
+		map.entrySet().forEach((entry) -> {
+            System.out.printf("Con DNI: %s - Cliente: %s %n", entry.getKey(), entry.getValue());
+        });
 	}
 	
 	private static void eliminaEmpleado(Empresa empresa, Scanner lector)
@@ -928,34 +913,28 @@ public class Menus {
 		 * 2- Buscar por clave principal
 		 * 3- Eliminar
 		 */
-		
+		Menus.ListarTreeMapEmpleadoDNI(empresa.getEmpleados());
 		String[] opcion = {""};
-		boolean claveBuena = false;
 		
-		do
+		
+		respuesta = metodosMenu.Metodos.menu(opcion, metodos.TreeMapToArrayList.DNIsEmpleados(empresa.getEmpleados()),"Escriba el DNI del empleado a borrar", errorLetras, lector);
+		if (empresa.getEmpleados().containsKey(respuesta))	//Si alguien usa esa clave principal
 		{
-			Menus.ListarTreeMapEmpleadoDNI(empresa.getEmpleados());
-			respuesta = metodosMenu.Metodos.menu(opcion, metodos.TreeMapToArrayList.DNIsEmpleados(empresa.getEmpleados()),"Escriba el DNI del empleado a borrar", errorLetras, lector);
-			if (empresa.getEmpleados().containsKey(respuesta))	//Si alguien usa esa clave principal
-			{
-				String[] lista = {"S.- Sí", "N.- No"};
-				String valor = "SN";
-				claveBuena = true;
-				
-					switch (metodosMenu.Metodos.menu(lista, valor,"El empleado se borrará ¿Está seguro?", errorLetras,  lector))
-					{
-					case "S":
-						empresa.despedirEmpleado(respuesta);
-						Serializar.grabaEmpresa(empresa); 	//Guardamos 
-						break;
-					case "N":
-						
-						break; 	//Sale sin tocar nada
-					}
-			}else {
-				System.out.println("DNI no válido");
-			}
-		}while(!claveBuena);
+			String[] lista = {"S.- Sí", "N.- No"};
+			String valor = "SN";
+			
+				switch (metodosMenu.Metodos.menu(lista, valor,"El empleado se borrará ¿Está seguro?", errorLetras,  lector))
+				{
+				case "S":
+					empresa.despedirEmpleado(respuesta);
+					Serializar.grabaEmpresa(empresa); 	//Guardamos 
+					break;
+				case "N":
+					
+					break; 	//Sale sin tocar nada
+				}
+			
+		}
 	}
 	
 	private static void MenuEmpleado(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CarnetRequeridoInvalidoException

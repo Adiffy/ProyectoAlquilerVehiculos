@@ -49,6 +49,12 @@ public class Cliente extends Persona{
 		this.setTarjeta(tarjeta);
 	}
 
+	@Override
+	public String toString() {
+		return "Cliente | " + dni + ", con tarjeta" + tarjeta +", "+ getNombreCompleto()+" | Licencia: "+ licencia ;
+	}
+
+	
 	
 
 }

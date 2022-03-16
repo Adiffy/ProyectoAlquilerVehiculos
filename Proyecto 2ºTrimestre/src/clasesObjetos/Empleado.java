@@ -65,5 +65,11 @@ public class Empleado extends Persona{
 		this.setFechaAlta(contratado.getFechaAlta());
 	}
 
+	@Override
+	public String toString() {
+		return "Empleado | " +  dni + ", " + getNombreCompleto();
+	}
+
+	
 }
  

@@ -888,36 +888,21 @@ public class Menus {
 	
 	private static void ListarTreeMapEmpleadoDNI(TreeMap<String,Empleado> map)
 	{
-//		map.entrySet().forEach((entry) -> {
-//            System.out.printf("- Empleado: %s"+" %n", entry.getKey(), entry.getValue());
-//        });
-		ArrayList<Empleado> lista = new ArrayList<Empleado>(map.values());
-		for (Empleado e:lista)
-		{
-			System.out.println(e);
-		}
+		map.entrySet().forEach((entry) -> {
+            System.out.printf("- Empleado: %s %n", entry.getKey(), entry.getValue());
+        });
 	}
 	private static void ListarTreeMapOficinas(TreeMap<String,Oficina> map)
 	{
-//		map.entrySet().forEach((entry) -> {
-//            System.out.printf("Con Código: %s - Oficina: %s %n", entry.getKey(), entry.getValue());
-//        });
-		ArrayList<Oficina> lista = new ArrayList<Oficina>(map.values());
-		for (Oficina i:lista)
-		{
-			System.out.println(i);
-		}
+		map.entrySet().forEach((entry) -> {
+            System.out.printf("Con Código: %s - Oficina: %s %n", entry.getKey(), entry.getValue());
+        });
 	}
 	private static void ListarTreeMapClienteDNI(TreeMap<String,Cliente> map)
 	{
-//		map.entrySet().forEach((entry) -> {
-//            System.out.printf("- Cliente: %s %n", entry.getKey(), entry.getValue());
-//        });
-		ArrayList<Cliente> lista = new ArrayList<Cliente>(map.values());
-		for (Cliente a:lista)
-		{
-			System.out.println(a);
-		}
+		map.entrySet().forEach((entry) -> {
+            System.out.printf("- Cliente: %s %n", entry.getKey(), entry.getValue());
+        });
 	}
 	
 	private static void eliminaEmpleado(Empresa empresa, Scanner lector)

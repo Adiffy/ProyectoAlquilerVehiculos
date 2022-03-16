@@ -899,14 +899,9 @@ public class Menus {
 	}
 	private static void ListarTreeMapOficinas(TreeMap<String,Oficina> map)
 	{
-//		map.entrySet().forEach((entry) -> {
-//            System.out.printf("Con Código: %s - Oficina: %s %n", entry.getKey(), entry.getValue());
-//        });
-		ArrayList<Oficina> lista = new ArrayList<Oficina>(map.values());
-		for (Oficina i:lista)
-		{
-			System.out.println(i);
-		}
+		map.entrySet().forEach((entry) -> {
+            System.out.printf("Con Código: %s - Oficina: %s %n", entry.getKey(), entry.getValue());
+        });
 	}
 	private static void ListarTreeMapClienteDNI(TreeMap<String,Cliente> map)
 	{
