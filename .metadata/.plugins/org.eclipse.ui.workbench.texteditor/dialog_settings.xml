@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="Vehiculo"/>
+		<item key="selection" value=""/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="porDNI"/>
+			<item value="DNI"/>
+			<item value="lista"/>
+			<item value="nombre"/>
+			<item value="porNombre"/>
+			<item value="con DNI"/>
+			<item value="123S"/>
+			<item value="listar"/>
 			<item value="toString"/>
 			<item value="vehiculo"/>
 			<item value="moto"/>
 			<item value="listar oficinas"/>
 			<item value="listarOficinas"/>
-			<item value="con DNI"/>
-			<item value="listar"/>
 			<item value="alquileres"/>
 			<item value="listad"/>
-			<item value="alquiler"/>
-			<item value="oficina"/>
-			<item value="empleado"/>
-			<item value="setDni"/>
-			<item value="listar todos"/>
-			<item value="local"/>
 		</list>
 		<list key="replacehistory">
 		</list>
