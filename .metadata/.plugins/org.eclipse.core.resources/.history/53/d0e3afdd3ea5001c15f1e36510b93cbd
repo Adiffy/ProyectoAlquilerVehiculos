@@ -159,19 +159,13 @@ public class Menus {
 				Menus.editaAlquiler(empresa, lector);
 				break;
 			case "3":	//Eliminar alquiler
-				boolean bien = false;
-				do
+				Menus.listarAlquileres(empresa.getAlquileres());  //Listamos los alquileres existentes
+				String respuesta = PideDato.cadena("Código de alquiler a eliminar", lector);
+				if (empresa.getAlquileres().containsKey(respuesta))	//Si existe
 				{
-					Menus.listarAlquileres(empresa.getAlquileres());  //Listamos los alquileres existentes
-					String respuesta = PideDato.cadena("Código de alquiler a eliminar", lector);
-					
-					if (empresa.getAlquileres().containsKey(respuesta))	//Si existe
-					{
-						empresa.quitaAlquiler(empresa.getAlquileres().get(respuesta));	//La eliminamos
-						Serializar.grabaEmpresa(empresa);
-						bien = true;
-					}
-				}while(!bien);
+					empresa.quitaAlquiler(empresa.getAlquileres().get(respuesta));	//La eliminamos
+					Serializar.grabaEmpresa(empresa);
+				}
 				
 				break;
 			case "S":

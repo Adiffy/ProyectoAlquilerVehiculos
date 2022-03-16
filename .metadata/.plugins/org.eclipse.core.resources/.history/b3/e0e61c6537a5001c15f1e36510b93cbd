@@ -169,7 +169,6 @@ public class Alquiler implements Serializable {
 			this.setFechaInicioAlquiler(fechaInicioAlquiler);
 			this.setFechaPrevistaFinAlquiler(fechaPrevistaFinAlquiler);
 			this.setaAlquilar(aAlquilar);
-			aAlquilar.setAlquilado(true); //Cuando se construye un alquiler  
 //			this.setCliente(cliente);
 //			this.setEncargado(emple);
 		}

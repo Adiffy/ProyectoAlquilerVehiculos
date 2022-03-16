@@ -109,7 +109,7 @@ public class Alquiler implements Serializable {
 			return (GregorianCalendar) FechaPrevistaFinAlquiler.clone();
 		}
 		
-
+		@SuppressWarnings("static-access")
 		public void setFechaPrevistaFinAlquiler(GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
 //			LocalDate fin = LocalDate.of(fechaPrevistaFinAlquiler.YEAR, fechaPrevistaFinAlquiler.MONTH, fechaPrevistaFinAlquiler.DAY_OF_MONTH);
 //			LocalDate inicio = LocalDate.of(FechaInicioAlquiler.YEAR, FechaInicioAlquiler.MONTH, FechaInicioAlquiler.DAY_OF_MONTH);
@@ -169,7 +169,6 @@ public class Alquiler implements Serializable {
 			this.setFechaInicioAlquiler(fechaInicioAlquiler);
 			this.setFechaPrevistaFinAlquiler(fechaPrevistaFinAlquiler);
 			this.setaAlquilar(aAlquilar);
-			aAlquilar.setAlquilado(true); //Cuando se construye un alquiler  
 //			this.setCliente(cliente);
 //			this.setEncargado(emple);
 		}

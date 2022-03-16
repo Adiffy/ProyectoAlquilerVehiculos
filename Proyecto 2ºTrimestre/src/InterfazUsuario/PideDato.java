@@ -515,10 +515,15 @@ public class PideDato {
 		Vehiculo auto = null;
 		do
 		{
+			//Pasamos el TreeMap a un ArrayList
 			ArrayList<Vehiculo> lista = new ArrayList<Vehiculo>(empresa.getGaraje().values());
+			//Listamos los vehiculos disponibles
 			for (Vehiculo a:lista)
 			{
-				System.out.println(a);
+				if (!a.isAlquilado()) 	//Si NO está alquilado
+				{
+					System.out.println(a);
+				}
 			}
 			System.out.println("Matrícula del vehículo a alquilar");
 			Matricula vehiculo = PideDato.matricula( l);

@@ -25,7 +25,7 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 	private int kms; //Los kilómetros que tiene
 	private Categoria categoria;
 	 
-	//private boolean alquilado=false; //Por defecto NO está alquilado
+	private boolean alquilado=false; //Por defecto NO está alquilado
 	
 	
 	private Oficina Oficina;
@@ -126,7 +126,8 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 		this.categoria = creada;
 	}
 	public boolean isAlquilado() {
-		return esElectrico;
+		boolean si = this.alquilado; 
+		return si;
 		/*if ()
 		{
 			return true;
@@ -143,7 +144,7 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 	 * @param alquilado
 	 */
 	public void setAlquilado(boolean alquilado) {
-		// = alquilado;
+		this.alquilado = alquilado;
 	}
 	
 	
