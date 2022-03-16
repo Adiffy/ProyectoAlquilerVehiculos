@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.LongitudCadenaNoValidaException;
-import metodos.*;
 
 public abstract class Persona implements Comparable<Persona>, Serializable{
 
@@ -47,7 +46,7 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 		return apellido2;
 	}
 	public void setApellido2(String apellido2) throws LongitudCadenaNoValidaException {
-		if (apellido2.length()>=2 && apellido2.length()<=25) {
+		if (apellido2.length()>=0 && apellido2.length()<=25) {
 			this.apellido2 = apellido2;
 		}else {
 			throw new LongitudCadenaNoValidaException("El segundo apellido es demasiado largo");
@@ -57,11 +56,11 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 		return dni;
 	}
 	protected void setDni(String dni) throws CarnetRequeridoInvalidoException {
-		if(MetodoDni.DNIvalido(dni)) {
+//		if(MetodoDni.DNIvalido(dni)) {
 			this.dni=dni;
-		}else {
-			throw new CarnetRequeridoInvalidoException("DNI inválido");
-		}
+//		}else {
+//			throw new CarnetRequeridoInvalidoException("DNI inválido");
+//		}
 		
 	}
 	

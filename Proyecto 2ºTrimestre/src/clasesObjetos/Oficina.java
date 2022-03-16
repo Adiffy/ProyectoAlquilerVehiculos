@@ -5,7 +5,6 @@ import java.util.TreeMap;
 
 import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.LongitudCadenaNoValidaException;
-import metodos.Validadores;
 
 public class Oficina implements Serializable{
 
@@ -237,7 +236,7 @@ public class Oficina implements Serializable{
 		this.setDescripción(oficina.getDescripción());
 		this.setLocalidad(oficina.getLocalidad());
 		this.setProvincia(oficina.getProvincia());
-		this.setPersonal(oficina.getPersonal());
+//		this.setPersonal(oficina.getPersonal());
 		this.setUbicacion(oficina.getUbicacion());
 	}
 	
@@ -279,7 +278,7 @@ public class Oficina implements Serializable{
 		return copiaCod;
 	}
 	public void setCódigo(String code) {
-		if (Validadores.codigoValidado(code))
+//		if (Validadores.codigoValidado(code))
 		{
 			String cop = code;
 			Codigo = cop;

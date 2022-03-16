@@ -90,7 +90,7 @@ public class MetodoDni {
 	{
 		String dniDividido[]= new String[2];
 		dniDividido[0]=dniCompleto.substring(8);
-		dniDividido[1]=dniCompleto.substring(0,8);
+		dniDividido[1]=dniCompleto.substring(0,7);
 		return dniDividido;
 	}
 }

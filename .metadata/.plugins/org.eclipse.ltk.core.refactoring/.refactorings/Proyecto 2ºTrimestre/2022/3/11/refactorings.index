@@ -6,3 +6,6 @@
 1647334512969	Encapsulate field 'Categorias'
 1647355498345	Delete element
 1647362432761	Infer generic type arguments
+1647423332087	Encapsulate field 'cliente'
+1647423348633	Encapsulate field 'encargado'
+1647424586864	Encapsulate field 'aAlquilar'

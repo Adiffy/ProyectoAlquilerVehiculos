@@ -149,7 +149,7 @@ public class Menus {
 			switch (metodosMenu.Metodos.menu(opcione, opcValidas, "Gestión de alquileres", mensajeError, lector))
 			{
 			case "1"://crear un alquiler
-				Alquiler nuevo =  PideDato.alquiler(lector);	//lo pedimos
+				Alquiler nuevo =  PideDato.alquiler(empresa, lector);	//lo pedimos
 //				new Alquiler(new GregorianCalendar(1995,12,25),new GregorianCalendar(1995,12,25)); 
 				
 				empresa.nuevoAlquiler(nuevo);
@@ -159,7 +159,7 @@ public class Menus {
 				Menus.editaAlquiler(empresa, lector);
 				break;
 			case "3":	//Eliminar alquiler
-				Alquiler alquil = PideDato.alquiler(lector);
+				Alquiler alquil = PideDato.alquiler(empresa, lector);
 				empresa.quitaAlquiler(alquil);
 				break;
 			case "S":
@@ -305,7 +305,7 @@ public class Menus {
 		}while(!seVa);
 		
 	}
-	private static void listadoPersonas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
+	protected static void listadoPersonas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
 		String[] elecc = {"1.- Empleados","2.- Clientes","3.- Atrás (Salir)"};
 		String posib = "123";
@@ -338,8 +338,8 @@ public class Menus {
 	
 	private static void listadoVehiculos(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, PlantaNoValidaException
 	{
-		String[] elecc = {"1.- De combustión","2.- Eléctricos","3.- Atrás (Salir)"};
-		String posib = "1234";
+		String[] elecc = {"1.- De combustión","2.- Eléctricos","3.- Todos","S.- Atrás (Salir)"};
+		String posib = "123S";
 		String error = "Seleccione una opción de este conjunto:";
 		boolean sale = false;
 		
@@ -357,7 +357,7 @@ public class Menus {
 				ArrayList<Vehiculo> aMostrar = TreeMapToArrayList.Garaje(empresa.getGaraje());
 				listarVehiculos(aMostrar);
 				break;
-			case "4": //Salir 
+			case "S": //Salir 
 				sale = true;
 				break;
 			}
@@ -434,6 +434,7 @@ public class Menus {
 					for (Oficina a:ofi)
 					{
 						System.out.printf("Oficina: "+a.getCódigo()+" - "+a.getDescripción());
+						System.out.println(""); //Salto de linea
 					}
 					//Elige la clave
 					codigo = PideDato.cadena("Código de la oficina:", lector);
@@ -968,6 +969,7 @@ public class Menus {
 		{	//Imprimimos alquileres
 				
 			System.out.printf("Código: "+a.getCodigo()+" - Alquiler "+a);
+			System.out.println(""); //Salto de línea
 				
 			
 		}
@@ -996,7 +998,7 @@ public class Menus {
 	private static void creaMoto(Empresa empresa, Scanner lector) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
 	{
 		
-			Moto nueva = PideDato.moto(lector);
+			Moto nueva = PideDato.moto(empresa, lector);
 			empresa.addAlGaraje(nueva);	//Añadimos el vehículo
 			Serializar.grabaEmpresa(empresa);//Guardamos cambios
 		

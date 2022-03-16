@@ -19,6 +19,9 @@ public class Alquiler implements Serializable {
 		private GregorianCalendar FechaPrevistaFinAlquiler = new GregorianCalendar();
 		private GregorianCalendar FechaDevolucion = new GregorianCalendar();
 		
+//		private Cliente cliente;
+//		private Empleado encargado;
+		private Vehiculo aAlquilar;
 		private double PrecioAlquiler ;
 		
 		private Oficina OficinaRecogida;
@@ -26,6 +29,48 @@ public class Alquiler implements Serializable {
 		
 		//Getters & Setters
 		
+		/**
+		 * @return the aAlquilar
+		 */
+		public Vehiculo getaAlquilar() {
+			return aAlquilar;
+		}
+
+		/**
+		 * @param aAlquilar the aAlquilar to set
+		 */
+		public void setaAlquilar(Vehiculo aAlquilar) {
+			this.aAlquilar = aAlquilar;
+		}
+
+		/**
+		 * @return the encargado
+//		 */
+//		public Empleado getEncargado() {
+//			return encargado;
+//		}
+//
+//		/**
+//		 * @param encargado the encargado to set
+//		 */
+//		public void setEncargado(Empleado encargado) {
+//			this.encargado = encargado;
+//		}
+//
+//		/**
+//		 * @return the cliente
+//		 */
+//		public Cliente getCliente() {
+//			return cliente;
+//		}
+//
+//		/**
+//		 * @param cliente the cliente to set
+//		 */
+//		public void setCliente(Cliente cliente) {
+//			this.cliente = cliente;
+//		}
+
 		public String getCodigo() {
 			String copia = codigo;
 			return copia;
@@ -118,11 +163,14 @@ public class Alquiler implements Serializable {
 		
 		//Constructores
 		
-		public Alquiler(String codigo, GregorianCalendar fechaInicioAlquiler, GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
+		public Alquiler(Vehiculo aAlquilar, String codigo, GregorianCalendar fechaInicioAlquiler, GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
 			super();
 			this.setCodigo(codigo);
 			this.setFechaInicioAlquiler(fechaInicioAlquiler);
 			this.setFechaPrevistaFinAlquiler(fechaPrevistaFinAlquiler);
+			this.setaAlquilar(aAlquilar);
+//			this.setCliente(cliente);
+//			this.setEncargado(emple);
 		}
 		
 		//Metodos
@@ -146,5 +194,12 @@ public class Alquiler implements Serializable {
 			}else {
 				return false;
 			}
+		}
+		
+		@Override
+		public String toString()
+		{
+			return codigo+" - "+this.getPrecioAlquiler();
+			
 		}
 }

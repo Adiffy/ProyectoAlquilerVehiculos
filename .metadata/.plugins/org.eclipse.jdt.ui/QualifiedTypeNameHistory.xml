@@ -22,7 +22,6 @@
     <fullyQualifiedTypeName name="exceptions.CarnetRequeridoInvalidoException"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="metodosMenu.Metodos"/>
-    <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
     <fullyQualifiedTypeName name="exceptions.FechaNoValidaException"/>
     <fullyQualifiedTypeName name="exceptions.LongitudCadenaNoValidaException"/>
     <fullyQualifiedTypeName name="accesoADatos.Serializar"/>
@@ -30,4 +29,6 @@
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="InterfazUsuario.PideDato"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.TreeMap"/>
+    <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
 </qualifiedTypeNameHistroy>

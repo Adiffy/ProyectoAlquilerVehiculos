@@ -3,6 +3,7 @@ package InterfazUsuario;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import accesoADatos.Serializar;
 import clasesObjetos.Alquiler;
@@ -17,6 +18,7 @@ import clasesObjetos.Furgoneta;
 import clasesObjetos.Matricula;
 import clasesObjetos.Moto;
 import clasesObjetos.Oficina;
+import clasesObjetos.Vehiculo;
 import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.CilindradaNoValidaException;
 import exceptions.CodigoPostalException;
@@ -371,12 +373,13 @@ public class PideDato {
 		case "N","n":
 			deAeropuerto = false;
 		}
-		return new Oficina(codigo, Descripcion, ubi, Provincia, Localidad, deAeropuerto);
+		TreeMap<String,Empleado>personal = new TreeMap<String, Empleado>();
+		return new Oficina(codigo, Descripcion, ubi, personal, Localidad,Provincia, deAeropuerto);
 	}
 	public static Empleado empleado(Empresa empresa,Scanner l) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CarnetRequeridoInvalidoException
 	{
 		GregorianCalendar fechaAlta;
-		Oficina trabajo;	//Oficina en la que trabaja
+//		Oficina trabajo;	//Oficina en la que trabaja
 		
 		String nombre;
 		String ap1;
@@ -404,10 +407,10 @@ public class PideDato {
 		}while (!bien);
 		
 		
-			trabajo = empresa.getOficinas().get(elegida);//Metemos la oficina correspondiente
+//			trabajo = empresa.getOficinas().get(elegida);//Metemos la oficina correspondiente
 		fechaAlta = PideDato.fecha("Fecha de alta del trabajador:", l);
 		
-		Empleado nuevo = new Empleado(nombre, ap1, ap2, dni,fechaAlta, trabajo);
+		Empleado nuevo = new Empleado(nombre, ap1, ap2, dni,fechaAlta);
 		empresa.getOficinas().get(elegida).addEmpleado(nuevo);
 		Serializar.grabaEmpresa(empresa);
 		return nuevo;
@@ -495,11 +498,12 @@ public class PideDato {
 		
 		
 	}
-	public static Alquiler alquiler(Scanner l) throws FechaNoValidaException
+	public static Alquiler alquiler(Empresa empresa, Scanner l) throws FechaNoValidaException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
 	{
 		GregorianCalendar inicio;
 		GregorianCalendar fin;
 		String cod;
+		boolean sale = false;
 		
 		Metodos.pintaSubrayado("Datos de alquiler");
 	
@@ -508,7 +512,30 @@ public class PideDato {
 		inicio = PideDato.fecha("Fecha inicio", l);
 		fin = PideDato.fecha("Fecha final prevista", l);
 		
-		return new Alquiler(cod, inicio,fin);
+		Vehiculo auto = null;
+		do
+		{
+			ArrayList<Vehiculo> lista = new ArrayList<Vehiculo>(empresa.getGaraje().values());
+			for (Vehiculo a:lista)
+			{
+				System.out.println(a);
+			}
+			System.out.println("Matrícula del vehículo a alquilar");
+			Matricula vehiculo = PideDato.matricula( l);
+			if (empresa.getGaraje().get(vehiculo) != null)
+			{
+				auto = empresa.getGaraje().get(vehiculo);
+				
+				sale = true;
+			}
+		}while(!sale);
+		
+		
+//		System.out.println("Empleado:");
+//		Menus.listadoPersonas(empresa, l);
+
+		
+		return new Alquiler(auto,cod, inicio,fin);
 	}
 	
 	public static CocheElectrico cocheElectrico(Empresa empresa,Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TiempoRecargaNoValidoException, TipoNoValidoException 
@@ -577,7 +604,7 @@ public class PideDato {
 		
 	}
 	
-	public static Moto moto(Scanner l) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
+	public static Moto moto(Empresa empresa, Scanner l) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
 	{
 		int cilindrada;
 		String carnet; //Carnet requerido (AM/A1/A2)
@@ -595,7 +622,7 @@ public class PideDato {
 		String model = PideDato.cadena("Modelo de la moto", "Longitud no válida", 0, 25, l);
 		Categoria cat = null;
 		
-			cat = PideDato.categoria(null, l);
+			cat = PideDato.categoria(empresa, l);
 		
 		String color = PideDato.cadena("Color:", l);
 		GregorianCalendar fechaAlta = PideDato.fecha("Fecha de alta del vehículo", l);
