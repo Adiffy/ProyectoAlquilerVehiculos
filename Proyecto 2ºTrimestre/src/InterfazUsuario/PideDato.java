@@ -535,6 +535,12 @@ public class PideDato {
 			}
 		}while(!sale);
 		
+		boolean seVa = false;
+		
+		do
+		{
+			
+		}while (!seVa);
 		
 //		System.out.println("Empleado:");
 //		Menus.listadoPersonas(empresa, l);

@@ -27,8 +27,6 @@ public class Alquiler implements Serializable {
 		private Oficina OficinaRecogida;
 		private Oficina OficinaEntrega;
 		
-		private Vehiculo coche;
-		
 		//Getters & Setters
 		
 		/**
@@ -162,23 +160,16 @@ public class Alquiler implements Serializable {
 			}
 			
 		}
-		public void setAlquilado(Vehiculo aAlquilar,boolean si)
-		{
-			this.aAlquilar = aAlquilar;
-			aAlquilar.setAlquilado(si);
-		}
 		
 		//Constructores
 		
-		public Alquiler(Vehiculo aAlquilar, String codigo, GregorianCalendar fechaInicioAlquiler, GregorianCalendar fechaPrevistaFinAlquiler, Oficina OficinaRecogida, Oficina OficinaEntrega) throws FechaNoValidaException {
+		public Alquiler(Vehiculo aAlquilar, String codigo, GregorianCalendar fechaInicioAlquiler, GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
 			super();
 			this.setCodigo(codigo);
 			this.setFechaInicioAlquiler(fechaInicioAlquiler);
 			this.setFechaPrevistaFinAlquiler(fechaPrevistaFinAlquiler);
 			this.setaAlquilar(aAlquilar);
-			this.setOficinaRecogida(OficinaRecogida);
-			this.setOficinaEntrega(OficinaEntrega);
-			this.setAlquilado(aAlquilar, true); //Cuando se construye un alquiler el vehículo es alquilado
+			aAlquilar.setAlquilado(true); //Cuando se construye un alquiler  
 //			this.setCliente(cliente);
 //			this.setEncargado(emple);
 		}

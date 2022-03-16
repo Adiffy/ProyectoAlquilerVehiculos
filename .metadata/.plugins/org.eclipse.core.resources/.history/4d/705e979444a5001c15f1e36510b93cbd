@@ -266,7 +266,7 @@ public class Menus {
 				
 				GregorianCalendar nuevaFecha = PideDato.fecha("Fecha de devolución", lector);
 				empresa.getAlquileres().get(contesta).setFechaDevolucion(nuevaFecha);	//Set Fecha
-				empresa.getAlquileres().get(contesta).setAlquilado(empresa.getAlquileres().get(respuesta), false); //Deja de estar alquilado
+				empresa.getAlquileres().get(contesta).setAlquilado(null, false); //Deja de estar alquilado
 				Serializar.grabaEmpresa(empresa);
 				break;
 			case "S":
