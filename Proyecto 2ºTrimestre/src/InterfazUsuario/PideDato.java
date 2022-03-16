@@ -513,6 +513,22 @@ public class PideDato {
 		fin = PideDato.fecha("Fecha final prevista", l);
 		
 		Vehiculo auto = null;
+		boolean seVa = false;
+		String contesta;
+		Oficina ofi = null;
+		
+		do		//Primero pedimos las oficinas y luego listamos los vehículos en esas oficinas
+		{
+			//Listamos las oficinas
+			Menus.ListadoOficinas(empresa, l);
+			contesta = PideDato.cadena("Oficina donde se recogerá el vehículo", l);
+			if (empresa.getOficinas().get(contesta) != null)
+			{
+				ofi = empresa.getOficinas().get(contesta);
+				seVa = true;
+			}
+		}while (!seVa);
+		
 		do
 		{
 			//Pasamos el TreeMap a un ArrayList
@@ -522,7 +538,10 @@ public class PideDato {
 			{
 				if (!a.isAlquilado()) 	//Si NO está alquilado
 				{
-					System.out.println(a);
+					if (a.getOficina()==empresa.getOficinas().get(contesta))	//Si esta en la oficina elegida
+					{
+						System.out.println(a);
+					}		
 				}
 			}
 			System.out.println("Matrícula del vehículo a alquilar");
@@ -535,18 +554,26 @@ public class PideDato {
 			}
 		}while(!sale);
 		
-		boolean seVa = false;
-		
+		//Oficina donde se devuelve
+		boolean adios = false;
+		Oficina ofi2 = null;
 		do
 		{
-			
-		}while (!seVa);
+			//Listamos las oficinas 
+			Menus.ListadoOficinas(empresa, l);
+			contesta = PideDato.cadena("Oficina donde se devolverá el vehículo", l);	//Reutilizamos la variable contesta
+			if (empresa.getOficinas().get(contesta) != null)
+			{
+				ofi2 = empresa.getOficinas().get(contesta);
+				adios = true;
+			}
+		}while(!adios);
 		
 //		System.out.println("Empleado:");
 //		Menus.listadoPersonas(empresa, l);
 
 		
-		return new Alquiler(auto,cod, inicio,fin);
+		return new Alquiler(auto,cod, inicio,fin,ofi,ofi2);
 	}
 	
 	public static CocheElectrico cocheElectrico(Empresa empresa,Scanner l) throws RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TiempoRecargaNoValidoException, TipoNoValidoException 

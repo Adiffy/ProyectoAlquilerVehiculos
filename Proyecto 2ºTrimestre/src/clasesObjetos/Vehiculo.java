@@ -149,15 +149,16 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 	
 	
 	//Constructores
-	public Vehiculo(Matricula matricula,String marca, String modelo, String color) {
+	public Vehiculo(Matricula matricula,String marca, String modelo, String color, Oficina oficina) {
 		super();
 		this.setMarca(marca);
 		this.setModelo(modelo);
 		this.setColor(color);
 		this.setMatricula(matricula);
+		this.setOficina(oficina);
 	}
 	
-	public Vehiculo(Matricula matricula, String marca, String modelo, String color,GregorianCalendar fecha_alta ) {
+	public Vehiculo(Matricula matricula, String marca, String modelo, String color,GregorianCalendar fecha_alta,Oficina oficina ) {
 		super();	
 
 		this.setMarca(marca);
@@ -165,6 +166,7 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 		this.setColor(color);
 		this.setFechaAlta(fecha_alta);
 		this.setMatricula(matricula);
+		this.setOficina(oficina);
 	}
 	/**
 	 * Constructor de copia para vehículo
@@ -188,12 +190,12 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 	
 	
 	
-	public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categoria, String color,  Direccion oficina, int num_km) {
+	public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categoria, String color,  Oficina oficina, int num_km) {
 	
 		this.setMatricula(matricula);
 		this.setMarca(marca);
 		this.setModelo(modelo);
-		
+		this.setOficina(oficina);
 		this.setColor(color);
 		this.setCategoria(categoria);
 		//this.setUbi(oficina);
@@ -241,6 +243,7 @@ public Vehiculo(Matricula matricula, String marca, String modelo, Categoria cate
 	this.setMatricula(matricula);
 	this.setMarca(marca);
 	this.setModelo(modelo);
+	this.setOficina(Oficina);
 
 	this.setColor(color);
 	this.setCategoria(categoria);

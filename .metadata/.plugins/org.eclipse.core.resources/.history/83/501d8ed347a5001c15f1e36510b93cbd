@@ -87,10 +87,6 @@ public class Alquiler implements Serializable {
 //			this.cliente = cliente;
 //		}
 
-		/**
-		 * 
-		 * @return El código alfanumérico del alquiler
-		 */
 		public String getCodigo() {
 			String copia = codigo;
 			return copia;

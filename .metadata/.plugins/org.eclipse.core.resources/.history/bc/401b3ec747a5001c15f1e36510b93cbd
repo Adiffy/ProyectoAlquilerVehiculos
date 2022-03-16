@@ -81,16 +81,12 @@ public class Alquiler implements Serializable {
 //		}
 //
 //		/**
-//		 * @param cliente el cliente que alquila
+//		 * @param cliente the cliente to set
 //		 */
 //		public void setCliente(Cliente cliente) {
 //			this.cliente = cliente;
 //		}
 
-		/**
-		 * 
-		 * @return El código alfanumérico del alquiler
-		 */
 		public String getCodigo() {
 			String copia = codigo;
 			return copia;

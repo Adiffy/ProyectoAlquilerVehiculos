@@ -74,23 +74,19 @@ public class Alquiler implements Serializable {
 //		}
 //
 //		/**
-//		 * @return el cliente
+//		 * @return elk cliente
 //		 */
 //		public Cliente getCliente() {
 //			return cliente;
 //		}
 //
 //		/**
-//		 * @param cliente el cliente que alquila
+//		 * @param cliente the cliente to set
 //		 */
 //		public void setCliente(Cliente cliente) {
 //			this.cliente = cliente;
 //		}
 
-		/**
-		 * 
-		 * @return El código alfanumérico del alquiler
-		 */
 		public String getCodigo() {
 			String copia = codigo;
 			return copia;

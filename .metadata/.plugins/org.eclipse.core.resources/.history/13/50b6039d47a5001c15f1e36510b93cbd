@@ -32,65 +32,47 @@ public class Alquiler implements Serializable {
 		//Getters & Setters
 		
 		/**
-		 * @return el coche
-		 */
-		public Vehiculo getCoche() {
-			return coche;
-		}
-
-		/**
-		 * @param coche el coche a settear
-		 */
-		public void setCoche(Vehiculo coche) {
-			this.coche = coche;
-		}
-
-		/**
-		 * @return el vehículo aAlquilar
+		 * @return the aAlquilar
 		 */
 		public Vehiculo getaAlquilar() {
 			return aAlquilar;
 		}
 
 		/**
-		 * @param aAlquilar el Vehículo del alquiler
+		 * @param aAlquilar the aAlquilar to set
 		 */
 		public void setaAlquilar(Vehiculo aAlquilar) {
 			this.aAlquilar = aAlquilar;
 		}
 
 		/**
-		 * @return el encargado
+		 * @return the encargado
 //		 */
 //		public Empleado getEncargado() {
 //			return encargado;
 //		}
 //
 //		/**
-//		 * @param encargado el empleado encargado adjunto al alquiler
+//		 * @param encargado the encargado to set
 //		 */
 //		public void setEncargado(Empleado encargado) {
 //			this.encargado = encargado;
 //		}
 //
 //		/**
-//		 * @return el cliente
+//		 * @return the cliente
 //		 */
 //		public Cliente getCliente() {
 //			return cliente;
 //		}
 //
 //		/**
-//		 * @param cliente el cliente que alquila
+//		 * @param cliente the cliente to set
 //		 */
 //		public void setCliente(Cliente cliente) {
 //			this.cliente = cliente;
 //		}
 
-		/**
-		 * 
-		 * @return El código alfanumérico del alquiler
-		 */
 		public String getCodigo() {
 			String copia = codigo;
 			return copia;
