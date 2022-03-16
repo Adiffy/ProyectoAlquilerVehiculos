@@ -339,13 +339,13 @@ public class Menus {
 	private static void listadoVehiculos(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, PlantaNoValidaException
 	{
 		String[] elecc = {"1.- De combustión","2.- Eléctricos","3.- Todos","S.- Atrás (Salir)"};
-		
+		String posib = "123S";
 		String error = "Seleccione una opción de este conjunto:";
 		boolean sale = false;
 		
 		do
 		{
-			switch (metodosMenu.Metodos.menu(elecc, Menus.opcValidas, "TIPOS DE VEHÍCULOS A LISTAR", error, lector))
+			switch (metodosMenu.Metodos.menu(elecc, posib, "TIPOS DE VEHÍCULOS A LISTAR", error, lector))
 			{
 			case "1":	//De combustión
 				Menus.listaCombustion(empresa, lector);
