@@ -379,7 +379,7 @@ public class Menus {
 	}
 	private static void listaCombustion(Empresa empresa, Scanner lector) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException
 	{
-		String[] posibilidades = {"1.- Listar coches","2.- Listar Furgonetas","3.- Listar todos los vehículos de combustión","S.- Volver atrás"};
+		String[] posibilidades = {"1.- Listar  s","2.- Listar Furgonetas","3.- Listar todos los vehículos de combustión","S.- Volver atrás"};
 		boolean sale = false;
 		
 		do
@@ -389,7 +389,6 @@ public class Menus {
 			case "1":	//Sólo coches
 				ArrayList<DeCombustion> cocheraCoches = TreeMapToArrayList.CocheCombustion(empresa.getGaraje());
 				//Listamos
-				
 				for (Vehiculo a:cocheraCoches)
 				{
 					System.out.println(a);
