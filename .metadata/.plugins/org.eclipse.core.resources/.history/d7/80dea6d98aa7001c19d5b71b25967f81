@@ -9,11 +9,9 @@ import clasesObjetos.CocheElectrico;
 import clasesObjetos.DeCombustion;
 import clasesObjetos.Electrico;
 import clasesObjetos.Empleado;
-import clasesObjetos.Empresa;
 import clasesObjetos.Matricula;
 import clasesObjetos.Moto;
 import clasesObjetos.Oficina;
-import clasesObjetos.Persona;
 import clasesObjetos.Vehiculo;
 
 public class TreeMapToArrayList {
@@ -22,22 +20,6 @@ public class TreeMapToArrayList {
 	public static ArrayList<Vehiculo> Garaje(TreeMap<Matricula,Vehiculo> treemap) {
 		
 		ArrayList<Vehiculo> lista = new ArrayList<Vehiculo>(treemap.values());
-		return lista;
-	}
-	public static ArrayList<Persona> Personas(Empresa empresa)
-	{
-		ArrayList<Persona> lista = new ArrayList<Persona>();	//Creamos el ArrayList a devolver
-		
-		//Metemos todos los empleados
-		for (Persona a:Empleados(empresa.getEmpleados()))
-		{
-			lista.add(a);
-		}
-		//Metemos todos los clientes
-		for (Persona a:Clientes(empresa.getClientes()))
-		{
-			lista.add(a);
-		}
 		return lista;
 	}
 	public static ArrayList<Empleado> Empleados(TreeMap<String,Empleado> treemap) {

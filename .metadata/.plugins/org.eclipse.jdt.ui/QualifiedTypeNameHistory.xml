@@ -28,7 +28,9 @@
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="InterfazUsuario.PideDato"/>
     <fullyQualifiedTypeName name="java.util.TreeMap"/>
+    <fullyQualifiedTypeName name="InterfazUsuario.Menus"/>
     <fullyQualifiedTypeName name="metodos.TreeMapToArrayList"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="InterfazUsuario.Menus"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Persona"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Empresa"/>
 </qualifiedTypeNameHistroy>

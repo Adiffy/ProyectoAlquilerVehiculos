@@ -17,6 +17,7 @@ import clasesObjetos.Furgoneta;
 import clasesObjetos.Matricula;
 import clasesObjetos.Moto;
 import clasesObjetos.Oficina;
+import clasesObjetos.Persona;
 import clasesObjetos.Vehiculo;
 import comparadores.ComparaVehiculoPorCategoria;
 import exceptions.CarnetRequeridoInvalidoException;
@@ -50,7 +51,7 @@ public class Menus {
 	public static void principal(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, FechaNoValidaException
 	{
 		
-		String[] opciones = {"1.- Ficheros maestros", "2.- Gestión de oficinas", "3.- Mostrar listados", "S.- Salir"};
+		String[] opciones = {"1.- Configuración general", "2.- Gestión de oficinas", "3.- Mostrar listados", "S.- Salir"};
 		
 		
 		boolean noSale = true; //buleano para el bucle 
@@ -71,58 +72,30 @@ public class Menus {
 			case "S": //SALIR DE VERDAD
 				BarraDeCarga.pintar();
 				noSale = false;
-				break;
+				break;	
 			}
 		}while(noSale);
 	}
 	
 	private static void ficherosMaestros(Empresa empresa, Scanner lector) throws TipoNoValidoException, TiempoRecargaNoValidoException, LicenciaNoValidaException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException, FechaNoValidaException 
 	{
-		String[] opciones = {"1.- Configurar garaje", "2.- Gestionar clientes", "3.- Mostrar listados", "4.- Configurar oficinas", "5.- Gestionar alquileres","S.- Salir"};
-		String opcValidas = "12345S";
+		String[] opciones = {"1.- Configurar garaje", "2.- Gestionar clientes", "3.- Configurar oficinas", "4.- Gestionar alquileres","S.- Salir"};
+		String opcValidas = "1234S";
 			boolean sale= false ;
 		do 
 		{
-			switch (metodosMenu.Metodos.menu(opciones, opcValidas, "Ficheros maestros", menError, lector))
+			switch (metodosMenu.Metodos.menu(opciones, opcValidas, "Configuración general", menError, lector))
 			{
 			case "1":
-				String[] opc = {"1.- Añadir / eliminar vehículos a la flota","2.- Añadir categorías", "3.- Modificar listado de empleados", "4.- Modificar listado de oficinas","S.- Salir"};
-				String OPC = "1234S";
-				boolean salir = false;
-				do
-				{
-					switch (metodosMenu.Metodos.menu(opc, OPC, "Gestión de ficheros maestros", menError, lector))
-					{
-					case "1":
-						Menus.flotaVehicular(empresa, lector);
-						break;
-					case "2":
-						Menus.categorias(empresa, lector);
-						break;
-					case "3":
-						Menus.MenuListados(empresa, lector);
-						break;
-					case "4":
-						Menus.MenuOficinas(empresa, lector);
-						break;
-					case "S":
-						salir = true;
-						break;
-					}
-				}while (!salir);
-				
+				modificaGaraje(empresa,lector);
 				break;
-				
 			case "2":
 				Menus.clientes(empresa, lector);
 				break;
 			case "3":
-				Menus.MenuListados(empresa, lector);
+				Menus.oficinas(empresa, lector);
 				break;
 			case "4":
-				Menus.MenuEmpleado(empresa, lector);
-				break;
-			case "5":
 				Menus.alquileres(empresa, lector);
 				break;
 			case "S":
@@ -131,6 +104,27 @@ public class Menus {
 			}
 		}while(!sale);
 		
+	}
+	private static void modificaGaraje(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, PlantaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException, TiempoRecargaNoValidoException, CilindradaNoValidaException, CarnetRequeridoInvalidoException
+	{
+		String[] opc = {"1.- Añadir / eliminar vehículos a la flota","2.- Añadir categorías", "S.- Salir"};
+		String OPC = "12S";
+		boolean salir = false;
+		do
+		{
+			switch (metodosMenu.Metodos.menu(opc, OPC, "Gestión de la flota de vehículos", menError, lector))
+			{
+			case "1":
+				Menus.flotaVehicular(empresa, lector);
+				break;
+			case "2":
+				Menus.categorias(empresa, lector);
+				break;
+			case "S":
+				salir = true;
+				break;
+			}
+		}while (!salir);
 	}
 	private static void categorias(Empresa empresa, Scanner lector) throws RecargoNoValidoException
 	{
@@ -296,12 +290,13 @@ public class Menus {
 	}
 	private static void MenuListados(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, PlantaNoValidaException, TipoNoValidoException, EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, NumPlazasNoValidoException
 	{
-		String[] list = {"1.- Listar vehículos","2.- Listar Personas", "3.- Listar Oficinas","S.- Salir"};
+		String[] list = {"1.- Listar vehículos","2.- Listar Personas", "3.- Listar Oficinas","4.- Listar Alquileres","S.- Salir"};
+		String validas = "1234S";
 		boolean seVa = false;
 		
 		do 
 		{
-			switch (metodosMenu.Metodos.menu(list, opcValidas, "LISTADOS",mensaje, lector))
+			switch (metodosMenu.Metodos.menu(list, validas, "LISTADOS",mensaje, lector))
 			{
 			case "1": 	//Vehiculos
 				Menus.listadoVehiculos(empresa, lector);
@@ -312,6 +307,9 @@ public class Menus {
 			case "3":	//Oficinas
 				Menus.listadoOficinas(empresa, lector);
 				break;
+			case "4":
+				Menus.listarAlquileres(empresa.getAlquileres()); 	//Listamos los alquileres 
+				break;
 			case "S": //Salir
 				seVa = true;
 				break;
@@ -321,7 +319,7 @@ public class Menus {
 	}
 	protected static void listadoPersonas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException
 	{
-		String[] elecc = {"1.- Empleados","2.- Clientes","3.- Atrás (Salir)"};
+		String[] elecc = {"1.- Empleados","2.- Clientes","3.- Todas las personas","S.- Atrás (Salir)"};
 		String posib = "123";
 		String error = "Seleccione una opción de este conjunto:";
 		boolean sale = false;
@@ -336,7 +334,14 @@ public class Menus {
 			case "2":	//Clientes
 				Menus.listadoPersonasPor(empresa, "Clientes", lector);
 				break;
-			case "3": //Salir 
+			case "3":	//Todas las personas
+				ArrayList<Persona> lista = TreeMapToArrayList.Personas(empresa);	//Obtenemos el ArrayList con todas las personas
+				for (Persona a:lista)	//Listamos
+				{
+					System.out.println(a);
+				}
+				break;
+			case "S": //Salir 
 				break;
 			}
 		}while(!sale);
@@ -877,7 +882,7 @@ public class Menus {
 	
 	private static void oficinas(Empresa empresa, Scanner lector) throws LicenciaNoValidaException, LongitudNoValidaException, PlantaNoValidaException, CodigoPostalException, LongitudCadenaNoValidaException, CarnetRequeridoInvalidoException
 	{
-		String[] opcioness = {"A.- Empleados", "B.- Oficinas", "S.- Salir"};
+		String[] opcioness = {"A.- Oficinas", "B.- Empleados", "S.- Salir"};
 		String Validas = "ABS";
 		boolean sale = false;
 		
@@ -885,11 +890,11 @@ public class Menus {
 		{
 			switch (metodosMenu.Metodos.menu(opcioness, Validas, "GESTIÓN DE OFICINAS",errorLetras, lector))
 			{
-			case "A","a":	//Añadir o eliminar empleados
-				Menus.MenuEmpleado(empresa,lector);
-				break;
-			case "B","b":	//Añadir o eliminar oficinas
+			case "A","a":	//Añadir o eliminar oficinas
 				Menus.MenuOficinas(empresa, lector);
+				break;
+			case "B","b":	//Añadir o eliminar empleados
+				Menus.MenuEmpleado(empresa,lector);
 				break;
 			case "S","s": //SALIR
 				sale = true;
