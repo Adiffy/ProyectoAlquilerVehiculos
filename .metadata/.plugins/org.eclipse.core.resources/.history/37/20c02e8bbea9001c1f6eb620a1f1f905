@@ -1,0 +1,20 @@
+package accesoADatos;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class EmpresaDB {
+
+	static String cadenaConexion = "";
+	static Connection conn;
+	
+	public static void abreConexion()
+	{
+		try {
+			conn = DriverManager.getConnection(cadenaConexion, "Victor", "1234");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}

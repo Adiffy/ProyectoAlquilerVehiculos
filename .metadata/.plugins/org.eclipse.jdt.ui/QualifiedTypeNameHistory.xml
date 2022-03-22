@@ -33,4 +33,6 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="clasesObjetos.Persona"/>
     <fullyQualifiedTypeName name="clasesObjetos.Empresa"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
 </qualifiedTypeNameHistroy>
