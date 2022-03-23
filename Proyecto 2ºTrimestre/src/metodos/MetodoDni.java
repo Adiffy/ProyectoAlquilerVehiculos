@@ -18,22 +18,22 @@ public class MetodoDni {
 	public static boolean DNIvalido(String dnicompleto)
 	{
 		//Variables
-		boolean valido=false;
+		boolean valido=false;	//A priori el DNI no es válido
 		String numeros;
-		String[] dniDiv = new String[2];
+		String[] dniDiv = new String[2];	//El dni dividido
 		int num;
 		String letra;
 		
 		//Dividimos el dni en numeros y letra
 		dniDiv=divideDNI(dnicompleto);
-		numeros=dniDiv[0];
-		letra=dniDiv[1];
+		letra=dniDiv[0];
+		numeros=dniDiv[1];
 		num=Integer.parseInt(numeros); //Pasamos de String a numero
 		
 		//Comprobamos que la letra es la correcta 
 		if (letra.compareToIgnoreCase(CalculaLetra(num))==0)
 		{
-			valido=true;
+			valido=true;	//Cambiamos el valor a true
 		}
 		return valido;
 	} 
@@ -89,8 +89,8 @@ public class MetodoDni {
 	private static String[] divideDNI(String dniCompleto)
 	{
 		String dniDividido[]= new String[2];
-		dniDividido[0]=dniCompleto.substring(8);
-		dniDividido[1]=dniCompleto.substring(0,7);
+		dniDividido[0]=dniCompleto.substring(8);	//letra
+		dniDividido[1]=dniCompleto.substring(0,8);	//numeros
 		return dniDividido;
 	}
 }
