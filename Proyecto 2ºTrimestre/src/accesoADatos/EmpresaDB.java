@@ -71,4 +71,20 @@ public class EmpresaDB {
 		orden.close();		//Cerramos el Statement para liberar recursos
 		return resultado;
 	}
+	public static ArrayList<Double> selectDouble(String Instruccionsql, String columna) throws SQLException
+	{
+		Statement orden;
+		ArrayList<Double> resultado = new ArrayList<Double>();
+		orden = conn.createStatement();
+		ResultSet resultados = orden.executeQuery(Instruccionsql);
+		
+		while (resultados.next())
+		{
+			//Lo añadimos al ArrayList
+			resultado.add(resultados.getDouble(columna));
+		}
+		
+		orden.close();		//Cerramos el Statement para liberar recursos
+		return resultado;
+	}
 }
