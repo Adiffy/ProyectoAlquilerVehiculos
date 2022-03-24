@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class EmpresaDB {
 
 	//Propiedades estáticas
-	static String cadenaConexion = "jdbc:oracle:thin:@localhost:1521/Alquileres";
+	static String cadenaConexion = "jdbc:oracle:thin:@localhost:1521:xe";
 	static Connection conn;
 	
 	/**
@@ -21,4 +21,5 @@ public class EmpresaDB {
 			e.printStackTrace();
 		}
 	}
+	
 }

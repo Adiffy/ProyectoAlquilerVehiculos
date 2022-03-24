@@ -19,7 +19,6 @@ public class Principall {
 				System.out.println(a);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
