@@ -16,7 +16,7 @@ public class Acceso {
 	public static void abreConexion()
 	{
 		
-		try {
+		try {	//Creamos la conexión con la base de datos
 			conn = DriverManager.getConnection(cadenaConexion, "Victor", "1234");
 		} catch (SQLException e) {
 			e.printStackTrace();

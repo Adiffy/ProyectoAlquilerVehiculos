@@ -3,6 +3,7 @@ package principal;
 import java.util.Scanner;
 
 import InterfazUsuario.Menus;
+import accesoADatos.EmpresaDB;
 import accesoADatos.Serializar;
 import clasesObjetos.Empresa;
 import exceptions.CarnetRequeridoInvalidoException;
@@ -30,8 +31,7 @@ public class Principal {
 		
 		
 		Empresa empresa = Serializar.LeeEmpresa();	//intenta leer y si no puede crea la empresa
-		
-//			Empresa empresa = new Empresa();	//Creamos una empresa
+		EmpresaDB.abreConexion();	//Creamos una conexión con la BASE DE DATOS
 		
 		Scanner lector = new Scanner(System.in);
 	
