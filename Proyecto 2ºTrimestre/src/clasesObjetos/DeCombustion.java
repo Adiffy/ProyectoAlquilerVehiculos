@@ -53,7 +53,7 @@ public abstract class DeCombustion extends Vehiculo {
 	}
 
 	public void setEmisiones(String emisiones) throws EmisionesNoValidasException {
-		if (emisiones.equals("A") || emisiones.equals("B") || emisiones.equals("C"))
+		if (emisiones.compareToIgnoreCase("A")==0 || emisiones.compareToIgnoreCase("B")==0 || emisiones.compareToIgnoreCase("C")==0)
 		{
 			this.emisiones = emisiones;
 		} else {
