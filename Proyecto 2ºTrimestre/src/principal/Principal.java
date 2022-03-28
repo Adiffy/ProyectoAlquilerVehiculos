@@ -51,7 +51,7 @@ public class Principal {
 		{
 			System.out.println("ERROR | Contenido de la lista nulo");
 			a.printStackTrace();
-//			a.getLocalizedMessage();
+//			sysout(a.getLocalizedMessage());
 		}
 		
 		
