@@ -97,6 +97,7 @@ public class VentanaPrincipal extends JFrame {
 		PanelContenedor.add(btnRestar);
 		
 		JButton btnIgual = new JButton("=");
+		btnIgual.setToolTipText("Realiza la operaci\u00F3n");
 		btnIgual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Cuando se pulsa el igual	
