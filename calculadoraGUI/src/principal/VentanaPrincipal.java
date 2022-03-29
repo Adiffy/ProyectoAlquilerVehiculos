@@ -54,7 +54,7 @@ public class VentanaPrincipal extends JFrame {
 		PanelContenedor.setLayout(null);
 		
 		textField = new JTextField();
-		textField.setBounds(65, 11, 172, 20);
+		textField.setBounds(65, 11, 184, 20);
 		PanelContenedor.add(textField);
 		textField.setColumns(10);
 		
@@ -69,7 +69,7 @@ public class VentanaPrincipal extends JFrame {
 				operador = 1;
 			}
 		});
-		btnSuma.setBounds(248, 66, 42, 34);
+		btnSuma.setBounds(207, 66, 42, 34);
 		PanelContenedor.add(btnSuma);
 		
 		JButton btnDivide = new JButton(":");
@@ -93,7 +93,7 @@ public class VentanaPrincipal extends JFrame {
 				operador=2;
 			}
 		});
-		btnRestar.setBounds(248, 42, 42, 23);
+		btnRestar.setBounds(259, 42, 42, 23);
 		PanelContenedor.add(btnRestar);
 		
 		JButton btnIgual = new JButton("=");
@@ -122,7 +122,7 @@ public class VentanaPrincipal extends JFrame {
 				
 			}
 		});
-		btnIgual.setBounds(248, 101, 42, 42);
+		btnIgual.setBounds(259, 66, 42, 77);
 		PanelContenedor.add(btnIgual);
 		
 		JButton btnUNO = new JButton("1");
@@ -235,7 +235,7 @@ public class VentanaPrincipal extends JFrame {
 				operador = 3;
 			}
 		});
-		btnMultiplicar.setBounds(207, 66, 42, 34);
+		btnMultiplicar.setBounds(207, 101, 42, 42);
 		PanelContenedor.add(btnMultiplicar);
 		
 		JButton btnBorrar = new JButton("C");
@@ -244,7 +244,7 @@ public class VentanaPrincipal extends JFrame {
 				textField.setText(""); 		//Lo vaciamos
 			}
 		});
-		btnBorrar.setBounds(248, 6, 42, 31);
+		btnBorrar.setBounds(259, 6, 42, 31);
 		PanelContenedor.add(btnBorrar);
 	}
 }
