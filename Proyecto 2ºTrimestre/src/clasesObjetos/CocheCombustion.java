@@ -9,6 +9,7 @@ import exceptions.EmisionesNoValidasException;
 import exceptions.NumPlazasNoValidoException;
 import exceptions.PotenciaNoValidaException;
 import exceptions.TipoNoValidoException;
+import metodos.Validadores;
 
 
 public final class CocheCombustion extends DeCombustion implements Coche, Serializable{
@@ -37,7 +38,7 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 	}
 	public void setTipo(String Tipo) throws TipoNoValidoException
 	{
-		if (Tipo.equalsIgnoreCase("deportivo")||Tipo.equalsIgnoreCase("familiar")||Tipo.equalsIgnoreCase("todoterreno") ||Tipo.equalsIgnoreCase("4x4")) //si es A o B o C
+		if (Validadores.tipoCocheValido(Tipo)) //si es Familiar o Deportivo o Todoterreno			
 		{
 			String trab = Tipo;
 			this.tipo = trab;

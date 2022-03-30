@@ -9,6 +9,7 @@ import exceptions.LetrasMatriculaNoValidasException;
 import exceptions.NumeroMatriculaNoValidoException;
 import exceptions.PotenciaNoValidaException;
 import exceptions.TipoCarnetNoValidoException;
+import metodos.Validadores;
 
 public class Furgoneta extends DeCombustion {
 	
@@ -45,7 +46,7 @@ public class Furgoneta extends DeCombustion {
 	}
 
 	public void setCarnetRequerido(String carnetRequerido) throws TipoCarnetNoValidoException {
-		if (carnetRequerido.compareToIgnoreCase("B")==0 || carnetRequerido.compareToIgnoreCase("C")==0 || carnetRequerido.compareToIgnoreCase("D")==0 )
+		if (Validadores.carnetValidoFurgoneta(carnetRequerido))	//Si es un carnet válido
 		{
 			String copia = carnetRequerido;
 			this.carnetRequerido = copia;

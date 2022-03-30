@@ -98,7 +98,8 @@ public class Alquiler implements Serializable {
 
 		public double getPrecioAlquiler() {
 			//tipo primitivo
-			return this.PrecioAlquiler;
+			double precio = this.PrecioAlquiler ; 
+			return precio;
 		}
 
 		public void setPrecioAlquiler(Vehiculo coche) {
@@ -107,26 +108,26 @@ public class Alquiler implements Serializable {
 		}
 
 		public void setCodigo(String codigo) {
-			
-			this.codigo = codigo;
+			String code = codigo;
+			this.codigo = code ;
 		}
 
 		public GregorianCalendar getFechaInicioAlquiler() {
-			return (GregorianCalendar) FechaInicioAlquiler.clone();
+			return (GregorianCalendar) FechaInicioAlquiler.clone();	//Evitamos el tampering
 		}
 		
 		@SuppressWarnings("static-access")
 		public void setFechaInicioAlquiler(GregorianCalendar fechaInicioAlquiler) throws FechaNoValidaException {
 			if ((fechaInicioAlquiler.MONTH >= GregorianCalendar.getInstance().MONTH || fechaInicioAlquiler.DAY_OF_YEAR >= GregorianCalendar.getInstance().DAY_OF_YEAR))
 			{
-				FechaInicioAlquiler = (GregorianCalendar) fechaInicioAlquiler.clone();
+				FechaInicioAlquiler = (GregorianCalendar) fechaInicioAlquiler.clone();		//Devolvemos un 'clon' para que no puedan manipularlo
 			}else {
 				throw new FechaNoValidaException("Fecha de inicio de alquiler no válida");
 			}
 			
 		}
 		public GregorianCalendar getFechaPrevistaFinAlquiler() {
-			return (GregorianCalendar) FechaPrevistaFinAlquiler.clone();
+			return (GregorianCalendar) FechaPrevistaFinAlquiler.clone();	//Devolvemos una fecha de copia
 		}
 		
 
@@ -174,7 +175,7 @@ public class Alquiler implements Serializable {
 			//O es mayor el mes o el año de la fecha de devolución respecto la de inicio alquiler
 			if (fechaDevolucion.MONTH > this.FechaInicioAlquiler.MONTH || fechaDevolucion.YEAR > this.FechaInicioAlquiler.YEAR)	
 			{
-				FechaDevolucion = fechaDevolucion;
+				FechaDevolucion = (GregorianCalendar) fechaDevolucion.clone() ;
 			}else {
 				throw new FechaNoValidaException("Fecha de devolución anterior a la fecha de inicio del alquiler");
 			}

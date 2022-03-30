@@ -24,41 +24,49 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 	
 	//Getters & Setters
 	public String getNombre() {
-		return nombre;
+		String copia = nombre;
+		return copia;	//Devolvemos una copia
 	}
 	public void setNombre(String nombre) throws LongitudCadenaNoValidaException {
 		if (nombre.length()<=25 && nombre.length()>=2) {
-			this.nombre = nombre;
+			String nom = nombre;
+			this.nombre = nom;
 		}else {
 			throw new LongitudCadenaNoValidaException("Longitud de nombre no válida");
 		}
 	}
 	public String getApellido1() {
-		return apellido1;
+		String Ap1 = apellido1;
+		return Ap1;
 	}
 	public void setApellido1(String apellido1) throws LongitudCadenaNoValidaException {
 		if (apellido1.length()>=2 && apellido1.length()<=25) {
-			this.apellido1 = apellido1;
+			String Ap1 = apellido1;		//Evitamos el tampering
+			this.apellido1 = Ap1;
 		}else {
 			throw new LongitudCadenaNoValidaException("El primer apellido es demasiado largo");
 		}
 	}
 	public String getApellido2() {
-		return apellido2;
+		String Ap2 = apellido2; 
+		return Ap2;
 	}
 	public void setApellido2(String apellido2) throws LongitudCadenaNoValidaException {
 		if (apellido2.length()>=0 && apellido2.length()<=25) {
-			this.apellido2 = apellido2;
+			String Ap2 = apellido2; 
+			this.apellido2 = Ap2;
 		}else {
 			throw new LongitudCadenaNoValidaException("El segundo apellido es demasiado largo");
 		}
 	}
 	public String getDni() {
-		return dni;
+		String DNIcopia = dni; 
+		return DNIcopia;
 	}
 	protected void setDni(String dni) throws CarnetRequeridoInvalidoException {
 		if(MetodoDni.DNIvalido(dni)) {
-			this.dni=dni;
+			String DNIcopia = dni; 
+			this.dni=DNIcopia;
 		}else {
 			throw new CarnetRequeridoInvalidoException("DNI inválido");
 		}
@@ -88,6 +96,7 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 	
 	//Métodos
 	public String getNombreCompleto() {
+		//Devolvemos una nueva String con la concatenación de lo siguiente:
 		return apellido1+" "+apellido2+", "+nombre;
 	}
 	
