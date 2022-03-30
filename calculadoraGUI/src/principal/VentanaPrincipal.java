@@ -33,6 +33,8 @@ public class VentanaPrincipal extends JFrame {
 				try {
 					VentanaPrincipal frame = new VentanaPrincipal();
 					frame.setVisible(true);
+					VentanaResultado vent = new VentanaResultado();
+					vent.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
