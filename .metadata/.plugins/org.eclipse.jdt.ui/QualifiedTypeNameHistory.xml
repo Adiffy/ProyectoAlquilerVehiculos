@@ -14,7 +14,6 @@
     <fullyQualifiedTypeName name="clasesObjetos.Vehiculo"/>
     <fullyQualifiedTypeName name="comparadores.ComparaVehiculoPorCategoria"/>
     <fullyQualifiedTypeName name="clasesObjetos.Electrico"/>
-    <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
     <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
     <fullyQualifiedTypeName name="clasesObjetos.Alquiler"/>
     <fullyQualifiedTypeName name="clasesObjetos.DeCombustion"/>
@@ -42,4 +41,6 @@
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="accesoADatos.EmpresaDB"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Direccion"/>
 </qualifiedTypeNameHistroy>
