@@ -11,7 +11,6 @@
     <fullyQualifiedTypeName name="clasesObjetos.Matricula"/>
     <fullyQualifiedTypeName name="clasesObjetos.CocheElectrico"/>
     <fullyQualifiedTypeName name="clasesObjetos.Moto"/>
-    <fullyQualifiedTypeName name="clasesObjetos.Vehiculo"/>
     <fullyQualifiedTypeName name="comparadores.ComparaVehiculoPorCategoria"/>
     <fullyQualifiedTypeName name="clasesObjetos.Electrico"/>
     <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
@@ -47,6 +46,8 @@
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="accesoADatos.EmpresaDB"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Vehiculo"/>
+    <fullyQualifiedTypeName name="metodos.Validadores"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
 </qualifiedTypeNameHistroy>

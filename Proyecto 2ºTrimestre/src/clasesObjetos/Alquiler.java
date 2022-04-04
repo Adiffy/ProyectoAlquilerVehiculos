@@ -1,0 +1,234 @@
+package clasesObjetos;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.GregorianCalendar;
+
+import exceptions.FechaNoValidaException;
+
+public class Alquiler implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+		//Variables que Se usarán en caso de alquiler
+		private String codigo ; 
+		private GregorianCalendar FechaInicioAlquiler = new GregorianCalendar();
+		private GregorianCalendar FechaPrevistaFinAlquiler = new GregorianCalendar();
+		private GregorianCalendar FechaDevolucion = new GregorianCalendar();
+		
+//		private Cliente cliente;
+//		private Empleado encargado;
+		private Vehiculo aAlquilar;
+		private double PrecioAlquiler ;
+		
+		private Oficina OficinaRecogida;
+		private Oficina OficinaEntrega;
+		
+		private Vehiculo coche;
+		
+		//Getters & Setters
+		
+		/**
+		 * @return el coche
+		 */
+		public Vehiculo getCoche() {
+			return coche;
+		}
+
+		/**
+		 * @param coche el coche a settear
+		 */
+		public void setCoche(Vehiculo coche) {
+			this.coche = coche;
+		}
+
+		/**
+		 * @return el vehículo aAlquilar
+		 */
+		public Vehiculo getaAlquilar() {
+			return aAlquilar;
+		}
+
+		/**
+		 * @param aAlquilar el Vehículo del alquiler
+		 */
+		public void setaAlquilar(Vehiculo aAlquilar) {
+			this.aAlquilar = aAlquilar;
+		}
+
+		/**
+		 * @return el encargado
+//		 */
+//		public Empleado getEncargado() {
+//			return encargado;
+//		}
+//
+//		/**
+//		 * @param encargado el empleado encargado adjunto al alquiler
+//		 */
+//		public void setEncargado(Empleado encargado) {
+//			this.encargado = encargado;
+//		}
+//
+//		/**
+//		 * @return el cliente
+//		 */
+//		public Cliente getCliente() {
+//			return cliente;
+//		}
+//
+//		/**
+//		 * @param cliente el cliente que alquila
+//		 */
+//		public void setCliente(Cliente cliente) {
+//			this.cliente = cliente;
+//		}
+
+		/**
+		 * 
+		 * @return El código alfanumérico del alquiler
+		 */
+		public String getCodigo() {
+			String copia = codigo;
+			return copia;
+		}
+
+		public double getPrecioAlquiler() {
+			//tipo primitivo
+			double precio = this.PrecioAlquiler ; 
+			return precio;
+		}
+
+		public void setPrecioAlquiler(Vehiculo coche) {
+			int dias = this.getNumDias();
+			PrecioAlquiler = dias*coche.PrecioAlquiler();
+		}
+
+		public void setCodigo(String codigo) {
+			String code = codigo;
+			this.codigo = code ;
+		}
+
+		public GregorianCalendar getFechaInicioAlquiler() {
+			return (GregorianCalendar) FechaInicioAlquiler.clone();	//Evitamos el tampering
+		}
+		
+		@SuppressWarnings("static-access")
+		public void setFechaInicioAlquiler(GregorianCalendar fechaInicioAlquiler) throws FechaNoValidaException {
+			if ((fechaInicioAlquiler.MONTH >= GregorianCalendar.getInstance().MONTH || fechaInicioAlquiler.DAY_OF_YEAR >= GregorianCalendar.getInstance().DAY_OF_YEAR))
+			{
+				FechaInicioAlquiler = (GregorianCalendar) fechaInicioAlquiler.clone();		//Devolvemos un 'clon' para que no puedan manipularlo
+			}else {
+				throw new FechaNoValidaException("Fecha de inicio de alquiler no válida");
+			}
+			
+		}
+		public GregorianCalendar getFechaPrevistaFinAlquiler() {
+			return (GregorianCalendar) FechaPrevistaFinAlquiler.clone();	//Devolvemos una fecha de copia
+		}
+		
+
+		public void setFechaPrevistaFinAlquiler(GregorianCalendar fechaPrevistaFinAlquiler) throws FechaNoValidaException {
+//			LocalDate fin = LocalDate.of(fechaPrevistaFinAlquiler.YEAR, fechaPrevistaFinAlquiler.MONTH, fechaPrevistaFinAlquiler.DAY_OF_MONTH);
+//			LocalDate inicio = LocalDate.of(FechaInicioAlquiler.YEAR, FechaInicioAlquiler.MONTH, FechaInicioAlquiler.DAY_OF_MONTH);
+			
+//			if ((fin.compareTo(inicio)>0))
+//			{
+				FechaPrevistaFinAlquiler = fechaPrevistaFinAlquiler;
+//			}else 
+//			{
+//				throw new FechaNoValidaException("Fecha anterior a la fecha de inicio");
+//			}
+			
+		}
+		@SuppressWarnings("static-access")
+		public GregorianCalendar getFechaDevolucion() {
+			//Creamos y devolvemos una copia
+			return new GregorianCalendar (FechaDevolucion.YEAR, FechaDevolucion.MONTH, FechaDevolucion.DAY_OF_MONTH);
+		}
+		public Oficina getOficinaRecogida() {
+			Oficina copia = new Oficina(OficinaRecogida);
+			return copia;
+		}
+
+		public void setOficinaRecogida(Oficina oficinaRecogida) {
+			Oficina copia = new Oficina(oficinaRecogida); //Copiamos la oficina dada
+			OficinaRecogida = copia;	//Metemos la copia
+		}
+
+		public Oficina getOficinaEntrega() {
+			Oficina copia = new Oficina(this.OficinaEntrega); //Copiamos
+			return copia;	//Damos la copia
+		}
+
+		public void setOficinaEntrega(Oficina oficinaEntrega) {
+			Oficina copia = new Oficina(oficinaEntrega);
+			OficinaEntrega = copia ;
+		}
+
+		@SuppressWarnings("static-access")
+		public void setFechaDevolucion(GregorianCalendar fechaDevolucion) throws FechaNoValidaException {
+			
+			//O es mayor el mes o el año de la fecha de devolución respecto la de inicio alquiler
+			if (fechaDevolucion.MONTH > this.FechaInicioAlquiler.MONTH || fechaDevolucion.YEAR > this.FechaInicioAlquiler.YEAR)	
+			{
+				FechaDevolucion = (GregorianCalendar) fechaDevolucion.clone() ;
+			}else {
+				throw new FechaNoValidaException("Fecha de devolución anterior a la fecha de inicio del alquiler");
+			}
+			
+		}
+		public void setAlquilado(Vehiculo aAlquilar,boolean si)
+		{
+			this.aAlquilar = aAlquilar;
+			aAlquilar.setAlquilado(si);
+		}
+		
+		//Constructores
+		
+		public Alquiler(Vehiculo aAlquilar, String codigo, GregorianCalendar fechaInicioAlquiler, GregorianCalendar fechaPrevistaFinAlquiler, Oficina OficinaRecogida, Oficina OficinaEntrega) throws FechaNoValidaException {
+			super();
+			this.setCodigo(codigo);
+			this.setFechaInicioAlquiler(fechaInicioAlquiler);
+			this.setFechaPrevistaFinAlquiler(fechaPrevistaFinAlquiler);
+			this.setaAlquilar(aAlquilar);
+			this.setOficinaRecogida(OficinaRecogida);
+			this.setOficinaEntrega(OficinaEntrega);
+			this.setAlquilado(aAlquilar, true); //Cuando se construye un alquiler el vehículo es alquilado
+//			this.setCliente(cliente);
+//			this.setEncargado(emple);
+		}
+		
+		//Metodos
+		/**
+		 * @return El nº de días que el vehículo está alquilado
+		 */
+		@SuppressWarnings("static-access")
+		public int getNumDias()
+		{
+			LocalDate inicio = LocalDate.of(this.FechaInicioAlquiler.YEAR, this.FechaInicioAlquiler.MONTH, this.FechaInicioAlquiler.DAY_OF_MONTH);
+			LocalDate fin = LocalDate.of(this.FechaDevolucion.YEAR, this.FechaDevolucion.MONTH, this.FechaDevolucion.DAY_OF_MONTH);
+			LocalDate resultado = fin.minusDays(inicio.getDayOfYear());
+			return resultado.getDayOfYear();
+		}
+		
+		public boolean isAcabado()
+		{
+			if (this.getFechaDevolucion() != null && this.getOficinaRecogida() != null)
+			{
+				return true;
+			}else {
+				return false;
+			}
+		}
+		
+		@Override
+		public String toString()
+		{
+			return codigo+" - "+this.getPrecioAlquiler()+" | "+this.getFechaInicioAlquiler() ;
+			
+		}
+}
