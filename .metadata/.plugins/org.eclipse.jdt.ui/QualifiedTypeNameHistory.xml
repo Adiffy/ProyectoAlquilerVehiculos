@@ -49,4 +49,5 @@
     <fullyQualifiedTypeName name="clasesObjetos.Vehiculo"/>
     <fullyQualifiedTypeName name="metodos.Validadores"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
 </qualifiedTypeNameHistroy>
