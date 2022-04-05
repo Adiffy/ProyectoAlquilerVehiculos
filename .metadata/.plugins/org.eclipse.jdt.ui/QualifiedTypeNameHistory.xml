@@ -4,7 +4,6 @@
     <fullyQualifiedTypeName name="comparadores.ComparaEmpleadoPorNombre"/>
     <fullyQualifiedTypeName name="exceptions.CodigoPostalException"/>
     <fullyQualifiedTypeName name="clasesObjetos.Cliente"/>
-    <fullyQualifiedTypeName name="clasesObjetos.Empleado"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
     <fullyQualifiedTypeName name="exceptions.LicenciaNoValidaException"/>
     <fullyQualifiedTypeName name="comparadores.ComparaClientePorNombre"/>
@@ -13,7 +12,6 @@
     <fullyQualifiedTypeName name="clasesObjetos.Moto"/>
     <fullyQualifiedTypeName name="comparadores.ComparaVehiculoPorCategoria"/>
     <fullyQualifiedTypeName name="clasesObjetos.Electrico"/>
-    <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
     <fullyQualifiedTypeName name="clasesObjetos.Alquiler"/>
     <fullyQualifiedTypeName name="clasesObjetos.DeCombustion"/>
     <fullyQualifiedTypeName name="exceptions.CarnetRequeridoInvalidoException"/>
@@ -50,4 +48,9 @@
     <fullyQualifiedTypeName name="metodos.Validadores"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="accesoADatos.RepositorioOficina"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Empleado"/>
+    <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
 </qualifiedTypeNameHistroy>
