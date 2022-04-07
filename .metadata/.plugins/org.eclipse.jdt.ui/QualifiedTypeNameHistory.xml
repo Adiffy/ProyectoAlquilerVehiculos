@@ -43,7 +43,6 @@
     <fullyQualifiedTypeName name="metodos.Validadores"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="accesoADatos.RepositorioOficina"/>
-    <fullyQualifiedTypeName name="clasesObjetos.Empleado"/>
     <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="javax.swing.DefaultComboBoxModel"/>
@@ -51,8 +50,12 @@
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
-    <fullyQualifiedTypeName name="gui.MetodosGUI"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="javax.swing.JDialog"/>
+    <fullyQualifiedTypeName name="javax.swing.table.TableModel"/>
+    <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+    <fullyQualifiedTypeName name="gui.MetodosGUI"/>
+    <fullyQualifiedTypeName name="accesoADatos.RepositorioEmpleado"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Empleado"/>
 </qualifiedTypeNameHistroy>

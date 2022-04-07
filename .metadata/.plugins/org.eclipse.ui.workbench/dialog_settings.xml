@@ -32,6 +32,7 @@
 		<list key="WizardFileSystemResourceExportPage1.STORE_DESTINATION_NAMES_ID">
 			<item value="C:\Users\usuario\Desktop"/>
 			<item value="C:\Users\usuario\Downloads"/>
+			<item value="C:\Users\usuario\OneDrive\Documentos"/>
 		</list>
 	</section>
 </section>
