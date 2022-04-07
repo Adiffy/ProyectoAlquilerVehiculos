@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<item key="CommitDialog.showUntracked" value="true"/>
 	<list key="CommitDialog.authorValues">
 		<item value="Víctor Esquinas &lt;93326902+Adiffy@users.noreply.github.com&gt;"/>
 	</list>
@@ -14,7 +15,13 @@
 	</section>
 	<section name="GitCommitMessageComponent">
 		<list key="C:\Users\usuario\OneDrive\Documentos\GitHub\ProyectoAlquilerVehiculos\.git">
-			<item value="empty"/>
+			<item value="false"/>
+			<item value="Víctor Esquinas &lt;93326902+Adiffy@users.noreply.github.com&gt;"/>
+			<item value="a"/>
+			<item value="Víctor Esquinas &lt;93326902+Adiffy@users.noreply.github.com&gt;"/>
+			<item value="ed22bae445c74c4f6f17c095f74533a2d0789cf7"/>
+			<item value="0"/>
+			<item value="false"/>
 		</list>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.push.PushResultDialog.dialogBounds">
@@ -27,5 +34,12 @@
 			<item value="600"/>
 			<item value="400"/>
 		</list>
+	</section>
+	<section name="org.eclipse.egit.ui.COMMIT_DIALOG_SECTION">
+		<item key="DIALOG_X_ORIGIN" value="-55"/>
+		<item key="DIALOG_Y_ORIGIN" value="0"/>
+		<item key="DIALOG_WIDTH" value="642"/>
+		<item key="DIALOG_HEIGHT" value="641"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
 	</section>
 </section>

@@ -41,7 +41,6 @@
     <fullyQualifiedTypeName name="accesoADatos.EmpresaDB"/>
     <fullyQualifiedTypeName name="clasesObjetos.Vehiculo"/>
     <fullyQualifiedTypeName name="metodos.Validadores"/>
-    <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="accesoADatos.RepositorioOficina"/>
     <fullyQualifiedTypeName name="clasesObjetos.Empleado"/>
@@ -50,8 +49,10 @@
     <fullyQualifiedTypeName name="javax.swing.DefaultComboBoxModel"/>
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
-    <fullyQualifiedTypeName name="gui.MetodosGUI"/>
-    <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
+    <fullyQualifiedTypeName name="gui.MetodosGUI"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="javax.swing.JDialog"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>
