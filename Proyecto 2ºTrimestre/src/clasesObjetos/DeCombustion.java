@@ -5,7 +5,6 @@ import java.util.GregorianCalendar;
 import exceptions.ConsumoNoValidoException;
 import exceptions.EmisionesNoValidasException;
 import exceptions.PotenciaNoValidaException;
-import metodos.Validadores;
 
 public abstract class DeCombustion extends Vehiculo {
 
@@ -28,8 +27,7 @@ public abstract class DeCombustion extends Vehiculo {
 	public void setConsumo(double consumo) throws ConsumoNoValidoException {
 		if (consumo>0)
 		{
-			double cons = consumo;
-			this.consumo = cons;
+			this.consumo = consumo;
 		}else {
 			throw new ConsumoNoValidoException("Consumo inferior o igual a 0, no admitido");
 		}
@@ -43,8 +41,7 @@ public abstract class DeCombustion extends Vehiculo {
 	public void setPotencia(int potencia) throws PotenciaNoValidaException {
 		if (potencia>=50) //Potencia mínima
 		{
-			int caballaje = potencia;
-			this.potencia = caballaje;
+			this.potencia = potencia;
 		}else {
 			throw new PotenciaNoValidaException("Potencia inferior o igual a 50");
 		}
@@ -56,10 +53,9 @@ public abstract class DeCombustion extends Vehiculo {
 	}
 
 	public void setEmisiones(String emisiones) throws EmisionesNoValidasException {
-		if (Validadores.tipoEmisionesValidas(emisiones))
+		if (emisiones.equals("A") || emisiones.equals("B") || emisiones.equals("C"))
 		{
-			String em = emisiones;
-			this.emisiones = em;
+			this.emisiones = emisiones;
 		} else {
 			throw new EmisionesNoValidasException("Escriba el nivel de emisiones de su vehículo 'A','B' o 'C'");
 		}

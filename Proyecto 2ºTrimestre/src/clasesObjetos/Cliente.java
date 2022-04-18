@@ -3,7 +3,6 @@ package clasesObjetos;
 import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.LicenciaNoValidaException;
 import exceptions.LongitudCadenaNoValidaException;
-import metodos.Validadores;
 
 public class Cliente extends Persona{
 
@@ -35,7 +34,7 @@ public class Cliente extends Persona{
 
 	public void setLicencia(String licencia) throws LicenciaNoValidaException {
 		//Comprobamos que licencia es igual a una de las licencias permitidas
-		if (Validadores.carnetValido(licencia))
+		if (( licencia.compareToIgnoreCase("A")==0 || licencia.compareToIgnoreCase("B")==0 || licencia.compareToIgnoreCase("C")==0 || licencia.compareToIgnoreCase("D")==0 ) || licencia.compareToIgnoreCase("AM")==0 || licencia.compareToIgnoreCase("A1")==0 || licencia.compareToIgnoreCase("A2")==0)
 		{
 			String license = licencia;
 			this.licencia = license;

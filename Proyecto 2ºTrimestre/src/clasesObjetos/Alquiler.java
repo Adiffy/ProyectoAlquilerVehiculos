@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
+import exceptions.CodigoNoValidoException;
 import exceptions.FechaNoValidaException;
 
 public class Alquiler implements Serializable {
@@ -98,8 +99,7 @@ public class Alquiler implements Serializable {
 
 		public double getPrecioAlquiler() {
 			//tipo primitivo
-			double precio = this.PrecioAlquiler ; 
-			return precio;
+			return this.PrecioAlquiler;
 		}
 
 		public void setPrecioAlquiler(Vehiculo coche) {
@@ -107,27 +107,32 @@ public class Alquiler implements Serializable {
 			PrecioAlquiler = dias*coche.PrecioAlquiler();
 		}
 
-		public void setCodigo(String codigo) {
-			String code = codigo;
-			this.codigo = code ;
+		public void setCodigo(String codigo) throws CodigoNoValidoException {
+			if (codigo.length()>0 && codigo.length()<5)
+			{
+				String code = codigo;
+				this.codigo = code;
+			}else {
+				throw new CodigoNoValidoException();
+			}
 		}
 
 		public GregorianCalendar getFechaInicioAlquiler() {
-			return (GregorianCalendar) FechaInicioAlquiler.clone();	//Evitamos el tampering
+			return (GregorianCalendar) FechaInicioAlquiler.clone();
 		}
 		
 		@SuppressWarnings("static-access")
 		public void setFechaInicioAlquiler(GregorianCalendar fechaInicioAlquiler) throws FechaNoValidaException {
 			if ((fechaInicioAlquiler.MONTH >= GregorianCalendar.getInstance().MONTH || fechaInicioAlquiler.DAY_OF_YEAR >= GregorianCalendar.getInstance().DAY_OF_YEAR))
 			{
-				FechaInicioAlquiler = (GregorianCalendar) fechaInicioAlquiler.clone();		//Devolvemos un 'clon' para que no puedan manipularlo
+				FechaInicioAlquiler = (GregorianCalendar) fechaInicioAlquiler.clone();
 			}else {
 				throw new FechaNoValidaException("Fecha de inicio de alquiler no válida");
 			}
 			
 		}
 		public GregorianCalendar getFechaPrevistaFinAlquiler() {
-			return (GregorianCalendar) FechaPrevistaFinAlquiler.clone();	//Devolvemos una fecha de copia
+			return (GregorianCalendar) FechaPrevistaFinAlquiler.clone();
 		}
 		
 
@@ -175,7 +180,7 @@ public class Alquiler implements Serializable {
 			//O es mayor el mes o el año de la fecha de devolución respecto la de inicio alquiler
 			if (fechaDevolucion.MONTH > this.FechaInicioAlquiler.MONTH || fechaDevolucion.YEAR > this.FechaInicioAlquiler.YEAR)	
 			{
-				FechaDevolucion = (GregorianCalendar) fechaDevolucion.clone() ;
+				FechaDevolucion = fechaDevolucion;
 			}else {
 				throw new FechaNoValidaException("Fecha de devolución anterior a la fecha de inicio del alquiler");
 			}
@@ -189,7 +194,7 @@ public class Alquiler implements Serializable {
 		
 		//Constructores
 		
-		public Alquiler(Vehiculo aAlquilar, String codigo, GregorianCalendar fechaInicioAlquiler, GregorianCalendar fechaPrevistaFinAlquiler, Oficina OficinaRecogida, Oficina OficinaEntrega) throws FechaNoValidaException {
+		public Alquiler(Vehiculo aAlquilar, String codigo, GregorianCalendar fechaInicioAlquiler, GregorianCalendar fechaPrevistaFinAlquiler, Oficina OficinaRecogida, Oficina OficinaEntrega) throws FechaNoValidaException, CodigoNoValidoException {
 			super();
 			this.setCodigo(codigo);
 			this.setFechaInicioAlquiler(fechaInicioAlquiler);

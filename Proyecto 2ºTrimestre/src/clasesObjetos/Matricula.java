@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import exceptions.LetrasMatriculaNoValidasException;
 import exceptions.NumeroMatriculaNoValidoException;
-import metodos.Validadores;
 
 public class Matricula implements Comparable<Matricula>, Serializable {
 
@@ -25,26 +24,22 @@ public class Matricula implements Comparable<Matricula>, Serializable {
 	}
 	
 	private void setNumeros(int numeros) throws NumeroMatriculaNoValidoException {
-		if (Validadores.longituNumMatricula(numeros)) 
+		if (String.valueOf(numeros).length()<5 && String.valueOf(numeros).length()>2) //TODO revisar cuantos nº hay en matrícula
 		{
-			int num = numeros;
-			this.numeros = num;
+			this.numeros = numeros;
 		}else {
 			throw new NumeroMatriculaNoValidoException("Se esperaba únicamente la parte numérica de su matrícula. Por ejemplo: 3025");
 		}
 	}
 	
 	public String getLetras() {
-		String let = this.letras; //Evitamos el tampering haciendo un clon
-		return let;
+		return letras;
 	}
 	
 	private void setLetras(String letras) throws LetrasMatriculaNoValidasException {
-		if (Validadores.longituLetrasMatricula(letras))
+		if (letras.length()==3)
 		{
-			//Hacemos un clon para dar un valor a THIS.letras
-			String copia = letras;
-			this.letras = copia;
+			this.letras = letras;
 		}else {
 			throw new LetrasMatriculaNoValidasException("Se esperaba solo la cadena final de matrícula. Ejemplo: 'DML'");
 		}

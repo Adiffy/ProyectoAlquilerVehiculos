@@ -8,7 +8,6 @@ import exceptions.EmisionesNoValidasException;
 import exceptions.NumPlazasNoValidoException;
 import exceptions.TiempoRecargaNoValidoException;
 import exceptions.TipoNoValidoException;
-import metodos.Validadores;
 
 public class CocheElectrico extends Electrico implements Serializable, Coche {
 
@@ -40,7 +39,7 @@ public class CocheElectrico extends Electrico implements Serializable, Coche {
 	@Override
 	public void setTipo(String Tipo) throws TipoNoValidoException 
 	{
-		if (Validadores.tipoCocheValido(Tipo)) //si es Familiar o Deportivo o todoterreno
+		if (Tipo.equalsIgnoreCase("deportivo")||Tipo.equalsIgnoreCase("familiar")||Tipo.equalsIgnoreCase("todoterreno") ||Tipo.equalsIgnoreCase("4x4")) //si es A o B o C
 		{
 			String trab = Tipo;
 			this.tipo = trab;

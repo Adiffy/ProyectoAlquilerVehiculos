@@ -26,22 +26,18 @@ public class Direccion implements Serializable{
 	
 	//Getters & Setters 
 	public String getNombreVia() {
-		String copia = nombreVia; 
-		return copia;	//Devolvemos un clon
+		return nombreVia;
 	}
 	
 	public void setNombreVia(String nombreVia) throws LongitudNoValidaException {
-		if(nombreVia.length()<=25 && nombreVia.length()>=2) 
-		{
-			String copia = nombreVia; //Hacemos una copia antes de añadirlo
-			this.nombreVia = copia;
+		if(nombreVia.length()<=25 && nombreVia.length()>=2) {
+			this.nombreVia = nombreVia;
 		}else {
 			throw new LongitudNoValidaException("Nombre demasiado largo/corto");
 		}
 	}
 	public String getNumVia() {
-		String num = numVia;	//Evitamos el tampering
-		return num;
+		return numVia;
 	}
 	
 	public void setNumVia(String numVia) throws LongitudNoValidaException {
@@ -53,34 +49,31 @@ public class Direccion implements Serializable{
 		}
 	}
 	public String getPlanta() {
-		String copia = planta;	//Le hacemos una copia
-		return copia;		//Devolvemos la copia
+		return planta;
 	}
 	public void setPlanta(String planta) throws PlantaNoValidaException {
 		if (planta.length()<4)
 		{
-			String plant = planta;		//Le hacemos un clon
+			String plant = planta;
 			this.planta = plant;
 		}else {
 			throw new PlantaNoValidaException("Planta demasiado alta");
 		}
 	}
 	public String getCodigoPostal() {
-		String CP = codigoPostal; 
-		return CP;	//Devolvemos la copia
+		return codigoPostal;
 	}
 	public void setCodigoPostal(String codigoPostal) throws CodigoPostalException {
 		if (codigoPostal.length()==5) //Los CP tienen 5 caracteres, por ejemplo: 23009
 		{
 			String CP = codigoPostal;
-			this.codigoPostal = CP;	//Devolvemos una copia
+			this.codigoPostal = CP;
 		}else {
 			throw new CodigoPostalException("Longitud del Codigo Postal inválido");
 		}
 	}
 	public String getLocalidad() {
-		String loc = localidad; 
-		return loc;		//Evitamos el tampering devuelviendo un 'clon'
+		return localidad;
 	}
 	public void setLocalidad(String localidad) throws LongitudCadenaNoValidaException {
 		if (localidad.length()>3 && localidad.length()<25)

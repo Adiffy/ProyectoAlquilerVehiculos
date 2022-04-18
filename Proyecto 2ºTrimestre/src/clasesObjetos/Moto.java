@@ -7,7 +7,6 @@ import exceptions.CilindradaNoValidaException;
 import exceptions.ConsumoNoValidoException;
 import exceptions.EmisionesNoValidasException;
 import exceptions.PotenciaNoValidaException;
-import metodos.Validadores;
 
 public class Moto extends DeCombustion {
 
@@ -25,12 +24,11 @@ public class Moto extends DeCombustion {
 	//Getters & Setters 
 	public int getCilindrada() {
 		//Al ser entero no hace falta evitar el tampering
-		int cil = cilindrada;	//Pero lo hacemos por buena costumbre
-		return cil;
+		return cilindrada;
 	}
 
 	public void setCilindrada(int cilindrada) throws CilindradaNoValidaException {
-		if (Validadores.cilindradaValida(cilindrada))
+		if (cilindrada==49 || cilindrada==50 || cilindrada==125 || cilindrada==250 || cilindrada==500)
 		{
 			int cop = cilindrada;
 			this.cilindrada = cop;
@@ -45,9 +43,8 @@ public class Moto extends DeCombustion {
 	}
 
 	public void setCarnetRequerido(String carnetRequerido) throws CarnetRequeridoInvalidoException {
-		if (Validadores.carnetValidoMoto(carnetRequerido)) {
-			String carnetDeCopia = carnetRequerido;			//Hacemos el 'clon'
-			this.carnetRequerido = carnetDeCopia;
+		if (carnetRequerido.compareToIgnoreCase("AM")==0 || carnetRequerido.compareToIgnoreCase("A1")==0 || carnetRequerido.compareToIgnoreCase("A2")==0) {
+			this.carnetRequerido = carnetRequerido;
 		}else {
 			throw new CarnetRequeridoInvalidoException("Carnet no válido. Pruebe con 'AM', 'A1' o 'A2'");
 		}

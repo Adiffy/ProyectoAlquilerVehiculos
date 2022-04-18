@@ -24,49 +24,41 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 	
 	//Getters & Setters
 	public String getNombre() {
-		String copia = nombre;
-		return copia;	//Devolvemos una copia
+		return nombre;
 	}
 	public void setNombre(String nombre) throws LongitudCadenaNoValidaException {
 		if (nombre.length()<=25 && nombre.length()>=2) {
-			String nom = nombre;
-			this.nombre = nom;
+			this.nombre = nombre;
 		}else {
 			throw new LongitudCadenaNoValidaException("Longitud de nombre no válida");
 		}
 	}
 	public String getApellido1() {
-		String Ap1 = apellido1;
-		return Ap1;
+		return apellido1;
 	}
 	public void setApellido1(String apellido1) throws LongitudCadenaNoValidaException {
 		if (apellido1.length()>=2 && apellido1.length()<=25) {
-			String Ap1 = apellido1;		//Evitamos el tampering
-			this.apellido1 = Ap1;
+			this.apellido1 = apellido1;
 		}else {
 			throw new LongitudCadenaNoValidaException("El primer apellido es demasiado largo");
 		}
 	}
 	public String getApellido2() {
-		String Ap2 = apellido2; 
-		return Ap2;
+		return apellido2;
 	}
 	public void setApellido2(String apellido2) throws LongitudCadenaNoValidaException {
 		if (apellido2.length()>=0 && apellido2.length()<=25) {
-			String Ap2 = apellido2; 
-			this.apellido2 = Ap2;
+			this.apellido2 = apellido2;
 		}else {
 			throw new LongitudCadenaNoValidaException("El segundo apellido es demasiado largo");
 		}
 	}
 	public String getDni() {
-		String DNIcopia = dni; 
-		return DNIcopia;
+		return dni;
 	}
 	protected void setDni(String dni) throws CarnetRequeridoInvalidoException {
 		if(MetodoDni.DNIvalido(dni)) {
-			String DNIcopia = dni; 
-			this.dni=DNIcopia;
+			this.dni=dni;
 		}else {
 			throw new CarnetRequeridoInvalidoException("DNI inválido");
 		}
@@ -96,7 +88,6 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 	
 	//Métodos
 	public String getNombreCompleto() {
-		//Devolvemos una nueva String con la concatenación de lo siguiente:
 		return apellido1+" "+apellido2+", "+nombre;
 	}
 	
@@ -104,6 +95,7 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 	public String toString() {
 		return getDni()+" - "+getNombreCompleto();
 	}
+	
 	@Override
 	public boolean equals(Object a) {
 		if (this == a)
