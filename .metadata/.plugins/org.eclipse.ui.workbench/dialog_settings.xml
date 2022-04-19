@@ -30,8 +30,8 @@
 		<item key="WizardFileSystemResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="false"/>
 		<item key="WizardFileSystemResourceExportPage1.STORE_RESOLVE_LINKED_RESOURCES_ID" value="false"/>
 		<list key="WizardFileSystemResourceExportPage1.STORE_DESTINATION_NAMES_ID">
-			<item value="G:\Mi unidad"/>
 			<item value="C:\Users\usuario\Desktop"/>
+			<item value="G:\Mi unidad"/>
 			<item value="C:\Users\usuario\Downloads"/>
 			<item value="C:\Users\usuario\OneDrive\Documentos"/>
 		</list>

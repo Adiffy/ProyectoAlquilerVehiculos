@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="setDni"/>
+		<item key="selection" value="new JCombo"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="new JCombo"/>
+			<item value="show"/>
+			<item value="modal"/>
 			<item value="setDni"/>
 			<item value="persona"/>
 			<item value="alquile"/>
@@ -20,9 +23,6 @@
 			<item value="DNI"/>
 			<item value="lista"/>
 			<item value="nombre"/>
-			<item value="porNombre"/>
-			<item value="con DNI"/>
-			<item value="123S"/>
 		</list>
 		<list key="replacehistory">
 		</list>
