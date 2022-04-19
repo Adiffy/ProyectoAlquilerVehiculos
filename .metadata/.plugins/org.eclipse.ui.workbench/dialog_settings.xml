@@ -25,6 +25,7 @@
 			<item value="org.eclipse.wb/org.eclipse.wb.swing"/>
 		</list>
 	</section>
+<<<<<<< HEAD
 	<section name="FileSystemExportWizard">
 		<item key="WizardFileSystemResourceExportPage1.STORE_OVERWRITE_EXISTING_FILES_ID" value="true"/>
 		<item key="WizardFileSystemResourceExportPage1.STORE_CREATE_STRUCTURE_ID" value="false"/>
@@ -35,5 +36,10 @@
 			<item value="C:\Users\usuario\Downloads"/>
 			<item value="C:\Users\usuario\OneDrive\Documentos"/>
 		</list>
+=======
+	<section name="FileSystemImportWizard">
+	</section>
+	<section name="ZipFileImportWizard">
+>>>>>>> 53c770d8cf34a687fabcea8de3b938446f51f076
 	</section>
 </section>

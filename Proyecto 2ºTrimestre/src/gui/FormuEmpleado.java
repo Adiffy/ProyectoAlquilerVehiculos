@@ -1,0 +1,137 @@
+package gui;
+
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import clasesObjetos.Empleado;
+import clasesObjetos.Oficina;
+import enums.BusquedaPor;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.Calendar;
+
+public class FormuEmpleado extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField tbDNI;
+	private JTextField tbNombre;
+	private JTextField tbAp1;
+	private JTextField tbAp2;
+
+
+	/**
+	 * Constructor.
+	 */
+	public FormuEmpleado() {
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 403, 339);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 256, 367, 33);
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setAlignment(FlowLayout.RIGHT);
+		contentPane.add(panel);
+		
+		JButton btnBorrar = new JButton("Borrar");
+		btnBorrar.setIcon((new ImageIcon("recursos\\16\\recycle_bin.png")));
+		panel.add(btnBorrar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon("recursos\\16\\cross.png"));
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO cerrar ventana
+			}
+		});
+		panel.add(btnCancelar);
+		
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setIcon(new ImageIcon("recursos\\16\\diskette.png"));
+		panel.add(btnAceptar);
+		
+		JLabel lblDni = new JLabel("DNI");
+		lblDni.setBounds(10, 32, 63, 14);
+		contentPane.add(lblDni);
+		
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setBounds(10, 69, 46, 14);
+		contentPane.add(lblNombre);
+		
+		tbDNI = new JTextField();
+		tbDNI.setBounds(50, 29, 86, 20);
+		contentPane.add(tbDNI);
+		tbDNI.setColumns(10);
+		
+		tbNombre = new JTextField();
+		tbNombre.setBounds(60, 65, 97, 22);
+		contentPane.add(tbNombre);
+		tbNombre.setColumns(10);
+		
+		JLabel lblApellidos = new JLabel("Apellidos");
+		lblApellidos.setBounds(10, 94, 46, 14);
+		contentPane.add(lblApellidos);
+		
+		tbAp1 = new JTextField();
+		tbAp1.setBounds(60, 91, 110, 20);
+		contentPane.add(tbAp1);
+		tbAp1.setColumns(10);
+		
+		tbAp2 = new JTextField();
+		tbAp2.setBounds(180, 91, 115, 20);
+		contentPane.add(tbAp2);
+		tbAp2.setColumns(10);
+		
+		JLabel lblOficina = new JLabel("Oficina");
+		lblOficina.setBounds(10, 133, 46, 14);
+		contentPane.add(lblOficina);
+		
+		//Creamos el ComboBox
+		JComboBox<Oficina> comboBox = MetodosGUI.creaDesplegable();
+		comboBox.setBounds(70, 129, 133, 22);
+		contentPane.add(comboBox);
+		
+		JButton btnBuscar = new JButton("");	//Botón sin mensaje solo icono de lupa (ICONO DE BUSCAR)
+		btnBuscar.setIcon(new ImageIcon("recursos\\16\\zoom.png"));
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaBusqueda lupa = new VentanaBusqueda(BusquedaPor.EMPLEADO);
+				lupa.setVisible(true);
+				
+				@SuppressWarnings("unused")
+				Empleado emple = lupa.Emplelegido; 
+				
+			}
+		}); 
+		btnBuscar.setBounds(185, 65, 46, 23);
+		contentPane.add(btnBuscar);
+		
+		JLabel lblFechaAlta = new JLabel("Fecha de alta");
+		lblFechaAlta.setBounds(10, 173, 97, 14);
+		contentPane.add(lblFechaAlta);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerDateModel(new Date(1650232800000L), new Date(9241200000L), null, Calendar.DAY_OF_YEAR));
+		spinner.setBounds(106, 170, 97, 20);
+		contentPane.add(spinner);
+	}
+}
