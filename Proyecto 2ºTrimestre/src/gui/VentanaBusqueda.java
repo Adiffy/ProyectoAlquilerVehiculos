@@ -40,7 +40,7 @@ public class VentanaBusqueda extends JDialog {
 	private VentanaBusqueda yo;
 	private DefaultTableModel model;
 	public Empleado Emplelegido;
-	private JTable tabla;
+	private JTable tablaDatos;
 	private JTextField textFieldDNI;
 	private JTextField textFieldNombre;
 	private JTextField textFieldAp1;
@@ -196,12 +196,24 @@ public class VentanaBusqueda extends JDialog {
 		comboBox.setEnabled(false);
 		comboBox.setMaximumRowCount(15);
 		
+		JPanel panel_FechaAlta = new JPanel();
+		panelOfi.add(panel_FechaAlta);
+		
+		JLabel lblFech_Alta = new JLabel("Fecha de alta");
+		panel_FechaAlta.add(lblFech_Alta);
+		
+		JSpinner spinner = new JSpinner();
+		panel_FechaAlta.add(spinner);
+		spinner.setModel(new SpinnerDateModel(new Date(1650232800000L), new Date(9241200000L), null, Calendar.DAY_OF_YEAR));
+		spinner.setBounds(106, 170, 97, 20);
+		
 		JPanel panelTabla = new JPanel();
 		panelPrincipal.add(panelTabla, BorderLayout.CENTER);
 		
-		tabla = tableBusqueda;
+		tablaDatos  = tableBusqueda;	//TODO hacer bien la tabla con datos de BD
+	
+		panelTabla.add(tablaDatos);
 		
-		panelTabla.add(tabla);
 		//Cogemos la fila obtenida
 		int fila = tableBusqueda.getSelectedRow();
 		//Si no ha elegido ninguna

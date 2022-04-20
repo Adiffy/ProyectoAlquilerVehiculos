@@ -10,6 +10,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clasesObjetos.Empleado;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -72,8 +75,8 @@ public class VentanaPrincipal extends JFrame {
 		menuPrincipal.add(mnListados);
 		mntmEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FormuEmpleado v = new FormuEmpleado();
-				v.setVisible(true);
+				@SuppressWarnings("unused")
+				Empleado Emp = FormuEmpleado.showDialog();				
 			}
 		});
 		contentPane = new JPanel();
@@ -91,4 +94,5 @@ public class VentanaPrincipal extends JFrame {
 		setContentPane(contentPane);
 
 	}
+
 }

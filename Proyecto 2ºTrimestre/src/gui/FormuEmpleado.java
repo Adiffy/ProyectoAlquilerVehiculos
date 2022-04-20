@@ -16,9 +16,13 @@ import javax.swing.border.EmptyBorder;
 import clasesObjetos.Empleado;
 import clasesObjetos.Oficina;
 import enums.BusquedaPor;
+import exceptions.CarnetRequeridoInvalidoException;
+import exceptions.LongitudCadenaNoValidaException;
+
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Calendar;
 
 public class FormuEmpleado extends JFrame {
@@ -32,12 +36,15 @@ public class FormuEmpleado extends JFrame {
 	private JTextField tbNombre;
 	private JTextField tbAp1;
 	private JTextField tbAp2;
+	private JComboBox<Oficina> comboBox;
+	private JSpinner spinner;
+	public static Empleado elelegido;
 
 
 	/**
 	 * Constructor.
 	 */
-	public FormuEmpleado() {
+	private FormuEmpleado() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 403, 339);
@@ -53,6 +60,11 @@ public class FormuEmpleado extends JFrame {
 		contentPane.add(panel);
 		
 		JButton btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO borrar el empleado si existe
+			}
+		});
 		btnBorrar.setIcon((new ImageIcon("recursos\\16\\recycle_bin.png")));
 		panel.add(btnBorrar);
 		
@@ -61,11 +73,24 @@ public class FormuEmpleado extends JFrame {
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//TODO cerrar ventana
+				
 			}
 		});
 		panel.add(btnCancelar);
 		
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Creamos el Empleado
+				try {
+					elelegido = new Empleado( tbNombre.getText(), tbAp1.getText(), tbAp2.getText(),tbDNI.getText(), (GregorianCalendar) spinner.getValue(), (Oficina) comboBox.getSelectedItem());
+				} catch (CarnetRequeridoInvalidoException e1) {
+					guiExcepciones.ErrorCarnet.showDialog();
+				} catch (LongitudCadenaNoValidaException e1) {
+					guiExcepciones.LongitudNoValida.showDialog();
+				}
+			}
+		});
 		btnAceptar.setIcon(new ImageIcon("recursos\\16\\diskette.png"));
 		panel.add(btnAceptar);
 		
@@ -88,16 +113,16 @@ public class FormuEmpleado extends JFrame {
 		tbNombre.setColumns(10);
 		
 		JLabel lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setBounds(10, 94, 46, 14);
+		lblApellidos.setBounds(10, 94, 79, 14);
 		contentPane.add(lblApellidos);
 		
 		tbAp1 = new JTextField();
-		tbAp1.setBounds(60, 91, 110, 20);
+		tbAp1.setBounds(70, 91, 110, 20);
 		contentPane.add(tbAp1);
 		tbAp1.setColumns(10);
 		
 		tbAp2 = new JTextField();
-		tbAp2.setBounds(180, 91, 115, 20);
+		tbAp2.setBounds(195, 91, 115, 20);
 		contentPane.add(tbAp2);
 		tbAp2.setColumns(10);
 		
@@ -106,7 +131,7 @@ public class FormuEmpleado extends JFrame {
 		contentPane.add(lblOficina);
 		
 		//Creamos el ComboBox
-		JComboBox<Oficina> comboBox = MetodosGUI.creaDesplegable();
+		comboBox = MetodosGUI.creaDesplegable();
 		comboBox.setBounds(70, 129, 133, 22);
 		contentPane.add(comboBox);
 		
@@ -129,9 +154,17 @@ public class FormuEmpleado extends JFrame {
 		lblFechaAlta.setBounds(10, 173, 97, 14);
 		contentPane.add(lblFechaAlta);
 		
-		JSpinner spinner = new JSpinner();
+		spinner = new JSpinner();
 		spinner.setModel(new SpinnerDateModel(new Date(1650232800000L), new Date(9241200000L), null, Calendar.DAY_OF_YEAR));
 		spinner.setBounds(106, 170, 97, 20);
 		contentPane.add(spinner);
+	}
+	
+	public static Empleado showDialog()
+	{
+		FormuEmpleado ventana = new FormuEmpleado();
+		ventana.setVisible(true);
+		
+		return elelegido;
 	}
 }
