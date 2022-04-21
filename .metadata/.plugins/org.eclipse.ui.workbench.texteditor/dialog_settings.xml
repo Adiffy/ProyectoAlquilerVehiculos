@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="&quot;Cancelar&quot;"/>
+		<item key="selection" value="Spinner"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="spinner"/>
+			<item value="show"/>
+			<item value="panelPideDatos1"/>
+			<item value="contentPane"/>
 			<item value="&quot;Cancel&quot;"/>
 			<item value="&quot;OK&quot;"/>
 			<item value="new JCombo"/>
-			<item value="show"/>
 			<item value="modal"/>
 			<item value="setDni"/>
 			<item value="persona"/>
@@ -20,11 +23,10 @@
 			<item value="coche"/>
 			<item value="alquiler"/>
 			<item value="terminar"/>
-			<item value="isAlqui"/>
-			<item value="porDNI"/>
-			<item value="DNI"/>
 		</list>
 		<list key="replacehistory">
+			<item value="panelCodOfi"/>
+			<item value="panelPrincipal"/>
 			<item value="&quot;Cancelar&quot;"/>
 			<item value="&quot;Aceptar&quot;"/>
 		</list>

@@ -108,6 +108,7 @@ public class FormuEmpleado extends JFrame {
 		tbDNI.setColumns(10);
 		
 		tbNombre = new JTextField();
+		tbNombre.setEnabled(false);
 		tbNombre.setBounds(60, 65, 97, 22);
 		contentPane.add(tbNombre);
 		tbNombre.setColumns(10);
@@ -117,11 +118,13 @@ public class FormuEmpleado extends JFrame {
 		contentPane.add(lblApellidos);
 		
 		tbAp1 = new JTextField();
+		tbAp1.setEnabled(false);
 		tbAp1.setBounds(70, 91, 110, 20);
 		contentPane.add(tbAp1);
 		tbAp1.setColumns(10);
 		
 		tbAp2 = new JTextField();
+		tbAp2.setEnabled(false);
 		tbAp2.setBounds(195, 91, 115, 20);
 		contentPane.add(tbAp2);
 		tbAp2.setColumns(10);
@@ -155,14 +158,31 @@ public class FormuEmpleado extends JFrame {
 		contentPane.add(lblFechaAlta);
 		
 		spinner = new JSpinner();
+		spinner.setEnabled(false);
 		spinner.setModel(new SpinnerDateModel(new Date(1650232800000L), new Date(9241200000L), null, Calendar.DAY_OF_YEAR));
 		spinner.setBounds(106, 170, 97, 20);
 		contentPane.add(spinner);
+	}
+	/**
+	 * Sobrecarga del constructor que requiere:
+	 * @param tituloVentana El título de la ventana (que queremos que tenga)
+	 */
+	private FormuEmpleado(String tituloVentana)
+	{
+		FormuEmpleado ventanilla = new FormuEmpleado();
+		ventanilla.setTitle(tituloVentana);
 	}
 	
 	public static Empleado showDialog()
 	{
 		FormuEmpleado ventana = new FormuEmpleado();
+		ventana.setVisible(true);
+		
+		return elelegido;
+	}
+	public static Empleado showDialog(String tituloVentana)
+	{
+		FormuEmpleado ventana = new FormuEmpleado(tituloVentana);
 		ventana.setVisible(true);
 		
 		return elelegido;

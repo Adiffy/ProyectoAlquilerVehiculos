@@ -40,7 +40,6 @@
     <fullyQualifiedTypeName name="clasesObjetos.Vehiculo"/>
     <fullyQualifiedTypeName name="metodos.Validadores"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="accesoADatos.RepositorioOficina"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="javax.swing.DefaultComboBoxModel"/>
     <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
@@ -48,16 +47,17 @@
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="javax.swing.JDialog"/>
     <fullyQualifiedTypeName name="javax.swing.table.TableModel"/>
-    <fullyQualifiedTypeName name="accesoADatos.RepositorioEmpleado"/>
     <fullyQualifiedTypeName name="enums.BusquedaPor"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="clasesObjetos.Empleado"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-    <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
     <fullyQualifiedTypeName name="gui.MetodosGUI"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
     <fullyQualifiedTypeName name="gui.Excepciones.ErrorCarnet"/>
     <fullyQualifiedTypeName name="guiExcepciones.LongitudNoValida"/>
+    <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
+    <fullyQualifiedTypeName name="accesoADatos.RepositorioEmpleado"/>
+    <fullyQualifiedTypeName name="accesoADatos.RepositorioOficina"/>
 </qualifiedTypeNameHistroy>

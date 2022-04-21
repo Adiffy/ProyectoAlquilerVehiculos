@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clasesObjetos.Empleado;
+import clasesObjetos.Oficina;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -23,7 +26,7 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JPanel contentPane;
+	private JPanel panelPrincipal;
 
 
 
@@ -32,6 +35,10 @@ public class VentanaPrincipal extends JFrame {
 	 * Crea el Jframe.
 	 */
 	public VentanaPrincipal() {
+		
+		setTitle("Alquiler de vehículos");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("recursos\\Logo.png"));
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
@@ -70,6 +77,13 @@ public class VentanaPrincipal extends JFrame {
 		
 		JMenuItem mntmOficinas = new JMenuItem("Oficinas");
 		mnFicherosMaestros.add(mntmOficinas);
+		mntmOficinas.addActionListener(new ActionListener() 
+				{
+					public void actionPerformed(ActionEvent e) {
+						@SuppressWarnings("unused")
+						Oficina ofi = FormuOficinas.showDialog();
+					}
+				});
 		
 		JMenu mnListados = new JMenu("Listados");
 		menuPrincipal.add(mnListados);
@@ -79,19 +93,19 @@ public class VentanaPrincipal extends JFrame {
 				Empleado Emp = FormuEmpleado.showDialog();				
 			}
 		});
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
+		panelPrincipal = new JPanel();
+		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panelPrincipal.setLayout(new BorderLayout(0, 0));
 		
 		
 		//Creamos el logo
 		JLabel lblLogo = new JLabel("");
 		lblLogo.setIcon(new ImageIcon("recursos\\Europcar-Logo.svg.png"));
 		//Lo ponemos de fondo
-		contentPane.add(lblLogo);
+		panelPrincipal.add(lblLogo);
 		//Ponemos color de fondo igual que el de la imagen
-		contentPane.setBackground(new Color(14,129,2,255));
-		setContentPane(contentPane);
+		panelPrincipal.setBackground(new Color(14,129,2,255));
+		setContentPane(panelPrincipal);
 
 	}
 
