@@ -19,12 +19,14 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import accesoADatos.RepositorioEmpleado;
 import clasesObjetos.Empleado;
 import clasesObjetos.Oficina;
 import enums.BusquedaPor;
 
 /**
- * Clase que sirve para crear una ventana de búsqueda genérica
+ * Clase que sirve para crear una ventana de búsqueda 'genérica'
  * @author Víctor J. Esquinas García
  *
  */
@@ -42,9 +44,11 @@ public class VentanaBusqueda extends JDialog {
 	public Empleado Emplelegido;
 	private JTable tablaDatos;
 	private JTextField textFieldDNI;
-	private JTextField textFieldNombre;
 	private JTextField textFieldAp1;
 	private JTextField textFieldAp2;
+	private JTextField textFieldNombre;
+	private JComboBox<Oficina> comboBox;
+	private JSpinner spinnerFechaAlta;
 	
 
 	/**
@@ -77,7 +81,7 @@ public class VentanaBusqueda extends JDialog {
 		btnAceptar.setToolTipText("Guarda los cambios realizados");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO
+				//TODO INSERT / UPDATE Empleado/cliente..
 			}
 		});
 		abajo.add(btnAceptar);
@@ -124,6 +128,21 @@ public class VentanaBusqueda extends JDialog {
 		panelDNI.add(lblDni);
 		
 		textFieldDNI = new JTextField();
+		textFieldDNI.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Cuando presiona el Intro buscamos el empleado por su DNI
+				Emplelegido = RepositorioEmpleado.leeEmpleado(textFieldDNI.getText());
+				
+				if (Emplelegido != null)	//Si existe
+				{
+					textFieldNombre.setText(Emplelegido.getNombre());
+					textFieldAp1.setText(Emplelegido.getApellido1());
+					textFieldAp2.setText(Emplelegido.getApellido2());
+					spinnerFechaAlta.setModel(null);
+					comboBox.setSelectedItem((Oficina) Emplelegido.getOficina());
+				}
+			}
+		});
 		textFieldDNI.setToolTipText("Escriba un DNI v\u00E1lido");
 		panelDNI.add(textFieldDNI);
 		textFieldDNI.setColumns(12);
@@ -139,6 +158,7 @@ public class VentanaBusqueda extends JDialog {
 		panelNombre.add(lblNombre);
 		
 		textFieldNombre = new JTextField();
+		textFieldNombre.setEnabled(false);
 		panelNombre.add(textFieldNombre);
 		textFieldNombre.setColumns(15);
 		
@@ -153,6 +173,7 @@ public class VentanaBusqueda extends JDialog {
 		panel_Apellidos.add(lblAp1);
 		
 		textFieldAp1 = new JTextField();
+		textFieldAp1.setEnabled(false);
 		panel_Apellidos.add(textFieldAp1);
 		textFieldAp1.setColumns(10);
 		
@@ -160,37 +181,38 @@ public class VentanaBusqueda extends JDialog {
 		panel_Apellidos.add(lblAp2);
 		
 		textFieldAp2 = new JTextField();
+		textFieldAp2.setEnabled(false);
 		panel_Apellidos.add(textFieldAp2);
 		textFieldAp2.setColumns(10);
 		
-		JPanel panelContOfi = new JPanel();
-		panelContApellidos.add(panelContOfi, BorderLayout.CENTER);
-		panelContOfi.setLayout(new BorderLayout(0, 0));
+		JPanel panelContOfiFechaAlta = new JPanel();
+		panelContApellidos.add(panelContOfiFechaAlta, BorderLayout.CENTER);
+		panelContOfiFechaAlta.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelFechaAlta = new JPanel();
-		panelContOfi.add(panelFechaAlta, BorderLayout.NORTH);
+		panelContOfiFechaAlta.add(panelFechaAlta, BorderLayout.NORTH);
 		
 		JLabel lblFechaAlta = new JLabel("Fecha de alta");
 		panelFechaAlta.add(lblFechaAlta);
 		
-		JSpinner spinnerFechaAlta = new JSpinner();
+		spinnerFechaAlta = new JSpinner();	//TODO cambiar por JCalendar
 		spinnerFechaAlta.setToolTipText("Fecha de alta del trabajador");
 		spinnerFechaAlta.setModel(new SpinnerDateModel(new Date(1650232800000L), new Date(9241200000L), null, Calendar.DAY_OF_YEAR));
 		spinnerFechaAlta.setEnabled(false);
 		panelFechaAlta.add(spinnerFechaAlta);
 		
-		JPanel panel_1 = new JPanel();
-		panelContOfi.add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new BorderLayout(0, 0));
+		JPanel panel_Oficina = new JPanel();
+		panelContOfiFechaAlta.add(panel_Oficina, BorderLayout.CENTER);
+		panel_Oficina.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panelOfi = new JPanel();
-		panel_1.add(panelOfi, BorderLayout.CENTER);
+		panel_Oficina.add(panelOfi, BorderLayout.CENTER);
 		panelOfi.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JLabel lblOficina = new JLabel("Oficina");
 		panelOfi.add(lblOficina);
 		
-		JComboBox<Oficina> comboBox = MetodosGUI.creaDesplegable();
+		comboBox = MetodosGUI.creaDesplegable();
 		comboBox.setToolTipText("Elija la oficina correspondiente");
 		panelOfi.add(comboBox);
 		comboBox.setEnabled(false);
@@ -198,14 +220,6 @@ public class VentanaBusqueda extends JDialog {
 		
 		JPanel panel_FechaAlta = new JPanel();
 		panelOfi.add(panel_FechaAlta);
-		
-		JLabel lblFech_Alta = new JLabel("Fecha de alta");
-		panel_FechaAlta.add(lblFech_Alta);
-		
-		JSpinner spinner = new JSpinner();
-		panel_FechaAlta.add(spinner);
-		spinner.setModel(new SpinnerDateModel(new Date(1650232800000L), new Date(9241200000L), null, Calendar.DAY_OF_YEAR));
-		spinner.setBounds(106, 170, 97, 20);
 		
 		JPanel panelTabla = new JPanel();
 		panelPrincipal.add(panelTabla, BorderLayout.CENTER);

@@ -87,5 +87,13 @@ public class MetodosGUI {
 		DefaultTableModel model = new DefaultTableModel();
 		return model;
 	}*/
-
+	
+	public static boolean isSelected(Oficina ofi)
+	{
+		boolean resultado;
+		
+		resultado = ofi.isDeAeropuerto() ? true : false;
+		
+		return resultado;
+	}
 }

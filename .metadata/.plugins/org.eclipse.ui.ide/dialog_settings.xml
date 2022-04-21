@@ -7,6 +7,7 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="G:\Mi unidad\Proyecto 2ºTrimestre"/>
 			<item value="C:\Users\Victor\Documents\GitHub\ProyectoAlquilerVehiculos2\Proyecto 2ºTrimestre"/>
 			<item value="G:\Mi unidad\Empresa Alquiler\Proyecto 2ºTrimestre"/>
 			<item value="C:\Users\Victor\Documents\GitHub\ProyectoAlquilerVehiculos2\calculadoraGUI"/>

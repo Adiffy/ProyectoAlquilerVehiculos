@@ -51,6 +51,9 @@
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="accesoADatos.RepositorioOficina"/>
     <fullyQualifiedTypeName name="clasesObjetos.Empleado"/>
-    <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.util.GregorianCalendar"/>
+    <fullyQualifiedTypeName name="java.util.Calendar"/>
+    <fullyQualifiedTypeName name="guiExcepciones.RecargaNoValida"/>
+    <fullyQualifiedTypeName name="metodos.Helpers"/>
 </qualifiedTypeNameHistroy>
