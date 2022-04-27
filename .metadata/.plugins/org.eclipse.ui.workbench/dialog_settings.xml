@@ -29,4 +29,6 @@
 	</section>
 	<section name="ZipFileImportWizard">
 	</section>
+	<section name="org.eclipse.ui.preferences.keysPreferencePage">
+	</section>
 </section>
