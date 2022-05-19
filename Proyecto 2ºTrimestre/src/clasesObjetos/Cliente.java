@@ -1,6 +1,6 @@
 package clasesObjetos;
 
-import exceptions.CarnetRequeridoInvalidoException;
+import exceptions.DNInoValidoException;
 import exceptions.LicenciaNoValidaException;
 import exceptions.LongitudCadenaNoValidaException;
 
@@ -13,7 +13,7 @@ public class Cliente extends Persona{
 	
 	//Propiedades
 	private String licencia;
-	private int tarjeta;	//Nº de tarjeta de cliente habitual
+	private int tarjeta;	//Nï¿½ de tarjeta de cliente habitual
 	
 	//Getters y Setters
 	public int getTarjeta() {
@@ -39,11 +39,11 @@ public class Cliente extends Persona{
 			String license = licencia;
 			this.licencia = license;
 		}else {
-			throw new LicenciaNoValidaException("Licencia no válida, debe ser: A, B, C, D, AM, A1 o A2");
+			throw new LicenciaNoValidaException("Licencia no vï¿½lida, debe ser: A, B, C, D, AM, A1 o A2");
 		}
 	}
 
-	public Cliente(String nombre, String apellido1, String apellido2, String dni, String carnet, int tarjeta) throws LicenciaNoValidaException, CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException {
+	public Cliente(String nombre, String apellido1, String apellido2, String dni, String carnet, int tarjeta) throws LicenciaNoValidaException, LongitudCadenaNoValidaException, DNInoValidoException {
 		super(nombre, apellido1, apellido2, dni);
 		this.setLicencia(carnet);
 		this.setTarjeta(tarjeta);
@@ -51,7 +51,7 @@ public class Cliente extends Persona{
 
 	@Override
 	public String toString() {
-		return "Cliente | " + dni + ", con tarjeta" + tarjeta +", "+ getNombreCompleto()+" | Licencia: "+ licencia ;
+		return getNombreCompleto() ;
 	}
 
 	

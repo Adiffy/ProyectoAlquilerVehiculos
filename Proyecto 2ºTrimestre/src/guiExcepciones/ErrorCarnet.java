@@ -30,14 +30,14 @@ public class ErrorCarnet extends JDialog {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("recursos\\Europcar-Logo.svg.png"));
 		setModal(true);
-		setBounds(100, 100, 328, 167);
+		setBounds(100, 100, 239, 129);
 		getContentPane().setLayout(new BorderLayout());
 		panel.setLayout(new FlowLayout());
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(panel, BorderLayout.CENTER);
 		{
 			JLabel lblMensajeError = new JLabel("Debe elegir un carnet v\u00E1lido");
-			lblMensajeError.setIcon(new ImageIcon("recursos\\16\\cross.png"));
+			lblMensajeError.setIcon(new ImageIcon("recursos\\16\\close.png"));
 			panel.add(lblMensajeError);
 		}
 		{
@@ -49,11 +49,6 @@ public class ErrorCarnet extends JDialog {
 				okButton.setActionCommand("Aceptar");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setActionCommand("Cancelar");
-				buttonPane.add(cancelButton);
 			}
 		}
 	}

@@ -1,18 +1,21 @@
 package accesoADatos;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import clasesObjetos.Oficina;
 
 public class RepositorioOficina {
 
 	
 	/**
-	 * Método que devuelve un ArrayList de Oficinas sacadas de la base de datos
-	 * @return	el {@code ArrayList<Oficina>} extraído de la consulta
+	 * Mï¿½todo que devuelve un ArrayList de Oficinas sacadas de la base de datos
+	 * @return	el {@code ArrayList<Oficina>} extraï¿½do de la consulta
 	 * @throws SQLException	Error al realizar la consulta
 	 */
 	public static ArrayList<Oficina> listaOficinas() throws SQLException
@@ -26,7 +29,7 @@ public class RepositorioOficina {
 		{
 			//Cogemos una oficina
 			String codigo = resultados.getString("codigo");
-			//La añadimos al ArrayList
+			//La aï¿½adimos al ArrayList
 			lista.add(leeOficina(codigo));
 		}
 		st.close(); 	//Cerramos la conexion
@@ -34,7 +37,7 @@ public class RepositorioOficina {
 	}
 	
 	/**
-	 * Devuelve una oficina de la base de datos a partir de su código
+	 * Devuelve una oficina de la base de datos a partir de su cï¿½digo
 	 * Por ejemplo: JA01, MA01...
 	 * @param codigo El codigo de la oficina. Es una {@code String}
 	 * @return	La oficina WHERE codigo = codigo escrito
@@ -44,9 +47,9 @@ public class RepositorioOficina {
 		PreparedStatement st = null;
 		ResultSet rs;
 		Oficina ofi = null;
-		String sql="SELECT * FROM Oficina WHERE codigo=?";
+		String sql="SELECT * FROM Oficina WHERE codigo=UPPER(?)";
+		boolean deAeropuerto = false;
 		
-		//TODO averiguar si existe para hacer UPDATE / INSERT
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, codigo);
@@ -55,15 +58,199 @@ public class RepositorioOficina {
 			while (rs.next())
 			{
 				//Solo va a devolver 1(porque estamos preguntando por la PK) asi q no hay problema de sobre escritura
-				ofi = new Oficina(rs.getString("CODIGO"), rs.getString("DESCRIPCION"), rs.getString("PROVINCIA"), rs.getString("LOCALIDAD"), rs.getBoolean("DEAEROPUERTO"));
+//				rs.getBoolean("DEAEROPUERTO")
+				switch (rs.getString("DEAEROPUERTO"))
+				{
+				case "T":
+					deAeropuerto = true;
+					break;
+				case "F":
+					deAeropuerto = false;
+				}
+				
+				ofi = new Oficina(rs.getString("CODIGO"), rs.getString("DESCRIPCION"), rs.getString("PROVINCIA"), rs.getString("LOCALIDAD"), deAeropuerto);
 			}
-			//Cerramos la conexión
+			//Cerramos la conexiï¿½n
+			rs.close();
+			st.close();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null,
+				    "Error al intentar leer oficina(de cï¿½digo "+codigo+" de Base de Datos.",
+				    "DataBase error",
+				    JOptionPane.ERROR_MESSAGE);			
+			e.printStackTrace();
+		}
+		
+		return ofi;
+	}
+	
+	public static boolean borraOficina(String codigo)
+	{
+		boolean borrado = false;	//A priori no estï¿½ borrado
+		PreparedStatement st = null;
+		ResultSet rs;
+		String sql="DELETE FROM Oficina WHERE codigo=UPPER(?)";
+
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setString(1, codigo);
+			rs = st.executeQuery();
+			
+			if (rs.next())
+			{
+				borrado = true;
+			}
+			//Guardamos los cambios
+			st.executeUpdate("COMMIT");
+			//Cerramos la conexiï¿½n
+			rs.close();
 			st.close();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
+		return borrado;
+	}
+	
+	public static boolean insertOficina(Oficina Ofi)
+	{
+		boolean ejecutado=false;	//A priori suponemos que no ha podido ejecutarse
 		
-		return ofi;
+		//Averiguamos si existe para hacer UPDATE / INSERT
+		if (leeOficina(Ofi.getCÃ³digo())!=null)
+		{
+			update(Ofi);	//Si existe se Actualiza la ya existente
+			ejecutado = true;
+		}else {		
+			insert(Ofi);	//Si no existe la operaciï¿½n serï¿½ un insert
+			ejecutado = true;
+		}
+		return ejecutado;
+	}
+	
+	private static void update(Oficina Ofi)
+	{
+		String sql="UPDATE oficina SET "+ tuplaDif(Ofi) + " = "+ cambioTupla(Ofi);
+		PreparedStatement st = null;
+		try {	//Ejecutamos la consulta
+			st = EmpresaDB.conn.prepareStatement(sql);
+			//Hallamos los datos de la oficina y los metemos al Statement
+			st = datosOficina(Ofi,sql,st);
+			st.executeUpdate();
+			st.execute("COMMIT");
+			st.close();
+		}catch (SQLException e) {
+			// Imprimimos error en la consola y sacamos ventana de error
+			JOptionPane.showMessageDialog(null, "Error al insertar la oficina de cï¿½digo "+Ofi.getCÃ³digo(),"DataBase Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+
+	private static String cambioTupla(Oficina Ofi) {
+		//Devolvemos la columna a priori
+		Object devolver =  getTupla(Ofi);
+		//Pero si es la propiedad buleana deAeropuerto
+		if (devolver.getClass().getSimpleName().compareToIgnoreCase("boolean")==0)
+		{
+			if (Ofi.isDeAeropuerto())
+			{
+				devolver='T';
+			}else {
+				devolver='F';
+			}
+		}
+		return devolver.toString();
+	}
+	
+	/**
+	 * Mï¿½todo que devuelve el nombre de la tupla
+	 * que es diferente en base de datos
+	 * Se le da el cï¿½digo de la Oficina, consulta en base de datos y 
+	 * el mï¿½todo devuelve el nombre de la primera columna que tenga 
+	 * un valor diferente
+	 */
+	private static String tuplaDif(Oficina oficina)
+	{
+		String nombColumn = null;
+		String cod = oficina.getCÃ³digo();	//Hallamos la oficina en BD
+		Oficina ofi = leeOficina(cod);
+		//Comparamos su atributo diferente
+		if (ofi.getDescripciÃ³n().compareToIgnoreCase(oficina.getDescripciÃ³n())!=0)
+		{
+			nombColumn = "Descripcion";
+		}else if (ofi.getLocalidad().compareToIgnoreCase(oficina.getLocalidad())!=0)
+		{
+			nombColumn = "Localidad";
+		}else if (ofi.getProvincia().compareToIgnoreCase(oficina.getProvincia())!=0)
+		{
+			nombColumn = "Provincia";
+		}else if(ofi.isDeAeropuerto()==oficina.isDeAeropuerto())
+		{
+			nombColumn = "DeAeropuerto";
+		}
+		return nombColumn;
+	}
+	
+	/**
+	 * Mï¿½todo que devuelve el getter de Oficina que se corresponde
+	 * a la tupla diferente
+	 * @param oficina la oficina
+	 * @return	el nombre del getter
+	 */
+	private static Object getTupla(Oficina oficina)
+	{
+		//Lo que vamos a devolver
+		Object geter = null;
+		switch(tuplaDif(oficina))
+		{
+		case "Descripcion":
+			geter = oficina.getDescripciÃ³n();
+			break;
+		case "Localidad":
+			geter = oficina.getLocalidad();
+			break;
+		case "Provincia":
+			geter = oficina.getProvincia();
+			break;
+		case "DeAeropuerto":
+			geter = oficina.isDeAeropuerto();
+			break;
+		}
+		return geter;
+	}
+	
+	private static void insert(Oficina Ofi)
+	{
+		String sql="INSERT INTO oficina VALUES (?,?,?,?,?)";
+		PreparedStatement st = null;
+		try {	//Ejecutamos la consulta
+			st = EmpresaDB.conn.prepareStatement(sql);
+			//Hallamos los datos de la oficina y los metemos al Statement
+			st = datosOficina(Ofi,sql,st);
+			st.execute();
+			//Guardamos los cambios
+			st.execute("COMMIT");
+			//Cerramos la conexion
+			st.close();
+		}catch (SQLException e) {
+			// Imprimimos error en la consola y sacamos ventana de error
+			JOptionPane.showMessageDialog(null, "Error al insertar la oficina de cï¿½digo "+Ofi.getCÃ³digo(),"DataBase Error",JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+	
+	private static PreparedStatement datosOficina(Oficina ofi, String sql, PreparedStatement st)
+	{
+		try {
+			st.setString(1, ofi.getCÃ³digo());
+			st.setString(2, ofi.getDescripciÃ³n());
+			st.setString(3, ofi.getProvincia());
+			st.setString(4, ofi.getLocalidad());
+			st.setBoolean(5, ofi.isDeAeropuerto());
+		} catch (SQLException e) {
+			// Error por consola
+			e.printStackTrace();
+		}
+		return st;
 	}
 }

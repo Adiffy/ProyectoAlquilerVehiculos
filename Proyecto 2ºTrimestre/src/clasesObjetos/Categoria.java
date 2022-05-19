@@ -1,6 +1,7 @@
 package clasesObjetos;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import exceptions.RecargoNoValidoException;
 
@@ -71,7 +72,7 @@ public class Categoria implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Categoria " + codigo + "-" + descripcion;
+		return codigo + "-" + descripcion;
 	}
 	
 	/*
@@ -117,6 +118,19 @@ public class Categoria implements Serializable {
 		this.setCodigo(codcop);
 		this.setDescripcion(desccop);
 		this.setRecargo(recargocop);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Categoria otra = (Categoria) obj;
+		return Objects.equals(codigo, otra.codigo) && Objects.equals(descripcion, otra.descripcion)
+				&& Double.doubleToLongBits(recargo) == Double.doubleToLongBits(otra.recargo);
 	}
 	
 }

@@ -15,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 
 import clasesObjetos.Empleado;
 import clasesObjetos.Oficina;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -36,7 +35,7 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public VentanaPrincipal() {
 		
-		setTitle("Alquiler de vehículos");
+		setTitle("Alquiler de vehÃ­culos");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("recursos\\Logo.png"));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,23 +47,30 @@ public class VentanaPrincipal extends JFrame {
 		JMenu mnFicherosMaestros = new JMenu("Ficheros maestros");
 		menuPrincipal.add(mnFicherosMaestros);
 		
-		JMenu mnVehiculos = new JMenu("Vehiculos");
+		JMenuItem mnVehiculos = new JMenuItem("Vehiculos");
+		mnVehiculos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				FormuVehiculo ventana = new FormuVehiculo();
+//				ventana.setVisible(true);
+				FormuVehiculos.showDialog();
+			}
+		});
 		mnFicherosMaestros.add(mnVehiculos);
 		
-		JMenu mncoche = new JMenu("Coches");
-		mnVehiculos.add(mncoche);
+//		JMenu mncoche = new JMenu("Coches");
+//		mnVehiculos.add(mncoche);
 		
-		JMenuItem mntmDeCombustion = new JMenuItem("De combusti\u00F3n");
-		mncoche.add(mntmDeCombustion);
+//		JMenuItem mntmDeCombustion = new JMenuItem("De combusti\u00F3n");
+//		mncoche.add(mntmDeCombustion);
+//		
+//		JMenuItem mntmElectrico = new JMenuItem("El\u00E9ctricos");
+//		mncoche.add(mntmElectrico);
 		
-		JMenuItem mntmElectrico = new JMenuItem("El\u00E9ctricos");
-		mncoche.add(mntmElectrico);
-		
-		JMenuItem mntmFurgo = new JMenuItem("Furgonetas");
-		mnVehiculos.add(mntmFurgo);
-		
-		JMenuItem mntmMoto = new JMenuItem("Motos");
-		mnVehiculos.add(mntmMoto);
+//		JMenuItem mntmFurgo = new JMenuItem("Furgonetas");
+//		mnVehiculos.add(mntmFurgo);
+//		
+//		JMenuItem mntmMoto = new JMenuItem("Motos");
+//		mnVehiculos.add(mntmMoto);
 		
 		JMenu mnPersonas = new JMenu("Personas");
 		mnFicherosMaestros.add(mnPersonas);
@@ -73,20 +79,66 @@ public class VentanaPrincipal extends JFrame {
 		mnPersonas.add(mntmEmpleado);
 		
 		JMenuItem mntmClientes = new JMenuItem("Clientes");
+		mntmClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FormuCliente.showDialog();
+			}
+		});
 		mnPersonas.add(mntmClientes);
 		
 		JMenuItem mntmOficinas = new JMenuItem("Oficinas");
 		mnFicherosMaestros.add(mntmOficinas);
+		
+		JMenuItem mntmCategorias = new JMenuItem("Categor\u00EDas");
+		mntmCategorias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FormuCategoria.showFormuCat();;
+				
+			}
+		});
+		mnFicherosMaestros.add(mntmCategorias);
 		mntmOficinas.addActionListener(new ActionListener() 
 				{
 					public void actionPerformed(ActionEvent e) {
 						@SuppressWarnings("unused")
-						Oficina ofi = FormuOficinas.showDialog();
+						Oficina ofi = FormuOficina.showDialog();
 					}
 				});
 		
 		JMenu mnListados = new JMenu("Listados");
 		menuPrincipal.add(mnListados);
+		
+		JMenuItem mntmTablaEmpleados = new JMenuItem("Empleados");
+		mntmTablaEmpleados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TablaEmpleado.showDialog();
+			}
+		});
+		
+		JMenuItem mntmTablaOficinas = new JMenuItem("Oficinas");
+		mntmTablaOficinas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TablaOficina.showTablaOficinas();
+			}
+		});
+		mnListados.add(mntmTablaOficinas);
+		mnListados.add(mntmTablaEmpleados);
+		
+		JMenuItem mntmCliente = new JMenuItem("Clientes");
+		mntmCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TablaCliente.showDialogModal();
+			}
+		});
+		mnListados.add(mntmCliente);
+		
+		JMenuItem mntmAlquiler = new JMenuItem("Realizar alquiler");
+		mntmAlquiler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FormuAlquiler.showFrame();
+			}
+		});
+		menuPrincipal.add(mntmAlquiler);
 		mntmEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				@SuppressWarnings("unused")
@@ -107,6 +159,13 @@ public class VentanaPrincipal extends JFrame {
 		panelPrincipal.setBackground(new Color(14,129,2,255));
 		setContentPane(panelPrincipal);
 
+	}
+	
+	public static void showFrame()
+	{
+		VentanaPrincipal alquileres = new VentanaPrincipal();
+		alquileres.setExtendedState(JFrame.MAXIMIZED_BOTH); //La ventana se abre maximizada
+		alquileres.setVisible(true);
 	}
 
 }

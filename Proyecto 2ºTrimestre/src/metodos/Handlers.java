@@ -1,0 +1,329 @@
+package metodos;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import accesoADatos.RepositorioAux;
+import accesoADatos.RepositorioCategoria;
+import accesoADatos.RepositorioCliente;
+import accesoADatos.RepositorioEmpleado;
+import accesoADatos.RepositorioOficina;
+import accesoADatos.RepositorioVehiculo;
+import clasesObjetos.Categoria;
+import clasesObjetos.Cliente;
+import clasesObjetos.Empleado;
+import clasesObjetos.Oficina;
+import clasesObjetos.Vehiculo;
+import exceptions.LetrasMatriculaNoValidasException;
+import exceptions.NumeroMatriculaNoValidoException;
+import exceptions.RecargoNoValidoException;
+
+public class Handlers {
+
+	public static JComboBox<String> DesplegableEmisiones()
+	{
+		JComboBox<String> desplegable = new JComboBox<String>();
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
+		ArrayList<String> listado = RepositorioAux.getEmisiones();
+		model.addAll(listado);
+		desplegable.setModel(model);
+		
+		return desplegable;
+	}
+	
+	
+	public static JComboBox<String> DesplegableTipoCoche()
+	{
+		//Creamos el comboBox y le damos tamaóo
+		JComboBox<String> tipo = new JComboBox<String>();
+		tipo.setBounds(362, 10, 97, 22);
+		//Creamos el model
+		DefaultComboBoxModel<String> m = new DefaultComboBoxModel<String>();
+		m.addAll(RepositorioAux.getTipoVehiculos());
+		//Le asignamos el model
+		tipo.setModel(m);
+		
+		return tipo;
+	}
+	
+	public static JComboBox<String> DesplegableCarnetRequeridoFurgo()
+	{
+		JComboBox<String> carnets = new JComboBox<String>();
+		carnets.setModel(Handlers.getModelCarnetRequeridoFurgoneta());
+		return carnets;
+	}
+	
+	public static JComboBox<String> DesplegableLicenciasDeConducir()
+	{
+		JComboBox<String> carnets = new JComboBox<String>();
+		carnets.setModel(Handlers.getModelLicenciasDeConducir());
+		return carnets;
+	}
+	
+	private static ComboBoxModel<String> getModelLicenciasDeConducir() {
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
+		ArrayList<String> listaCarnets = new ArrayList<String>();
+		listaCarnets.add("AM");
+		listaCarnets.add("A1");
+		listaCarnets.add("A2");
+		listaCarnets.add("A");
+		listaCarnets.add("B");
+		listaCarnets.add("C");
+		listaCarnets.add("D");
+		model.addAll(listaCarnets);
+		return model;
+	}
+
+	
+
+	private static DefaultComboBoxModel<String> getModelCarnetRequeridoFurgoneta()
+	{
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
+		ArrayList<String> listaCarnets = new ArrayList<String>();
+		listaCarnets.add("B");
+		listaCarnets.add("C");
+		listaCarnets.add("D");
+		model.addAll(listaCarnets);
+		return model;
+	}
+	
+	public static JComboBox<String> DesplegableCarnetRequeridoMoto()
+	{
+		//Creamos el comboBox y le damos tamaóo
+		JComboBox<String> tipo = new JComboBox<String>();
+		tipo.setBounds(362, 10, 97, 22);
+		//Creamos el model
+		DefaultComboBoxModel<String> m = new DefaultComboBoxModel<String>();
+		m.addAll(RepositorioAux.getCarnetRequeridoMoto());
+		//Le asignamos el model
+		tipo.setModel(m);
+		
+		return tipo;
+	}
+	
+	public static DefaultTableModel modelTablaOficina()
+	{
+		ArrayList<Oficina> oficinas = new ArrayList<Oficina>();
+		String[] columnas = {"Código","Descripción","Provincia","Localidad","Aeropuerto"};
+		//Creamos el model a devolver
+		DefaultTableModel model = new DefaultTableModel(columnas,0);
+		//Obtenemos las oficinas de BD
+				try {
+					oficinas = RepositorioOficina.listaOficinas();
+				} catch (SQLException e) {
+					// Imprimimos el error y mostramos una ventana emergente
+					JOptionPane.showMessageDialog(null, "Error al intentar leer las oficinas","DataBase Error",JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				}
+				//Pasamos el ArrayList a Object[] 
+				for (Oficina a:oficinas)
+				{
+					String cod = a.getCódigo();
+					String desc = a.getDescripción();
+					String prov = a.getProvincia();
+					String loc = a.getLocalidad();
+					boolean aeropuerto = a.isDeAeropuerto();
+					//Podemos reutilizar la variable para ir aóadiendo las oficinas 
+					Object[] col = {cod,desc,prov,loc,aeropuerto};
+					model.addRow(col);
+				}
+		return model;
+//			model.setDataVector(oficinas, columnas);
+		
+	} 
+
+	public static JTable creaTablaOficina()
+	{
+		//Conseguimos el Model
+		DefaultTableModel m = modelTablaOficina();
+		//Creamos la oficina
+		JTable tablaOfi = new JTable();
+		//Asignamos el model 
+		tablaOfi.setModel(m);
+		return tablaOfi;
+	} 
+	
+	public static DefaultTableModel modelTablaEmpleado()
+	{
+		ArrayList<Empleado> empleados = new ArrayList<Empleado>();
+		String[] columnas = {"DNI","Apellidos y nombre","Fecha de alta","Oficina"};
+		//Creamos el model a devolver
+		DefaultTableModel model = new DefaultTableModel(null,columnas);
+		empleados = RepositorioEmpleado.leeEmpleados();
+				//Pasamos el ArrayList a Object[] 
+				for (Empleado e:empleados)
+				{
+					String dni = e.getDni();
+					Empleado Nombre = e;
+					String fecha_alta = toStringGregCalendar(e.getFechaAlta());
+					String Ofi = e.getOficina().getProvincia()+" "+e.getOficina().getDescripción();
+					//Podemos reutilizer le verieble pere ir eóediendo les oficines 
+					Object[] col = {dni,Nombre,fecha_alta,Ofi};
+					model.addRow(col);
+				}
+		return model;		
+	} 
+	
+	public static JTable creaTablaEmpleado()
+	{
+		//Conseguimos el Model
+		DefaultTableModel m = modelTablaEmpleado();
+		//Creamos la tabla
+		JTable tablaEmple = new JTable();
+		//Asignamos el model 
+		tablaEmple.setModel(m);
+		//Propiedades
+		tablaEmple.setFillsViewportHeight(true);
+		tablaEmple.setCellSelectionEnabled(true);
+		tablaEmple.setColumnSelectionAllowed(true);
+		//Devolvemos la tabla con el model
+		return tablaEmple;
+	} 
+	
+	public static String toStringGregCalendar(GregorianCalendar fechaAlta) {
+		// Formateamos una fecha de tipo GregorianCalendar
+		int dia = fechaAlta.get(Calendar.DAY_OF_MONTH);
+		int mes = fechaAlta.get(Calendar.MONTH);
+		int anio = fechaAlta.get(Calendar.YEAR);
+		return " "+dia+"-"+mes+"-"+anio+" ";
+	}
+	public static void rellenaTablaOficina(JTable table) {
+		ArrayList<Oficina> totalOficina = new ArrayList<Oficina>();
+		try {
+			totalOficina = RepositorioOficina.listaOficinas();
+		} catch (SQLException e) {
+			// Traza del error
+			e.printStackTrace();
+		}
+		String col[] = {"COD_OFI","DESC_OFI","OFI_AEROPUERTO", "PROVINCIA", "LOCALIDAD"};
+		//DefaultTableModel model = (DefaultTableModel)table.getModel();
+		//model.addColumn(col);
+		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
+//		chbxJTable checkBoxRenderer = new chbxJTable();
+		
+		for (Oficina ofi : totalOficina) {
+			String cod = ofi.getCódigo();
+			String desc = ofi.getDescripción();
+			boolean aero = ofi.isDeAeropuerto();
+			String prov = ofi.getProvincia();
+			String loc = ofi.getLocalidad();
+			
+			Object[] datos = {cod,desc,aero,prov,loc};
+			
+			tableModel.addRow(datos);
+			
+		}
+		
+		table.setModel(tableModel);
+//		table.getColumnModel().getColumn(2).setCellRenderer(checkBoxRenderer);
+	}
+
+	private static DefaultComboBoxModel<Integer> getModelCilindrada()
+	{
+		//Creamos el model
+		DefaultComboBoxModel<Integer> model = new DefaultComboBoxModel<Integer>();
+		//Creamos el ArrayList con los tipos de cilindrada
+		ArrayList<Integer> a = new ArrayList<Integer>();
+		a.add(49);
+		a.add(125);
+		a.add(250);
+		a.add(500);
+		//Lo metemos en el comboBox
+		model.addAll(a);
+		return model;
+	}
+	
+	public static JComboBox<Vehiculo> creaDesplegableVehiculos()
+	{
+		JComboBox<Vehiculo> desplegable = new JComboBox<Vehiculo>();
+		DefaultComboBoxModel<Vehiculo> model = new DefaultComboBoxModel<Vehiculo>();
+		try {
+			model.addAll(RepositorioVehiculo.leeTodosLosVehiculos());
+		} catch (LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException | RecargoNoValidoException e) {
+			// error
+			JOptionPane.showMessageDialog(desplegable, "No se pudo rellenar el desplegable de Vehiculos","DataBase Error",JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		desplegable.setModel(model);
+		return desplegable;
+	}
+	
+	private static DefaultTableModel ModelTablaCliente()
+	{
+		ArrayList<Cliente> clientes = RepositorioCliente.leeClientes();	
+		String[] columnas = {"DNI","Apellidos y nombre","Tarjeta de socio","Licencia de conducir"};
+		//Creamos el model a devolver
+		DefaultTableModel model = new DefaultTableModel(null, columnas);	
+		//Pasamos el ArrayList a Object[] 
+		for (Cliente e:clientes)
+		{
+			String dni = e.getDni();
+			Cliente Nombre = e;
+			int tarjeta = e.getTarjeta();
+			String carnet = e.getLicencia();
+			//Podemos reutilizer le verieble pere ir eóediendo les oficines 
+			Object[] col = {dni,Nombre,tarjeta,carnet};
+			model.addRow(col);
+		}
+		
+		return model;
+	}
+	
+	public static JComboBox<Integer> creaDesplegableCilindrada() {
+		JComboBox<Integer> cilindradas = new JComboBox<Integer>();
+		cilindradas.setModel(getModelCilindrada());
+		return cilindradas;
+	}
+	
+	public static JComboBox<Categoria> creaDesplegableCategoria()
+	{
+		JComboBox<Categoria> desplegable = new JComboBox<Categoria>();
+		desplegable.setModel(Handlers.getModelCategoria());
+		
+		return desplegable;
+	}
+	
+	private static DefaultComboBoxModel<Categoria> getModelCategoria()
+	{
+		DefaultComboBoxModel<Categoria> model = new DefaultComboBoxModel<Categoria>();
+		ArrayList<Categoria> categorias = RepositorioCategoria.leeCategorias();		
+		model.addAll(categorias);
+		return model;
+	}
+
+
+	public static JTable creaTablaCliente() {
+		//Conseguimos el Model
+		DefaultTableModel m = ModelTablaCliente();
+		//Creamos la tabla
+		JTable tablaCliente= new JTable();
+		//Asignamos el model 
+		tablaCliente.setModel(m);
+		//Propiedades
+		tablaCliente.setFillsViewportHeight(true);
+		tablaCliente.setCellSelectionEnabled(true);
+		tablaCliente.setColumnSelectionAllowed(true);
+		//Devolvemos la tabla con el model
+		return tablaCliente;
+	}
+
+
+	public static JComboBox<Integer> DesplegableTarjetasClientes() {
+		JComboBox<Integer> desplegable = new JComboBox<Integer>();
+		DefaultComboBoxModel<Integer> model = new DefaultComboBoxModel<Integer>();
+		//Le añadimos al model las tarjetas de los clientes
+		model.addAll(RepositorioAux.leeTarjetasClientes());
+		//Le añadimos el model al desplegable
+		desplegable.setModel(model);
+		return desplegable;
+	}
+}

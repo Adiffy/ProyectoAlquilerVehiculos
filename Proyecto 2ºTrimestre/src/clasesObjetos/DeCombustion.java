@@ -29,7 +29,7 @@ public abstract class DeCombustion extends Vehiculo {
 		{
 			this.consumo = consumo;
 		}else {
-			throw new ConsumoNoValidoException("Consumo inferior o igual a 0, no admitido");
+//			throw new ConsumoNoValidoException("Consumo inferior o igual a 0, no admitido");
 		}
 	}
 
@@ -43,7 +43,7 @@ public abstract class DeCombustion extends Vehiculo {
 		{
 			this.potencia = potencia;
 		}else {
-			throw new PotenciaNoValidaException("Potencia inferior o igual a 50");
+//			throw new PotenciaNoValidaException("Potencia inferior o igual a 50");
 		}
 	}
 

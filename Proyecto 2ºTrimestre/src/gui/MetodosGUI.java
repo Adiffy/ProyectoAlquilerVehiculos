@@ -2,11 +2,17 @@ package gui;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import com.toedter.calendar.JDateChooser;
+
+import accesoADatos.RepositorioAux;
 import accesoADatos.RepositorioEmpleado;
 import accesoADatos.RepositorioOficina;
 import clasesObjetos.Empleado;
@@ -20,10 +26,18 @@ public class MetodosGUI {
 	
 	public static void centraVentana(JFrame ventana)
 	{
-			//Leemos el tamaño de la pantalla donde se ejecuta el programa
+			//Leemos el tamaï¿½o de la pantalla donde se ejecuta el programa
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-			//Hacemos los cálculos para centrarlo y cambiamos su posición
+			//Hacemos los cï¿½lculos para centrarlo y cambiamos su posiciï¿½n
 		ventana.setLocation(dim.width/2-ventana.getSize().width/2, dim.height/2-ventana.getSize().height/2);
+	}
+	
+	public static void centraFormulario(JDialog formulario)
+	{
+			//Leemos el tamaï¿½o de la pantalla donde se ejecuta el programa
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+			//Hacemos los cï¿½lculos para centrarlo y cambiamos su posiciï¿½n
+		formulario.setLocation(dim.width/2-formulario.getSize().width/2, dim.height/2-formulario.getSize().height/2);
 	}
 	
 	// JCOMBOBOX
@@ -45,13 +59,33 @@ public class MetodosGUI {
 		
 		if (m.getSize()>0)	//Si hay alguno
 		{
-			comboBox.setSelectedIndex(0);  	//Lo ponemos en 0 por defecto
+			comboBox.setSelectedIndex(-1);  	//Lo ponemos en -1 por defecto
 		}else {
 			comboBox.setSelectedIndex(-1);  //Lo ponemos en -1 (ninguno seleccionado) al no haber
 		}
 		//Devolvemos el ComboBox
 		return comboBox;
 	}
+	
+	public static JComboBox<String> creaDesplegableProv()
+	{
+		JComboBox<String> combo = new JComboBox<>(); //Creamos el comboBox vacï¿½o
+		DefaultComboBoxModel<String> mod = new DefaultComboBoxModel<String>();	//Creamos el model vacï¿½o
+		//Rellenamos el model
+		mod.addAll(RepositorioAux.leeProvincias());
+		combo.setModel(mod);
+
+		if (mod.getSize()>0)	//Si hay alguno
+		{
+			combo.setSelectedIndex(0);  	//Lo ponemos en 0 por defecto
+		}else {
+			combo.setSelectedIndex(-1);  //Lo ponemos en -1 (ninguno seleccionado) al no haber
+		}
+		//Devolvemos el ComboBox
+		return combo;
+	}
+	
+	//JTABLE
 	
 	public static JTable creaTablaEmpleado()
 	{
@@ -65,7 +99,7 @@ public class MetodosGUI {
 		ArrayList<Empleado> listado = RepositorioEmpleado.leeEmpleados();
 		for (Empleado emple:listado)
 		{
-			//Hacemos un vector con el número de columnas +1 (DATOS + OBJETO)
+			//Hacemos un vector con el nï¿½mero de columnas +1 (DATOS + OBJETO)
 			Object[] datos = new Object[4];
 			//Del empleado que toque rellenamos sus datos
 			datos[0]=emple.getDni();
@@ -76,7 +110,7 @@ public class MetodosGUI {
 		}
 	
 		tableTemp.setModel(model);
-		//Le damos tamaño 0 a la columna que contiene el objeto
+		//Le damos tamaï¿½o 0 a la columna que contiene el objeto
 		tableTemp.getColumnModel().getColumn(3).setPreferredWidth(0);
 		return tableTemp;
 	}
@@ -91,9 +125,58 @@ public class MetodosGUI {
 	public static boolean isSelected(Oficina ofi)
 	{
 		boolean resultado;
-		
+			
 		resultado = ofi.isDeAeropuerto() ? true : false;
 		
 		return resultado;
+	}
+	
+	public static void estadoInicial(JPanel panel)
+	{
+		for (Component co:panel.getComponents())
+		{
+			boolean jlabel = (co.getClass().getSimpleName().compareToIgnoreCase("JLabel")==0);
+			boolean jbutton = (co.getClass().getSimpleName().compareToIgnoreCase("JButton")==0);
+			boolean jpanel = (co.getClass().getSimpleName().compareToIgnoreCase("JPanel")==0);
+			boolean jtextField = (co.getClass().getSimpleName().compareToIgnoreCase("JTextField")==0);
+			boolean jdatechooser = (co.getClass().getSimpleName().compareToIgnoreCase("JDateChooser")==0);
+			boolean jtabbedpane = (co.getClass().getSimpleName().compareToIgnoreCase("JTabbedPane")==0); 
+			//Si no es un JLABEL ni un JButton ni otro JPanel
+			if (!jlabel && !jbutton && !jpanel && !jtabbedpane)
+			{
+				//Lo deshabilitamos
+				co.setEnabled(false);
+				if (jtextField)  //Si es un JTextField lo vaciamos
+				{
+					((JTextField) co).setText("");	//Lo tratamos como JTextField
+				}else if (jdatechooser)
+				{
+					((JDateChooser) co).setDate(null);	//Vaciamos los componentes de fecha
+				}
+			}
+			if (jpanel)	//Si es un panel que se meta dentro 
+			{
+				estadoInicial((JPanel) co);	//Recursividad
+			}
+		}
+	}
+	
+	public static void estadoEditar(JPanel panel)
+	{
+		for (Component co:panel.getComponents())
+		{
+			boolean jlabel = (co.getClass().getSimpleName().compareToIgnoreCase("JLabel")==0);
+			boolean jbutton = (co.getClass().getSimpleName().compareToIgnoreCase("JButton")==0);
+			boolean jpanel = (co.getClass().getSimpleName().compareToIgnoreCase("JPanel")==0);
+			//Si no es un JLABEL ni un JButton ni otro JPanel
+			if (!jlabel && !jbutton && !jpanel)
+			{
+				co.setEnabled(true);
+			}
+			if (jpanel)	//Si es un panel que se meta dentro 
+			{
+				estadoEditar((JPanel) co);	//Recursividad
+			}
+		}
 	}
 }

@@ -1,9 +1,10 @@
 package clasesObjetos;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.TreeMap;
 
-import exceptions.CarnetRequeridoInvalidoException;
+import exceptions.DNInoValidoException;
 import exceptions.LongitudCadenaNoValidaException;
 
 public class Oficina implements Serializable{
@@ -18,11 +19,11 @@ public class Oficina implements Serializable{
 	private TreeMap<String, Empleado> personal;
 	  
 	 
-	private String Codigo; //(es un alfanumérico de 4 letras : JA01, MA10…)
-	private String Descripción; //(“Jaén estación de trenes”, “Málaga principal”
+	private String Codigo; //(es un alfanumÃ³rico de 4 letras : JA001, MA10Ã³)
+	private String DescripciÃ³n; //(Ã³JaÃ³n estaciÃ³n de trenesÃ³, Ã³MÃ³laga principalÃ³
 	private String Localidad;
 	private String Provincia;
-	private boolean deAeropuerto; //Si es o no oficina de aeropuerto (porque esto supone un recargo en los alquileres, según se explica más adelante)
+	private boolean deAeropuerto; //Si es o no oficina de aeropuerto (porque esto supone un recargo en los alquileres, segÃ³n se explica mÃ³s adelante)
 
 	
 	
@@ -31,8 +32,8 @@ public class Oficina implements Serializable{
 //		return new Direccion(ubicacion); //Devolveremos una copia
 //	}
 //	public void setUbicacion(Direccion ubicacion) {
-//		//Suponemos que al haber creado la ubicación ya será correcta
-//		//Aún así, evitaremos el tampering mediante una copia
+//		//Suponemos que al haber creado la ubicaciÃ³n ya serÃ³ correcta
+//		//AÃ³n asÃ³, evitaremos el tampering mediante una copia
 //		this.ubicacion = new Direccion(ubicacion);
 //	}
 	
@@ -47,15 +48,15 @@ public class Oficina implements Serializable{
 			Localidad = jaen;
 		}
 	}
-	public String getDescripción() {
-		String desc = this.Descripción;
+	public String getDescripciÃ³n() {
+		String desc = this.DescripciÃ³n;
 		return desc ;
 	}
-	public void setDescripción(String descripcion) {
+	public void setDescripciÃ³n(String descripcion) {
 		if (descripcion.length()>0)
 		{
 			String desc = descripcion;
-			Descripción = desc;
+			DescripciÃ³n = desc;
 		}
 	}
 	public String getProvincia() {
@@ -69,19 +70,19 @@ public class Oficina implements Serializable{
 			switch (provincia)
 			{
 			case "1":
-				this.Provincia = "Álava";
+				this.Provincia = "Ã³lava";
 				break;
 			case "2":
 				this.Provincia = "Albacete";
 				break;
 			case "4":
-				this.Provincia = "Almería";
+				this.Provincia = "AlmerÃ³a";
 				break;
 			case "5":
 				this.Provincia = "Asturias";
 				break;
 			case "6":
-				this.Provincia = "Ávila";
+				this.Provincia = "Ã³vila";
 				break;
 			case "7":
 				 this.Provincia = "Badajoz";
@@ -93,22 +94,22 @@ public class Oficina implements Serializable{
 				this.Provincia = "Burgos";
 				break;
 			case "10":
-				this.Provincia = "Cáceres";
+				this.Provincia = "CÃ³ceres";
 				break;
 			case "11":
-				this.Provincia = "Cádiz";
+				this.Provincia = "CÃ³diz";
 				break;
 			case "12":
 				this.Provincia = "Cantabria";
 				break;
 			case "13":
-				this.Provincia = "Castellón";
+				this.Provincia = "CastellÃ³n";
 				break;
 			case "14":
 				this.Provincia = "Ciudad Real";
 				break;
 			case "15":
-				this.Provincia = "Córdoba";
+				this.Provincia = "CÃ³rdoba";
 				break;
 			case "16":
 				this.Provincia = "Cuenca";
@@ -120,7 +121,7 @@ public class Oficina implements Serializable{
 				this.Provincia = "Guadalajara";
 				break;
 			case "19":
-				this.Provincia = "Guipúzcoa (Gipuzkoa)";
+				this.Provincia = "GuipÃ³zcoa (Gipuzkoa)";
 				break;
 			case "20":
 				this.Provincia = "Huelva";
@@ -132,10 +133,10 @@ public class Oficina implements Serializable{
 				this.Provincia = "Islas Baleares";
 				break;
 			case "23":
-				this.Provincia = "Jaén";
+				this.Provincia = "JaÃ³n";
 				break;
 			case "24":
-				this.Provincia = "La coruña (A Coruña)";
+				this.Provincia = "La coruÃ³a (A CoruÃ³a)";
 				break;
 			case "25":
 				this.Provincia = "La Rioja";
@@ -144,10 +145,10 @@ public class Oficina implements Serializable{
 				this.Provincia = "Las Palmas";
 				break;
 			case "27":
-				this.Provincia = "León";
+				this.Provincia = "LeÃ³n";
 				break;
 			case "28":
-				this.Provincia = "Lérida (Lleida)";
+				this.Provincia = "LÃ³rida (Lleida)";
 				break;
 			case "29":
 				this.Provincia = "Lugo";
@@ -156,7 +157,7 @@ public class Oficina implements Serializable{
 				this.Provincia = "Madrid";
 				break;
 			case "31":
-				this.Provincia = "Málaga";
+				this.Provincia = "MÃ³laga";
 				break;
 			case "32":
 				this.Provincia = "Murcia";
@@ -221,7 +222,7 @@ public class Oficina implements Serializable{
 			case "52":
 				this.Provincia = "Melilla";
 				break;
-			default:
+			default:	//Si no es numerico, nos han dado el nombre correcto
 				this.Provincia = provincia;
 			}
 //			String jaen = provincia; //Creamos una nueva provincia clon
@@ -233,9 +234,9 @@ public class Oficina implements Serializable{
 	 * @param oficina	La oficina a clonar
 	 */
 	public Oficina(Oficina oficina) {
-		this.setCódigo(oficina.getCódigo());
+		this.setCÃ³digo(oficina.getCÃ³digo());
 		this.setDeAeropuerto(oficina.isDeAeropuerto());
-		this.setDescripción(oficina.getDescripción());
+		this.setDescripciÃ³n(oficina.getDescripciÃ³n());
 		this.setLocalidad(oficina.getLocalidad());
 		this.setProvincia(oficina.getProvincia());
 //		this.setPersonal(oficina.getPersonal());
@@ -243,25 +244,25 @@ public class Oficina implements Serializable{
 	}
 	
 	
-	public Oficina(String código, String descripción,  TreeMap<String, Empleado> personal,  
+	public Oficina(String cÃ³digo, String descripciÃ³n,  TreeMap<String, Empleado> personal,  
 			 String provincia, String localidad, boolean deAeropuerto) {
 		super();
-		this.setCódigo(código);
+		this.setCÃ³digo(cÃ³digo);
 //		this.setUbicacion(ubicacion);
 		this.setPersonal(personal);
-		this.setCódigo(localidad);
-		this.setDescripción(descripción);
+		this.setCÃ³digo(localidad);
+		this.setDescripciÃ³n(descripciÃ³n);
 		this.setLocalidad(localidad);
 		this.setProvincia(provincia);
 		this.setDeAeropuerto(deAeropuerto);
 	}
 	
-	public Oficina(String código, String descripción,   
+	public Oficina(String cÃ³digo, String descripciÃ³n,   
 			 String provincia, String localidad, boolean deAeropuerto) {
 		super();
-		this.setCódigo(código);
+		this.setCÃ³digo(cÃ³digo);
 //		this.setUbicacion(ubicacion);
-		this.setDescripción(descripción);
+		this.setDescripciÃ³n(descripciÃ³n);
 		this.setLocalidad(localidad);
 		this.setProvincia(provincia);
 		this.setDeAeropuerto(deAeropuerto);
@@ -275,11 +276,11 @@ public class Oficina implements Serializable{
 		boolean SIoNO = deAeropuerto;	//Evitamos el tampering
 		this.deAeropuerto = SIoNO;	//Introducimos el valor que queramos T / F
 	}
-	public String getCódigo() {
+	public String getCÃ³digo() {
 		String copiaCod = Codigo;
 		return copiaCod;
 	}
-	public void setCódigo(String code) {
+	public void setCÃ³digo(String code) {
 //		if (Validadores.codigoValidado(code))
 		{
 			String cop = code;
@@ -287,6 +288,8 @@ public class Oficina implements Serializable{
 		}
 		
 	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public TreeMap<String, Empleado> getPersonal() {
 		return (TreeMap<String, Empleado>) personal.clone() ;
@@ -294,15 +297,41 @@ public class Oficina implements Serializable{
 	public void setPersonal(TreeMap<String, Empleado> personal) {
 		this.personal = personal;
 	}
-	public void addEmpleado(Empleado contratado) throws CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException
+	public void addEmpleado(Empleado contratado) throws LongitudCadenaNoValidaException
 	{
 		String clavePrincipal = contratado.getDni() ;
-		this.personal.put(clavePrincipal, new Empleado(contratado)); //Lo añadimos
+		try {
+			this.personal.put(clavePrincipal, new Empleado(contratado));
+		} catch (DNInoValidoException | LongitudCadenaNoValidaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} //Lo aÃ³adimos
 	}
 	
 	@Override
 	public String toString()
 	{
-		return ""+this.getCódigo()+" | "+this.getDescripción() + " - "+this.getProvincia()+", "+this.getLocalidad();
+		return ""+this.getCÃ³digo()+" | "+this.getDescripciÃ³n(); //+ " - "+this.getProvincia()+", "+this.getLocalidad();
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(Codigo, DescripciÃ³n, Localidad, Provincia, deAeropuerto, personal);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+		{
+			return true;
+		}
+		if (obj == null)
+		{
+			return false;
+		}
+		if (getClass() != obj.getClass())
+			return false;
+		Oficina otra = (Oficina) obj;
+		return Objects.equals(Codigo, otra.Codigo);
+	}
+	
+	
 }

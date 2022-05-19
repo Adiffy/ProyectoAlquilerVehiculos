@@ -82,7 +82,7 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 	 * @throws TipoNoValidoException 
 	 */
 	public CocheCombustion(Matricula matricula, String marca, String modelo, Categoria categoria, String color,
-			GregorianCalendar fecha_alta, Oficina oficina, int num_km, int num_plazas, double consumo, String tipo, int potencia, String emisiones, int numDias) throws EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, TipoNoValidoException {
+			GregorianCalendar fecha_alta, Oficina oficina, int num_km, int num_plazas, double consumo, String tipo, int potencia, String emisiones) throws EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, TipoNoValidoException {
 		super(matricula, marca, modelo, categoria, color, fecha_alta, oficina, num_km, consumo, potencia, emisiones);
 		this.setNumPlazas(num_plazas);
 		this.setTipo(tipo);

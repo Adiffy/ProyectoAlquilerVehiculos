@@ -1,8 +1,9 @@
 package clasesObjetos;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import exceptions.CarnetRequeridoInvalidoException;
+import exceptions.DNInoValidoException;
 import exceptions.LongitudCadenaNoValidaException;
 
 public class Empleado extends Persona{
@@ -19,9 +20,11 @@ public class Empleado extends Persona{
 	
 	//Getters y Setters
 	
-	@SuppressWarnings("static-access")
 	public GregorianCalendar getFechaAlta() { //Creamos una nueva fecha espejo
-		return new GregorianCalendar(fechaAlta.YEAR,fechaAlta.MONTH,fechaAlta.DAY_OF_MONTH);
+		int anio = fechaAlta.get(Calendar.YEAR);
+		int mes = fechaAlta.get(Calendar.MONTH);
+		int dia = fechaAlta.get(Calendar.DAY_OF_MONTH);
+		return new GregorianCalendar(anio,mes,dia);
 	}
 
 	public void setFechaAlta(GregorianCalendar fechaAlta) {	//Le hacemos un clon
@@ -47,8 +50,9 @@ public class Empleado extends Persona{
 	 * @param oficinaTrabajo	La {@code Oficina} donde trabaja el {@code Empleado}
 	 * @throws CarnetRequeridoInvalidoException 
 	 * @throws LongitudCadenaNoValidaException 
+	 * @throws DNInoValidoException 
 	 */
-	public Empleado(String nombre, String apellido1, String apellido2, String dni, GregorianCalendar fechaAlta, Oficina oficinaTrabajo) throws CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException {
+	public Empleado(String nombre, String apellido1, String apellido2, String dni, GregorianCalendar fechaAlta, Oficina oficinaTrabajo) throws LongitudCadenaNoValidaException, DNInoValidoException {
 		super(nombre, apellido1, apellido2, dni);
 		this.setFechaAlta(fechaAlta);
 		this.setOficina(oficinaTrabajo);
@@ -59,7 +63,7 @@ public class Empleado extends Persona{
 	 * @throws CarnetRequeridoInvalidoException 
 	 * @throws LongitudCadenaNoValidaException 
 	 */
-	public Empleado(Empleado contratado) throws CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException {
+	public Empleado(Empleado contratado) throws DNInoValidoException, LongitudCadenaNoValidaException {
 		super(contratado.getNombre(),contratado.getApellido2(),contratado.getDni());
 		this.setOficina(contratado.getOficina());
 		this.setFechaAlta(contratado.getFechaAlta());
@@ -67,9 +71,36 @@ public class Empleado extends Persona{
 
 	@Override
 	public String toString() {
-		return "Empleado | " +  dni + ", " + getNombreCompleto();
+		return getNombreCompleto();
 	}
 
+	// Separamos los atributos de un nombre completo
+	public static String getAp1FromNombreCompleto(String nombreCompleto) {
+		return (nombreCompleto.substring(0, nombreCompleto.indexOf(" ")).trim());
+	}
+	
+	public static String getAp2FromNombreCompleto(String nombreCompleto) {
+		return (nombreCompleto.substring(nombreCompleto.indexOf(" "), nombreCompleto.indexOf(" ")).trim());
+	}
+	
+	public static String getNombreFromNombreCompleto(String nombreCompleto)
+	{
+		return (nombreCompleto.substring(nombreCompleto.indexOf(","),nombreCompleto.indexOf(" ")).trim());
+	}
+
+	@Override
+	public boolean equals(Object a) {
+		if (this == a)
+			return true;
+		if (a == null || this.getClass() != a.getClass())
+			return false;
+		Persona dado = (Empleado) a; //Hacemos una copia tipo PERSONA y no OBJETO
+		if (this.getDni() == dado.getDni()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	
 }
  

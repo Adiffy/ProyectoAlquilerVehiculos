@@ -4,11 +4,9 @@ import java.util.GregorianCalendar;
 
 import exceptions.CarnetRequeridoInvalidoException;
 import exceptions.CilindradaNoValidaException;
-import exceptions.ConsumoNoValidoException;
-import exceptions.EmisionesNoValidasException;
-import exceptions.PotenciaNoValidaException;
+import exceptions.TiempoRecargaNoValidoException;
 
-public class Moto extends DeCombustion {
+public class Moto extends Electrico {
 
 	/**
 	 * 
@@ -46,18 +44,18 @@ public class Moto extends DeCombustion {
 		if (carnetRequerido.compareToIgnoreCase("AM")==0 || carnetRequerido.compareToIgnoreCase("A1")==0 || carnetRequerido.compareToIgnoreCase("A2")==0) {
 			this.carnetRequerido = carnetRequerido;
 		}else {
-			throw new CarnetRequeridoInvalidoException("Carnet no válido. Pruebe con 'AM', 'A1' o 'A2'");
+			throw new CarnetRequeridoInvalidoException("Carnet no vï¿½lido. Pruebe con 'AM', 'A1' o 'A2'");
 		}
 	}
 
+
+
 	public Moto(Matricula matricula, String marca, String modelo, Categoria categoria, String color,
-			GregorianCalendar fecha_alta, clasesObjetos.Oficina oficina, int num_km, double consumo,
-			int caballaje, String emisiones, int cilindrada,String carnet) throws EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, CilindradaNoValidaException, CarnetRequeridoInvalidoException {
-		super(matricula, marca, modelo, categoria, color, fecha_alta, oficina, num_km, consumo, caballaje,
-				emisiones);
+			GregorianCalendar fecha_alta, clasesObjetos.Oficina oficina, int num_km, int autonomia, int tiempoDeRecarga,
+			int cilindrada, String carnetRequerido) throws TiempoRecargaNoValidoException, CarnetRequeridoInvalidoException, CilindradaNoValidaException {
+		super(matricula, marca, modelo, categoria, color, fecha_alta, oficina, num_km, autonomia, tiempoDeRecarga);
 		this.setCilindrada(cilindrada);
-		this.setCarnetRequerido(carnet);
-		
+		this.setCarnetRequerido(carnetRequerido);
 	}
 
 	@Override
@@ -73,7 +71,7 @@ public class Moto extends DeCombustion {
 		}
 		Moto dada = (Moto) a; //Hacemos que lo trate como MOTO y no OBJETO
 		
-		if (this.matricula == dada.matricula) { //Comparamos sus matrículas
+		if (this.matricula == dada.matricula) { //Comparamos sus matrï¿½culas
 			return true;
 		}else {
 			return false;	//Ya a estas alturas ha fallado todos los controles por lo que, es falso

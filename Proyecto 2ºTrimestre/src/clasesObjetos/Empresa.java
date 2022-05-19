@@ -23,7 +23,7 @@ public class Empresa implements Serializable{
 	
 	//Propiedades
 	private TreeMap<Matricula, Vehiculo> Stock;
-	private TreeMap<String, Cliente> Clientes; //El String será el DNI
+	private TreeMap<String, Cliente> Clientes; //El String serï¿½ el DNI
 	private TreeMap<String, Empleado> Empleados; //El personal de la empresa
 	private TreeMap<String, Oficina> Oficinas; //Las oficinas de la empresa
 	private TreeMap<String, Alquiler> Alquileres; //Los alquileres de la empresa
@@ -107,7 +107,7 @@ public class Empresa implements Serializable{
 
 	/**
 	 * Constructor "de copia" que requiere de un treeMap ya creado de garage
-	 * @param garage El {@code TreeMap} de Vehículos con clave principal del tipo {@code Matrícula}
+	 * @param garage El {@code TreeMap} de Vehï¿½culos con clave principal del tipo {@code Matrï¿½cula}
 	 */
 	@SuppressWarnings("unchecked")//Quitamos el Warning para evitar errores al exportar
 	public void setGaraje(TreeMap<Matricula, Vehiculo> garaje) {
@@ -142,7 +142,7 @@ public class Empresa implements Serializable{
 	
 	public void nuevaOficina(Oficina oficina) //Equivale a un put
 	{
-		Oficinas.put(oficina.getCódigo(), oficina);
+		Oficinas.put(oficina.getCÃ³digo(), oficina);
 	}
 	public void nuevoCliente(Cliente cliente) //Equivale a un put
 	{
@@ -172,8 +172,8 @@ public class Empresa implements Serializable{
 		ArrayList<Empleado> empleados = metodos.TreeMapToArrayList.Empleados(Empleados);//PASAMOS DE TREEMAP A ARRAYLIST
 		ComparaEmpleadoPorNombre c = new ComparaEmpleadoPorNombre();
 		empleados.sort(c);
-		//Creamos un empleado con el constructor mínimo para luego intercambiarlo con el empleado anterior al comparar en el bucle:
-//		Empleado b = new Empleado("Nombre","Apellido1", "Apellido2", "78280774k", null, new Oficina("23009","", new Direccion("Calle","12", "23009", "Jaén"), "", "", true));
+		//Creamos un empleado con el constructor mï¿½nimo para luego intercambiarlo con el empleado anterior al comparar en el bucle:
+//		Empleado b = new Empleado("Nombre","Apellido1", "Apellido2", "78280774k", null, new Oficina("23009","", new Direccion("Calle","12", "23009", "Jaï¿½n"), "", "", true));
 //		
 //		for (Empleado a:empleados)
 //		{
@@ -196,8 +196,8 @@ public class Empresa implements Serializable{
 		//boolean PrimeraVez = true;	//Para recorrerlo
 		
 		ArrayList<Cliente> clientes = metodos.TreeMapToArrayList.Clientes(Clientes);//PASAMOS DE TREEMAP A ARRAYLIST
-		//Creamos un empleado con el constructor mínimo para luego intercambiarlo con el empleado anterior al comparar en el bucle:
-		//Cliente b = new Cliente("Nombre", "Ap1", "Ap2", "78280774k", "A1", 0);//Las tarjetas de los clientes de verdad no empezarán en 0 sino en 1
+		//Creamos un empleado con el constructor mï¿½nimo para luego intercambiarlo con el empleado anterior al comparar en el bucle:
+		//Cliente b = new Cliente("Nombre", "Ap1", "Ap2", "78280774k", "A1", 0);//Las tarjetas de los clientes de verdad no empezarï¿½n en 0 sino en 1
 		ComparaClientePorNombre c = new ComparaClientePorNombre();
 		clientes.sort(c);
 /*
@@ -229,7 +229,7 @@ public class Empresa implements Serializable{
 	}
 	public void eliminarOficina(Oficina ofi) //Equivale a un remove
 	{
-		Oficinas.remove(ofi.getCódigo());
+		Oficinas.remove(ofi.getCÃ³digo());
 	}
 	public void eliminarOficina(String ClaveOfi) //Equivale a un remove
 	{

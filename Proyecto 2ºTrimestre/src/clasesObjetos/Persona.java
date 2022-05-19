@@ -1,8 +1,7 @@
 package clasesObjetos;
 
 import java.io.Serializable;
-
-import exceptions.CarnetRequeridoInvalidoException;
+import exceptions.DNInoValidoException;
 import exceptions.LongitudCadenaNoValidaException;
 import metodos.MetodoDni;
 
@@ -54,24 +53,25 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 		}
 	}
 	public String getDni() {
-		return dni;
+		String copia = dni;
+		return copia;
 	}
-	protected void setDni(String dni) throws CarnetRequeridoInvalidoException {
+	protected void setDni(String dni) throws DNInoValidoException {
 		if(MetodoDni.DNIvalido(dni)) {
 			this.dni=dni;
 		}else {
-			throw new CarnetRequeridoInvalidoException("DNI inválido");
+			throw new DNInoValidoException("DNI inválido");
 		}
 		
 	}
 	
 	//Constructores 
-	public Persona( String dni) throws CarnetRequeridoInvalidoException {
+	public Persona( String dni) throws DNInoValidoException {
 		super();
 		this.setDni(dni);
 	}
 	
-	public Persona(String nombre, String apellido1, String apellido2, String dni) throws CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException {
+	public Persona(String nombre, String apellido1, String apellido2, String dni) throws DNInoValidoException, LongitudCadenaNoValidaException {
 		super();
 		this.setNombre(nombre);
 		this.setApellido1(apellido1);
@@ -79,7 +79,7 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 		this.setDni(dni);
 	}
 	
-	public Persona(String nombre, String apellido1,  String dni) throws CarnetRequeridoInvalidoException, LongitudCadenaNoValidaException {
+	public Persona(String nombre, String apellido1,  String dni) throws DNInoValidoException, LongitudCadenaNoValidaException {
 		super();
 		this.setNombre(nombre);
 		this.setApellido1(apellido1);
