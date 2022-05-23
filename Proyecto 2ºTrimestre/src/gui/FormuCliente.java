@@ -42,7 +42,6 @@ public class FormuCliente extends JDialog {
 	private static JTextField tbNombre;
 	private static JTextField tbAp1;
 	private static JTextField tbAp2;
-	private static JTextField tbtarjeta;
 	private static JTextField tblicencia;
 	private JComboBox<String> cbCarnet;
 	private JComboBox<Integer> cbTarjeta;
@@ -90,13 +89,23 @@ public class FormuCliente extends JDialog {
 
 	private void creaTbTarjeta() {
 		cbTarjeta = Handlers.DesplegableTarjetasClientes();
+		cbTarjeta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int tarjeta = (int) cbTarjeta.getSelectedItem();
+				RellenaClienteTarjeta(tarjeta);
+			}
+		});
 		cbTarjeta.setBounds(117, 127, 46, 22);
 		panelPrincipal_1.add(cbTarjeta);
 		
 		JButton btnNuevaTarjeta = new JButton("");
 		btnNuevaTarjeta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO crear una nueva tarjeta   (int)
+				//Creamos una nueva tarjeta   (int)
+				int tarjeta = FormuTarjetaCliente.showDialogModal();
+				cbTarjeta.setSelectedItem(tarjeta);
+//				.setText(""+tarjeta);
+				RellenaClienteTarjeta(tarjeta);
 			}
 		});
 		btnNuevaTarjeta.setIcon(new ImageIcon(FormuCliente.class.getResource("/16/edit.png")));
@@ -104,6 +113,10 @@ public class FormuCliente extends JDialog {
 		panelPrincipal_1.add(btnNuevaTarjeta);
 	}
 
+	private void RellenaClienteTarjeta(int tarjeta) {
+		elelegido = RepositorioCliente.leeCliente(tarjeta);
+		rellenaCliente(elelegido);
+	}
 	private void creaCampos_a_rellenar() {
 		creaLabelDNI();		
 		creaLabelNombre();
@@ -270,8 +283,14 @@ public class FormuCliente extends JDialog {
 								MetodosGUI.estadoEditar(panelPrincipal);
 								tbDNI.setEnabled(false);
 								rellenaTextFields();
+								if (elelegido !=null )
+								{
+									rellenaTextFields();
+								}
 							}else {
-								JOptionPane.showMessageDialog(null, "Longitud del DNI invólida");
+								JOptionPane.showMessageDialog(
+										null, "Longitud del DNI invólida",
+										"Error",JOptionPane.ERROR_MESSAGE);
 							}
 						}
 				}
@@ -281,7 +300,7 @@ public class FormuCliente extends JDialog {
 	}
 	
 	/**
-	 * El mótodo que rellena emplelegido 
+	 * El mótodo que rellena clienlegido 
 	 * Pero desde la base de datos utilizando el campo DNI
 	 */
 	private void rellenaClienteConsultado()
@@ -290,13 +309,13 @@ public class FormuCliente extends JDialog {
 	}
 	
 	/**
-	 * El mótodo que rellena emplelegido (variable utilizada para componer el Cliente que compone el usuario)
+	 * El mótodo que rellena clienlegido (variable utilizada para componer el Cliente que compone el usuario)
 	 */
 	private void rellenaCliente()
 	{
 		try {
 			//Pasamos el contenido de tbTarjeta a int
-			int tarjeta = Integer.parseInt(tbtarjeta.getText());
+			int tarjeta = (int ) cbTarjeta.getSelectedItem();
 			elelegido = new Cliente( tbNombre.getText(), tbAp1.getText(), tbAp2.getText(),tbDNI.getText(), tblicencia.getText(),tarjeta);
 		} catch (DNInoValidoException e1) {
 			ErrorCarnet.showDialog();
@@ -307,9 +326,13 @@ public class FormuCliente extends JDialog {
 			e.printStackTrace();
 		}
 	}
-	private void rellenaCliente(Cliente emple)
+	/**
+	 * Método que rellena el cliente según la base de datos
+	 * @param clien	El clienado que deseamos consultar
+	 */
+	private void rellenaCliente(Cliente clien)
 	{
-		elelegido = RepositorioCliente.leeCliente(emple.getDni());
+		elelegido = RepositorioCliente.leeCliente(clien.getDni());
 		rellenaTextFields();
 	}
 	
@@ -323,7 +346,7 @@ public class FormuCliente extends JDialog {
 		tbAp1.setText(elelegido.getApellido1());
 		tbAp2.setText(elelegido.getApellido2());
 		tblicencia.setText(elelegido.getLicencia());
-		tbtarjeta.setText(""+elelegido.getTarjeta());
+		cbTarjeta.setSelectedItem(elelegido.getTarjeta());
 		
 	}
 	

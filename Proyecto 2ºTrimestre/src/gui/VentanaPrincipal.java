@@ -13,7 +13,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import clasesObjetos.Empleado;
 import clasesObjetos.Oficina;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -121,6 +120,9 @@ public class VentanaPrincipal extends JFrame {
 				TablaOficina.showTablaOficinas();
 			}
 		});
+		
+		JMenuItem mntmListadoAlquileres = new JMenuItem("Alquileres");
+		mnListados.add(mntmListadoAlquileres);
 		mnListados.add(mntmTablaOficinas);
 		mnListados.add(mntmTablaEmpleados);
 		
@@ -138,11 +140,14 @@ public class VentanaPrincipal extends JFrame {
 				FormuAlquiler.showFrame();
 			}
 		});
+		
+		JMenu mnNewMenu = new JMenu("");
+		menuPrincipal.add(mnNewMenu);
 		menuPrincipal.add(mntmAlquiler);
 		mntmEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				@SuppressWarnings("unused")
-				Empleado Emp = FormuEmpleado.showDialog();				
+				
+				FormuEmpleado.showDialog();				
 			}
 		});
 		panelPrincipal = new JPanel();

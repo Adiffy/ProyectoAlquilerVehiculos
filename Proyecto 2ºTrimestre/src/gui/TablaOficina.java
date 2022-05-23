@@ -13,13 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
+import accesoADatos.RepositorioOficina;
 import clasesObjetos.Oficina;
 import metodos.Handlers;
 import javax.swing.JScrollPane;
 
 /**
- * Clase que sirve para crear una ventana con la tabla de empleados
- * @author Víctor J. Esquinas García
+ * Clase que sirve para crear una ventana con la tabla de oficinas
+ * @author VÃ­ctor J. Esquinas GarcÃ­a
  *
  */
 public class TablaOficina extends JDialog {
@@ -32,7 +33,7 @@ public class TablaOficina extends JDialog {
 	private JPanel panelPrincipal;
 	private JTable tableBusqueda;
 	private TablaOficina yo;
-	public Oficina Ofielegida;
+	public static Oficina Ofielegida;
 	
 	/**
 	 * Constructor
@@ -64,7 +65,18 @@ public class TablaOficina extends JDialog {
 		btnAceptar.setToolTipText("Guarda los cambios realizados");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO INSERT / UPDATE Empleado/cliente..
+				if (tableBusqueda.getSelectedRow()>=0)
+				{
+					int num_fila  = tableBusqueda.getSelectedRow();
+					
+					Ofielegida = (Oficina) tableBusqueda.getValueAt(num_fila, 0);
+					
+					if (RepositorioOficina.insertOficina(Ofielegida))
+					{	//Lo ponemos en el estado inicial para que se note que lo hemos insertado / actualizado
+						MetodosGUI.estadoInicial(panelPrincipal);
+					}
+					yo.setVisible(false);
+				}
 			}
 		});
 		abajo.add(btnAceptar);
@@ -101,16 +113,24 @@ public class TablaOficina extends JDialog {
 		scrollPane.setViewportView(tableBusqueda);
 
 	}
-	
-	public static void showTablaOficinas()
+	/**
+	 * Abre el {@code JDialog} y lo hace visible para el usuario
+	 * @return	El JDialog en estado no-modal
+	 */
+	public static Oficina showTablaOficinas()
 	{
 		//Creamos la ventana
 		TablaOficina nuevaVentana = new TablaOficina();		
 		//La ponemos visible
 		nuevaVentana.setVisible(true);
+		
+		return Ofielegida;
 	}
-	
-	public static void showTablaOficinasModal()
+	/**
+	 * Abre el {@code JDialog} en estado {@code modal}
+	 * @return	El JDialog en estado modal
+	 */
+	public static Oficina showTablaOficinasModal()
 	{
 		//Creamos la ventana
 		TablaOficina nuevaVentana = new TablaOficina();
@@ -118,5 +138,7 @@ public class TablaOficina extends JDialog {
 		nuevaVentana.setModal(true);
 		//La ponemos visible
 		nuevaVentana.setVisible(true);
+		
+		return Ofielegida;
 	}
 }

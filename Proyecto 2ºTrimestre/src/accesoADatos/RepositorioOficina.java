@@ -137,14 +137,18 @@ public class RepositorioOficina {
 	
 	private static void update(Oficina Ofi)
 	{
-		String sql="UPDATE oficina SET "+ tuplaDif(Ofi) + " = "+ cambioTupla(Ofi);
+		String sql="UPDATE oficina SET descripcion = ?, Provincia = ?, Localidad = ?,"
+				+ "DeAeropuerto = ?  WHERE codigo = "+ Ofi.getCódigo();
 		PreparedStatement st = null;
 		try {	//Ejecutamos la consulta
 			st = EmpresaDB.conn.prepareStatement(sql);
 			//Hallamos los datos de la oficina y los metemos al Statement
-			st = datosOficina(Ofi,sql,st);
+			st = datosOficinaParaUpdate(Ofi,sql,st);
 			st.executeUpdate();
+			//Guardamos los cambios realizados
 			st.execute("COMMIT");
+			
+			//Cerramos la conexión
 			st.close();
 		}catch (SQLException e) {
 			// Imprimimos error en la consola y sacamos ventana de error
@@ -152,7 +156,7 @@ public class RepositorioOficina {
 			e.printStackTrace();
 		}
 	}
-
+/*
 	private static String cambioTupla(Oficina Ofi) {
 		//Devolvemos la columna a priori
 		Object devolver =  getTupla(Ofi);
@@ -167,16 +171,16 @@ public class RepositorioOficina {
 			}
 		}
 		return devolver.toString();
-	}
+	}*/
 	
 	/**
-	 * M�todo que devuelve el nombre de la tupla
+	 * Método que devuelve el nombre de la tupla
 	 * que es diferente en base de datos
-	 * Se le da el c�digo de la Oficina, consulta en base de datos y 
-	 * el m�todo devuelve el nombre de la primera columna que tenga 
+	 * Se le da el código de la Oficina, consulta en base de datos y 
+	 * el método devuelve el nombre de la primera columna que tenga 
 	 * un valor diferente
 	 */
-	private static String tuplaDif(Oficina oficina)
+/*	private static String tuplaDif(Oficina oficina)
 	{
 		String nombColumn = null;
 		String cod = oficina.getCódigo();	//Hallamos la oficina en BD
@@ -199,12 +203,12 @@ public class RepositorioOficina {
 	}
 	
 	/**
-	 * M�todo que devuelve el getter de Oficina que se corresponde
+	 * Método que devuelve el getter de Oficina que se corresponde
 	 * a la tupla diferente
 	 * @param oficina la oficina
 	 * @return	el nombre del getter
 	 */
-	private static Object getTupla(Oficina oficina)
+/*	private static Object getTupla(Oficina oficina)
 	{
 		//Lo que vamos a devolver
 		Object geter = null;
@@ -224,7 +228,7 @@ public class RepositorioOficina {
 			break;
 		}
 		return geter;
-	}
+	}*/
 	
 	private static void insert(Oficina Ofi)
 	{
@@ -245,7 +249,13 @@ public class RepositorioOficina {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Método que rellena un {@code PrepraredStatement} con los atributos de una {@code Oficina} dada
+	 * @param ofi	La oficina de la que sacaremos los parámetros
+	 * @param sql	La instrucción SQL a rellenar con los parámetros de la Oficina
+	 * @param st	El preparedStatement que devolveremos ya relleno
+	 * @return			^
+	 */
 	private static PreparedStatement datosOficina(Oficina ofi, String sql, PreparedStatement st)
 	{
 		try {
@@ -254,6 +264,28 @@ public class RepositorioOficina {
 			st.setString(3, ofi.getProvincia());
 			st.setString(4, ofi.getLocalidad());
 			st.setBoolean(5, ofi.isDeAeropuerto());
+		} catch (SQLException e) {
+			// Error por consola
+			e.printStackTrace();
+		}
+		return st;
+	}
+	
+	/**
+	 * Este método se encarga de rellenar los datos del {@code PreparedStatement} para una instrucción
+	 * sql 'Update', por tanto no cuenta con el setString(1, oficina.getCodigo()).
+	 * @param ofi	La oficina en cuestión
+	 * @param sql	La instrucción sql que vamos a rellenar con los parámetros de la oficina dada
+	 * @param st	El {@code PreparedStatement}
+	 * @return	El {@code PreparedStatemet} ya relleno con los parámetros de la oficina
+	 */
+	private static PreparedStatement datosOficinaParaUpdate(Oficina ofi, String sql, PreparedStatement st)
+	{
+		try {
+			st.setString(1, ofi.getDescripción());
+			st.setString(2, ofi.getProvincia());
+			st.setString(3, ofi.getLocalidad());
+			st.setBoolean(4, ofi.isDeAeropuerto());
 		} catch (SQLException e) {
 			// Error por consola
 			e.printStackTrace();

@@ -18,7 +18,7 @@ import metodos.Handlers;
 
 /**
  * Clase que sirve para crear una ventana con la tabla de empleados
- * @author V�ctor J. Esquinas Garc�a
+ * @author Víctor J. Esquinas García
  *
  */
 public class TablaEmpleado extends JDialog {

@@ -108,4 +108,97 @@ public class RepositorioCliente {
 		return lista;
 	}
 
+	/**
+	 * 
+	 * @param tarjeta	el número de tarjeta a comprobar si existe
+	 * @return el numero de tarjeta del cliente o -1 si no existe
+	 */
+	public static int leeTarjeta(int tarjeta) {
+		int carnet = -1; 	//A priori no existe
+		String sql = "SELECT tarjeta FROM CLIENTE";
+		PreparedStatement st;
+		ResultSet rs;
+		
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			rs = st.executeQuery();
+			
+			while (rs.next())
+			{
+				int tar = rs.getInt("tarjeta");
+				//Si es la que estamos buscando
+				if (tar == tarjeta)
+				{	//Hacemos que nuestra tarjeta valga ese valor
+					carnet = tar;
+					break;
+				}
+			}
+			//Cerramos la conexión
+			st.close();
+			rs.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return carnet;
+	}
+
+	public static Cliente leeCliente(int tarjeta) {
+		PreparedStatement st = null;
+		ResultSet rs;
+		Cliente cli = null;	//Sacamos todos los atributos
+		//Los generales de -> PERSONA
+		//Y los espec�ficos de -> EMPLEADO
+		String sql="SELECT * FROM Persona P JOIN Cliente C ON P.DNI=C.PERSONA_DNI "
+				+ "WHERE C.tarjeta= ?";
+
+
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setInt(1, tarjeta);
+			rs = st.executeQuery();
+
+			while (rs.next())
+			{
+				//Solo va a devolver 1(porque estamos preguntando por la PK) asi q no hay problema de sobre escritura
+				String Dni = rs.getString("dni");
+				String nombre = rs.getString("Nombre");
+				String ap1 = rs.getString("Ap1");
+				String ap2 = rs.getString("Ap2");
+				//Atributos de cliente
+				String carnet = rs.getString("licencia");
+
+
+				try {		/* Nos cubrimos de los errores de la creaci�n de Empleado */
+					cli = new Cliente(nombre, ap1, ap2, Dni, carnet, tarjeta);
+				} catch (LongitudCadenaNoValidaException e) {
+					// Longitud inválida
+					JOptionPane.showMessageDialog(null, "Longitud de cadena no v�lida","Error de creaci�n",JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				} catch (DNInoValidoException e) {
+					// DNI no válido 
+					JOptionPane.showMessageDialog(null, "DNI no válido: "+Dni,"Error de creaci�n",JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				} catch (LicenciaNoValidaException e) {
+					// Carnet no valido
+					JOptionPane.showMessageDialog(null, "Licencia de conducir no v�lida: "+carnet,"Error de creaci�n",JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				} 
+			}
+
+			//Cerramos la conexi�n
+			rs.close();
+			st.close();
+		} catch (SQLException e) {
+
+			JOptionPane.showMessageDialog(null,
+					"Error al intentar leer cliente de Base de Datos. "+"Tarjeta de cliente: "+tarjeta,
+					"DataBase error",
+					JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+
+		return cli;
+	}
+
 }

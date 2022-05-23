@@ -3,7 +3,6 @@
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
     <fullyQualifiedTypeName name="metodos.MetodoDni"/>
     <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
-    <fullyQualifiedTypeName name="accesoADatos.RepositorioOficina"/>
     <fullyQualifiedTypeName name="javax.swing.JTable"/>
     <fullyQualifiedTypeName name="gui.Formucategoria"/>
     <fullyQualifiedTypeName name="gui.TablaEmpleado"/>
@@ -31,12 +30,10 @@
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="clasesObjetos.CocheCombustion"/>
     <fullyQualifiedTypeName name="clasesObjetos.CocheElectrico"/>
-    <fullyQualifiedTypeName name="gui.MetodosGUI"/>
     <fullyQualifiedTypeName name="clasesObjetos.Oficina"/>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="java.awt.Toolkit"/>
-    <fullyQualifiedTypeName name="accesoADatos.RepositorioCliente"/>
     <fullyQualifiedTypeName name="accesoADatos.RepositorioEmpleado"/>
     <fullyQualifiedTypeName name="metodos.Helpers"/>
     <fullyQualifiedTypeName name="metodos.Handlers"/>
@@ -50,6 +47,11 @@
     <fullyQualifiedTypeName name="accesoADatos.RepositorioPersona"/>
     <fullyQualifiedTypeName name="accesoADatos.EmpresaDB"/>
     <fullyQualifiedTypeName name="javax.swing.JComponent"/>
-    <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
     <fullyQualifiedTypeName name="javax.swing.JCheckBox"/>
+    <fullyQualifiedTypeName name="accesoADatos.RepositorioOficina"/>
+    <fullyQualifiedTypeName name="gui.MetodosGUI"/>
+    <fullyQualifiedTypeName name="gui.FormuCliente"/>
+    <fullyQualifiedTypeName name="gui.FormuTarjetaCliente"/>
+    <fullyQualifiedTypeName name="accesoADatos.RepositorioCliente"/>
+    <fullyQualifiedTypeName name="javax.swing.JComboBox"/>
 </qualifiedTypeNameHistroy>

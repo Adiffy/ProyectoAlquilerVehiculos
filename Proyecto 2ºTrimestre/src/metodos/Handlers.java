@@ -112,7 +112,7 @@ public class Handlers {
 	public static DefaultTableModel modelTablaOficina()
 	{
 		ArrayList<Oficina> oficinas = new ArrayList<Oficina>();
-		String[] columnas = {"Código","Descripción","Provincia","Localidad","Aeropuerto"};
+		String[] columnas = {"Código y Descripción","Provincia","Localidad","Aeropuerto"};
 		//Creamos el model a devolver
 		DefaultTableModel model = new DefaultTableModel(columnas,0)
 		{
@@ -123,7 +123,7 @@ public class Handlers {
 
 			@SuppressWarnings("rawtypes")
 			Class[] columnType = new Class[] {
-					String.class, String.class,String.class,String.class, boolean.class 
+					Oficina.class,String.class,String.class, boolean.class 
 			};
 			@SuppressWarnings({ "unused", "rawtypes" })
 			public Class getColumnTypes(int columnIndex)
@@ -132,7 +132,7 @@ public class Handlers {
 			}
 			boolean[] columnEditables = new boolean[] 
 					{
-							false,false,false,false,false
+							false,false,false,false
 					};
 			public boolean isCellEditable (int Row, int column)
 			{
@@ -144,14 +144,13 @@ public class Handlers {
 		//Pasamos el ArrayList a Object[] 
 		for (Oficina a:oficinas)
 		{
-			String cod = a.getCódigo();
-			String desc = a.getDescripción();
+			Oficina coddesc = a;
 			String prov = a.getProvincia();
 			String loc = a.getLocalidad();
 			boolean aeropuerto = a.isDeAeropuerto();//Si es de aeropuerto se marca
 
 			//Podemos reutilizar la variable para ir aóadiendo las oficinas 
-			Object[] col = {cod,desc,prov,loc,aeropuerto};
+			Object[] col = {coddesc,prov,loc,aeropuerto};
 			model.addRow(col);
 		}
 		return model;

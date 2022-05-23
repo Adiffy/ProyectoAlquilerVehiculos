@@ -303,15 +303,15 @@ public class Oficina implements Serializable{
 		try {
 			this.personal.put(clavePrincipal, new Empleado(contratado));
 		} catch (DNInoValidoException | LongitudCadenaNoValidaException e) {
-			// TODO Auto-generated catch block
+			// Error
 			e.printStackTrace();
-		} //Lo aóadimos
+		} //Lo añadimos
 	}
 	
 	@Override
 	public String toString()
 	{
-		return ""+this.getCódigo()+" | "+this.getDescripción(); //+ " - "+this.getProvincia()+", "+this.getLocalidad();
+		return ""+this.getCódigo()+" · "+this.getDescripción()+" "; //+ " - "+this.getProvincia()+", "+this.getLocalidad();
 	}
 	@Override
 	public int hashCode() {

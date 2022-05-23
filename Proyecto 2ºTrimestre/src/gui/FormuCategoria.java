@@ -174,7 +174,7 @@ public class FormuCategoria extends JDialog {
 						{
 							//Rellenamos los componentes
 							rellenaCategoria();
-						}	//Exista o no (S� o s�)
+						}	//Exista o no (Sí o sí)
 						//Preparamos los componentes 
 						MetodosGUI.estadoEditar(contentPanel);
 						tbDesc.setEnabled(true);

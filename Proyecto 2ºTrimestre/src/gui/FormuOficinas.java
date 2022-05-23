@@ -28,24 +28,30 @@ public class FormuOficinas extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final JPanel contentPanel = new JPanel();
+	private final static JPanel contentPanel = new JPanel();
 	private static FormuOficinas yo;
 	private static JTextField tbCodOfi;
-	private static JTextField tbDesc;
 	private static JComboBox<String> tbProv;
-	private JLabel lblDesc;
 	private JLabel lblCodOfi;
 	private static Oficina OfiElegida;
-	private static JCheckBox chckbxDeAeropuerto;
-	private JPanel panelIzquierdo;
 	private JPanel panelArriba;
 	private JPanel panelSuperior;
 	private JPanel buttonPane;
 	private JPanel panelDerecho;
-	private static JTextField tbLoc;
 	private JButton okButton;
 	private JButton btnBorrar;
 	private JButton cancelButton;
+	private JPanel panelLoc;
+	private JLabel lblLoc;
+	private static JTextField tbLoc;
+	private JPanel panelIzquierdo;
+	private JPanel panelDesc_1;
+	private JLabel lblDesc;
+	private static JTextField tbDesc;
+	private JPanel panelDeAeropuerto_1;
+	private static JCheckBox chckbxDeAeropuerto;
+	private JPanel panelCodOfi;
+	private JButton btnBuscar;
 
 
 	/**
@@ -57,11 +63,7 @@ public class FormuOficinas extends JDialog {
 		creaTitulo();
 		JPanel panelPrincipal = creaPanelCodOfi();
 
-		panelIzquierdo = new JPanel();
-		panelPrincipal.add(panelIzquierdo, BorderLayout.WEST);
-
 		creaPanelIzquierdo();
-		pideDeAeropuerto();
 		creaPanelDerecho(panelPrincipal);
 		creaPanelInferior(panelPrincipal);
 
@@ -73,31 +75,18 @@ public class FormuOficinas extends JDialog {
 		buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-		creaBotonDesbloquear();
+//		creaBotonDesbloquear();
 		creaBotonBorrar();
 		creaBotonCancelar();
 		creaBotonAceptar();
 		
 	}
 
-	private void creaBotonDesbloquear() {
-		{
-			JButton btndesbloquear = new JButton("");
-			btndesbloquear.setIcon((new ImageIcon("recursos\\16\\unlock.png")));
-			btndesbloquear.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					okButton.setEnabled(true);
-					cancelButton.setEnabled(true);
-					btnBorrar.setEnabled(true);
-				}
-			});
-			buttonPane.add(btndesbloquear);
-		}
-	}
+	
 
 	private void creaBotonCancelar() {
 		cancelButton = new JButton("Cancelar");
-		cancelButton.setIcon(new ImageIcon("recursos\\16\\cross.png"));
+		cancelButton.setIcon(new ImageIcon(FormuOficinas.class.getResource("/16/cross.png")));
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Borramos lo que haya escrito en cada uno de los TextFields
@@ -107,12 +96,11 @@ public class FormuOficinas extends JDialog {
 		});
 		cancelButton.setActionCommand("Cancelar");
 		buttonPane.add(cancelButton);
-		cancelButton.setEnabled(false);
 	}
 
 	private void creaBotonAceptar() {
 		okButton = new JButton("Aceptar");
-		okButton.setIcon(new ImageIcon("recursos\\16\\diskette.png"));
+		okButton.setIcon(new ImageIcon(FormuOficinas.class.getResource("/16/diskette.png")));
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Leemos lo que ha escrito el usuario
@@ -127,15 +115,13 @@ public class FormuOficinas extends JDialog {
 			}
 		});
 		okButton.setActionCommand("Aceptar");
-		okButton.setEnabled(false);
 		buttonPane.add(okButton);
-		getRootPane().setDefaultButton(okButton);
 	}
 
 	private void creaBotonBorrar() {
 		{
 			btnBorrar = new JButton("Borrar");
-			btnBorrar.setIcon((new ImageIcon("recursos\\16\\recycle_bin.png")));
+			btnBorrar.setIcon(new ImageIcon(FormuOficinas.class.getResource("/16/recycle_bin.png")));
 			btnBorrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//Borrar Oficina
@@ -144,42 +130,48 @@ public class FormuOficinas extends JDialog {
 				}
 			});
 			buttonPane.add(btnBorrar);
-			btnBorrar.setEnabled(false);
 		}
 	}
 
 	private void creaPanelIzquierdo() {
-		JPanel panelDesc = new JPanel();
-		panelIzquierdo.add(panelDesc);
-
-		creaLabelDesc(panelDesc);
-		creaTbDesc();
-		panelDesc.add(tbDesc);
+		{
+			panelDesc_1 = new JPanel();
+			panelIzquierdo.add(panelDesc_1);
+			creaLabelDesc(panelCodOfi);
+			creaTbDesc();
+		}
 	}
 
 	private void creaLabelDesc(JPanel panelDesc) {
-		lblDesc = new JLabel("Descripci\u00F3n");
-		panelDesc.add(lblDesc);
+		{
+			lblDesc = new JLabel("Descripción");
+			panelDesc_1.add(lblDesc);
+		}
 	}
 
 	private void creaTbDesc() {
-		tbDesc = new JTextField();
-		tbDesc.setEnabled(false);
-		lblDesc.setLabelFor(tbDesc);
-		tbDesc.setColumns(10);
+		{
+			tbDesc = new JTextField();
+			tbDesc.setEnabled(false);
+			tbDesc.setColumns(10);
+			panelDesc_1.add(tbDesc);
+		}
 	}
 
 	private void pideDeAeropuerto() {
-		JPanel panelDeAeropuerto = new JPanel();
-		panelIzquierdo.add(panelDeAeropuerto);
-
-		checkBoxDeAeropuerto(panelDeAeropuerto);
+		{
+			panelDeAeropuerto_1 = new JPanel();
+			panelIzquierdo.add(panelDeAeropuerto_1);
+			checkBoxDeAeropuerto(panelDeAeropuerto_1);
+		}
 	}
 
 	private void checkBoxDeAeropuerto(JPanel panelDeAeropuerto) {
-		chckbxDeAeropuerto = new JCheckBox("Oficina de aeropuerto");
-		chckbxDeAeropuerto.setEnabled(false);
-		panelDeAeropuerto.add(chckbxDeAeropuerto);
+		{
+			chckbxDeAeropuerto = new JCheckBox("Oficina de aeropuerto");
+			chckbxDeAeropuerto.setEnabled(false);
+			panelDeAeropuerto_1.add(chckbxDeAeropuerto);
+		}
 	}
 
 	private void creaPanelDerecho(JPanel panelPrincipal) {
@@ -214,7 +206,7 @@ public class FormuOficinas extends JDialog {
 		panelArriba = new JPanel();
 		panelPrincipal.add(panelArriba, BorderLayout.NORTH);
 
-		JPanel panelCodOfi = new JPanel();
+		panelCodOfi = new JPanel();
 		panelArriba.add(panelCodOfi);
 
 		lblCodOfi = new JLabel("C\u00F3digo de la oficina");
@@ -241,6 +233,25 @@ public class FormuOficinas extends JDialog {
 		lblCodOfi.setLabelFor(tbCodOfi);
 		tbCodOfi.setColumns(10);
 		panelCodOfi.add(tbCodOfi);
+		{
+			btnBuscar = new JButton("");
+			btnBuscar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					//Mostramos el listado de Oficinas
+					OfiElegida = TablaOficina.showTablaOficinasModal();
+					rellenaCampoOficina();
+					MetodosGUI.estadoEditar(panelPrincipal);
+				}
+			});
+			btnBuscar.setIcon(new ImageIcon(FormuOficinas.class.getResource("/16/zoom.png")));
+			panelArriba.add(btnBuscar);
+		}
+		{
+			panelIzquierdo = new JPanel();
+			panelPrincipal.add(panelIzquierdo, BorderLayout.CENTER);
+			
+			pideDeAeropuerto();
+		}
 		return panelPrincipal;
 	}
 
@@ -248,23 +259,25 @@ public class FormuOficinas extends JDialog {
 
 		JPanel panelAbajo = new JPanel();
 		panelPrincipal.add(panelAbajo, BorderLayout.SOUTH);
+		{
+			panelLoc = new JPanel();
+			panelAbajo.add(panelLoc);
+			{
+				lblLoc = new JLabel("Localidad");
+				panelLoc.add(lblLoc);
+			}
+			{
+				tbLoc = new JTextField();
+				tbLoc.setEnabled(false);
+				tbLoc.setColumns(15);
+				panelLoc.add(tbLoc);
+			}
+		}
 
 		JLabel lblProv = new JLabel("Provincia");
 		panelAbajo.add(lblProv);
 		tbProv = MetodosGUI.creaDesplegableProv();
 		panelAbajo.add(tbProv);
-
-		JPanel panelLoc = new JPanel();
-		panelPrincipal.add(panelLoc, BorderLayout.CENTER);
-
-		JLabel lblLoc = new JLabel("Localidad");
-		panelLoc.add(lblLoc);
-
-
-		tbLoc = new JTextField();
-		tbLoc.setEnabled(false);
-		tbLoc.setColumns(15);
-		panelLoc.add(tbLoc);
 
 
 	}
@@ -273,14 +286,14 @@ public class FormuOficinas extends JDialog {
 		panelSuperior.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		contentPanel.add(panelSuperior, BorderLayout.NORTH);
 		JLabel lblTitulo = new JLabel("Editor de Oficinas");
-		lblTitulo.setIcon(new ImageIcon("recursos\\16\\pencil.png"));
+		lblTitulo.setIcon(new ImageIcon(FormuOficinas.class.getResource("/16/pencil.png")));
 		panelSuperior.add(lblTitulo);
 	}
 
 	private void declaraAtributosGenerales() {
 		setTitle("Oficinas");
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("recursos\\Logo.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FormuOficinas.class.getResource("/icons/miniLogo.png")));
 		setBounds(100, 100, 705, 385);
 		yo = this;
 		getContentPane().setLayout(new BorderLayout());
@@ -296,8 +309,9 @@ public class FormuOficinas extends JDialog {
 		if (RepositorioOficina.leeOficina(tbCodOfi.getText())!=null)	//Si existe
 		{
 			OfiElegida = RepositorioOficina.leeOficina(tbCodOfi.getText());
+			rellenaCampoOficina();
 		}
-		rellenaCampoOficina();
+		MetodosGUI.estadoEditar(contentPanel);
 	}
 
 	private static void rellenaCampoOficina() {
