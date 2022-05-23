@@ -22,6 +22,7 @@ import clasesObjetos.CocheCombustion;
 import clasesObjetos.CocheElectrico;
 import clasesObjetos.Matricula;
 import clasesObjetos.Oficina;
+import clasesObjetos.Vehiculo;
 import exceptions.ConsumoNoValidoException;
 import exceptions.EmisionesNoValidasException;
 import exceptions.LetrasMatriculaNoValidasException;
@@ -42,9 +43,10 @@ import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 /**
- * Formulario 'genérico' para todos los vehículos
+ * Formulario 'genï¿½rico' para todos los vehï¿½culos
  * @author Victor
  *
  */
@@ -83,6 +85,8 @@ public class FormuVehiculos extends JDialog {
 	private static JPanel panelFurgo;
 	private static JPanel panelMoto;
 
+	private static Vehiculo VehiculoElegido;
+
 	private JComboBox<String> cbEmisionesFurgo;
 	private JComboBox<String> cbEmisiones;
 
@@ -97,7 +101,7 @@ public class FormuVehiculos extends JDialog {
 		creaButtonPane();
 		//creamos el panel y los campos generales a rellenar
 		pideAtributosGenerales();
-		//Formamos los paneles que vamos a utilizar y pedimos los atributos generales que no cabían arriba
+		//Formamos los paneles que vamos a utilizar y pedimos los atributos generales que no cabï¿½an arriba
 		pideAtributosGenerales2();
 		//Llamamos a todos los Handlers para que rellenen los comboBoxes y otras propiedades
 		preparaComboBoxes();
@@ -149,7 +153,7 @@ public class FormuVehiculos extends JDialog {
 		setBounds(100, 100, 873, 423);
 		getContentPane().setLayout(new BorderLayout());
 		//Centramos la ventana
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();	//Averiguamos el tamaño de la pantalla
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();	//Averiguamos el tamaï¿½o de la pantalla
 		setLocation(dim.width/2-getSize().width/2,dim.height/2-getSize().height/2);	//Lo ponemos en la mitad
 	}
 
@@ -220,7 +224,7 @@ public class FormuVehiculos extends JDialog {
 	private void creaFormuCocheElectrico(JTabbedPane EspecialidadVehiculos) {
 		panelCocheElectrico = new JPanel();
 		panelCocheElectrico.setLayout(null);
-		EspecialidadVehiculos.addTab("Coche eléctrico", null, panelCocheElectrico, null);
+		EspecialidadVehiculos.addTab("Coche elÃ©ctrico", null, panelCocheElectrico, null);
 		
 			JLabel lblAutonomia = new JLabel("Autonom\u00EDa");
 			lblAutonomia.setBounds(10, 123, 77, 24);
@@ -253,7 +257,7 @@ public class FormuVehiculos extends JDialog {
 		comboBoxCategoriaCocheElectrico.setBounds(649, 95, 143, 22);
 		panelCocheElectrico.add(comboBoxCategoriaCocheElectrico);
 
-		JLabel lblcategoriaCocheElectrico = new JLabel("Categoria");
+		JLabel lblcategoriaCocheElectrico = new JLabel("CategorÃ­a");
 		lblcategoriaCocheElectrico.setBounds(649, 78, 102, 14);
 		panelCocheElectrico.add(lblcategoriaCocheElectrico);
 		
@@ -277,7 +281,7 @@ public class FormuVehiculos extends JDialog {
 	private void creaFormuCocheComb(JTabbedPane EspecialidadVehiculos) {
 		panelCocheCom = new JPanel();
 		panelCocheCom.setLayout(null);
-		EspecialidadVehiculos.addTab("Coche de combustión", null, panelCocheCom, null);
+		EspecialidadVehiculos.addTab("Coche de combustiÃ³n", null, panelCocheCom, null);
 		
 			JLabel lblNumPlazas = new JLabel("N\u00FAmero de plazas");
 			lblNumPlazas.setBounds(32, 34, 130, 14);
@@ -436,22 +440,22 @@ public class FormuVehiculos extends JDialog {
 					//Si presiona Enter: 
 					if (e.getKeyCode()==KeyEvent.VK_ENTER)
 					{
-						//Rellenamos los campos según la base de datos
+						//Rellenamos los campos segï¿½n la base de datos
 						Matricula matricula = null;
 						try {
 							matricula = RepositorioVehiculo.leeMatricula(tbMatricula.getText());
 						} catch (LetrasMatriculaNoValidasException e1) {
 							// mostramos una ventana de error
 							JOptionPane.showMessageDialog(null,
-													"Matrícula incorrecta",
+													"Matrï¿½cula incorrecta",
 													"Letras incorrectas",
 													JOptionPane.ERROR_MESSAGE);
 							e1.printStackTrace();
 						} catch (NumeroMatriculaNoValidoException e1) {
 							// mostramos el error por pantalla
 							JOptionPane.showMessageDialog(null,
-									"Matrícula incorrecta",
-									"Números incorrectas",
+									"Matrï¿½cula incorrecta",
+									"Nï¿½meros incorrectas",
 									JOptionPane.ERROR_MESSAGE);
 							e1.printStackTrace();
 						}
@@ -476,10 +480,12 @@ public class FormuVehiculos extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Aceptar");
+				okButton.setIcon(new ImageIcon(FormuVehiculos.class.getResource("/16/check_mark.png")));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						//TODO actualizar 
 						//TODO rellenar un vehiculo segun los tributos rellenados
+						rellenaVehiculoElegido();
 						RepositorioVehiculo.insertUpdate(null);
 						//Volvemos al estado Inicial
 						MetodosGUI.estadoInicial(panelCentral);
@@ -488,10 +494,11 @@ public class FormuVehiculos extends JDialog {
 				});
 				okButton.setActionCommand("Aceptar");
 				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+//				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setIcon(new ImageIcon(FormuVehiculos.class.getResource("/16/cancel.png")));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						MetodosGUI.estadoInicial((JPanel) getContentPane());
@@ -504,6 +511,45 @@ public class FormuVehiculos extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+	
+	private void rellenaVehiculoElegido() {
+		String mat = tbMatricula.getText();
+		Matricula matricula = null;
+		try {
+			matricula = RepositorioVehiculo.leeMatricula(tbMatricula.getText());
+		} catch (LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e1) {
+			// error al crear la matrÃ­cula
+			JOptionPane.showMessageDialog(cbEmisiones, "MatrÃ­cula no vÃ¡lida: "+tbMatricula.getText(),
+					"Error de creaciÃ³n",JOptionPane.ERROR_MESSAGE);
+			e1.printStackTrace();
+		}	
+		if (RepositorioVehiculo.Electrico(mat))
+		{//Si es elÃ©ctrico
+			if (RepositorioVehiculo.cocheElectrico(mat))
+			{//Si es un CocheElectrico
+				VehiculoElegido = RepositorioVehiculo.leeCocheElectrico(matricula);
+			}else {
+				//Si es electrico pero no es un CocheElectrico, serÃ¡ una moto
+				VehiculoElegido = RepositorioVehiculo.leeMotocicleta(matricula);
+			}
+		}else {
+			//Si no es elÃ©ctrico, serÃ¡ de combustiÃ³n
+			if (RepositorioVehiculo.CocheCombustion(mat)) {
+				try {
+					VehiculoElegido = RepositorioVehiculo.leeCocheComb(matricula);
+				} catch (EmisionesNoValidasException | NumPlazasNoValidoException | ConsumoNoValidoException
+						| PotenciaNoValidaException | TipoNoValidoException | RecargoNoValidoException e) {
+					// error creando el coche
+					JOptionPane.showMessageDialog(cbEmisiones, "Error al crear el coche de combustiÃ³n: "+tbMatricula.getText(),
+							"Error de creaciÃ³n",JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				}
+			}else {
+				//SÃ³lo puede ser una furgoneta
+				VehiculoElegido = RepositorioVehiculo.leeFurgoneta(matricula);
+			}
+		}		
 	}
 
 	private static void goToEstadoInicialPanelesEspecializados() {
@@ -536,19 +582,21 @@ public class FormuVehiculos extends JDialog {
 		gcarnetMoto.add(rdbtnA2);
 	}
 	
-	public static void showDialog()
+	public static Vehiculo showDialog()
 	{
 		FormuVehiculos v = new FormuVehiculos();
 		v.setVisible(true);
+		return VehiculoElegido;
 	}
-	public static void showDialogModal()
+	public static Vehiculo showDialogModal()
 	{
 		FormuVehiculos v = new FormuVehiculos();
 		v.setModal(true);
 		v.setVisible(true);
+		return VehiculoElegido;
 	}
 	private void rellenaVehiculoFromBD(Matricula mat) {
-		// Primero realizamos la consulta según su matricula
+		// Primero realizamos la consulta segï¿½n su matricula
 		try {
 			VehiculoDB automovil = RepositorioVehiculo.leeVehiculo(mat);
 			if (automovil !=null)
@@ -580,7 +628,7 @@ public class FormuVehiculos extends JDialog {
 						break;
 					default:
 						JOptionPane.showMessageDialog(cbTipo,
-													  "Tipo de vehículo no reconocido",
+													  "Tipo de vehï¿½culo no reconocido",
 													  "ERROR",JOptionPane.ERROR_MESSAGE);
 						break;
 					}
@@ -641,4 +689,6 @@ public class FormuVehiculos extends JDialog {
 		comboBoxCategoriaCocheCombustion.setSelectedItem(auto.getCategoria());
 		oficinasCocheCombustion.setSelectedItem(auto.getOficina());
 	}
+	
+
 }

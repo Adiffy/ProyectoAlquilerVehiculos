@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -84,7 +85,10 @@ public class TablaCliente extends JDialog {
 	}
 
 	private void creaAtributosGenerales() {
-		setBounds(100, 100, 450, 300);
+		setTitle("Clientes");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TablaCliente.class.getResource("/icons/miniLogo.png")));
+		setBounds(100, 100, 596, 356);
+		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -148,7 +152,7 @@ public class TablaCliente extends JDialog {
 
 	private void seleccionaCliente(Cliente cliente) {
 		// Seleccionamos el cliente
-
+		
 	}
 
 	public static Cliente showDialog()

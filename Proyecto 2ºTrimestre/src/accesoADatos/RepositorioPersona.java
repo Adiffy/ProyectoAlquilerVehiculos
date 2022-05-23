@@ -52,9 +52,9 @@ public class RepositorioPersona {
 			st.setString(2, p.getNombre());
 			st.setString(3, p.getApellido1());
 			st.setString(4, p.getApellido2());
-			st.executeQuery();
+			st.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// Error
 			e.printStackTrace();
 		}
 		
@@ -69,9 +69,9 @@ public class RepositorioPersona {
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, dni);
-			rs = st.executeQuery(sql);	//Al ejecutar la instrucción SQL se elimina la persona
+			rs = st.executeQuery(sql);	//Al ejecutar la instrucciï¿½n SQL se elimina la persona
 			
-			st.close();    // Cerramos la conexión
+			st.close();    // Cerramos la conexiï¿½n
 			rs.close();
 		} catch (SQLException e) {
 			// TODO Ventana error

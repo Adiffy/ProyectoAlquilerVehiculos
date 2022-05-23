@@ -330,7 +330,7 @@ public class Oficina implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Oficina otra = (Oficina) obj;
-		return Objects.equals(Codigo, otra.Codigo);
+		return (Codigo.compareToIgnoreCase(otra.Codigo)==0);
 	}
 	
 	

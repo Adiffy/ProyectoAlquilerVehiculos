@@ -1,20 +1,15 @@
 package gui;
 
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
 import accesoADatos.RepositorioEmpleado;
 import clasesObjetos.Empleado;
 import clasesObjetos.Oficina;
@@ -25,8 +20,10 @@ import metodos.MetodoDni;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-public class FormuEmpleado extends JFrame {
+public class FormuEmpleado extends JDialog {
 
 	/**
 	 *
@@ -48,7 +45,7 @@ public class FormuEmpleado extends JFrame {
 	 */
 	private FormuEmpleado() {
 //		yo = this;
-		ceclaraAtributosGenerales();
+		declaraAtributosGenerales();
 		creaPanelBotones();
 		//Creamos los campos que son iguales (TextFields)
 		creaCampos_a_rellenar();
@@ -56,7 +53,7 @@ public class FormuEmpleado extends JFrame {
 		creaComboBoxOficinas();
 	JButton btnBuscar = creaBotonConsulta();
 	
-	btnBuscar.setBounds(167, 43, 46, 25);
+	btnBuscar.setBounds(180, 42, 46, 25);
 	panelPrincipal.add(btnBuscar);
 	creaLabelFecha_alta();
 	creaTbFechaAlta();
@@ -83,19 +80,34 @@ public class FormuEmpleado extends JFrame {
 
 	private void creaTbFechaAlta() {
 		fechaAlta = new JDateChooser();
-		fechaAlta.setDateFormatString("dd mm yyyy\r\n");
-		fechaAlta.setBounds(97, 157, 102, 22);
+		fechaAlta.setDateFormatString("yyyy/MM/dd");
+		fechaAlta.setBounds(91, 163, 110, 24);
 		panelPrincipal.add(fechaAlta);
+		
+		JButton btnAceptar = new JButton("");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Creamos el Empleado
+				rellenaEmpleadoConsultado();
+				if (elelegido != null)
+				{
+					rellenaEmpleado();
+				}
+			}
+		});
+		btnAceptar.setIcon(new ImageIcon(FormuEmpleado.class.getResource("/16/next.png")));
+		btnAceptar.setBounds(203, 7, 23, 23);
+		panelPrincipal.add(btnAceptar);
 	}
 
 	private void creaLabelFecha_alta() {
 		JLabel lblFechaAlta = new JLabel("Fecha de alta");
-		lblFechaAlta.setBounds(10, 157, 97, 14);
+		lblFechaAlta.setBounds(10, 165, 97, 14);
 		panelPrincipal.add(lblFechaAlta);
 	}
 
 	private JButton creaBotonConsulta() {
-		JButton btnBuscar = new JButton("");	//Botón sin mensaje solo icono de lupa (ICONO DE BUSCAR)
+		JButton btnBuscar = new JButton("");	//Botï¿½n sin mensaje solo icono de lupa (ICONO DE BUSCAR)
 		btnBuscar.setIcon(new ImageIcon("recursos\\\\16\\\\zoom.png"));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -115,10 +127,12 @@ public class FormuEmpleado extends JFrame {
 		panelPrincipal.add(comboBox);
 	}
 
-	private void ceclaraAtributosGenerales() {
+	private void declaraAtributosGenerales() {
+		setTitle("Nuevo empleado");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FormuEmpleado.class.getResource("/icons/miniLogo.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 411, 291);
+		setBounds(100, 100, 473, 392);
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelPrincipal);
@@ -128,7 +142,7 @@ public class FormuEmpleado extends JFrame {
 
 	private void creaPanelBotones() {
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 209, 350, 33);
+		panel.setBounds(10, 295, 437, 47);
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.RIGHT);
 		panelPrincipal.add(panel);
@@ -158,20 +172,22 @@ public class FormuEmpleado extends JFrame {
 				//Borramos el empleado si existe
 				rellenaEmpleado();	//Componemos el Empleado
 				switch (JOptionPane.showConfirmDialog(btnBorrar,
-						"¿Está seguro de que desea eliminar al empleado "+elelegido.getNombreCompleto()+"?",
-						"Confirme para borrar", JOptionPane.WARNING_MESSAGE))
+						"Â¿EstÃ¡ seguro de que desea eliminar al empleado "+elelegido.getNombreCompleto()+"?",
+						"Confirme para borrar", JOptionPane.ERROR_MESSAGE))
 				{
 				case 0:
 					if (RepositorioEmpleado.borraEmpleado(elelegido.getDni())<0) //Lo mandamos a borrar
 					{
 						//Si sale -1 es que no ha podido borrar
-						JOptionPane.showMessageDialog(btnBorrar, "No se pudo borrar el empleado de DNI "+elelegido.getDni(),"Error al borrar",JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(btnBorrar,
+								"No se pudo borrar el empleado de DNI "+elelegido.getDni(),
+								"Error al borrar",JOptionPane.ERROR_MESSAGE);
 					}else {
 						//Lo vaciamos para que se note que lo hemos borrado
 						MetodosGUI.estadoInicial(panelPrincipal);
 					}
 					break;
-				case 1:	
+				case 1:	//No hacemos nada
 					break;
 				}
 			}
@@ -182,13 +198,28 @@ public class FormuEmpleado extends JFrame {
 
 	private void creaBotonAceptar(JPanel panel) {
 		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				rellenaEmpleado();
+				if (RepositorioEmpleado.insertEmpleado(elelegido))
+				{
+					MetodosGUI.estadoEditar(panelPrincipal);
+					//Lo vaciamos para que se note que se insertÃ³
+				}
+			}
+		});
 		btnAceptar.setIcon(new ImageIcon("recursos\\16\\diskette.png"));
 		panel.add(btnAceptar);
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Creamos el Empleado
 				rellenaEmpleado();
-//				RepositorioEmpleado.insertEmpleado(elelegido);
+				if (RepositorioEmpleado.insertEmpleado(elelegido))
+				{
+					MetodosGUI.estadoEditar(panelPrincipal);
+					//Lo vaciamos para que se note que se insertÃ³
+				}
+				
 			}
 			});
 	}
@@ -201,7 +232,7 @@ public class FormuEmpleado extends JFrame {
 
 	private void creaLabelNombre() {
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(10, 47, 46, 14);
+		lblNombre.setBounds(10, 47, 63, 14);
 		panelPrincipal.add(lblNombre);
 	}
 
@@ -214,7 +245,7 @@ public class FormuEmpleado extends JFrame {
 	private void creaApellido2() {
 		tbAp2 = new JTextField();
 		tbAp2.setEnabled(false);
-		tbAp2.setBounds(204, 76, 110, 24);
+		tbAp2.setBounds(204, 79, 125, 21);
 		panelPrincipal.add(tbAp2);
 		tbAp2.setColumns(25);
 	}
@@ -222,21 +253,21 @@ public class FormuEmpleado extends JFrame {
 	private void creaTbApellido1() {
 		tbAp1 = new JTextField();
 		tbAp1.setEnabled(false);
-		tbAp1.setBounds(68, 76, 110, 24);
+		tbAp1.setBounds(68, 76, 125, 24);
 		panelPrincipal.add(tbAp1);
 		tbAp1.setColumns(25);
 	}
 
 	private void creaLabelApellidos() {
 		JLabel lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setBounds(10, 79, 79, 14);
+		lblApellidos.setBounds(10, 81, 79, 14);
 		panelPrincipal.add(lblApellidos);
 	}
 
 	private void creaTbNombre() {
 		tbNombre = new JTextField();
 		tbNombre.setEnabled(false);
-		tbNombre.setBounds(58, 43, 97, 25);
+		tbNombre.setBounds(60, 42, 110, 25);
 		panelPrincipal.add(tbNombre);
 		tbNombre.setColumns(25);
 	}
@@ -254,15 +285,18 @@ public class FormuEmpleado extends JFrame {
 				{
 					if (tbDNI.getText().length()==9)
 						{
-							if (MetodoDni.DNIvalido(tbDNI.getText()))	//Si es un DNI válido
+							if (MetodoDni.DNIvalido(tbDNI.getText()))	//Si es un DNI vï¿½lido
 							{
 								//Componemos el empleado
 								rellenaEmpleadoConsultado();
 								MetodosGUI.estadoEditar(panelPrincipal);
 								tbDNI.setEnabled(false);
-								rellenaTextFields();
+								if (elelegido !=null )
+								{
+									rellenaTextFields();
+								}
 							}else {
-								JOptionPane.showMessageDialog(null, "Longitud del DNI inválida");
+								JOptionPane.showMessageDialog(null, "Longitud del DNI invÃ¡lida");
 							}
 						}
 				}
@@ -272,7 +306,7 @@ public class FormuEmpleado extends JFrame {
 	}
 	
 	/**
-	 * El método que rellena emplelegido 
+	 * El MÃ©todo que rellena emplelegido 
 	 * Pero desde la base de datos utilizando el campo DNI
 	 */
 	private void rellenaEmpleadoConsultado()
@@ -281,13 +315,16 @@ public class FormuEmpleado extends JFrame {
 	}
 	
 	/**
-	 * El método que rellena emplelegido (variable utilizada para componer el empleado que compone el usuario)
+	 * El MÃ©todo que rellena emplelegido (variable utilizada para componer el empleado que compone el usuario)
 	 */
 	private void rellenaEmpleado()
 	{
 		try {
 			Calendar fecha =fechaAlta.getCalendar();
-			GregorianCalendar fecha_alta = new GregorianCalendar(fecha.get(Calendar.YEAR),fecha.get(Calendar.MONTH),fecha.get(Calendar.DAY_OF_MONTH));
+			int anio = fecha.get(Calendar.YEAR);
+			int mes = fecha.get(Calendar.MONTH);
+			int dia = fecha.get(Calendar.DAY_OF_MONTH);
+			GregorianCalendar fecha_alta = new GregorianCalendar(anio,mes,dia);
 			elelegido = new Empleado( tbNombre.getText(), tbAp1.getText(), tbAp2.getText(),tbDNI.getText(), fecha_alta, (Oficina) comboBox.getSelectedItem());
 		} catch (DNInoValidoException e1) {
 			guiExcepciones.ErrorCarnet.showDialog();
@@ -301,8 +338,8 @@ public class FormuEmpleado extends JFrame {
 		rellenaTextFields();
 	}
 	/**
-	 * Método que rellena todos los textFields según el objeto
-	 * Empleado (que es estático) de la clase
+	 * MÃ©todo que rellena todos los textFields segÃºn el objeto
+	 * Empleado (que es estÃ¡tico) de la clase
 	 */
 	private void rellenaTextFields() {
 		tbDNI.setText(elelegido.getDni());
@@ -319,7 +356,7 @@ public class FormuEmpleado extends JFrame {
 	
 	/**
 	 * Sobrecarga del constructor que requiere:
-	 * @param tituloVentana El título de la ventana (que queremos que tenga)
+	 * @param tituloVentana El tï¿½tulo de la ventana (que queremos que tenga)
 	 */
 	private FormuEmpleado(String tituloVentana)
 	{
@@ -334,6 +371,7 @@ public class FormuEmpleado extends JFrame {
 	
 		return elelegido;
 	}
+
 	public static Empleado showDialog(String tituloVentana)
 	{
 		FormuEmpleado ventana = new FormuEmpleado(tituloVentana);

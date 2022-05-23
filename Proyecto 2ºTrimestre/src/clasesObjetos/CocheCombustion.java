@@ -28,11 +28,11 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 	@Override
 	public void setNumPlazas(int num) throws NumPlazasNoValidoException
 	{
-		if (num>0 && num<=8) //Suponemos que en un coche no caben más de 8 personas
+		if (num>0 && num<=8) //Suponemos que en un coche no caben mï¿½s de 8 personas
 		{
 			this.numPlazas = num;
 		}else {
-			throw new NumPlazasNoValidoException("Número de plazas no válido");
+			throw new NumPlazasNoValidoException("Nï¿½mero de plazas no vï¿½lido");
 		}
 	}
 	public void setTipo(String Tipo) throws TipoNoValidoException
@@ -42,7 +42,7 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 			String trab = Tipo;
 			this.tipo = trab;
 		}else {
-			throw new TipoNoValidoException("El tipo puede ser únicamente 'familiar', 'deportivo' o 'todoterreno(4x4)'");
+			throw new TipoNoValidoException("El tipo puede ser ï¿½nicamente 'familiar', 'deportivo' o 'todoterreno(4x4)'");
 		}
 	}
 
@@ -58,25 +58,25 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 	}
 	
 	/**
-	 * Crea un coche de combustión
-	 * Para ello necesita los siguientes parámetros:
-	 * @param matricula	La matrícula del coche de tipo {@code Matrícula} ({@code int} numeros, {@code String} letras)
+	 * Crea un coche de combustiÃ³n
+	 * Para ello necesita los siguientes parÃ¡metros:
+	 * @param matricula	La matrÃ­cula del coche de tipo {@code MatrÃ­cula} ({@code int} numeros, {@code String} letras)
 	 * @param marca	Una {@code String} que se refiere a su marca. Por ejemplo: "Skoda".
-	 * @param modelo Una {@code String} que será su modelo. 
-	 * @param categoria Una {@code Categoria} ({@code String} Codigo, {@code String} descripción, {@code double} recargo)
-	 * @param color	Una {@code String} que indicará el color
-	 * @param fecha_alta	La fecha que se dio de alta o adquirió el vehículo. Tipo {@code GregorianCalendar}
-	 * @param alquilado	Un {@code boolean} que reflejará el estado actual del coche (Alquilado o no).
-	 * @param oficina La oficina en la que se encuentra (si el coche no está alquilado). Tipo {@code Direccion} ({@code String} nombreVia, {@code String} numVia, {@code String} codigoPostal, {@code String} localidad)
-	 * @param num_km Los kilómetros recorridos por el vehículo. Tipo {@code int}.
-	 * @param num_plazas El número de plazas que dispone el coche. Tipo {@code int}.
+	 * @param modelo Una {@code String} que serÃ¡ su modelo. 
+	 * @param categoria Una {@code Categoria} ({@code String} Codigo, {@code String} descripciï¿½n, {@code double} recargo)
+	 * @param color	Una {@code String} que indicarï¿½ el color
+	 * @param fecha_alta	La fecha que se dio de alta o adquiriÃ³ el vehÃ­culo. Tipo {@code GregorianCalendar}
+	 * @param alquilado	Un {@code boolean} que reflejarÃ¡ el estado actual del coche (Alquilado o no).
+	 * @param oficina La oficina en la que se encuentra (si el coche no estï¿½ alquilado). Tipo {@code Direccion} ({@code String} nombreVia, {@code String} numVia, {@code String} codigoPostal, {@code String} localidad)
+	 * @param num_km Los kilÃ³metros recorridos por el vehÃ­culo. Tipo {@code int}.
+	 * @param num_plazas El nÃºmero de plazas que dispone el coche. Tipo {@code int}.
 	 * @param consumo El consumo del coche (Litros por cada 100km). Tipo {@code double}.
 	 * @param tipo	El tipo del coche, puede ser "Familiar, Deportivo". Tipo {@code String}.
 	 * @param potencia	El caballaje del coche medido en CV. Tipo {@code int}.
 	 * @param emisiones El {@code String} que indica el nivel de emisiones del coche. Puede ser "A", "B" o "C".
 	 * 
 	 * @throws EmisionesNoValidasException Error. Las emisiones no son "A" ni "B" ni "C".
-	 * @throws NumPlazasNoValidoException  Error. El número de plazas es 0 o muy alto(>8).
+	 * @throws NumPlazasNoValidoException  Error. El nï¿½mero de plazas es 0 o muy alto(>8).
 	 * @throws PotenciaNoValidaException 
 	 * @throws ConsumoNoValidoException 
 	 * @throws TipoNoValidoException 
@@ -102,7 +102,7 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 		}
 		CocheCombustion dado = (CocheCombustion) a; //Hacemos que lo trate como COCHE y no OBJETO
 		
-		if (this.matricula == dado.matricula) { //Comparamos sus matrículas
+		if (this.matricula == dado.matricula) { //Comparamos sus matrï¿½culas
 			return true;
 		}else {
 			return false;	//Ya a estas alturas ha fallado todos los controles por lo que, es falso
@@ -137,7 +137,7 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 
 	
 	
-	/*	Constructor inútil ya que no puede existir un vehículo porque es abstracto
+	/*	Constructor inÃºtil ya que no puede existir un vehÃ­culo porque es abstracto
 	public CocheCombustion(Vehiculo vehiculo, int numplazas, String tipo) throws EmisionesNoValidasException, NumPlazasNoValidoException {
 		super(vehiculo);
 		this.setTipo(tipo);

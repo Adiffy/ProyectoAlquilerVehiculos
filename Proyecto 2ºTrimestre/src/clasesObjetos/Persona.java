@@ -29,7 +29,7 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 		if (nombre.length()<=25 && nombre.length()>=2) {
 			this.nombre = nombre;
 		}else {
-			throw new LongitudCadenaNoValidaException("Longitud de nombre no válida");
+			throw new LongitudCadenaNoValidaException("Longitud de nombre no vï¿½lida");
 		}
 	}
 	public String getApellido1() {
@@ -60,7 +60,7 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 		if(MetodoDni.DNIvalido(dni)) {
 			this.dni=dni;
 		}else {
-			throw new DNInoValidoException("DNI inválido");
+			throw new DNInoValidoException("DNI invÃ¡lido");
 		}
 		
 	}
@@ -86,7 +86,7 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 		this.setDni(dni);
 	}
 	
-	//Métodos
+	//Mï¿½todos
 	public String getNombreCompleto() {
 		return apellido1+" "+apellido2+", "+nombre;
 	}
@@ -111,7 +111,7 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 	}
 	
 	/**
-	 * Compara 2 personas para ordenarlas alfabéticamente, comparando sus nombres completos
+	 * Compara 2 personas para ordenarlas alfabï¿½ticamente, comparando sus nombres completos
 	 * @param o	La persona con la que se compara.
 	 * @return	Un entero que indica la diferencia entre las Personas comparadas o 0 si no hay ninguna.
 	 */

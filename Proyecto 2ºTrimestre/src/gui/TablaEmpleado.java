@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -17,7 +18,7 @@ import metodos.Handlers;
 
 /**
  * Clase que sirve para crear una ventana con la tabla de empleados
- * @author Víctor J. Esquinas García
+ * @author Vï¿½ctor J. Esquinas Garcï¿½a
  *
  */
 public class TablaEmpleado extends JDialog {
@@ -44,7 +45,7 @@ public class TablaEmpleado extends JDialog {
 //		creaComboBox();
 		JPanel panelTabla = creaTabla();
 		creaScrollPane(panelTabla);
-
+		MetodosGUI.centraFormulario(yo);
 		}
 
 		
@@ -54,10 +55,10 @@ public class TablaEmpleado extends JDialog {
 		//Si no ha elegido ninguna
 		if (fila<0)
 		{
-			JOptionPane.showMessageDialog(getParent(), "Debes seleccionar una opción", "Error", JOptionPane.ERROR_MESSAGE);
-		}else //Si elige una opción válida
+			JOptionPane.showMessageDialog(getParent(), "Debes seleccionar una opciï¿½n", "Error", JOptionPane.ERROR_MESSAGE);
+		}else //Si elige una opciï¿½n vï¿½lida
 		{
-			//La última columna tiene el objeto
+			//La ï¿½ltima columna tiene el objeto
 			Emplelegido= (Empleado) model.getValueAt(fila, tableBusqueda.getColumnCount()-1);
 		}*/
 
@@ -134,6 +135,7 @@ public class TablaEmpleado extends JDialog {
 
 	private void creaPanelPrincipal() {
 		setTitle("Empleados");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TablaEmpleado.class.getResource("/icons/miniLogo.png")));
 		yo=this;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 596, 356);

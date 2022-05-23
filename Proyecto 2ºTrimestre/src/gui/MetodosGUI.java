@@ -18,7 +18,6 @@ import accesoADatos.RepositorioOficina;
 import clasesObjetos.Empleado;
 import clasesObjetos.Oficina;
 import java.awt.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MetodosGUI {			
@@ -47,13 +46,8 @@ public class MetodosGUI {
 		//Creamos el ComboBox
 		JComboBox<Oficina> comboBox = new JComboBox<>();
 		DefaultComboBoxModel<Oficina> m = new DefaultComboBoxModel<Oficina>();	//Creamos el Model
-		try {
-			//Intenta meter al DefaultComboBoxModel el ArrayList<Oficina>
-			m.addAll(RepositorioOficina.listaOficinas());
-		} catch (SQLException e) {
-			// Error
-			e.printStackTrace();
-		}
+		//Intenta meter al DefaultComboBoxModel el ArrayList<Oficina>
+		m.addAll(RepositorioOficina.listaOficinas());
 		comboBox.setModel(m);	//Metemos el model
 		
 		
@@ -69,7 +63,7 @@ public class MetodosGUI {
 	
 	public static JComboBox<String> creaDesplegableProv()
 	{
-		JComboBox<String> combo = new JComboBox<>(); //Creamos el comboBox vac�o
+		JComboBox<String> combo = new JComboBox<String>(); //Creamos el comboBox vac�o
 		DefaultComboBoxModel<String> mod = new DefaultComboBoxModel<String>();	//Creamos el model vac�o
 		//Rellenamos el model
 		mod.addAll(RepositorioAux.leeProvincias());

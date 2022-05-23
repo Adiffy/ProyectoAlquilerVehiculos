@@ -14,7 +14,7 @@ public class Alquiler implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-		//Variables que Se usarán en caso de alquiler
+		//Variables que Se usarï¿½n en caso de alquiler
 		private String codigo ; 
 		private GregorianCalendar FechaInicioAlquiler = new GregorianCalendar();
 		private GregorianCalendar FechaPrevistaFinAlquiler = new GregorianCalendar();
@@ -47,14 +47,14 @@ public class Alquiler implements Serializable {
 		}
 
 		/**
-		 * @return el vehículo aAlquilar
+		 * @return el vehï¿½culo aAlquilar
 		 */
 		public Vehiculo getaAlquilar() {
 			return aAlquilar;
 		}
 
 		/**
-		 * @param aAlquilar el Vehículo del alquiler
+		 * @param aAlquilar el Vehï¿½culo del alquiler
 		 */
 		public void setaAlquilar(Vehiculo aAlquilar) {
 			this.aAlquilar = aAlquilar;
@@ -90,7 +90,7 @@ public class Alquiler implements Serializable {
 
 		/**
 		 * 
-		 * @return El código alfanumérico del alquiler
+		 * @return El cï¿½digo alfanumï¿½rico del alquiler
 		 */
 		public String getCodigo() {
 			String copia = codigo;
@@ -127,7 +127,7 @@ public class Alquiler implements Serializable {
 			{
 				FechaInicioAlquiler = (GregorianCalendar) fechaInicioAlquiler.clone();
 			}else {
-				throw new FechaNoValidaException("Fecha de inicio de alquiler no válida");
+				throw new FechaNoValidaException("Fecha de inicio de alquiler no vï¿½lida");
 			}
 			
 		}
@@ -177,12 +177,12 @@ public class Alquiler implements Serializable {
 		@SuppressWarnings("static-access")
 		public void setFechaDevolucion(GregorianCalendar fechaDevolucion) throws FechaNoValidaException {
 			
-			//O es mayor el mes o el año de la fecha de devolución respecto la de inicio alquiler
+			//O es mayor el mes o el aÃ±o de la fecha de devoluciÃ³n respecto la de inicio alquiler
 			if (fechaDevolucion.MONTH > this.FechaInicioAlquiler.MONTH || fechaDevolucion.YEAR > this.FechaInicioAlquiler.YEAR)	
 			{
 				FechaDevolucion = fechaDevolucion;
 			}else {
-				throw new FechaNoValidaException("Fecha de devolución anterior a la fecha de inicio del alquiler");
+				throw new FechaNoValidaException("Fecha de devoluciÃ³n anterior a la fecha de inicio del alquiler");
 			}
 			
 		}
@@ -202,14 +202,14 @@ public class Alquiler implements Serializable {
 			this.setaAlquilar(aAlquilar);
 			this.setOficinaRecogida(OficinaRecogida);
 			this.setOficinaEntrega(OficinaEntrega);
-			this.setAlquilado(aAlquilar, true); //Cuando se construye un alquiler el vehículo es alquilado
+			this.setAlquilado(aAlquilar, true); //Cuando se construye un alquiler el vehï¿½culo es alquilado
 //			this.setCliente(cliente);
 //			this.setEncargado(emple);
 		}
 		
 		//Metodos
 		/**
-		 * @return El nº de días que el vehículo está alquilado
+		 * @return El nÂº de dÃ­as que el vehÃ­culo estÃ¡ alquilado
 		 */
 		@SuppressWarnings("static-access")
 		public int getNumDias()

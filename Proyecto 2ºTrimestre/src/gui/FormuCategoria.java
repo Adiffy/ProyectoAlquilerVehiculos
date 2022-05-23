@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -50,6 +51,7 @@ public class FormuCategoria extends JDialog {
 		creaButtonPane();
 		//Lo ponemos en su estado inicial
 		MetodosGUI.estadoInicial(contentPanel);
+		tbCod.setEnabled(true);
 		tbDesc.setEnabled(false);
 		okButton.setEnabled(false);
 		
@@ -75,7 +77,7 @@ public class FormuCategoria extends JDialog {
 							MetodosGUI.estadoInicial(contentPanel);
 							vaciaTbDesc();
 						}else {
-							JOptionPane.showMessageDialog(okButton, "Error al intentar crear / actualizar la oficina con código "+CatElegida.getCodigo()+" en la base de datos.","DataBase Error",JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(okButton, "Error al intentar crear / actualizar la oficina con cï¿½digo "+CatElegida.getCodigo()+" en la base de datos.","DataBase Error",JOptionPane.ERROR_MESSAGE);
 						}
 					}
 				});
@@ -167,12 +169,12 @@ public class FormuCategoria extends JDialog {
 				public void keyPressed(KeyEvent e) {
 					if (e.getKeyCode()==KeyEvent.VK_ENTER)
 					{
-						//Si existe la categoría
+						//Si existe la categorï¿½a
 						if (RepositorioCategoria.leeCategoria(tbCod.getText())!=null)
 						{
 							//Rellenamos los componentes
 							rellenaCategoria();
-						}	//Exista o no (Sí o sí)
+						}	//Exista o no (Sï¿½ o sï¿½)
 						//Preparamos los componentes 
 						MetodosGUI.estadoEditar(contentPanel);
 						tbDesc.setEnabled(true);
@@ -186,6 +188,8 @@ public class FormuCategoria extends JDialog {
 	}
 
 	private void declaraAtributosGenerales() {
+		setTitle("Nueva categorÃ­a");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FormuCategoria.class.getResource("/icons/miniLogo.png")));
 		setBounds(100, 100, 450, 277);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -210,9 +214,9 @@ public class FormuCategoria extends JDialog {
 	
 	private static void rellenaCategoria()
 	{
-		//Obtenemos el código
+		//Obtenemos el cï¿½digo
 		String cod = tbCod.getText();
-		//Vemos si la categoría existe
+		//Vemos si la categorï¿½a existe
 		CatElegida = RepositorioCategoria.leeCategoria(cod);
 		if (CatElegida!=null)
 		{

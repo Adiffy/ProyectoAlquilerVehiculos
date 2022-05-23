@@ -6,19 +6,19 @@ public class MetodoDni {
 	 * <p>
 	 * Devuelve un verdadero o falso dependiendo de la autenticidad del DNI.
 	 * Para ello comprueba que la longitud es correcta y luego si la letra dada coincide con 
-	 * la letra correspondiente según el número.
+	 * la letra correspondiente segï¿½n el nï¿½mero.
 	 * 
 	 * {@code Ejemplo de uso:}
 	 *  if (DNIvalido("78280774k))
 	 *  {...}
 	 * </p>
-	 * @param dnicompleto	El DNI completo con los números y la letra
-	 * @return Verdadero si es válido o Falso si no lo es.
+	 * @param dnicompleto	El DNI completo con los nï¿½meros y la letra
+	 * @return Verdadero si es vï¿½lido o Falso si no lo es.
 	 */
 	public static boolean DNIvalido(String dnicompleto)
 	{
 		//Variables
-		boolean valido=false;	//A priori el DNI no es válido
+		boolean valido=false;	//A priori el DNI no es vï¿½lido
 		String numeros;
 		String[] dniDiv = new String[2];	//El dni dividido
 		int num;
@@ -41,11 +41,11 @@ public class MetodoDni {
 	
 	/**
 	 * <p>
-	 * Calcula la letra correspondiente a un número de DNI
+	 * Calcula la letra correspondiente a un nï¿½mero de DNI
 	 * <blockquote>Por ejemplo:</blockquote>
 	 * CalculaLetra(78280774) nos devuelve "K"
 	 * @param n Dni sin letra
-	 * @return Letra que corresponde al número
+	 * @return Letra que corresponde al nï¿½mero
 	 */
 	public static String CalculaLetra(int n)
 	{
@@ -127,7 +127,7 @@ public class MetodoDni {
 				letra="E";
 				break;
 			default: 
-				letra = "Ñ"; //Si no es ninguna devolverá la Ñ
+				letra = "Ã‘"; //Si no es ninguna devolverÃ¡ la Ã‘
 				break;
 		}
 		return letra;

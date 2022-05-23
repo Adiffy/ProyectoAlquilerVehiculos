@@ -34,12 +34,13 @@ public class Cliente extends Persona{
 
 	public void setLicencia(String licencia) throws LicenciaNoValidaException {
 		//Comprobamos que licencia es igual a una de las licencias permitidas
-		if (( licencia.compareToIgnoreCase("A")==0 || licencia.compareToIgnoreCase("B")==0 || licencia.compareToIgnoreCase("C")==0 || licencia.compareToIgnoreCase("D")==0 ) || licencia.compareToIgnoreCase("AM")==0 || licencia.compareToIgnoreCase("A1")==0 || licencia.compareToIgnoreCase("A2")==0)
+		if (( licencia.compareToIgnoreCase("A")==0 || licencia.compareToIgnoreCase("B")==0 || licencia.compareToIgnoreCase("C")==0 || licencia.compareToIgnoreCase("D")==0 ) || licencia.compareToIgnoreCase("AM")==0 || licencia.compareToIgnoreCase("A1")==0 || licencia.compareToIgnoreCase("A2")==0
+				|| licencia.compareToIgnoreCase("C1")==0 || licencia.compareToIgnoreCase("C2")==0 || licencia.compareToIgnoreCase("B1")==0 || licencia.compareToIgnoreCase("B2")==0)
 		{
 			String license = licencia;
 			this.licencia = license;
 		}else {
-			throw new LicenciaNoValidaException("Licencia no v�lida, debe ser: A, B, C, D, AM, A1 o A2");
+			throw new LicenciaNoValidaException("Licencia no válida, debe ser: AM, A1 o A2, A, B, B1, B2, C, C1, C2, D");
 		}
 	}
 

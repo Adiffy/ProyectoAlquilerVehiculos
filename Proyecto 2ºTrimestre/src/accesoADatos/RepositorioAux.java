@@ -26,7 +26,7 @@ public class RepositorioAux {
 			while (rs.next())
 			{
 				
-				lista.add(leeProvincia(i));
+				lista.add(leeProvincia(i).toUpperCase());
 				i++;
 			}
 			//Cerramos las conexiones

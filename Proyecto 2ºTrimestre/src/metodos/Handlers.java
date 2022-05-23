@@ -1,6 +1,5 @@
 package metodos;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -36,11 +35,11 @@ public class Handlers {
 		ArrayList<String> listado = RepositorioAux.getEmisiones();
 		model.addAll(listado);
 		desplegable.setModel(model);
-		
+
 		return desplegable;
 	}
-	
-	
+
+
 	public static JComboBox<String> DesplegableTipoCoche()
 	{
 		//Creamos el comboBox y le damos tamaóo
@@ -51,24 +50,24 @@ public class Handlers {
 		m.addAll(RepositorioAux.getTipoVehiculos());
 		//Le asignamos el model
 		tipo.setModel(m);
-		
+
 		return tipo;
 	}
-	
+
 	public static JComboBox<String> DesplegableCarnetRequeridoFurgo()
 	{
 		JComboBox<String> carnets = new JComboBox<String>();
 		carnets.setModel(Handlers.getModelCarnetRequeridoFurgoneta());
 		return carnets;
 	}
-	
+
 	public static JComboBox<String> DesplegableLicenciasDeConducir()
 	{
 		JComboBox<String> carnets = new JComboBox<String>();
 		carnets.setModel(Handlers.getModelLicenciasDeConducir());
 		return carnets;
 	}
-	
+
 	private static ComboBoxModel<String> getModelLicenciasDeConducir() {
 		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 		ArrayList<String> listaCarnets = new ArrayList<String>();
@@ -83,7 +82,7 @@ public class Handlers {
 		return model;
 	}
 
-	
+
 
 	private static DefaultComboBoxModel<String> getModelCarnetRequeridoFurgoneta()
 	{
@@ -95,7 +94,7 @@ public class Handlers {
 		model.addAll(listaCarnets);
 		return model;
 	}
-	
+
 	public static JComboBox<String> DesplegableCarnetRequeridoMoto()
 	{
 		//Creamos el comboBox y le damos tamaóo
@@ -106,39 +105,58 @@ public class Handlers {
 		m.addAll(RepositorioAux.getCarnetRequeridoMoto());
 		//Le asignamos el model
 		tipo.setModel(m);
-		
+
 		return tipo;
 	}
-	
+
 	public static DefaultTableModel modelTablaOficina()
 	{
 		ArrayList<Oficina> oficinas = new ArrayList<Oficina>();
 		String[] columnas = {"Código","Descripción","Provincia","Localidad","Aeropuerto"};
 		//Creamos el model a devolver
-		DefaultTableModel model = new DefaultTableModel(columnas,0);
-		//Obtenemos las oficinas de BD
-				try {
-					oficinas = RepositorioOficina.listaOficinas();
-				} catch (SQLException e) {
-					// Imprimimos el error y mostramos una ventana emergente
-					JOptionPane.showMessageDialog(null, "Error al intentar leer las oficinas","DataBase Error",JOptionPane.ERROR_MESSAGE);
-					e.printStackTrace();
-				}
-				//Pasamos el ArrayList a Object[] 
-				for (Oficina a:oficinas)
-				{
-					String cod = a.getCódigo();
-					String desc = a.getDescripción();
-					String prov = a.getProvincia();
-					String loc = a.getLocalidad();
-					boolean aeropuerto = a.isDeAeropuerto();
-					//Podemos reutilizar la variable para ir aóadiendo las oficinas 
-					Object[] col = {cod,desc,prov,loc,aeropuerto};
-					model.addRow(col);
-				}
+		DefaultTableModel model = new DefaultTableModel(columnas,0)
+		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@SuppressWarnings("rawtypes")
+			Class[] columnType = new Class[] {
+					String.class, String.class,String.class,String.class, boolean.class 
+			};
+			@SuppressWarnings({ "unused", "rawtypes" })
+			public Class getColumnTypes(int columnIndex)
+			{
+				return columnType[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] 
+					{
+							false,false,false,false,false
+					};
+			public boolean isCellEditable (int Row, int column)
+			{
+				return columnEditables[column];
+			}
+			
+		};
+		oficinas = RepositorioOficina.listaOficinas();
+		//Pasamos el ArrayList a Object[] 
+		for (Oficina a:oficinas)
+		{
+			String cod = a.getCódigo();
+			String desc = a.getDescripción();
+			String prov = a.getProvincia();
+			String loc = a.getLocalidad();
+			boolean aeropuerto = a.isDeAeropuerto();//Si es de aeropuerto se marca
+
+			//Podemos reutilizar la variable para ir aóadiendo las oficinas 
+			Object[] col = {cod,desc,prov,loc,aeropuerto};
+			model.addRow(col);
+		}
 		return model;
-//			model.setDataVector(oficinas, columnas);
-		
+		//			model.setDataVector(oficinas, columnas);
+
 	} 
 
 	public static JTable creaTablaOficina()
@@ -151,7 +169,7 @@ public class Handlers {
 		tablaOfi.setModel(m);
 		return tablaOfi;
 	} 
-	
+
 	public static DefaultTableModel modelTablaEmpleado()
 	{
 		ArrayList<Empleado> empleados = new ArrayList<Empleado>();
@@ -159,20 +177,20 @@ public class Handlers {
 		//Creamos el model a devolver
 		DefaultTableModel model = new DefaultTableModel(null,columnas);
 		empleados = RepositorioEmpleado.leeEmpleados();
-				//Pasamos el ArrayList a Object[] 
-				for (Empleado e:empleados)
-				{
-					String dni = e.getDni();
-					Empleado Nombre = e;
-					String fecha_alta = toStringGregCalendar(e.getFechaAlta());
-					String Ofi = e.getOficina().getProvincia()+" "+e.getOficina().getDescripción();
-					//Podemos reutilizer le verieble pere ir eóediendo les oficines 
-					Object[] col = {dni,Nombre,fecha_alta,Ofi};
-					model.addRow(col);
-				}
+		//Pasamos el ArrayList a Object[] 
+		for (Empleado e:empleados)
+		{
+			String dni = e.getDni();
+			Empleado Nombre = e;
+			String fecha_alta = toStringGregCalendar(e.getFechaAlta());
+			String Ofi = e.getOficina().getProvincia()+" "+e.getOficina().getDescripción();
+			//Podemos reutilizer le verieble pere ir eóediendo les oficines 
+			Object[] col = {dni,Nombre,fecha_alta,Ofi};
+			model.addRow(col);
+		}
 		return model;		
 	} 
-	
+
 	public static JTable creaTablaEmpleado()
 	{
 		//Conseguimos el Model
@@ -188,7 +206,7 @@ public class Handlers {
 		//Devolvemos la tabla con el model
 		return tablaEmple;
 	} 
-	
+
 	public static String toStringGregCalendar(GregorianCalendar fechaAlta) {
 		// Formateamos una fecha de tipo GregorianCalendar
 		int dia = fechaAlta.get(Calendar.DAY_OF_MONTH);
@@ -198,33 +216,28 @@ public class Handlers {
 	}
 	public static void rellenaTablaOficina(JTable table) {
 		ArrayList<Oficina> totalOficina = new ArrayList<Oficina>();
-		try {
-			totalOficina = RepositorioOficina.listaOficinas();
-		} catch (SQLException e) {
-			// Traza del error
-			e.printStackTrace();
-		}
+		totalOficina = RepositorioOficina.listaOficinas();
 		String col[] = {"COD_OFI","DESC_OFI","OFI_AEROPUERTO", "PROVINCIA", "LOCALIDAD"};
 		//DefaultTableModel model = (DefaultTableModel)table.getModel();
 		//model.addColumn(col);
 		DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-//		chbxJTable checkBoxRenderer = new chbxJTable();
-		
+		//		chbxJTable checkBoxRenderer = new chbxJTable();
+
 		for (Oficina ofi : totalOficina) {
 			String cod = ofi.getCódigo();
 			String desc = ofi.getDescripción();
 			boolean aero = ofi.isDeAeropuerto();
 			String prov = ofi.getProvincia();
 			String loc = ofi.getLocalidad();
-			
+
 			Object[] datos = {cod,desc,aero,prov,loc};
-			
+
 			tableModel.addRow(datos);
-			
+
 		}
-		
+
 		table.setModel(tableModel);
-//		table.getColumnModel().getColumn(2).setCellRenderer(checkBoxRenderer);
+		//		table.getColumnModel().getColumn(2).setCellRenderer(checkBoxRenderer);
 	}
 
 	private static DefaultComboBoxModel<Integer> getModelCilindrada()
@@ -241,13 +254,17 @@ public class Handlers {
 		model.addAll(a);
 		return model;
 	}
-	
-	public static JComboBox<Vehiculo> creaDesplegableVehiculos()
+
+	public static JComboBox<Vehiculo> creaDesplegableVehiculos(Oficina ofi)
 	{
 		JComboBox<Vehiculo> desplegable = new JComboBox<Vehiculo>();
 		DefaultComboBoxModel<Vehiculo> model = new DefaultComboBoxModel<Vehiculo>();
+
 		try {
-			model.addAll(RepositorioVehiculo.leeTodosLosVehiculos());
+			//Obtenemos los vehículos de la oficina
+			ArrayList<? extends Vehiculo> listado = RepositorioVehiculo.leeTodosLosVehiculos(ofi);
+			//Los añadimos al model
+			model.addAll(listado);
 		} catch (LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException | RecargoNoValidoException e) {
 			// error
 			JOptionPane.showMessageDialog(desplegable, "No se pudo rellenar el desplegable de Vehiculos","DataBase Error",JOptionPane.ERROR_MESSAGE);
@@ -256,13 +273,40 @@ public class Handlers {
 		desplegable.setModel(model);
 		return desplegable;
 	}
-	
+
+	public static JComboBox<Vehiculo> creaDesplegableVehiculos()
+	{
+		JComboBox<Vehiculo> desplegable = new JComboBox<Vehiculo>();
+		DefaultComboBoxModel<Vehiculo> model = new DefaultComboBoxModel<Vehiculo>();
+
+		try {
+			//Eliminamos los vehículos vacíos
+			ArrayList<? extends Vehiculo> listado = RepositorioVehiculo.leeTodosLosVehiculos();
+			for (Vehiculo a:listado)
+			{
+				if (a==null)
+				{				//Si no hay un vehículo se elimina la tupla
+					listado.remove(a);
+				}
+			}
+			//Los añadimos al model
+			model.addAll(listado);
+		} catch (LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException | RecargoNoValidoException e) {
+			// error
+			JOptionPane.showMessageDialog(desplegable, "No se pudo rellenar el desplegable de Vehiculos","DataBase Error",JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		desplegable.setModel(model);
+		return desplegable;
+	}
+
 	private static DefaultTableModel ModelTablaCliente()
 	{
 		ArrayList<Cliente> clientes = RepositorioCliente.leeClientes();	
 		String[] columnas = {"DNI","Apellidos y nombre","Tarjeta de socio","Licencia de conducir"};
 		//Creamos el model a devolver
 		DefaultTableModel model = new DefaultTableModel(null, columnas);	
+		model.addRow(columnas);
 		//Pasamos el ArrayList a Object[] 
 		for (Cliente e:clientes)
 		{
@@ -274,24 +318,24 @@ public class Handlers {
 			Object[] col = {dni,Nombre,tarjeta,carnet};
 			model.addRow(col);
 		}
-		
+
 		return model;
 	}
-	
+
 	public static JComboBox<Integer> creaDesplegableCilindrada() {
 		JComboBox<Integer> cilindradas = new JComboBox<Integer>();
 		cilindradas.setModel(getModelCilindrada());
 		return cilindradas;
 	}
-	
+
 	public static JComboBox<Categoria> creaDesplegableCategoria()
 	{
 		JComboBox<Categoria> desplegable = new JComboBox<Categoria>();
 		desplegable.setModel(Handlers.getModelCategoria());
-		
+
 		return desplegable;
 	}
-	
+
 	private static DefaultComboBoxModel<Categoria> getModelCategoria()
 	{
 		DefaultComboBoxModel<Categoria> model = new DefaultComboBoxModel<Categoria>();
@@ -322,6 +366,39 @@ public class Handlers {
 		DefaultComboBoxModel<Integer> model = new DefaultComboBoxModel<Integer>();
 		//Le añadimos al model las tarjetas de los clientes
 		model.addAll(RepositorioAux.leeTarjetasClientes());
+		//Le añadimos el model al desplegable
+		desplegable.setModel(model);
+		return desplegable;
+	}
+
+
+	public static JComboBox<Cliente> creaDesplegableClientes() {
+		JComboBox<Cliente> desplegable = new JComboBox<Cliente>();
+		DefaultComboBoxModel<Cliente> model = new DefaultComboBoxModel<Cliente>();
+		//Le añadimos al model las tarjetas de los clientes
+		model.addAll(RepositorioCliente.leeClientes());
+		//Le añadimos el model al desplegable
+		desplegable.setModel(model);
+		return desplegable;
+	}
+
+
+	public static JComboBox<Empleado> creaDesplegableEmpleados() {
+		JComboBox<Empleado> desplegable = new JComboBox<Empleado>();
+		DefaultComboBoxModel<Empleado> model = new DefaultComboBoxModel<Empleado>();
+		//Le añadimos al model las tarjetas de los clientes
+		model.addAll(RepositorioEmpleado.leeEmpleados());
+		//Le añadimos el model al desplegable
+		desplegable.setModel(model);
+		return desplegable;
+	}
+
+
+	public static JComboBox<Oficina> creaDesplegableOficina() {
+		JComboBox<Oficina> desplegable = new JComboBox<Oficina>();
+		DefaultComboBoxModel<Oficina> model = new DefaultComboBoxModel<Oficina>();
+		//Le añadimos al model las tarjetas de los clientes
+		model.addAll(RepositorioOficina.listaOficinas());
 		//Le añadimos el model al desplegable
 		desplegable.setModel(model);
 		return desplegable;

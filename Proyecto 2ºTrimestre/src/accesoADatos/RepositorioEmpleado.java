@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.JOptionPane;
@@ -29,7 +29,7 @@ public class RepositorioEmpleado {
 		ResultSet rs;
 		Empleado emple = null;	//Sacamos todos los atributos
 		//Los generales de -> PERSONA
-		//Y los espec�ficos de -> EMPLEADO
+		//Y los específicos de -> EMPLEADO
 		String sql="SELECT * FROM Persona P JOIN EMPLEADO E ON P.DNI=E.PERSONA_DNI "
 				+ "WHERE DNI=UPPER(?)";
 
@@ -69,7 +69,7 @@ public class RepositorioEmpleado {
 				} 
 			}
 
-			//Cerramos la conexi�n
+			//Cerramos la conexión
 			rs.close();
 			st.close();
 		} catch (SQLException e) {
@@ -150,10 +150,10 @@ public class RepositorioEmpleado {
 
 		return lista;
 	}
-	
+
 	public static boolean insertEmpleado(Empleado emple)
 	{
-//		boolean hecho = false; //A priori no se ha ejecutado la operaci�n
+		//		boolean hecho = false; //A priori no se ha ejecutado la operaci�n
 		if (leeEmpleado(emple.getDni())!=null)	//Si existe en la BD
 		{
 			return update(emple);
@@ -161,25 +161,99 @@ public class RepositorioEmpleado {
 			return insert(emple);
 		}
 	}
-	
+
+	/**
+	 * M�todo que actualiza todas las tuplas de un empleado con un
+	 * determinado DNI
+	 * @param emple un empleado alterado
+	 */
 	private static boolean update(Empleado emple) {
 		boolean hecho = false; //A priori no se ha ejecutado la operaci�n
-		PreparedStatement st = null;
-		String sql = "UPDATE "+ tablaDif(emple)+ " SET ? = ? "
-					+ "WHERE ? = ?";
-		
-		try {//establecemos la conexi�n
-			st = EmpresaDB.conn.prepareStatement(sql);
-			st.setString(1, tuplaDif(emple));
-			st.setString(2, "");//TODO);
+
+		try {//establecemos la conexión
+			//Primero modificamos las propiedades del objeto Persona
+
+			updateNombre(emple);
+			updateAp1(emple);
+			updateAp2(emple);
+			//Ahora vamos con los atributos del empleado
+			updateFecha_alta(emple);
+			updateCodOficina(emple);
+			hecho=true;	//Ha podido ejecutar todo el c�digo dentro del TRY
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			// error
 			e.printStackTrace();
 		}
 		return hecho;
 	}
-	
-	private static String tablaDif(Empleado emple)
+
+	private static void updateCodOficina(Empleado emple) throws SQLException {
+		String sql = "UPDATE empleado SET oficina = ? "
+				+ "WHERE persona_dni = ?";
+		PreparedStatement st;
+		st = EmpresaDB.conn.prepareStatement(sql);
+		st.setString(1,emple.getOficina().getCódigo());
+		st.setString(2, emple.getDni());
+		st.execute();
+		st.execute("COMMIT");
+		st.close();
+	}
+
+	private static void updateFecha_alta(Empleado emple) throws SQLException {
+		String sql = "UPDATE empleado SET fecha_alta = ? "
+				+ "WHERE persona_dni = ?";
+		PreparedStatement st;
+		st = EmpresaDB.conn.prepareStatement(sql);
+		GregorianCalendar fechaAlta = emple.getFechaAlta();
+		int dia = fechaAlta.get(Calendar.DAY_OF_MONTH);
+		int mes = fechaAlta.get(Calendar.MONTH);
+		int anio = fechaAlta.get(Calendar.YEAR);
+		@SuppressWarnings("deprecation")
+		Date fecha = new Date (anio,mes,dia);
+		st.setDate(1, (java.sql.Date) fecha);
+		st.setString(2, emple.getDni());
+		st.execute();
+		st.execute("COMMIT");
+		st.close();
+	}
+
+	private static void updateAp2(Empleado emple) throws SQLException {
+		String sql = "UPDATE PERSONA SET AP2 = ? "
+				+ "WHERE dni = ?";
+		PreparedStatement st;
+		st = EmpresaDB.conn.prepareStatement(sql);
+		st.setString(1, emple.getApellido2());
+		st.setString(2, emple.getDni());
+		st.execute();
+		st.execute("COMMIT");
+		st.close();
+	}
+
+	private static void updateAp1(Empleado emple) throws SQLException {
+		String sql = "UPDATE PERSONA SET AP1 = ? "
+				+ "WHERE dni = ?";
+		PreparedStatement st;
+		st = EmpresaDB.conn.prepareStatement(sql);
+		st.setString(1, emple.getApellido1());
+		st.setString(2, emple.getDni());
+		st.execute();
+		st.execute("COMMIT");
+		st.close();
+	}
+
+	private static void updateNombre(Empleado emple) throws SQLException {
+		String sql = "UPDATE PERSONA SET NOMBRE = ? "
+				+ "WHERE dni = ?";
+		PreparedStatement st;
+		st = EmpresaDB.conn.prepareStatement(sql);
+		st.setString(1, emple.getNombre());
+		st.setString(2, emple.getDni());
+		st.execute();
+		st.execute("COMMIT");
+		st.close();
+	}
+
+	/*private static String tablaDif(Empleado emple)
 	{
 		Empleado original = leeEmpleado(emple.getDni());
 		if (comparaTuplaPersona(emple, original).compareToIgnoreCase("iguales")!=0)
@@ -188,9 +262,9 @@ public class RepositorioEmpleado {
 		}else {
 			return "empleado";
 		}
-	}
+	}*/
 
-	private static String tuplaDif(Empleado emple) {
+	/*private static String tuplaDif(Empleado emple) {
 		// Buscamos el empleado equivalente en la Base de Datos
 		Empleado original = leeEmpleado(emple.getDni());
 		if (RepositorioPersona.leePersona(emple.getDni()) != null)
@@ -209,9 +283,9 @@ public class RepositorioEmpleado {
 		}else {
 			return "";
 		}
-	}
+	}*/
 
-	private static String comparaTuplaPersona(Empleado emple, Empleado original) {
+	/*private static String comparaTuplaPersona(Empleado emple, Empleado original) {
 		if (original.getNombre().compareToIgnoreCase(emple.getNombre())!=0)
 		{
 			return "nombre";
@@ -224,32 +298,42 @@ public class RepositorioEmpleado {
 		}else {
 			return "iguales";
 		}
-	}
+	}*/
 
+	@SuppressWarnings("deprecation")
 	public static boolean insert(Empleado emple)
 	{
 		boolean ejecutado=false;	//A priori suponemos que no ha podido ejecutarse
 		PreparedStatement st = null;
-		String sql="INSERT INTO empleado VALUES (?,?,?)";
-
-		//TODO averiguar si existe para hacer UPDATE / INSERT
-
-
+		//		RepositorioPersona.insertPersona(emple);
+		String sql="INSERT INTO Persona (dni,nombre,ap1,ap2) VALUES (?,?,?,?)";
 
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
-			RepositorioPersona.insertPersona(emple);	//Insertamos primero la persona
+			st.setString(1, emple.getDni());
+			st.setString(2, emple.getNombre());
+			st.setString(3, emple.getApellido1());
+			st.setString(4, emple.getApellido2());
+			st.executeUpdate();
+			st.execute("COMMIT");
+
+			sql="INSERT INTO empleado (fecha_alta,persona_dni,oficina) VALUES (?,?,?)";	
+			
+			st = EmpresaDB.conn.prepareStatement(sql);
+//			RepositorioPersona.insertPersona(emple);	//Insertamos primero la persona
 
 			GregorianCalendar aux = emple.getFechaAlta();	//Acortamos la ruta a escribir
 			//Componemos la fecha
-			st.setString(1, aux.get(Calendar.YEAR)+"/"+aux.get(Calendar.MONTH)+"/"+aux.get(Calendar.DAY_OF_MONTH));
+//			aux.get(Calendar.YEAR)+"/"+aux.get(Calendar.MONTH)+"/"+aux.get(Calendar.DAY_OF_MONTH)
+			Date dat = new Date(aux.get(Calendar.YEAR),aux.get(Calendar.MONTH), aux.get(Calendar.DAY_OF_MONTH));
+			st.setDate(1, (java.sql.Date) dat);
 			st.setString(2, emple.getDni());
 			st.setString(3, emple.getOficina().getCódigo());
 
 			st.executeUpdate();
-			st.executeUpdate("COMMIT");
-
-			//Cerramos la conexi�n
+			st.execute("COMMIT");
+			ejecutado = true;	//si llega hasta aquí sin errores se ejecutó
+			//Cerramos la conexión
 			st.close();
 		}catch (SQLException e) {
 			// Error
@@ -267,18 +351,18 @@ public class RepositorioEmpleado {
 	/**
 	 * Borra un empleado 
 	 * @param dni	El dni del empleado a borrar
-	 * @return	El n�mero de filas modificadas
+	 * @return	El número de filas modificadas
 	 */
 	public static int borraEmpleado(String dni)
 	{
 		int numFilas = -1;	//A priori no se modifica ninguna fila
 		PreparedStatement st;
-		String sql="DELETE FROM EMPLEADO WHERE PERSONA_DNI =?";
+		String sql="DELETE FROM PERSONA WHERE DNI =?";
 
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, dni);
-			st.execute();	//Al ejecutar la instrucci�n ya borramos
+			st.execute();	//Al ejecutar la instrucción ya borramos
 
 			st.execute("COMMIT");	//Guardamos	
 			if (leeEmpleado(dni) != null)

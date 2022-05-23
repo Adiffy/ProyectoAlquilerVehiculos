@@ -36,7 +36,7 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() {
 		
 		setTitle("Alquiler de vehículos");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("recursos\\Logo.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaPrincipal.class.getResource("/icons/miniLogo.png")));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -101,7 +101,7 @@ public class VentanaPrincipal extends JFrame {
 				{
 					public void actionPerformed(ActionEvent e) {
 						@SuppressWarnings("unused")
-						Oficina ofi = FormuOficina.showDialog();
+						Oficina ofi = FormuOficinas.showDialog();
 					}
 				});
 		

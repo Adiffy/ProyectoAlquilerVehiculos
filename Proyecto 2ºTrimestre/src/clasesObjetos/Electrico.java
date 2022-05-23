@@ -15,8 +15,8 @@ public abstract class Electrico extends Vehiculo {
 	private int tiempoRecarga; //Tiempo que tarda en cargarse por completo (tiempo en minutos)
 	
 	
-	//Máximos y mínimos
-	private int maxTiempoRecarga=200;
+	//MÃ¡ximos y mÃ­nimos
+	private int maxTiempoRecarga=2000;
 	private int minTiempoRecarga=0;
 	
 	public int getTiempoRecarga() { //Tipo primitivo, no hace falta clonar
@@ -28,7 +28,7 @@ public abstract class Electrico extends Vehiculo {
 		{
 			this.tiempoRecarga = tiempoRecarga;
 		}else {
-			throw new TiempoRecargaNoValidoException("Tiempo de recarga menor o igual a"+ minTiempoRecarga+ " ó mayor que"+ maxTiempoRecarga);
+			throw new TiempoRecargaNoValidoException("Tiempo de recarga menor o igual a"+ minTiempoRecarga+ " ï¿½ mayor que"+ maxTiempoRecarga);
 		}
 	}
 
@@ -48,13 +48,13 @@ public abstract class Electrico extends Vehiculo {
 		super(matricula, marca, modelo, categoria, color, fecha_alta,  oficina, num_km);
 		this.setAutonomia(autonomia);
 		this.setTiempoRecarga(tiempoDeRecarga);
-	//	this.setElectrico(true); //Todos los que hereden de electrico son electricos (para el cálculo del alquiler)
+	//	this.setElectrico(true); //Todos los que hereden de electrico son electricos (para el cï¿½lculo del alquiler)
 	}
 
 	@Override
 	public String toString()
 	{
-		return this.matricula +" - " +this.getMarca()+" "+this.getModelo() + "| Autonomía: " + this.getAutonomia() + " Tiempo de Recarga: "+this.getTiempoRecarga();
+		return ""+this.matricula + " - " + this.getMarca() + " " + this.getModelo();
 	}
 	
 }

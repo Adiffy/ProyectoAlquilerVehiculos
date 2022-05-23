@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -39,7 +40,7 @@ import objetosBD.VehiculoDB;
 public class RepositorioVehiculo {
 
 	/**
-	 * Obtiene las matriculas de la tabla VEHICULO y se las pasa al m�todo leeVehiculo mediante un bucle
+	 * Obtiene las matriculas de la tabla VEHICULO y se las pasa al Método leeVehiculo mediante un bucle
 	 * @return un ArrayList<VehiculoDB>
 	 * @throws LetrasMatriculaNoValidasException
 	 * @throws NumeroMatriculaNoValidoException
@@ -52,7 +53,7 @@ public class RepositorioVehiculo {
 		PreparedStatement st;
 		ResultSet rs;
 		String matricula;
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			rs = st.executeQuery();
@@ -63,7 +64,7 @@ public class RepositorioVehiculo {
 
 			}
 
-			//Cerramos la conexi�n
+			//Cerramos la conexión
 			st.close();
 			rs.close();
 		} catch (SQLException e) {
@@ -72,59 +73,162 @@ public class RepositorioVehiculo {
 		}
 		return lista;
 	}
-	
+
 	public static ArrayList<? extends Vehiculo> leeTodosLosVehiculos() throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException
 	{
-		ArrayList<VehiculoDB> lista = new ArrayList<VehiculoDB>();
 		ArrayList<Vehiculo> lista2 = new ArrayList<Vehiculo>();
 		String sql = "SELECT matricula FROM VEHICULO";
 		PreparedStatement st;
 		ResultSet rs;
 		String matricula;
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			rs = st.executeQuery();
 			while (rs.next())
 			{
 				matricula = rs.getString("matricula");
-				lista.add(leeVehiculo(leeMatricula(matricula)));
-			}
-			//Una vez tenemos los Vehiculos es hora de preguntar por su especialidad
-			st = EmpresaDB.conn.prepareStatement(sql);
-			rs = st.executeQuery();
-			while (rs.next())
-			{
-				matricula = rs.getString("matricula");
-				try {
-					lista2.add(leeCocheComb(leeMatricula(matricula)));
-				} catch (EmisionesNoValidasException | NumPlazasNoValidoException | ConsumoNoValidoException
-						| PotenciaNoValidaException | TipoNoValidoException | RecargoNoValidoException
-						| LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e1) {
-					// error de creaci�n
-					e1.printStackTrace();
+				if (Electrico(matricula))
+				{
+					if (cocheElectrico(matricula))
+					{
+						lista2.add(leeCocheElectrico(leeMatricula(matricula)));
+					}else {
+						lista2.add(leeMotocicleta(leeMatricula(matricula)));
+					}
+				}else {
+					if (CocheCombustion(matricula))
+					{
+						lista2.add(leeCocheComb(leeMatricula(matricula)));
+					}else {
+						lista2.add(leeFurgoneta(leeMatricula(matricula)));
+					}
 				}
-				lista2.add(leeCocheElectrico(leeMatricula(matricula)));
-				try {
-					lista2.add(leeFurgoneta(leeMatricula(matricula)));
-				} catch (EmisionesNoValidasException | ConsumoNoValidoException | PotenciaNoValidaException
-						| RecargoNoValidoException | LetrasMatriculaNoValidasException
-						| NumeroMatriculaNoValidoException e) {
-					// error de creaci�n
-					e.printStackTrace();
-				}
-				lista2.add(leeMotocicleta(leeMatricula(matricula)));
-			}
-			//Cerramos la conexi�n
+			}			
+			//Cerramos la conexión
 			st.close();
 			rs.close();
-		} catch (SQLException e) {
+		} catch (SQLException | EmisionesNoValidasException | NumPlazasNoValidoException | ConsumoNoValidoException | PotenciaNoValidaException | TipoNoValidoException e) {
 			// Mostramos la traza
 			e.printStackTrace();
 		}
 		return lista2;
 	}
-	
+	public static ArrayList<? extends Vehiculo> leeTodosLosVehiculos(Oficina ofi) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException, RecargoNoValidoException
+	{
+		ArrayList<Vehiculo> lista2 = new ArrayList<Vehiculo>();
+		String sql = "SELECT matricula FROM VEHICULO WHERE oficina = ?";
+		PreparedStatement st;
+		ResultSet rs;
+		String matricula;
+
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setString(1, ofi.getCódigo());
+			rs = st.executeQuery();
+			while (rs.next())
+			{
+				matricula = rs.getString("matricula");
+				if (Electrico(matricula))
+				{
+					if (cocheElectrico(matricula))
+					{
+						lista2.add(leeCocheElectrico(leeMatricula(matricula)));
+					}else {
+						lista2.add(leeMotocicleta(leeMatricula(matricula)));
+					}
+				}else {
+					if (CocheCombustion(matricula))
+					{
+						lista2.add(leeCocheComb(leeMatricula(matricula)));
+					}else {
+						lista2.add(leeFurgoneta(leeMatricula(matricula)));
+					}
+				}
+			}			
+			//Cerramos la conexión
+			st.close();
+			rs.close();
+		} catch (SQLException | EmisionesNoValidasException | NumPlazasNoValidoException | ConsumoNoValidoException | PotenciaNoValidaException | TipoNoValidoException e) {
+			// Mostramos la traza
+			e.printStackTrace();
+		}
+		return lista2;
+	}
+
+	public static boolean CocheCombustion(String matricula) {
+		// Miramos si la matrícula se encuentra en la tabla de cocheCombustión
+		boolean encontrado;
+		String sql = "SELECT * FROM CocheCombustion WHERE combustionMatricula = "+matricula;
+		Statement st;
+		ResultSet rs;
+
+		try {
+			st = EmpresaDB.conn.createStatement();
+			rs = st.executeQuery(sql);
+			if (rs.next())
+			{
+				encontrado = true;
+			}else {
+				encontrado = false;
+			}
+			
+			//cerramos la conexión
+			st.close();
+		} catch (SQLException e) {
+			encontrado = false;
+		}
+		return encontrado;
+	}
+
+	public static boolean Electrico(String matricula) {
+		// Miramos si la matrícula se encuentra en la tabla de Electrico
+		boolean encontrado;
+		String sql = "SELECT * FROM ELECTRICO WHERE VEHICULO_MATRICULA = "+matricula;
+		Statement st;
+		ResultSet rs;
+
+		try {
+			st = EmpresaDB.conn.createStatement();
+			rs = st.executeQuery(sql);
+			if (rs.next())
+			{
+				encontrado = true;
+			}else {
+				encontrado = false;
+			}
+			//cerramos la conexión
+			st.close();
+		} catch (SQLException e) {
+			encontrado = false;
+		}
+		return encontrado;
+	}
+
+	public static boolean cocheElectrico(String matricula) {
+		// Miramos si la matrícula se encuentra en la tabla de coche Electrico
+		boolean encontrado;
+		String sql = "SELECT * FROM COCHEELECTRICO WHERE VEHICULO_MATRICULA = "+matricula;
+		Statement st;
+		ResultSet rs;
+
+		try {
+			st = EmpresaDB.conn.createStatement();
+			rs = st.executeQuery(sql);
+			if (rs.next())
+			{
+				encontrado = true;
+			}else {
+				encontrado = false;
+			}
+			//cerramos la conexión
+			st.close();
+		} catch (SQLException e) {
+			encontrado = false;
+		}
+		return encontrado;
+	}
+
 	public static void insertUpdate(Vehiculo a)
 	{
 		try {
@@ -133,7 +237,7 @@ public class RepositorioVehiculo {
 			case "Moto":
 				if (RepositorioVehiculo.leeMoto(a.getMatricula())!=null)
 				{	//Si ya existe realizaremos un Update
-					
+
 				}else  {	//Insertamos
 					insertMoto(a);
 				}
@@ -141,7 +245,7 @@ public class RepositorioVehiculo {
 			case "Furgoneta":
 				if (RepositorioVehiculo.leeFurgo(a.getMatricula())!=null)
 				{	//Si ya existe realizaremos un Update
-					
+
 				}else  {	//Insertamos
 					insertFurgo(a);
 				}
@@ -149,7 +253,7 @@ public class RepositorioVehiculo {
 			case "CocheCombustion":
 				if (RepositorioVehiculo.leeCocheComb(a.getMatricula())!=null)
 				{	//Si ya existe realizaremos un Update
-					
+
 				}else  {	//Insertamos
 					insertCocheComb(a);
 				}
@@ -157,7 +261,7 @@ public class RepositorioVehiculo {
 			case "CocheElectrico":
 				if (RepositorioVehiculo.leeCocheElectrico(a.getMatricula())!=null)
 				{	//Si ya existe realizaremos un Update
-					
+
 				}else  {	//Insertamos
 					insertCocheElectrico(a);
 				}
@@ -170,7 +274,7 @@ public class RepositorioVehiculo {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private static void insertCocheElectrico(Vehiculo a) {
 		// Insertamos el coche en la base de datos
 		String sql = "INSERT INTO CocheElectrico VALUES (?,?,?)";
@@ -189,8 +293,8 @@ public class RepositorioVehiculo {
 			st.setString(3, b.getMatricula().toString());
 			st.execute();
 			st.execute("COMMIT");
-			
-			//Cerramos la conexi�n
+
+			//Cerramos la conexión
 			st.close();
 		} catch (SQLException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
 			// Imprimimos el error en la consola
@@ -201,7 +305,7 @@ public class RepositorioVehiculo {
 	private static void insertElectrico(Electrico a) {
 		String sql = "INSERT INTO electrico VALUES (?,?,?)";
 		PreparedStatement st;
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setInt(1, a.getAutonomia());
@@ -221,36 +325,36 @@ public class RepositorioVehiculo {
 
 	private static void insertCocheComb(Vehiculo a) {
 		// Insertamos el coche en la base de datos
-				String sql = "INSERT INTO CocheCombustion VALUES (?,?,?)";
-				PreparedStatement st;
+		String sql = "INSERT INTO CocheCombustion VALUES (?,?,?)";
+		PreparedStatement st;
 
-				try {
-					//Ejecutamos la primera instrucci�n (VEHICULO)
-					insertVehiculo(a);
-					
-					//Ejecutamos la segunda instrucci�n (DE COMBUSTION)
-					insertDeCombustion(a);
-					st = EmpresaDB.conn.prepareStatement(sql);
-					CocheCombustion b = (CocheCombustion) a ;
-					st.setInt(1, b.getNumPlazas());
-					st.setString(2, b.getTipo());
-					st.setString(3, b.getMatricula().toString());
-					st.execute();
-					st.execute("COMMIT");
-					
-					//Cerramos la conexi�n
-					st.close();
-				} catch (SQLException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
-					// Imprimimos el error en la consola
-					e.printStackTrace();
-				}
+		try {
+			//Ejecutamos la primera instrucci�n (VEHICULO)
+			insertVehiculo(a);
+
+			//Ejecutamos la segunda instrucci�n (DE COMBUSTION)
+			insertDeCombustion(a);
+			st = EmpresaDB.conn.prepareStatement(sql);
+			CocheCombustion b = (CocheCombustion) a ;
+			st.setInt(1, b.getNumPlazas());
+			st.setString(2, b.getTipo());
+			st.setString(3, b.getMatricula().toString());
+			st.execute();
+			st.execute("COMMIT");
+
+			//Cerramos la conexión
+			st.close();
+		} catch (SQLException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
+			// Imprimimos el error en la consola
+			e.printStackTrace();
+		}
 	}
 
 	private static void insertDeCombustion(Vehiculo a) throws SQLException {
 		String sql = "INSERT INTO deCombustion VALUES (?,?,?,?)";
 		PreparedStatement st;
 		CocheCombustion b = (CocheCombustion) a; 
-		
+
 		st= EmpresaDB.conn.prepareStatement(sql);
 		st.setDouble(1, b.getConsumo());
 		st.setInt(2, b.getPotencia());
@@ -277,7 +381,7 @@ public class RepositorioVehiculo {
 		try {
 			//Ejecutamos la primera instrucci�n (VEHICULO)
 			insertVehiculo(a);
-			
+
 			//Ejecutamos la segunda instrucci�n (DE COMBUSTION)
 			insertDeCombustion(a);
 			//Ejecutamos la tercera instrucci�n (FURGONETA)
@@ -287,8 +391,8 @@ public class RepositorioVehiculo {
 			st.setString(2, b.getCarnetRequerido());
 			st.execute();
 			st.execute("COMMIT");
-			
-			//Cerramos la conexi�n
+
+			//Cerramos la conexión
 			st.close();
 		} catch (SQLException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
 			// Imprimimos el error en la consola
@@ -298,7 +402,7 @@ public class RepositorioVehiculo {
 
 	private static void insertMoto(Vehiculo a) {
 		// Insertamos la moto en la base de datos
-		
+
 		String sql2 = "INSERT INTO moto VALUES (?,?)";
 		PreparedStatement st;
 
@@ -314,21 +418,21 @@ public class RepositorioVehiculo {
 			st.setString(2, b.getCarnetRequerido());
 			st.execute();
 			st.execute("COMMIT");
-			
-			//Cerramos la conexi�n
+
+			//Cerramos la conexión
 			st.close();
 		} catch (SQLException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
 			// Imprimimos el error en la consola
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
-	 * M�todo que realiza el INSERT INTO VEHICULO de cualquier vehiculo dado
+	 * Método que realiza el INSERT INTO VEHICULO de cualquier vehiculo dado
 	 * Utilizado para los atributos generales del insert de todo nuevo veh�culo 
 	 * <p>
-	 * Este m�todo adem�s realiza la instrucci�n de COMMIT 
+	 * Este Método además realiza la instrucción de COMMIT 
 	 * (guardar los cambios en la base de datos)
 	 * </p>
 	 * @param a la clase que extiende de Vehiculo. Por ejemplo: Coche, Moto ...
@@ -340,7 +444,7 @@ public class RepositorioVehiculo {
 			throws SQLException, LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException {
 		PreparedStatement st;
 		String sql1 = "INSERT INTO VEHICULO VALUES (?,?,?,?,?,?,?,?)";
-		
+
 		st = EmpresaDB.conn.prepareStatement(sql1);
 		st.setString(1,a.getMatricula().toString());
 		st.setString(2, a.getMarca());
@@ -369,7 +473,7 @@ public class RepositorioVehiculo {
 		String cod_oficina = null;
 		GregorianCalendar fechaAlta = new GregorianCalendar();
 		int km = 0;
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, mat.toString());
@@ -385,7 +489,7 @@ public class RepositorioVehiculo {
 				cod_categoria = rs.getString("categoria");	//Debemos obtener toda la categoria
 				cod_oficina = rs.getString("oficina");
 			}
-			//Cerramos la conexi�n
+			//Cerramos la conexión
 			st.close();
 			rs.close();
 		} catch (SQLException e) {
@@ -394,7 +498,7 @@ public class RepositorioVehiculo {
 		}
 		return new VehiculoDB(mat, marca, mod, color, fechaAlta, km, new Categoria(RepositorioCategoria.leeCategoria(cod_categoria)),new Oficina(RepositorioOficina.leeOficina(cod_oficina)));
 	}
-	
+
 	public static CocheCombustion leeCocheComb(Matricula matricula) throws EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, TipoNoValidoException, RecargoNoValidoException
 	{
 		String sql = "SELECT * FROM cocheCombustion WHERE combustionmatricula = ?";
@@ -410,12 +514,12 @@ public class RepositorioVehiculo {
 			e1.printStackTrace();
 		}
 		CombustionBD deComb = RepositorioVehiculo.atributosDeCombustion(matricula);
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, matricula.toString());
 			rs = st.executeQuery();
-			
+
 			while (rs.next())
 			{
 				numPlazas = rs.getInt("numplazas");
@@ -426,8 +530,8 @@ public class RepositorioVehiculo {
 			e.printStackTrace();
 		}
 
-			return new CocheCombustion(matricula, general.getMarca(), general.getModelo(), general.getCategoria(), general.getColor(),  general.getFechaAlta(), general.getOficina(), general.getKms(),numPlazas, deComb.getConsumo(), tipo, deComb.getPotencia(),deComb.getEmisiones());
-		
+		return new CocheCombustion(matricula, general.getMarca(), general.getModelo(), general.getCategoria(), general.getColor(),  general.getFechaAlta(), general.getOficina(), general.getKms(),numPlazas, deComb.getConsumo(), tipo, deComb.getPotencia(),deComb.getEmisiones());
+
 	}
 
 	/**
@@ -461,7 +565,7 @@ public class RepositorioVehiculo {
 			return null;
 		}
 	}
-	
+
 	public static String tipoVehiculo(Vehiculo auto) throws EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, TipoNoValidoException, RecargoNoValidoException
 	{
 		if (auto.getClass().getSimpleName()=="CocheCombustion")
@@ -488,7 +592,7 @@ public class RepositorioVehiculo {
 		Moto motomami = null;
 		int cilindrada = 0;
 		String carnet = null; //El carnet requerido para conducir la moto
-		
+
 		VehiculoDB a = null;
 		try {
 			a = leeVehiculo(matricula);
@@ -496,57 +600,57 @@ public class RepositorioVehiculo {
 			// error
 			e1.printStackTrace();
 		}
-//		DeCombustionDB b = leeDeCombustion(matricula);
+		//		DeCombustionDB b = leeDeCombustion(matricula);
 		ElectricoBD b = leeElectricoBD(matricula);
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, matricula.toString());
 			rs = st.executeQuery();
-			
+
 			while (rs.next())
 			{
 				cilindrada = rs.getInt("cilindrada");
 				carnet = rs.getString("carnet");
 			}
-			//Cerramos la conexi�n
+			//Cerramos la conexión
 			st.close();
 			rs.close();
 		} catch (SQLException e) {
 			// Imprimimos la trazabilidad
 			e.printStackTrace();
 		}
-		
-			try {
-				motomami = new Moto(matricula,a.getMarca(),a.getModelo(),a.getCategoria(),a.getColor(),a.getFechaAlta(),a.getOficina(),
-						a.getKms(),b.getAutonomia(),b.getTiempoRecarga(),cilindrada,carnet);
-			} catch (CilindradaNoValidaException | CarnetRequeridoInvalidoException | TiempoRecargaNoValidoException
-					| RecargoNoValidoException e) {
-				//error
-				e.printStackTrace();
-			}
-		
+
+		try {
+			motomami = new Moto(matricula,a.getMarca(),a.getModelo(),a.getCategoria(),a.getColor(),a.getFechaAlta(),a.getOficina(),
+					a.getKms(),b.getAutonomia(),b.getTiempoRecarga(),cilindrada,carnet);
+		} catch (CilindradaNoValidaException | CarnetRequeridoInvalidoException | TiempoRecargaNoValidoException
+				| RecargoNoValidoException e) {
+			//error
+			e.printStackTrace();
+		}
+
 		return motomami;
 	}
-	
+
 	private static ElectricoBD leeElectricoBD(Matricula matricula) {
 		String sql ="SELECT * FROM ELECTRICO WHERE Vehiculo_matricula = UPPER(?)";
 		PreparedStatement st;
 		ResultSet rs;
 		int tiempoRecarga = 0;
 		int autonomia = 0;
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, matricula.toString());
 			rs = st.executeQuery();
-			
+
 			while (rs.next())
 			{
 				autonomia = rs.getInt("autonomia");
 				tiempoRecarga = rs.getInt("tiemporecarga");
 			}
-			//Cerramos la conexi�n
+			//Cerramos la conexión
 			st.close();
 			rs.close();
 		} catch (SQLException e) {
@@ -564,25 +668,25 @@ public class RepositorioVehiculo {
 		ResultSet rs;
 		int cilindrada = 0;
 		String carnet = null; //El carnet requerido para conducir la moto
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, matricula.toString());
 			rs = st.executeQuery();
-			
+
 			while (rs.next())
 			{
 				cilindrada = rs.getInt("cilindrada");
 				carnet = rs.getString("carnet");
 			}
-			//Cerramos la conexi�n
+			//Cerramos la conexión
 			st.close();
 			rs.close();
 		} catch (SQLException e) {
 			// Imprimimos la trazabilidad
 			e.printStackTrace();
 		}
-		
+
 		return new MotoBD(cilindrada,carnet);
 	}
 	public static FurgonetaBD leeFurgo(Matricula matricula) {
@@ -592,45 +696,49 @@ public class RepositorioVehiculo {
 		ResultSet rs;
 		int carga=0; //La capacidad de carga del veh�culo
 		String carnet= null; //El carnet necesario para conducirlo
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, matricula.toString());
 			rs = st.executeQuery();
-			
+
 			while (rs.next())
 			{
 				carga = rs.getInt("capacidadcarga");
 				carnet = rs.getString("carnetRequeridoFurgo");
 			}
-			//Cerramos la conexi�n para liberar la carga 
+			//Cerramos la conexión para liberar la carga 
 			st.close();
 			rs.close();
 		} catch (SQLException e) {
 			// Imprimimos la traza
 			e.printStackTrace();
 		}
-		
+
 		return new FurgonetaBD(carga, carnet);
 	}
-	
-	public static Furgoneta leeFurgoneta(Matricula matricula) throws EmisionesNoValidasException, ConsumoNoValidoException, PotenciaNoValidaException, RecargoNoValidoException {
+
+	public static Furgoneta leeFurgoneta(Matricula matricula)  {
 		// Buscamos la furgoneta de la matricula dada
 		VehiculoDB a = null;
 		DeCombustionDB b = null;
 		FurgonetaBD c = null;
+		Furgoneta Furgo = null;
 		try {
 			a = leeVehiculo(matricula);
 			b = leeDeCombustion(matricula);
 			c = leeFurgo(matricula);
-		} catch (RecargoNoValidoException e) {
+
+			Furgo = new Furgoneta(matricula, a.getMarca(), a.getModelo(), a.getCategoria(), a.getColor(),  a.getFechaAlta(), a.getOficina(), a.getKms(), b.getConsumo(), b.getPotencia(), b.getEmisiones(), c.getCapacidadCarga(), c.getCarnetRequerido());
+
+		} catch (RecargoNoValidoException | EmisionesNoValidasException | ConsumoNoValidoException | PotenciaNoValidaException e) {
 			// error
 			e.printStackTrace();
 		}
 
-		return new Furgoneta(matricula, a.getMarca(), a.getModelo(), a.getCategoria(), a.getColor(),  a.getFechaAlta(), a.getOficina(), a.getKms(), b.getConsumo(), b.getPotencia(), b.getEmisiones(), c.getCapacidadCarga(), c.getCarnetRequerido());
+		return Furgo;
 	}
-	
+
 	private static DeCombustionDB leeDeCombustion(Matricula matricula) {
 		// 
 		String sql ="SELECT * FROM deCombustion WHERE vehiculo_matricula=?";
@@ -639,20 +747,20 @@ public class RepositorioVehiculo {
 		double consumo = 0;
 		int potencia = 0;
 		String emisiones = null;
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, matricula.toString());
 			rs = st.executeQuery();
-			
+
 			while(rs.next())
 			{
 				consumo = rs.getDouble("consumo");
 				potencia = rs.getInt("potencia");
 				emisiones = rs.getString("emisiones");
-//				mat = leeMatricula(rs.getString("vehiculo_matricula"));
+				//				mat = leeMatricula(rs.getString("vehiculo_matricula"));
 			}
-			
+
 			//Cerramos la conexion
 			st.close();
 		} catch (SQLException e) {
@@ -674,13 +782,13 @@ public class RepositorioVehiculo {
 		String tipo = null;
 		VehiculoDB general = null;
 		CocheElectrico coche = null;
-		
+
 		try {
 			general = RepositorioVehiculo.leeVehiculo(matricula);
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, matricula.toString());
 			rs = st.executeQuery();
-			
+
 			while(rs.next())
 			{
 				numPlazas = rs.getInt("numplazas");
@@ -695,7 +803,7 @@ public class RepositorioVehiculo {
 			// Imprimimos la traza
 			e.printStackTrace();
 		}
-		
+
 		try {
 			coche = new CocheElectrico(matricula,general.getMarca(),general.getModelo(),general.getCategoria(), general.getColor(),general.getFechaAlta(),general.getOficina(),general.getKms(),autonomia, tiempoRecarga,tipo, numPlazas);
 		} catch (TiempoRecargaNoValidoException | EmisionesNoValidasException | NumPlazasNoValidoException
@@ -713,7 +821,7 @@ public class RepositorioVehiculo {
 		String emisiones = null;
 		PreparedStatement st;
 		ResultSet rs;
-		
+
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
 			st.setString(1, mat.toString());
@@ -724,7 +832,7 @@ public class RepositorioVehiculo {
 				consumo = rs.getDouble("consumo");
 				emisiones = rs.getString("emisiones");
 			}
-			//Cerramos la conexi�n
+			//Cerramos la conexión
 			st.close();
 			rs.close();
 		} catch (SQLException e) {
@@ -733,19 +841,21 @@ public class RepositorioVehiculo {
 		}
 		return new CombustionBD(consumo,potencia,emisiones);
 	}
-	
+
 	public static String tipoVehiculo(VehiculoDB auto) throws EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, TipoNoValidoException, RecargoNoValidoException
 	{
 		Matricula mat = auto.getMatricula();
-		
-			return tipoVehiculoBD(mat);
+
+		return tipoVehiculoBD(mat);
 	}
-	
+
 	public static Matricula leeMatricula(String matriculaCompleta) throws LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException {
 		String parte_numerica = matriculaCompleta.substring(0,4);
 		int numeros = Integer.parseInt(parte_numerica);
 		String letras = matriculaCompleta.substring(4);
-						
+
 		return new Matricula(numeros, letras);
 	}
+
+	
 }

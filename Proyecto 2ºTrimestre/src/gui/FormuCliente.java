@@ -105,20 +105,13 @@ public class FormuCliente extends JDialog {
 	}
 
 	private void creaCampos_a_rellenar() {
-		creaLabelDNI();
-		
+		creaLabelDNI();		
 		creaLabelNombre();
-
 		creaTbDNI();
-
 		creaTbNombre();
-
 		creaLabelApellidos();
-
 		creaTbApellido1();
-
 		creaApellido2();
-
 	}
 
 
@@ -144,7 +137,6 @@ public class FormuCliente extends JDialog {
 		panelPrincipal_1 = new JPanel();
 		panelPrincipal_1.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panelPrincipal_1);
-
 		panelPrincipal_1.setLayout(null);
 	}
 
@@ -320,6 +312,7 @@ public class FormuCliente extends JDialog {
 		elelegido = RepositorioCliente.leeCliente(emple.getDni());
 		rellenaTextFields();
 	}
+	
 	/**
 	 * Mótodo que rellena todos los textFields segón el objeto
 	 * Cliente (que es estótico) de la clase

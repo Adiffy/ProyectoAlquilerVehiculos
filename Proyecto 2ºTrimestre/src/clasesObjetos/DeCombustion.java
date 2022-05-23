@@ -39,7 +39,7 @@ public abstract class DeCombustion extends Vehiculo {
 	}
 
 	public void setPotencia(int potencia) throws PotenciaNoValidaException {
-		if (potencia>=50) //Potencia mínima
+		if (potencia>=50) //Potencia mï¿½nima
 		{
 			this.potencia = potencia;
 		}else {
@@ -57,7 +57,7 @@ public abstract class DeCombustion extends Vehiculo {
 		{
 			this.emisiones = emisiones;
 		} else {
-			throw new EmisionesNoValidasException("Escriba el nivel de emisiones de su vehículo 'A','B' o 'C'");
+			throw new EmisionesNoValidasException("Escriba el nivel de emisiones de su vehï¿½culo 'A','B' o 'C'");
 		}
 	}
 
@@ -72,10 +72,9 @@ public abstract class DeCombustion extends Vehiculo {
 	}
 	
 	
-
 	@Override
 	public String toString()
 	{
-		return this.matricula+" - "+ this.getMarca()+" "+this.getModelo() + "| Consumo: " + this.getConsumo() + " Potencia: "+this.getPotencia();
+		return ""+this.matricula + " - " + this.getMarca() + " " + this.getModelo();
 	}
 }

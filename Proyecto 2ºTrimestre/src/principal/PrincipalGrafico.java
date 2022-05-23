@@ -7,7 +7,7 @@ public class PrincipalGrafico {
 
 	public static void main(String[] args) {
 		
-		//Abrimos conexi�n
+		//Abrimos conexión
 		EmpresaDB.abreConexion();
 		
 		// Iniciamos la primera ventana

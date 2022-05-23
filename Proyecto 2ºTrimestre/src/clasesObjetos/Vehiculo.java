@@ -17,15 +17,15 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 	private static final long serialVersionUID = 1L;
 	
 	//Propiedades
-	protected Matricula matricula; //Matrícula del vehículo
+	protected Matricula matricula; //matrÃ­cula del vehÃ­culo
 	private String marca;	//Marca del coche. Ejemplo: "Renault"
-	private String modelo; 	//Modelo del coche (puede ser numérico y/o contener letras. Por ejemplo--> Audi "R8") 
-	private String Color; //Color del vehículo
+	private String modelo; 	//Modelo del coche (puede ser numï¿½rico y/o contener letras. Por ejemplo--> Audi "R8") 
+	private String Color; //Color del vehÃ­culo
 	private GregorianCalendar fechaAlta;
-	private int kms; //Los kilómetros que tiene
+	private int kms; //Los kilÃ³metros que tiene
 	private Categoria categoria;
 	 
-	private boolean alquilado=false; //Por defecto NO está alquilado
+	private boolean alquilado=false; //Por defecto NO estï¿½ alquilado
 	
 	
 	private Oficina Oficina;
@@ -38,7 +38,7 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 		return new Oficina(Oficina);
 	}
 	public void setOficina(Oficina oficina) {
-		//Ya está creada (se supone que validada)
+		//Ya estï¿½ creada (se supone que validada)
 		Oficina = oficina;
 	}
 	public boolean isEsElectrico() {
@@ -97,7 +97,7 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 		return kms;
 	}
 	public void setKms(int kms) {
-		if (kms>=0)	//Puede ser 0 o más PERO NO negativo
+		if (kms>=0)	//Puede ser 0 o mï¿½s PERO NO negativo
 		{
 			this.kms = kms;
 		}
@@ -111,8 +111,8 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 		if (! this.isAlquilado()) {
 			this.ubi = cop;
 		}else {
-			//TODO excepción ---> NO se puede meter una ubicación si está alquilado por alguien
-			 //Mala filosofía
+			//TODO excepciï¿½n ---> NO se puede meter una ubicaciï¿½n si estï¿½ alquilado por alguien
+			 //Mala filosofï¿½a
 		}
 	}*/
 	public Categoria getCategoria() {
@@ -137,9 +137,9 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 	}
 	/**
 	 *	<p>
-	 *  Alquilado es la propiedad que indica si un coche está alquilado o no mediante un {@code boolean}.
+	 *  Alquilado es la propiedad que indica si un coche estï¿½ alquilado o no mediante un {@code boolean}.
 	 *  		Ejemplo de uso:
-	 *  				audi.setAlquilado(true); //Ahora este coche está alquilado
+	 *  				audi.setAlquilado(true); //Ahora este coche estï¿½ alquilado
 	 *  </p>
 	 * @param alquilado
 	 */
@@ -169,8 +169,8 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 		this.setOficina(oficina);
 	}
 	/**
-	 * Constructor de copia para vehículo
-	 * @param vehiculo el vehículo a copiar
+	 * Constructor de copia para vehÃ­culo
+	 * @param vehiculo el vehÃ­culo a copiar
 	 * @throws NumeroMatriculaNoValidoException 
 	 * @throws LetrasMatriculaNoValidasException 
 	 */
@@ -202,16 +202,16 @@ public abstract class Vehiculo implements Comparable<Vehiculo>, Alquilable, Seri
 		this.setKms(num_km);
 	}
 /**
- * Constructor completo de vehículo
- * @param matricula	 La matrícula del vehículo del tipo {@code Matricula}
- * @param marca	La marca del vehículo del tipo {@code String}. Ejemplo: "Skoda"
- * @param modelo El modelo del vehículo del tipo {@code String}. Ejemplo: "R8"
- * @param categoria La categoría del vehículo del tipo {@code Categoria}
- * @param color	El color del vehículo del tipo {@code String} puede ser nulo (""). Ejemplo: "Naranja"
- * @param fecha_alta	La fecha en la que el vehículo entró en la base de datos, tipo {@code GregorianCalendar}
- * @param alquilado El buleano que identifica si el vehículo se encuentra alquilado {@value true} o no {@value false}
- * @param oficina La oficina o ubicación en la que se encuentra el vehículo si NO está alquilado {@value false}, de tipo {@code Direccion}
- * @param num_km El nº de kilómetros que tiene el coche de forma entera, es decir, de tipo {@code int}
+ * Constructor completo de vehÃ­culo
+ * @param matricula	 La matrÃ­cula del vehÃ­culo del tipo {@code Matricula}
+ * @param marca	La marca del vehÃ­culo del tipo {@code String}. Ejemplo: "Skoda"
+ * @param modelo El modelo del vehÃ­culo del tipo {@code String}. Ejemplo: "R8"
+ * @param categoria La categorï¿½a del vehÃ­culo del tipo {@code Categoria}
+ * @param color	El color del vehÃ­culo del tipo {@code String} puede ser nulo (""). Ejemplo: "Naranja"
+ * @param fecha_alta	La fecha en la que el vehÃ­culo entrï¿½ en la base de datos, tipo {@code GregorianCalendar}
+ * @param alquilado El buleano que identifica si el vehÃ­culo se encuentra alquilado {@value true} o no {@value false}
+ * @param oficina La oficina o ubicaciï¿½n en la que se encuentra el vehÃ­culo si NO estï¿½ alquilado {@value false}, de tipo {@code Direccion}
+ * @param num_km El nÂº de kilÃ³metros que tiene el coche de forma entera, es decir, de tipo {@code int}
  */
 public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categoria, String color, GregorianCalendar fecha_alta, Oficina oficina, int num_km) {
 	
@@ -228,15 +228,15 @@ public Vehiculo(Matricula matricula, String marca, String modelo,Categoria categ
 }
 
 /**
- * 	Constructor completo para un vehículo que va a ser alquilado
- * @param matricula	 La matrícula del vehículo del tipo {@code Matricula}
- * @param marca	La marca del vehículo del tipo {@code String}. Ejemplo: "Skoda"
- * @param modelo El modelo del vehículo del tipo {@code String}. Ejemplo: "R8"
- * @param categoria La categoría del vehículo del tipo {@code Categoria}
- * @param color	El color del vehículo del tipo {@code String} puede ser nulo (""). Ejemplo: "Naranja"
- * @param fecha_alta	La fecha en la que el vehículo entró en la base de datos, tipo {@code GregorianCalendar}
- * @param oficina La oficina o ubicación en la que se encuentra el vehículo si NO está alquilado {@value false}, de tipo {@code Direccion}
- * @param num_km El nº de kilómetros que tiene el coche de forma entera, es decir, de tipo {@code int}
+ * 	Constructor completo para un vehÃ­culo que va a ser alquilado
+ * @param matricula	 La matrÃ­cula del vehÃ­culo del tipo {@code Matricula}
+ * @param marca	La marca del vehÃ­culo del tipo {@code String}. Ejemplo: "Skoda"
+ * @param modelo El modelo del vehÃ­culo del tipo {@code String}. Ejemplo: "R8"
+ * @param categoria La categorï¿½a del vehÃ­culo del tipo {@code Categoria}
+ * @param color	El color del vehÃ­culo del tipo {@code String} puede ser nulo (""). Ejemplo: "Naranja"
+ * @param fecha_alta	La fecha en la que el vehÃ­culo entrÃ³ en la base de datos, tipo {@code GregorianCalendar}
+ * @param oficina La oficina o ubicaciï¿½n en la que se encuentra el vehÃ­culo si NO estÃ¡ alquilado {@value false}, de tipo {@code Direccion}
+ * @param num_km El nï¿½ de kilÃ³metros que tiene el coche de forma entera, es decir, de tipo {@code int}
  */
 public Vehiculo(Matricula matricula, String marca, String modelo, Categoria categoria, String color, GregorianCalendar fecha_alta , Direccion oficina, int num_km) {
 	
@@ -270,17 +270,18 @@ public Vehiculo(Matricula matricula, String marca, String modelo, Categoria cate
 		}
 		Vehiculo copia = (Vehiculo) otro;
 		
-			//Comparamos sus matrículas
+			//Comparamos sus matrÃ­culas
 			return (copia.matricula==this.matricula);
 			
 		
 	
 			
 	}
+
 	@Override
 	public String toString()
 	{
-		return ""+this.matricula + " - " + this.getMarca();
+		return ""+this.matricula + " - " + this.getMarca() + " " + this.getModelo();
 	}
 	
 	
@@ -298,8 +299,8 @@ public Vehiculo(Matricula matricula, String marca, String modelo, Categoria cate
 	public double PrecioAlquiler(int base)
 	{
 		double precio = base;	//El total a pagar por el cliente
-		double porcentaje = 0;	//El porcentaje que se le aplica si es eléctrico/de combustión
-		double recargo = 0; //El recargo que se le aplica en base a su categoría
+		double porcentaje = 0;	//El porcentaje que se le aplica si es elï¿½ctrico/de combustiï¿½n
+		double recargo = 0; //El recargo que se le aplica en base a su categorï¿½a
 		
 		if (this.esElectrico )
 		{

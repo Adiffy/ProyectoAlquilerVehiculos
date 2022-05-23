@@ -14,25 +14,32 @@ public class RepositorioOficina {
 
 	
 	/**
-	 * M�todo que devuelve un ArrayList de Oficinas sacadas de la base de datos
-	 * @return	el {@code ArrayList<Oficina>} extra�do de la consulta
+	 * Método que devuelve un ArrayList de Oficinas sacadas de la base de datos
+	 * @return	el {@code ArrayList<Oficina>} extraído de la consulta
 	 * @throws SQLException	Error al realizar la consulta
 	 */
-	public static ArrayList<Oficina> listaOficinas() throws SQLException
+	public static ArrayList<Oficina> listaOficinas() 
 	{
 		String Instruccionsql = "SELECT * FROM OFICINA";		//La consulta para obtener todas las oficinas
 		ArrayList<Oficina> lista = new ArrayList<Oficina>();
-		Statement st = EmpresaDB.conn.prepareStatement(Instruccionsql);
-		ResultSet resultados = st.executeQuery(Instruccionsql);
-		
-		while (resultados.next())	//Mientras avance el cursor
-		{
-			//Cogemos una oficina
-			String codigo = resultados.getString("codigo");
-			//La a�adimos al ArrayList
-			lista.add(leeOficina(codigo));
+		Statement st;
+		try {
+			st = EmpresaDB.conn.prepareStatement(Instruccionsql);
+			ResultSet resultados = st.executeQuery(Instruccionsql);
+			
+			while (resultados.next())	//Mientras avance el cursor
+			{
+				//Cogemos una oficina
+				String codigo = resultados.getString("codigo");
+				//La a�adimos al ArrayList
+				lista.add(leeOficina(codigo));
+			}
+			st.close(); 	//Cerramos la conexion
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		st.close(); 	//Cerramos la conexion
+		
 		return lista;
 	}
 	
