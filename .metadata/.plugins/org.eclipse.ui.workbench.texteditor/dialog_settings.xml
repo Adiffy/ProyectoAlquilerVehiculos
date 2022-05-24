@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="tbtarje"/>
+		<item key="selection" value="empleado"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="tbTarje"/>
-			<item value="tbtarjeta"/>
-			<item value="cb"/>
-			<item value="tarjeta"/>
-			<item value="emple"/>
-			<item value="rellenaCliente"/>
-			<item value="vk"/>
-			<item value="rellenaOficina()"/>
-			<item value="rellenaOficina"/>
-			<item value="rellena"/>
-			<item value="toStr"/>
-			<item value="selecc"/>
-			<item value="check"/>
-			<item value="tbDesc"/>
-			<item value="lblDesc"/>
+			<item value="empleado"/>
+			<item value="salida"/>
+			<item value="oficina sa"/>
+			<item value="oficin"/>
+			<item value="tbPrecioç"/>
+			<item value="HANDLERS"/>
+			<item value="setAlquilado"/>
+			<item value="precio"/>
+			<item value="Date"/>
+			<item value="tbF"/>
+			<item value="precioAlquiler"/>
+			<item value="cliente"/>
+			<item value="veh�culo"/>
+			<item value="GregorianCalendar"/>
+			<item value="jda"/>
 		</list>
 		<list key="replacehistory">
+			<item value="tbPrecio"/>
+			<item value="vehículo"/>
+			<item value="Date"/>
+			<item value="ColorBorde"/>
+			<item value="ColorFondo"/>
+			<item value="MiColor"/>
+			<item value="Punto"/>
 			<item value="clien"/>
 			<item value="matrícula"/>
 			<item value="kilómetros"/>
-			<item value="vehículo"/>
 			<item value="conexión"/>
 			<item value="getCódigo()"/>
 			<item value="getCódigo"/>
 			<item value="Método"/>
 			<item value="Metodos"/>
-			<item value="rellenaOficinaElegida"/>
-			<item value="oficinasCocheCombustion"/>
-			<item value="oficinasCocheElectrico"/>
-			<item value="otra"/>
-			<item value="FormuVehiculos"/>
-			<item value="comboBoxCategoriaCocheElectrico"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

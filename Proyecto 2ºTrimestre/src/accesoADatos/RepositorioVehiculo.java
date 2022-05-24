@@ -172,7 +172,7 @@ public class RepositorioVehiculo {
 			}else {
 				encontrado = false;
 			}
-			
+
 			//cerramos la conexión
 			st.close();
 		} catch (SQLException e) {
@@ -497,6 +497,213 @@ public class RepositorioVehiculo {
 			e.printStackTrace();
 		}
 		return new VehiculoDB(mat, marca, mod, color, fechaAlta, km, new Categoria(RepositorioCategoria.leeCategoria(cod_categoria)),new Oficina(RepositorioOficina.leeOficina(cod_oficina)));
+	}
+
+	public static Vehiculo lee(Matricula mat) throws RecargoNoValidoException
+	{
+		CocheCombustion coche = null;
+		CocheElectrico tesla = null;
+		Furgoneta furgo = null;
+		Moto moto = null;
+		String sql = "SELECT * FROM VEHICULO WHERE MATRICULA=UPPER(?)";
+		PreparedStatement st;
+		ResultSet rs;
+		// Declaramos las variables que utilizaremos para crear el vehiculo
+		String marca = null;
+		String mod = null;
+		Categoria cat = null;
+		String color = null;
+		Date fecha = null;
+		String cod_categoria = null;
+		String cod_oficina = null;
+		Oficina ofi = null;
+		GregorianCalendar fechaAlta = new GregorianCalendar();
+		int km = 0;
+
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setString(1, mat.toString());
+			rs = st.executeQuery();
+			while (rs.next())
+			{
+				marca = rs.getString("marca");
+				mod = rs.getString("modelo");
+				color = rs.getString("color");
+				fecha = rs.getDate("fechaalta");
+				fechaAlta.setTime(fecha);
+				km = rs.getInt("kms");
+				cod_categoria = rs.getString("categoria");	//Debemos obtener toda la categoria
+				cat = RepositorioCategoria.leeCategoria(cod_categoria);
+				cod_oficina = rs.getString("oficina");// También obtenemos toda la Oficina
+				ofi = RepositorioOficina.leeOficina(cod_oficina);
+			}
+			//Cerramos la conexión
+			st.close();
+			rs.close();
+
+			// Atributos propios de la clase DeCombustion
+			double consumo = 0.0;
+			int potencia = 0;
+			String emisiones = null;
+			// Atributos propios de la clase Electrico
+			int autonomia = 0;
+			int tiempoRecarga = 0;
+			// Atributos característicos de Coche
+			int numPlazas = 0;
+			String tipo = null;
+			//Atributo de furgoneta
+			int capacidadCarga = 0;
+			String licenciaRequerida = null;	//Atributo también de moto
+			// Atributo exclusivo de moto
+			int cilindrada = 0;
+			
+			if (RepositorioVehiculo.leeDeCombustion(mat)!=null)
+			{	//Si es de combustión extraemos sus atributos
+				st.close();
+				rs.close();
+				sql = "SELECT * FROM decombustion WHERE vehiculo_matricula="+mat;
+				st = EmpresaDB.conn.prepareStatement(sql);
+				rs = st.executeQuery();
+
+				while (rs.next())
+				{
+					consumo = rs.getDouble("consumo");
+					potencia = rs.getInt("tipo");
+					emisiones = rs.getString("emisiones");
+				}
+				switch (RepositorioVehiculo.tipoVehiculo(mat))
+				{
+				case "CocheCombustion":
+					st.close();
+					rs.close();
+					sql = "SELECT * FROM cochecombustion WHERE combustionMatricula="+mat;
+					st = EmpresaDB.conn.prepareStatement(sql);
+					rs = st.executeQuery();
+
+					while (rs.next())
+					{
+						numPlazas = rs.getInt("numPlazas");
+						tipo = rs.getString("tipo");
+					}
+					try {
+						coche = new CocheCombustion(mat, marca, mod, cat, color, fechaAlta, ofi, km, numPlazas, consumo, tipo, potencia, emisiones);
+					} catch (EmisionesNoValidasException | NumPlazasNoValidoException | ConsumoNoValidoException
+							| PotenciaNoValidaException | TipoNoValidoException e) {
+						// no se pudo crear el coche
+						e.printStackTrace();
+					}
+					break;
+
+				case "Furgoneta":
+					st.close();
+					rs.close();
+					sql = "SELECT * FROM furgoneta WHERE matricula="+mat;
+					st = EmpresaDB.conn.prepareStatement(sql);
+					rs = st.executeQuery();
+					
+					while (rs.next())
+					{
+						capacidadCarga = rs.getInt("capacidadcarga");
+						licenciaRequerida = rs.getString("carnetRequeridoFurgo");
+					}
+					
+					furgo = new Furgoneta(mat, marca, mod, cat, color, fechaAlta, ofi, km, consumo, potencia, emisiones, capacidadCarga, licenciaRequerida);
+					break;
+				}
+			}else {
+				//Si no es de combustión será eléctrico
+				st.close();
+				rs.close();
+				sql = "SELECT * FROM electrico WHERE vehiculo_matricula="+mat;
+				st = EmpresaDB.conn.prepareStatement(sql);
+				rs = st.executeQuery();
+
+				while (rs.next())
+				{
+					autonomia = rs.getInt("autonomia");
+					tiempoRecarga = rs.getInt("tiempoRecarga");
+				}
+				switch (RepositorioVehiculo.tipoVehiculo(mat))
+				{
+				case "CocheElectrico":
+
+					st.close();
+					rs.close();
+					sql = "SELECT * FROM cocheelectrico WHERE vehiculo_matricula="+mat;
+					st = EmpresaDB.conn.prepareStatement(sql);
+					rs = st.executeQuery();
+
+					while (rs.next())
+					{
+						numPlazas = rs.getInt("numPlazas");
+						tipo = rs.getString("tipo");
+					}
+					tesla = new CocheElectrico(mat, marca, mod, cat, color, fechaAlta, ofi, km, autonomia, tiempoRecarga, tipo, numPlazas);
+					break;
+				case "Moto":
+					st.close();
+					rs.close();
+					sql  ="SELECT * FROM moto WHERE vehiculo_matricula="+mat;
+					st = EmpresaDB.conn.prepareStatement(sql);
+					rs = st.executeQuery();
+					
+					while (rs.next())
+					{
+						cilindrada = rs.getInt("cilindrada");
+						licenciaRequerida = rs.getString("carnet");
+					}
+					
+					moto = new Moto(mat, marca, mod, cat, color, fechaAlta, ofi, km, autonomia, tiempoRecarga, cilindrada, licenciaRequerida);
+					break;
+				}
+			}
+
+			//Cerramos la conexión
+			st.close();
+			rs.close();
+		} catch (SQLException | TiempoRecargaNoValidoException 
+				| EmisionesNoValidasException | NumPlazasNoValidoException | TipoNoValidoException 
+				| ConsumoNoValidoException | PotenciaNoValidaException | CarnetRequeridoInvalidoException 
+				| CilindradaNoValidaException e) {
+			// Mostramos la traza
+			e.printStackTrace();
+		}
+
+		switch (RepositorioVehiculo.tipoVehiculo(mat))
+		{
+		case "CocheCombustion":
+			return coche;
+		case "CocheElectrico":
+			return tesla;
+		case "Furgoneta":
+			return furgo;
+		case "Moto":
+			return moto;
+		default:
+			return moto;
+		}
+
+	}
+
+	private static String tipoVehiculo(Matricula mat) {
+		// Consultamos la matricula en las distintas tablas
+		try {
+			if (leeCocheComb(mat)!=null)
+			{
+				return "CocheCombustion";
+			}else if (leeCocheElectrico(mat)!=null) {
+				return "CocheElectrico";
+			}else if (leeFurgo(mat)!=null) {
+				return "Furgoneta";
+			}else if(leeMoto(mat)!=null) {
+				return "Moto";
+			}
+		} catch (EmisionesNoValidasException | NumPlazasNoValidoException | ConsumoNoValidoException
+				| PotenciaNoValidaException | TipoNoValidoException | RecargoNoValidoException e) {
+			// error de creación
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public static CocheCombustion leeCocheComb(Matricula matricula) throws EmisionesNoValidasException, NumPlazasNoValidoException, ConsumoNoValidoException, PotenciaNoValidaException, TipoNoValidoException, RecargoNoValidoException
@@ -857,5 +1064,5 @@ public class RepositorioVehiculo {
 		return new Matricula(numeros, letras);
 	}
 
-	
+
 }

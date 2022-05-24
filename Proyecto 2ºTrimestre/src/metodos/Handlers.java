@@ -402,4 +402,20 @@ public class Handlers {
 		desplegable.setModel(model);
 		return desplegable;
 	}
+
+
+	public static JComboBox<Empleado> creaDesplegableEmpleados(Oficina ofi) {
+		// Obtenemos todos los empleados
+		JComboBox<Empleado> combo = creaDesplegableEmpleados();
+		//Retiramos los empleados con oficina distinta
+		for (Empleado a: RepositorioEmpleado.leeEmpleados())
+		{
+			if (a.getOficina()!=ofi)	//Si es de otra oficina ...
+			{
+				combo.removeItem(a);	// ... se elimina
+			}	
+		}
+		
+		return combo;
+	}
 }

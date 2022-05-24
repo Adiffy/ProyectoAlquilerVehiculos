@@ -50,6 +50,12 @@ public class Cliente extends Persona{
 		this.setTarjeta(tarjeta);
 	}
 
+	public Cliente(Cliente cliente) throws LicenciaNoValidaException, DNInoValidoException, LongitudCadenaNoValidaException {
+		super(cliente.getNombre(), cliente.getApellido1(), cliente.getApellido2(), cliente.getDni());
+		this.setLicencia(cliente.getLicencia());
+		this.setTarjeta(cliente.getTarjeta());
+	}
+
 	@Override
 	public String toString() {
 		return getNombreCompleto() ;
