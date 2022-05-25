@@ -122,6 +122,11 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		JMenuItem mntmListadoAlquileres = new JMenuItem("Alquileres");
+		mntmListadoAlquileres.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TablaAlquiler.showDialog();
+			}
+		});
 		mnListados.add(mntmListadoAlquileres);
 		mnListados.add(mntmTablaOficinas);
 		mnListados.add(mntmTablaEmpleados);
@@ -133,6 +138,15 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		mnListados.add(mntmCliente);
+		
+		JMenuItem mntmListadoCategorias = new JMenuItem("Categorias");
+		mnListados.add(mntmListadoCategorias);
+		
+		JMenu mnVehiculosGeneral = new JMenu("Vehículos");
+		mnListados.add(mnVehiculosGeneral);
+		
+		JMenuItem mntmTablaVehiculos = new JMenuItem("Vehiculos");
+		mnVehiculosGeneral.add(mntmTablaVehiculos);
 		
 		JMenuItem mntmAlquiler = new JMenuItem("Realizar alquiler");
 		mntmAlquiler.addActionListener(new ActionListener() {

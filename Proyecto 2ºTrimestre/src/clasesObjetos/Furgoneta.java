@@ -17,7 +17,7 @@ public class Furgoneta extends DeCombustion {
 	 */
 	private static final long serialVersionUID = -622124846681716489L;
 	//Propiedades
-	private int capacidadCarga; //En metros cúbicos
+	private int capacidadCarga; //En metros cï¿½bicos
 	private String carnetRequerido; //Puede ser  B / C / D
 	private int precioBase = 70;
 
@@ -60,12 +60,12 @@ public class Furgoneta extends DeCombustion {
 	 * @param matricula	Objeto tipo {@code Matricula} 
 	 * @param marca	Marca de la furgoneta, por ejemplo "skoda" en forma de {@code String}
 	 * @param modelo	Modelo de la furgoneta, tipo {@code String}
-	 * @param categoria	Categoría de la furgoneta, tipo {@code Categoria}
+	 * @param categoria	Categorï¿½a de la furgoneta, tipo {@code Categoria}
 	 * @param color	Color de la furgoneta, por ejemplo "blanco". Tipo {@code String}
-	 * @param fecha_alta	Fecha de alta del vehículo, del tipo {@code GregorianCalendar}
-	 * @param alquilado {@code boolean} que indica si el vehículo se encuentra alquilado (no disponible) o no (disponible)
-	 * @param oficina	{@code Direccion} que indica donde se encuentra la furgoneta (si no está alquilada)
-	 * @param num_km	Los kilómetros que tiene el vehículo en forma de {@code int}
+	 * @param fecha_alta	Fecha de alta del vehï¿½culo, del tipo {@code GregorianCalendar}
+	 * @param alquilado {@code boolean} que indica si el vehï¿½culo se encuentra alquilado (no disponible) o no (disponible)
+	 * @param oficina	{@code Direccion} que indica donde se encuentra la furgoneta (si no estï¿½ alquilada)
+	 * @param num_km	Los kilï¿½metros que tiene el vehï¿½culo en forma de {@code int}
 	 * @param consumo	El consumo (Litros por cada 100km) de la furgoneta, es un {@code double}
 	 * @param caballaje	La potencia medida en {@code int} (medida en CV)
 	 * @param emisiones	El tipo de emisiones ({@code String} Puede ser A, B o C
@@ -105,7 +105,7 @@ public class Furgoneta extends DeCombustion {
 		}
 		Furgoneta dada = (Furgoneta) a; //Hacemos que lo trate como FURGONETA y no OBJETO
 		
-		if (this.matricula == dada.matricula) { //Comparamos sus matrículas
+		if (this.matricula == dada.matricula) { //Comparamos sus matrï¿½culas
 			return true;
 		}else {
 			return false;	//Ya a estas alturas ha fallado todos los controles por lo que, es falso

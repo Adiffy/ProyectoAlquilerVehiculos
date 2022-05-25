@@ -15,7 +15,10 @@ import clasesObjetos.Empleado;
 import clasesObjetos.Oficina;
 import clasesObjetos.Vehiculo;
 import exceptions.CodigoNoValidoException;
+import exceptions.DNInoValidoException;
 import exceptions.FechaNoValidaException;
+import exceptions.LicenciaNoValidaException;
+import exceptions.LongitudCadenaNoValidaException;
 import metodos.Handlers;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
@@ -26,7 +29,9 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
-import java.sql.Date;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Date;
 import java.awt.event.ItemEvent;
 import com.toedter.calendar.JDateChooser;
 
@@ -40,6 +45,9 @@ public class FormuAlquiler extends JFrame {
 	private JPanel contentPane;
 	private JTextField tbCodAlquiler;
 	private Alquiler alquilerRealizado;
+	private Vehiculo vehiculo;
+	private Cliente cliente;
+	private Empleado emple;
 	private JComboBox<Cliente> cbClientes;
 	private JComboBox<Empleado> cbEmpleados;
 	private JComboBox<Oficina> cbOfi;
@@ -75,6 +83,14 @@ public class FormuAlquiler extends JFrame {
 			cbClientes = Handlers.creaDesplegableClientes();
 			cbClientes.setBounds(10, 194, 154, 22);
 			panel.add(cbClientes);
+			cbClientes.addItemListener(new ItemListener() {
+
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+					// rellenamos el Cliente
+					cliente = (Cliente) cbClientes.getSelectedItem();
+				}
+			});
 
 			JLabel lblEmpleado = new JLabel("Empleado");
 			lblEmpleado.setBounds(10, 114, 71, 14);
@@ -93,6 +109,34 @@ public class FormuAlquiler extends JFrame {
 			tbCodAlquiler.setBounds(178, 8, 86, 20);
 			panel.add(tbCodAlquiler);
 			tbCodAlquiler.setColumns(10);
+			tbCodAlquiler.addKeyListener(new KeyListener() {
+
+				@Override
+				public void keyTyped(KeyEvent e) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void keyReleased(KeyEvent e) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void keyPressed(KeyEvent e) {					
+					// Si la tecla pulsada es Enter
+					if (e.getKeyCode()==KeyEvent.VK_ENTER)
+					{
+						//Componemos el alquiler
+						rellenaAlquilerConsultado();
+						MetodosGUI.estadoEditar(contentPane);
+						tbCodAlquiler.setEnabled(false);
+
+					}
+				}
+
+			});
 
 			JLabel lblCodAlquiler = new JLabel("C\u00F3digo del alquiler");
 			lblCodAlquiler.setBounds(79, 11, 129, 14);
@@ -134,6 +178,12 @@ public class FormuAlquiler extends JFrame {
 			panel.add(btnCreaVehiculo);
 
 			JButton btnListaAlquileres = new JButton("");
+			btnListaAlquileres.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					 alquilerRealizado = TablaAlquiler.showDialogModal();
+					 rellenaCamposAlquiler();
+				}
+			});
 			btnListaAlquileres.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/zoom.png")));
 			btnListaAlquileres.setBounds(274, 8, 25, 20);
 			panel.add(btnListaAlquileres);
@@ -148,10 +198,26 @@ public class FormuAlquiler extends JFrame {
 					cbVehiculo = Handlers.creaDesplegableVehiculos((Oficina) cbOficinaSalida.getSelectedItem());
 					cbVehiculo.setBounds(253, 139, 200, 22);
 					panel.add(cbVehiculo);
+					cbVehiculo.addItemListener(new ItemListener() {
+
+						@Override
+						public void itemStateChanged(ItemEvent e) {
+							vehiculo = (Vehiculo) cbVehiculo.getSelectedItem();			
+						}
+
+					});
 					//ComboBox de empleados
 					cbEmpleados = Handlers.creaDesplegableEmpleados((Oficina) cbOficinaSalida.getSelectedItem());
 					cbEmpleados.setBounds(10, 139, 154, 22);
 					panel.add(cbEmpleados);
+					cbEmpleados.addItemListener(new ItemListener() {
+
+						@Override
+						public void itemStateChanged(ItemEvent e) {
+							// Rellenamos el empleado
+							emple = (Empleado) cbEmpleados.getSelectedItem();
+						}
+					});
 				}
 			});
 
@@ -170,28 +236,44 @@ public class FormuAlquiler extends JFrame {
 			panel.add(btnCreaOficina_1);
 
 			tbFechaInicioAlquiler = new JDateChooser();
-			tbFechaInicioAlquiler.setBounds(10, 253, 94, 20);
+			tbFechaInicioAlquiler.setBounds(10, 253, 105, 20);
 			panel.add(tbFechaInicioAlquiler);
 
 			tbFechaPrevistaFinAlquiler = new JDateChooser();
-			tbFechaPrevistaFinAlquiler.setBounds(253, 253, 94, 20);
+			tbFechaPrevistaFinAlquiler.setBounds(253, 253, 105, 20);
 			panel.add(tbFechaPrevistaFinAlquiler);
 
 			JLabel lblFechaInicio = new JLabel("Fecha de inicio del alquiler");
-			lblFechaInicio.setBounds(10, 228, 124, 14);
+			lblFechaInicio.setBounds(10, 228, 154, 14);
 			panel.add(lblFechaInicio);
 
 			JLabel lblFechaFin = new JLabel("Fecha estimada finalizacion");
 			lblFechaFin.setBounds(253, 217, 154, 36);
 			panel.add(lblFechaFin);
-			
-			tbPrecio.setBounds(434, 23, 60, 20);
+			tbPrecio.setEnabled(false);
+
+			tbPrecio.setBounds(434, 253, 60, 20);
 			panel.add(tbPrecio);
 			tbPrecio.setColumns(6);
-			
+
 			JLabel lblClientes = new JLabel("Clientes");
 			lblClientes.setBounds(10, 169, 71, 14);
 			panel.add(lblClientes);
+
+			JLabel lblPrecio = new JLabel("Precio");
+			lblPrecio.setLabelFor(tbPrecio);
+			lblPrecio.setBounds(434, 228, 60, 14);
+			panel.add(lblPrecio);
+
+			JButton btnCreaCliente = new JButton("");
+			btnCreaCliente.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					cliente = FormuCliente.showDialogModal();
+				}
+			});
+			btnCreaCliente.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/add.png")));
+			btnCreaCliente.setBounds(175, 192, 33, 25);
+			panel.add(btnCreaCliente);
 		}
 
 	}
@@ -203,7 +285,7 @@ public class FormuAlquiler extends JFrame {
 			JButton okButton = new JButton("Aceptar");
 			okButton.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/check_mark.png")));
 			okButton.addActionListener(new ActionListener() {
-				
+
 
 				public void actionPerformed(ActionEvent e) {
 					//TODO realizar el alquiler
@@ -217,7 +299,14 @@ public class FormuAlquiler extends JFrame {
 
 				private void rellenaAlquiler() {
 					try {
-						alquilerRealizado = new Alquiler(tbCodAlquiler.getText(),(Date) tbFechaInicioAlquiler.getDate() , (Date) tbFechaPrevistaFinAlquiler.getDate(),Double.parseDouble(tbPrecio.getText()), (Vehiculo) cbVehiculo.getSelectedItem(), (Cliente) cbClientes.getSelectedItem(), (Oficina) cbOficinaSalida.getSelectedItem(), (Oficina) cbOfi.getSelectedItem());
+			
+						alquilerRealizado = new Alquiler(tbCodAlquiler.getText(), (Date) tbFechaInicioAlquiler.getDate(), (Date) tbFechaPrevistaFinAlquiler.getDate(), Double.parseDouble(tbPrecio.getText()), vehiculo, cliente, emple, (Oficina) cbOficinaSalida.getSelectedItem(), (Oficina) cbOfi.getSelectedItem());
+						
+						int duracion = alquilerRealizado.getNumDiasAprox();
+						double PrecioAlquiler = duracion*vehiculo.PrecioAlquiler();
+						alquilerRealizado.setPrecioAlquiler(PrecioAlquiler);
+						tbPrecio.setText(""+alquilerRealizado.getPrecioAlquiler());
+
 					} catch (FechaNoValidaException | CodigoNoValidoException e1) {
 						// error al crear el alquiler
 						e1.printStackTrace();
@@ -233,7 +322,8 @@ public class FormuAlquiler extends JFrame {
 			JButton cancelButton = new JButton("Cancelar");
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					//TODO todo vacío
+					//Lo ponemos como al principio: todo vacío
+					MetodosGUI.estadoInicial(contentPane);
 				}
 			});
 			cancelButton.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/cancel.png")));
@@ -241,16 +331,44 @@ public class FormuAlquiler extends JFrame {
 			buttonPane.add(cancelButton);
 		}
 	}
+	private void rellenaAlquilerConsultado() {
+		// Buscamos el alquiler
+		if (RepositorioAlquiler.leeAlquiler(tbCodAlquiler.getText()) != null)
+		{//Si existe lo rellenamos
+			alquilerRealizado = RepositorioAlquiler.leeAlquiler(tbCodAlquiler.getText());
+			rellenaCamposAlquiler();
+		}
+
+
+	}
+
+
+
+	private void rellenaCamposAlquiler() {
+		tbFechaInicioAlquiler.setDate(alquilerRealizado.getFechaInicioAlquiler());
+		tbFechaPrevistaFinAlquiler.setDate(alquilerRealizado.getFechaPrevistaFinAlquiler());
+		try {
+			cbClientes.setSelectedItem(alquilerRealizado.getCliente());
+		} catch (LicenciaNoValidaException | DNInoValidoException | LongitudCadenaNoValidaException e) {
+			// errores de creación del cliente
+			e.printStackTrace();
+		}
+		cbEmpleados.setSelectedItem(alquilerRealizado.getEncargado());
+		cbOficinaSalida.setSelectedItem(alquilerRealizado.getOficinaRecogida());
+		cbOfi.setSelectedItem(alquilerRealizado.getOficinaEntrega());
+		cbVehiculo.setSelectedItem(alquilerRealizado.getaAlquilar());
+		tbPrecio.setText(""+alquilerRealizado.getPrecioAlquiler());
+	}
 
 	/**
 	 * Coge la fecha escrita por el usuario y la convierte en GregorianCalendar
 	 * @return	la fecha de inicio del alquiler de tipo {@code GregorianCalendar}
 	 */
-/*	private GregorianCalendar getFechaInicioAlquiler() {
+	/*	private GregorianCalendar getFechaInicioAlquiler() {
 
 		return null;
 	}
-*/
+	 */
 	public static void showFrame()
 	{
 		FormuAlquiler ventana = new FormuAlquiler();

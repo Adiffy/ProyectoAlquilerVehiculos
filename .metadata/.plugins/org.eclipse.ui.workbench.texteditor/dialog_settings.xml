@@ -1,30 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="empleado"/>
+		<item key="selection" value="Vehiculo"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="empleado"/>
-			<item value="salida"/>
-			<item value="oficina sa"/>
-			<item value="oficin"/>
-			<item value="tbPrecioç"/>
-			<item value="HANDLERS"/>
-			<item value="setAlquilado"/>
-			<item value="precio"/>
-			<item value="Date"/>
-			<item value="tbF"/>
-			<item value="precioAlquiler"/>
+			<item value="Empleado"/>
+			<item value="TablaEmpleado"/>
 			<item value="cliente"/>
-			<item value="veh�culo"/>
-			<item value="GregorianCalendar"/>
-			<item value="jda"/>
+			<item value="num"/>
+			<item value="Num"/>
+			<item value="NumDi"/>
+			<item value="precio"/>
+			<item value="toStr"/>
+			<item value="Emplelegido"/>
+			<item value="dni"/>
+			<item value="dniç"/>
+			<item value="vk"/>
+			<item value="Cliente"/>
+			<item value="handlers"/>
+			<item value="west"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Vehiculo"/>
+			<item value="TablaVehiculos"/>
+			<item value="Alquielegido"/>
+			<item value="Alquiler"/>
 			<item value="tbPrecio"/>
 			<item value="vehículo"/>
 			<item value="Date"/>
@@ -36,10 +40,6 @@
 			<item value="matrícula"/>
 			<item value="kilómetros"/>
 			<item value="conexión"/>
-			<item value="getCódigo()"/>
-			<item value="getCódigo"/>
-			<item value="Método"/>
-			<item value="Metodos"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

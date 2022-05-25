@@ -36,33 +36,34 @@ public class FormuEmpleado extends JDialog {
 	private JTextField tbAp2;
 	private JComboBox<Oficina> comboBox;
 	public static Empleado elelegido;
-//	private JFrame yo;
+	//	private JFrame yo;
 	private JDateChooser fechaAlta;
 
 
 	/**
 	 * Constructor.
 	 */
-	private FormuEmpleado() {
-//		yo = this;
+	private FormuEmpleado() 
+	{
+		//		yo = this;
 		declaraAtributosGenerales();
 		creaPanelBotones();
 		//Creamos los campos que son iguales (TextFields)
 		creaCampos_a_rellenar();
 		//Creamos el ComboBox
 		creaComboBoxOficinas();
-	JButton btnBuscar = creaBotonConsulta();
-	
-	btnBuscar.setBounds(180, 42, 46, 25);
-	panelPrincipal.add(btnBuscar);
-	creaLabelFecha_alta();
-	creaTbFechaAlta();
+		JButton btnBuscar = creaBotonConsulta();
+
+		btnBuscar.setBounds(180, 42, 46, 25);
+		panelPrincipal.add(btnBuscar);
+		creaLabelFecha_alta();
+		creaTbFechaAlta();
 
 	}
 
 	private void creaCampos_a_rellenar() {
 		creaLabelDNI();
-		
+
 		creaLabelNombre();
 
 		creaTbDNI();
@@ -83,7 +84,7 @@ public class FormuEmpleado extends JDialog {
 		fechaAlta.setDateFormatString("yyyy/MM/dd");
 		fechaAlta.setBounds(91, 163, 110, 24);
 		panelPrincipal.add(fechaAlta);
-		
+
 		JButton btnAceptar = new JButton("");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -219,9 +220,9 @@ public class FormuEmpleado extends JDialog {
 					MetodosGUI.estadoEditar(panelPrincipal);
 					//Lo vaciamos para que se note que se insertó
 				}
-				
+
 			}
-			});
+		});
 	}
 
 	private void creaLabelDNI() {
@@ -284,27 +285,27 @@ public class FormuEmpleado extends JDialog {
 				if (e.getKeyCode()==KeyEvent.VK_ENTER)
 				{
 					if (tbDNI.getText().length()==9)
+					{
+						if (MetodoDni.DNIvalido(tbDNI.getText()))	//Si es un DNI v�lido
 						{
-							if (MetodoDni.DNIvalido(tbDNI.getText()))	//Si es un DNI v�lido
+							//Componemos el empleado
+							rellenaEmpleadoConsultado();
+							MetodosGUI.estadoEditar(panelPrincipal);
+							tbDNI.setEnabled(false);
+							if (elelegido !=null )
 							{
-								//Componemos el empleado
-								rellenaEmpleadoConsultado();
-								MetodosGUI.estadoEditar(panelPrincipal);
-								tbDNI.setEnabled(false);
-								if (elelegido !=null )
-								{
-									rellenaTextFields();
-								}
-							}else {
-								JOptionPane.showMessageDialog(null, "Longitud del DNI inválida");
+								rellenaTextFields();
 							}
+						}else {
+							JOptionPane.showMessageDialog(null, "Longitud del DNI inválida");
 						}
+					}
 				}
 			}
 
 		});
 	}
-	
+
 	/**
 	 * El Método que rellena emplelegido 
 	 * Pero desde la base de datos utilizando el campo DNI
@@ -313,7 +314,7 @@ public class FormuEmpleado extends JDialog {
 	{
 		elelegido = RepositorioEmpleado.leeEmpleado(tbDNI.getText());
 	}
-	
+
 	/**
 	 * El Método que rellena emplelegido (variable utilizada para componer el empleado que compone el usuario)
 	 */
@@ -353,7 +354,7 @@ public class FormuEmpleado extends JDialog {
 		fechaAlta.setDate(fecha);
 		comboBox.setSelectedItem((Oficina) elelegido.getOficina());
 	}
-	
+
 	/**
 	 * Sobrecarga del constructor que requiere:
 	 * @param tituloVentana El t�tulo de la ventana (que queremos que tenga)
@@ -363,12 +364,12 @@ public class FormuEmpleado extends JDialog {
 		FormuEmpleado ventanilla = new FormuEmpleado();
 		ventanilla.setTitle(tituloVentana);
 	}
-	
+
 	public static Empleado showDialog()
 	{
 		FormuEmpleado ventana = new FormuEmpleado();
 		ventana.setVisible(true);
-	
+
 		return elelegido;
 	}
 
@@ -376,9 +377,8 @@ public class FormuEmpleado extends JDialog {
 	{
 		FormuEmpleado ventana = new FormuEmpleado(tituloVentana);
 		ventana.setVisible(true);
-	
+
 		return elelegido;
 	}
 }
 
-		

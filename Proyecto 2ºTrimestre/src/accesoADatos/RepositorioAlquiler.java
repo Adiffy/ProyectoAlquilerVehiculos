@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import clasesObjetos.Alquiler;
 import clasesObjetos.Cliente;
@@ -31,7 +32,42 @@ public class RepositorioAlquiler {
 	 * Realiza el insert en la tabla Alquiler en la base de datos
 	 */
 	public static void alquilar(Alquiler alquiler) {
-		// Realizamos la instrucción
+		// Si ya existe hacemos Update, sino INSERT
+		if (leeAlquiler(alquiler.getCodigo())!=null)
+		{
+			update(alquiler);
+		}else {
+			insert(alquiler);
+		}
+	}
+
+	private static void update(Alquiler alquiler) {
+		String sql = "UPDATE alquiler SET fecha_inicio=?,fechaprevistafin=?,precio=?,dni_cliente=?,dni_empleado=?,matricula_vehiculo=?,oficinaRecogida=?,oficinaDejada=? WHERE codigo ="+alquiler.getCodigo();
+		PreparedStatement st;
+		
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setDate(1, (Date) alquiler.getFechaInicioAlquiler());
+			st.setDate(2, (Date) alquiler.getFechaPrevistaFinAlquiler());
+			st.setDouble(3, alquiler.getPrecioAlquiler());
+			st.setString(4, alquiler.getCliente().getDni());
+			st.setString(5, alquiler.getEncargado().getDni());
+			st.setString(6, alquiler.getaAlquilar().getMatricula().toString());
+			st.setString(7, alquiler.getOficinaRecogida().getCódigo());
+			st.setString(8, alquiler.getOficinaEntrega().getCódigo());
+			
+			st.executeUpdate();
+			st.execute("COMMIT");
+			
+			//cerramos la conexión
+			st.close();
+		} catch (SQLException | LicenciaNoValidaException | DNInoValidoException | LongitudCadenaNoValidaException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
+			// Error en la base de datos / leer cliente o matricula
+			e.printStackTrace();
+		}
+	}
+
+	private static void insert(Alquiler alquiler) {
 		String sql = "INSERT INTO alquiler "
 				+ "(codigo,fecha_inicio,fechaprevistafin,precio,dni_cliente,matricula_vehiculo,oficinaRecogida,oficinaDejada)"
 				+ " VALUES (?,?,?,?,?,?,?,?)";
@@ -57,8 +93,8 @@ public class RepositorioAlquiler {
 			throws SQLException, LicenciaNoValidaException, DNInoValidoException, LongitudCadenaNoValidaException,
 			LetrasMatriculaNoValidasException, NumeroMatriculaNoValidoException {
 		st.setString(1, alquiler.getCodigo());
-		st.setDate(2, alquiler.getFechaInicioAlquiler());
-		st.setDate(3, alquiler.getFechaPrevistaFinAlquiler());
+		st.setDate(2, (Date) alquiler.getFechaInicioAlquiler());
+		st.setDate(3, (Date) alquiler.getFechaPrevistaFinAlquiler());
 		st.setDouble(4, alquiler.getPrecioAlquiler());
 		st.setString(5, alquiler.getCliente().getDni());
 		st.setString(6, alquiler.getaAlquilar().getMatricula().toString());
@@ -106,6 +142,32 @@ public class RepositorioAlquiler {
 			e.printStackTrace();
 		}
 		return al;
+	}
+
+	public static ArrayList<Alquiler> leeAlquileres() {
+		// Preparamos el ArrayList
+		ArrayList<Alquiler> alquileres = new ArrayList<Alquiler>();
+		String sql = "SELECT codigo FROM alquiler";
+		PreparedStatement st;
+		ResultSet rs;
+		
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			rs = st.executeQuery();
+			while (rs.next())
+			{
+				String cod = rs.getString("codigo");
+				alquileres.add(leeAlquiler(cod));
+			}
+			//cerramos la conexión
+			st.close();
+			rs.close();
+		} catch (SQLException e) {
+			// error
+			e.printStackTrace();
+		}
+		
+		return alquileres;
 	}
 
 	

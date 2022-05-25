@@ -1,5 +1,6 @@
 package metodos;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -11,18 +12,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import accesoADatos.RepositorioAlquiler;
 import accesoADatos.RepositorioAux;
 import accesoADatos.RepositorioCategoria;
 import accesoADatos.RepositorioCliente;
 import accesoADatos.RepositorioEmpleado;
 import accesoADatos.RepositorioOficina;
 import accesoADatos.RepositorioVehiculo;
+import clasesObjetos.Alquiler;
 import clasesObjetos.Categoria;
 import clasesObjetos.Cliente;
 import clasesObjetos.Empleado;
+import clasesObjetos.Matricula;
 import clasesObjetos.Oficina;
 import clasesObjetos.Vehiculo;
+import exceptions.DNInoValidoException;
 import exceptions.LetrasMatriculaNoValidasException;
+import exceptions.LicenciaNoValidaException;
+import exceptions.LongitudCadenaNoValidaException;
 import exceptions.NumeroMatriculaNoValidoException;
 import exceptions.RecargoNoValidoException;
 
@@ -138,7 +145,7 @@ public class Handlers {
 			{
 				return columnEditables[column];
 			}
-			
+
 		};
 		oficinas = RepositorioOficina.listaOficinas();
 		//Pasamos el ArrayList a Object[] 
@@ -415,7 +422,107 @@ public class Handlers {
 				combo.removeItem(a);	// ... se elimina
 			}	
 		}
-		
+
 		return combo;
+	}
+
+
+	public static JTable creaTablaAlquiler() {
+		//Conseguimos el Model
+		DefaultTableModel m = null;
+		try {
+			m = ModelTablaAlquiler();
+		} catch (LicenciaNoValidaException | DNInoValidoException | LongitudCadenaNoValidaException e) {
+			// error al crear el cliente
+			e.printStackTrace();
+		}
+		//Creamos la tabla
+		JTable tablaAlquiler = new JTable();
+		//Asignamos el model 
+		tablaAlquiler.setModel(m);
+		//Propiedades
+		tablaAlquiler.setFillsViewportHeight(true);
+		tablaAlquiler.setCellSelectionEnabled(true);
+		tablaAlquiler.setColumnSelectionAllowed(true);
+		//Devolvemos la tabla con el model
+		return tablaAlquiler;
+	}
+
+
+	@SuppressWarnings("deprecation")
+	private static DefaultTableModel ModelTablaAlquiler() throws LicenciaNoValidaException, DNInoValidoException, LongitudCadenaNoValidaException {
+		ArrayList<Alquiler> alquileres = new ArrayList<Alquiler>();
+		String[] columnas = {"Código","Precio","Vehículo","Empleado encargado", "Cliente","Oficina de salida", "Oficina de devolucón","Fecha de inicio", "Fecha de finalización"};
+		//Creamos el model a devolver
+		DefaultTableModel model = new DefaultTableModel(null,columnas);
+		alquileres = RepositorioAlquiler.leeAlquileres();
+		//Pasamos el ArrayList a Object[] 
+		for (Alquiler e:alquileres)
+		{
+			Alquiler codigo = e;
+			double precio = e.getPrecioAlquiler();
+			Vehiculo vehiculo = e.getaAlquilar();
+			Date fechaInicio = (Date) e.getFechaInicioAlquiler();
+			Date fechaFin = null;
+			if (e.getFechaDevolucion()==null)	//Si aún no tiene fecha de entrega OFICIAL
+			{
+				fechaFin = new Date (e.getFechaPrevistaFinAlquiler().getYear(), e.getFechaPrevistaFinAlquiler().getMonth(), e.getFechaPrevistaFinAlquiler().getDate());
+			}else {
+				fechaFin = new Date( e.getFechaDevolucion().getYear(), e.getFechaDevolucion().getMonth(), e.getFechaDevolucion().getDate());
+			}
+			Empleado emple = e.getEncargado();
+			Cliente cli = e.getCliente();
+			String OfiSalida = e.getOficinaRecogida().getCódigo();
+			String OfiEntrega = e.getOficinaEntrega().getCódigo();
+			//Podemos reutilizer le verieble pere ir eóediendo les oficines 
+			Object[] col = {codigo,precio,vehiculo,emple,cli,OfiSalida,OfiEntrega,fechaInicio,fechaFin};
+			model.addRow(col);
+		}
+		return model;
+	}
+
+
+	public static JTable creaTablaVehiculos() {
+		// Cogemos el model
+		DefaultTableModel m = creaModelVehiculos();
+		// Hacemos la tabla
+		JTable tabla = new JTable();
+		tabla.setModel(m);
+		//Propiedades
+		tabla.setFillsViewportHeight(true);
+		tabla.setCellSelectionEnabled(true);
+		tabla.setColumnSelectionAllowed(true);
+		return tabla;
+	}
+
+
+	private static DefaultTableModel creaModelVehiculos() {
+		ArrayList<? extends Vehiculo> vehiculos = new ArrayList<Vehiculo>();
+		String[] columnas = {"Matícula","Marca y modelo","Categoría","Color", "Oficina", "Kilómetros", "Fecha de alta"};
+		//Creamos el model a devolver
+		DefaultTableModel model = new DefaultTableModel(null,columnas);
+		try {
+			vehiculos = RepositorioVehiculo.leeTodosLosVehiculos();
+			//Pasamos el ArrayList a Object[] 
+			for (Vehiculo v:vehiculos)
+			{
+				Matricula mat = v.getMatricula();
+				Vehiculo marca = v;
+				Categoria cat = v.getCategoria();
+				String color = v.getColor();
+				String oficina = v.getOficina().getCódigo();
+				int kms = v.getKms();
+				GregorianCalendar fecha_alta = v.getFechaAlta();
+				
+				//Podemos reutilizer le verieble pere ir eóediendo les oficines 
+				Object[] col = {mat,marca,cat,color,oficina,kms,fecha_alta};
+				model.addRow(col);
+			}
+		} catch (LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException | RecargoNoValidoException e) {
+			// Error al leer vehículo
+			e.printStackTrace();
+		}
+		
+		return model;
 	}
 }

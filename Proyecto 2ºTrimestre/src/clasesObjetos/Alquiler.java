@@ -1,7 +1,7 @@
 package clasesObjetos;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 import java.util.GregorianCalendar;
 
@@ -27,6 +27,7 @@ public class Alquiler implements Serializable {
 		private Empleado encargado;
 		private Vehiculo aAlquilar;
 		private double PrecioAlquiler ;
+//		private double PrecioAlquilerAprox ; //Calculado con el nº de días previstos
 		
 		private Oficina OficinaRecogida;
 		private Oficina OficinaEntrega;
@@ -123,7 +124,7 @@ public class Alquiler implements Serializable {
 			{
 				FechaInicioAlquiler = (Date) fechaInicioAlquiler.clone();
 			}else {
-				throw new FechaNoValidaException("Fecha de inicio de alquiler no v�lida");
+				throw new FechaNoValidaException("Fecha de inicio de alquiler no válida");
 			}
 			
 		}
@@ -170,16 +171,16 @@ public class Alquiler implements Serializable {
 			OficinaEntrega = copia ;
 		}
 
-		@SuppressWarnings({ "deprecation" })
+//		@SuppressWarnings({ "deprecation" })
 		public void setFechaDevolucion(Date fechaDevolucion) throws FechaNoValidaException {
 			
 			//O es mayor el mes o el año de la fecha de devolución respecto la de inicio alquiler
-			if (fechaDevolucion.getMonth() > this.FechaInicioAlquiler.getMonth() || fechaDevolucion.getYear() > this.FechaInicioAlquiler.getYear())	
-			{
+//			if (fechaDevolucion.getMonth() > this.FechaInicioAlquiler.getMonth() || fechaDevolucion.getYear() > this.FechaInicioAlquiler.getYear())	
+//			{
 				FechaDevolucion = fechaDevolucion;
-			}else {
-				throw new FechaNoValidaException("Fecha de devolución anterior a la fecha de inicio del alquiler");
-			}
+//			}else {
+//				throw new FechaNoValidaException("Fecha de devolución anterior a la fecha de inicio del alquiler");
+//			}
 			
 		}
 		public void setAlquilado(Vehiculo aAlquilar,boolean si)
@@ -256,6 +257,14 @@ public class Alquiler implements Serializable {
 			LocalDate resultado = fin.minusDays(inicio.getDayOfYear());
 			return resultado.getDayOfYear();
 		}
+		@SuppressWarnings("deprecation")
+		public int getNumDiasAprox()
+		{
+			LocalDate inicio = LocalDate.of(this.FechaInicioAlquiler.getYear(), this.FechaInicioAlquiler.getMonth(), this.FechaInicioAlquiler.getDate());
+			LocalDate fin = LocalDate.of(this.FechaPrevistaFinAlquiler.getYear(), this.FechaPrevistaFinAlquiler.getMonth(), this.FechaPrevistaFinAlquiler.getDate());
+			LocalDate resultado = fin.minusDays(inicio.getDayOfYear());
+			return resultado.getDayOfYear();
+		}
 		
 		public boolean isAcabado()
 		{
@@ -270,7 +279,7 @@ public class Alquiler implements Serializable {
 		@Override
 		public String toString()
 		{
-			return codigo+" - "+this.getPrecioAlquiler()+" | "+this.getFechaInicioAlquiler() ;
+			return codigo+"" ;
 			
 		}
 }

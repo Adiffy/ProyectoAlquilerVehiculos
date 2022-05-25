@@ -561,14 +561,15 @@ public class RepositorioVehiculo {
 			{	//Si es de combustión extraemos sus atributos
 				st.close();
 				rs.close();
-				sql = "SELECT * FROM decombustion WHERE vehiculo_matricula="+mat;
+				sql = "SELECT * FROM decombustion WHERE vehiculo_matricula=?";
 				st = EmpresaDB.conn.prepareStatement(sql);
+				st.setString(1, mat.toString());
 				rs = st.executeQuery();
 
 				while (rs.next())
 				{
 					consumo = rs.getDouble("consumo");
-					potencia = rs.getInt("tipo");
+					potencia = rs.getInt("potencia");
 					emisiones = rs.getString("emisiones");
 				}
 				switch (RepositorioVehiculo.tipoVehiculo(mat))
@@ -576,8 +577,9 @@ public class RepositorioVehiculo {
 				case "CocheCombustion":
 					st.close();
 					rs.close();
-					sql = "SELECT * FROM cochecombustion WHERE combustionMatricula="+mat;
+					sql = "SELECT * FROM cochecombustion WHERE combustionMatricula=?";
 					st = EmpresaDB.conn.prepareStatement(sql);
+					st.setString(1, mat.toString());
 					rs = st.executeQuery();
 
 					while (rs.next())
@@ -597,8 +599,9 @@ public class RepositorioVehiculo {
 				case "Furgoneta":
 					st.close();
 					rs.close();
-					sql = "SELECT * FROM furgoneta WHERE matricula="+mat;
+					sql = "SELECT * FROM furgoneta WHERE matricula=?";
 					st = EmpresaDB.conn.prepareStatement(sql);
+					st.setString(1, mat.toString());
 					rs = st.executeQuery();
 					
 					while (rs.next())
@@ -614,8 +617,9 @@ public class RepositorioVehiculo {
 				//Si no es de combustión será eléctrico
 				st.close();
 				rs.close();
-				sql = "SELECT * FROM electrico WHERE vehiculo_matricula="+mat;
+				sql = "SELECT * FROM electrico WHERE vehiculo_matricula=?";
 				st = EmpresaDB.conn.prepareStatement(sql);
+				st.setString(1, mat.toString());
 				rs = st.executeQuery();
 
 				while (rs.next())
@@ -629,8 +633,9 @@ public class RepositorioVehiculo {
 
 					st.close();
 					rs.close();
-					sql = "SELECT * FROM cocheelectrico WHERE vehiculo_matricula="+mat;
+					sql = "SELECT * FROM cocheelectrico WHERE vehiculo_matricula=?";
 					st = EmpresaDB.conn.prepareStatement(sql);
+					st.setString(1, mat.toString());
 					rs = st.executeQuery();
 
 					while (rs.next())
@@ -643,8 +648,9 @@ public class RepositorioVehiculo {
 				case "Moto":
 					st.close();
 					rs.close();
-					sql  ="SELECT * FROM moto WHERE vehiculo_matricula="+mat;
+					sql  ="SELECT * FROM moto WHERE vehiculo_matricula=?";
 					st = EmpresaDB.conn.prepareStatement(sql);
+					st.setString(1, mat.toString());
 					rs = st.executeQuery();
 					
 					while (rs.next())
