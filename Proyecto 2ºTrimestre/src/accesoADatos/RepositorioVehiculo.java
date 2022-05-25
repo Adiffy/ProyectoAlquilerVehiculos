@@ -1165,14 +1165,13 @@ public class RepositorioVehiculo {
 			boolean hay2=false;
 			int tipofinal=-1;
 			Matricula mat = null;
+			GregorianCalendar fechaAlta = null;
 			
 			try {
 				PreparedStatement ps=EmpresaDB.conn.prepareStatement("SELECT * FROM vehiculo WHERE matricula=?");
 				ps.setString(1, matricula);
 				resultadoSql=ps.executeQuery();
-				mat = leeMatricula(resultadoSql.getString("matricula"));
-				Date fecha = resultadoSql.getDate("fechaalta");
-				GregorianCalendar fechaAlta = new GregorianCalendar(fecha.getYear(),fecha.getMonth(),fecha.getDate());
+				
 				
 				if(resultadoSql.next()) {
 					
@@ -1180,6 +1179,9 @@ public class RepositorioVehiculo {
 					ps=EmpresaDB.conn.prepareStatement("SELECT * FROM decombustion WHERE vehiculo_matricula=?");
 					ps.setString(1, matricula);
 					tipo=ps.executeQuery();
+					mat = leeMatricula(resultadoSql.getString("matricula"));
+					Date fecha = resultadoSql.getDate("fechaalta");
+					fechaAlta = new GregorianCalendar(fecha.getYear(),fecha.getMonth(),fecha.getDate());
 					categoria=RepositorioCategoria.leeCategoria(resultadoSql.getString("categoria"));
 					oficina=RepositorioOficina.leeOficina(resultadoSql.getString("oficina"));
 			

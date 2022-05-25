@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="válida"/>
+		<item key="selection" value="ModelVe"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="v�lida"/>
-			<item value="equals("/>
-			<item value="Seleccionar"/>
-			<item value="tbDni"/>
-			<item value="textFiltro"/>
-			<item value="SearchInJtable"/>
-			<item value="panelFiltroBusqueda"/>
-			<item value="filter"/>
-			<item value="Emplelegido"/>
-			<item value="les oficines"/>
-			<item value="eóediendo"/>
-			<item value="toStr"/>
+			<item value="modelVe"/>
+			<item value="lee("/>
+			<item value="lee"/>
+			<item value="CategoriaBD"/>
+			<item value="Conexion.conexion"/>
+			<item value="EmpresaDB.conn"/>
+			<item value="return"/>
 			<item value="Vehiculo"/>
-			<item value="TablaVehiculos"/>
-			<item value="Empleado"/>
+			<item value="leeVehiculo"/>
+			<item value="precio"/>
+			<item value="Double"/>
+			<item value="Doublr"/>
+			<item value="textField"/>
+			<item value="v�lido"/>
+			<item value="oficinaSal"/>
 		</list>
 		<list key="replacehistory">
-			<item value="válida"/>
-			<item value="compareToIgnoreCase("/>
-			<item value="tbDni"/>
-			<item value="panel"/>
-			<item value="CatElegida"/>
-			<item value="las oficinas"/>
-			<item value="añadiendo"/>
-			<item value="Categoria"/>
-			<item value="TablaCategoria"/>
-			<item value="Vehiculo"/>
-			<item value="TablaVehiculos"/>
-			<item value="Alquielegido"/>
-			<item value="Alquiler"/>
-			<item value="tbPrecio"/>
-			<item value="vehículo"/>
+			<item value="RepositorioCategoria"/>
+			<item value="EmpresaDB.conn"/>
+			<item value="tipo ="/>
+			<item value="código"/>
+			<item value="válido"/>
+			<item value="instrucción"/>
+			<item value="compareTo"/>
+			<item value="VehiculoElegido"/>
+			<item value="TablaMoto"/>
+			<item value="tbMat"/>
+			<item value="Moto"/>
+			<item value="CocheElectrico"/>
+			<item value="TablaCocheElectrico"/>
+			<item value="reutilizar"/>
+			<item value="para"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

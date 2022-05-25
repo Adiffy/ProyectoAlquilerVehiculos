@@ -549,7 +549,7 @@ public class Handlers {
 				String color = v.getColor();
 				String oficina = v.getOficina().getCódigo();
 				int kms = v.getKms();
-				String fecha_alta =  toStringGregCalendar(v.getFechaAlta());;
+				Date fecha_alta =  new Date (v.getFechaAlta().getTimeInMillis());
 				int cilindrada = v.getCilindrada();
 				String carnet = v.getCarnetRequerido();
 				int autonomia = v.getAutonomia();
@@ -685,7 +685,7 @@ public class Handlers {
 			String colo = c.getColor();
 			Oficina ofi = c.getOficina();
 			int kms = c.getKms();
-			String fecha =  toStringGregCalendar(c.getFechaAlta());
+			Date fecha =  new Date (c.getFechaAlta().getTimeInMillis());
 			int numPlazas = c.getNumPlazas();
 			int autonomia = c.getAutonomia();
 			int tiempoRecarga = c.getTiempoRecarga();

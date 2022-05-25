@@ -186,5 +186,28 @@ public class RepositorioAlquiler {
 		return alquileres;
 	}
 
+	public static boolean borraAlquiler(Alquiler alquilerRealizado) {
+		// Si se pudo o no
+		boolean borrado = false; 	//A priori no hemos podido borrarlo
+		// Preparamos la instrucción
+		String sql = "DELETE FROM alquiler WHERE codigo = ?";
+		PreparedStatement st;
+		
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setString(1, alquilerRealizado.getCodigo());
+			
+			st.executeUpdate();
+			//Guardamos y ponemos borrado = true
+			borrado = st.execute("COMMIT");
+		} catch (SQLException e) {
+			// error
+			e.printStackTrace();
+		}
+		
+		
+		return borrado;
+	}
+
 	
 }
