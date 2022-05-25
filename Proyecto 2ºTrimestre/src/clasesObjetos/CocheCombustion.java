@@ -70,6 +70,7 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 	 * @param oficina La oficina en la que se encuentra (si el coche no est� alquilado). Tipo {@code Direccion} ({@code String} nombreVia, {@code String} numVia, {@code String} codigoPostal, {@code String} localidad)
 	 * @param num_km Los kilómetros recorridos por el vehículo. Tipo {@code int}.
 	 * @param num_plazas El número de plazas que dispone el coche. Tipo {@code int}.
+	 * @param oficina2 
 	 * @param consumo El consumo del coche (Litros por cada 100km). Tipo {@code double}.
 	 * @param tipo	El tipo del coche, puede ser "Familiar, Deportivo". Tipo {@code String}.
 	 * @param potencia	El caballaje del coche medido en CV. Tipo {@code int}.

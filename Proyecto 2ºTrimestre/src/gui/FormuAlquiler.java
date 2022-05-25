@@ -63,6 +63,7 @@ public class FormuAlquiler extends JFrame {
 	private JDateChooser tbFechaInicioAlquiler;
 	private JLabel tbPrecio;
 	private JDateChooser tbFechaPrevistaFinAlquiler;
+	private JPanel buttonPane_1;
 
 
 
@@ -77,10 +78,10 @@ public class FormuAlquiler extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-		creaButtonPane(buttonPane);
+		buttonPane_1 = new JPanel();
+		buttonPane_1.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane_1, BorderLayout.SOUTH);
+		creaButtonPane(buttonPane_1);
 		{
 			JButton okButton = new JButton("Aceptar");
 			okButton.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/check_mark.png")));
@@ -116,7 +117,7 @@ public class FormuAlquiler extends JFrame {
 
 			});
 			okButton.setActionCommand("Aceptar");
-			buttonPane.add(okButton);
+			buttonPane_1.add(okButton);
 			getRootPane().setDefaultButton(okButton);
 		}
 		{
@@ -352,6 +353,10 @@ public class FormuAlquiler extends JFrame {
 					tbCodAlquiler.setEnabled(true);
 				}
 			});
+			
+			JButton btnNewButton = new JButton("Borrar");
+			btnNewButton.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/recycle_bin.png")));
+			buttonPane_1.add(btnNewButton);
 			cancelButton.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/cancel.png")));
 			cancelButton.setActionCommand("Cancelar");
 			buttonPane.add(cancelButton);

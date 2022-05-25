@@ -142,7 +142,7 @@ public class RepositorioAlquiler {
 				dni = rs.getString("dni_empleado");
 				Empleado emple = RepositorioEmpleado.leeEmpleado(dni);
 				String matricula = rs.getString("matricula_vehiculo");
-				Vehiculo auto = RepositorioVehiculo.lee(RepositorioVehiculo.leeMatricula(matricula));
+				Vehiculo auto = RepositorioVehiculo.lee(RepositorioVehiculo.leeVehiculo(matricula));
 				Oficina ofi = RepositorioOficina.leeOficina(rs.getString("oficinaRecogida"));
 				Oficina ofiEntrega = RepositorioOficina.leeOficina(rs.getString("oficinaDejada"));
 				
@@ -153,7 +153,7 @@ public class RepositorioAlquiler {
 					al = new Alquiler(codigo, fechaInicio, fechaPrevistaFin,precio, auto, cli, emple, ofi, ofiEntrega);
 				}
 			}
-		} catch (SQLException | FechaNoValidaException | CodigoNoValidoException | RecargoNoValidoException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
+		} catch (SQLException | FechaNoValidaException | CodigoNoValidoException | RecargoNoValidoException e) {
 			// error en la consulta
 			e.printStackTrace();
 		}
