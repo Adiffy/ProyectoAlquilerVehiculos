@@ -86,7 +86,7 @@ public class TablaAlquiler extends JDialog {
 				{
 					int num_fila  = tableBusqueda.getSelectedRow();
 					
-					Alquielegido = (Alquiler) tableBusqueda.getValueAt(num_fila, 1);
+					Alquielegido = (Alquiler) tableBusqueda.getValueAt(num_fila, 0);
 					yo.setVisible(false);
 				}
 			}

@@ -15,7 +15,7 @@ public class Empleado extends Persona{
 	
 	//Propiedades
 	private GregorianCalendar fechaAlta;
-	private Oficina oficina;		//La oficina a la que está asignado el empleado
+	private Oficina oficina;		//La oficina a la que estï¿½ asignado el empleado
 
 	
 	//Getters y Setters
@@ -45,8 +45,8 @@ public class Empleado extends Persona{
 	 * @param nombre	Un {@code String} para indicar su nombre. Ejemplo: "Diego"
 	 * @param apellido1	Otro {@code String} para indicar su primer apellido. Ejemplo: "Maradona"  
 	 * @param apellido2 Otro {@code String} para su segundo apellido, puede ser "".
-	 * @param dni Un {@code String} a modo de DNI (que será validado por el set)
-	 * @param fechaAlta Un {@code GregorianCalendar} que indicará cuando se dió de alta el {@code Empleado}
+	 * @param dni Un {@code String} a modo de DNI (que serï¿½ validado por el set)
+	 * @param fechaAlta Un {@code GregorianCalendar} que indicarï¿½ cuando se diï¿½ de alta el {@code Empleado}
 	 * @param oficinaTrabajo	La {@code Oficina} donde trabaja el {@code Empleado}
 	 * @throws CarnetRequeridoInvalidoException 
 	 * @throws LongitudCadenaNoValidaException 
@@ -95,7 +95,7 @@ public class Empleado extends Persona{
 		if (a == null || this.getClass() != a.getClass())
 			return false;
 		Persona dado = (Empleado) a; //Hacemos una copia tipo PERSONA y no OBJETO
-		if (this.getDni() == dado.getDni()) {
+		if (this.getDni().compareToIgnoreCase(dado.getDni())==0) {
 			return true;
 		}else {
 			return false;

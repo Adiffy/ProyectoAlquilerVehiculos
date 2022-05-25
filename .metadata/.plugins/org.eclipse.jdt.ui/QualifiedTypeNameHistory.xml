@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="javax.swing.JTable"/>
-    <fullyQualifiedTypeName name="gui.Formucategoria"/>
-    <fullyQualifiedTypeName name="gui.TablaEmpleado"/>
     <fullyQualifiedTypeName name="enums.BusquedaPor"/>
     <fullyQualifiedTypeName name="accesoADatos.RepositorioAux"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="javax.swing.JTextField"/>
     <fullyQualifiedTypeName name="com.toedter.calendar.JDateChooser"/>
     <fullyQualifiedTypeName name="javax.swing.DefaultComboBoxModel"/>
     <fullyQualifiedTypeName name="javax.swing.ButtonGroup"/>
     <fullyQualifiedTypeName name="clasesObjetos.Categoria"/>
-    <fullyQualifiedTypeName name="accesoADatos.RepositorioCategoria"/>
     <fullyQualifiedTypeName name="clasesObjetos.VehiculoDB"/>
     <fullyQualifiedTypeName name="java.util.Calendar"/>
     <fullyQualifiedTypeName name="objetosBD.CombustionBD"/>
@@ -19,7 +14,6 @@
     <fullyQualifiedTypeName name="objetosBD.MotoBD"/>
     <fullyQualifiedTypeName name="objetosBD.FurgonetaBD"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-    <fullyQualifiedTypeName name="java.awt.Dimension"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="java.awt.Toolkit"/>
     <fullyQualifiedTypeName name="accesoADatos.RepositorioEmpleado"/>
@@ -60,4 +54,10 @@
     <fullyQualifiedTypeName name="clasesObjetos.Alquiler"/>
     <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
     <fullyQualifiedTypeName name="clasesObjetos.Matricula"/>
+    <fullyQualifiedTypeName name="accesoADatos.RepositorioCategoria"/>
+    <fullyQualifiedTypeName name="java.awt.Rectangle"/>
+    <fullyQualifiedTypeName name="java.awt.Dimension"/>
+    <fullyQualifiedTypeName name="manejadoresEventos.filtroTablas"/>
+    <fullyQualifiedTypeName name="gui.TablaVehiculos"/>
+    <fullyQualifiedTypeName name="javax.swing.JTextField"/>
 </qualifiedTypeNameHistroy>

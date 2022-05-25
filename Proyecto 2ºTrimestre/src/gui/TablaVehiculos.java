@@ -11,10 +11,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import clasesObjetos.Vehiculo;
+import manejadoresEventos.filtroTablas;
 import metodos.Handlers;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 /**
  * Clase que sirve para crear una ventana con la tabla de Vehiculos
@@ -30,9 +34,11 @@ public class TablaVehiculos extends JDialog {
 
 	private JPanel panelPrincipal;
 	private JTable tableBusqueda;
+
+	private JTextField tbDni = new JTextField();
 	private static TablaVehiculos yo;
-	private static Vehiculo Emplelegido;
-//	private JComboBox<Oficina> comboBox;
+	private static Vehiculo VehiculoElegido;
+	//	private JComboBox<Oficina> comboBox;
 
 
 
@@ -41,12 +47,32 @@ public class TablaVehiculos extends JDialog {
 	 */
 	public TablaVehiculos() {
 		creaPanelPrincipal();
-		creaPanelBotones();
-//		creaComboBox();
 		JPanel panelTabla = creaTabla();
+		creaPanelBotones();
 		creaScrollPane(panelTabla);
+		creaFiltro();
 		MetodosGUI.centraFormulario(yo);
+		filtroTablas.filtraEnTabla(tableBusqueda, tbDni);
+	}
+
+
+	private void creaFiltro() {
+		{
+			JPanel panel = new JPanel();
+			FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+			flowLayout.setAlignment(FlowLayout.LEFT);
+			panelPrincipal.add(panel, BorderLayout.NORTH);
+			{
+				JLabel lblNewLabel = new JLabel("Buscar: ");
+				panel.add(lblNewLabel);
+			}
+			{
+				tbDni = new JTextField();
+				panel.add(tbDni);
+				tbDni.setColumns(10);
+			}
 		}
+	}
 
 
 	private void creaPanelBotones() {
@@ -77,31 +103,33 @@ public class TablaVehiculos extends JDialog {
 		return panelTabla;
 	}
 
-	
-		private void creaBotonAceptar(JPanel abajo) {
-			JButton btnAceptar = new JButton("Seleccionar");
-			btnAceptar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					//Si ha elegido alguna fila
-					if (tableBusqueda.getSelectedRow()>=0)
-					{
-						int num_fila  = tableBusqueda.getSelectedRow();
-						
-						Emplelegido = (Vehiculo) tableBusqueda.getValueAt(num_fila, 1);
-						yo.setVisible(false);
-					}
+
+	private void creaBotonAceptar(JPanel abajo) {
+		JButton btnAceptar = new JButton("Seleccionar");
+		btnAceptar.setIcon(new ImageIcon(TablaVehiculos.class.getResource("/16/check_mark.png")));
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Si ha elegido alguna fila
+				if (tableBusqueda.getSelectedRow()>=0)
+				{
+					int num_fila  = tableBusqueda.getSelectedRow();
+
+					VehiculoElegido = (Vehiculo) tableBusqueda.getValueAt(num_fila, 1);
+					yo.setVisible(false);
 				}
-			});
-			btnAceptar.setToolTipText("Guarda los cambios realizados");
-			abajo.add(btnAceptar);
-			
-				
-		}
+			}
+		});
+		btnAceptar.setToolTipText("Guarda los cambios realizados");
+		abajo.add(btnAceptar);
+
+
+	}
 
 
 
 	private void creaBotonCancelar(JPanel abajo) {
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setIcon(new ImageIcon(TablaVehiculos.class.getResource("/16/cancel.png")));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				yo.setVisible(false);	//Lo ocultamos
@@ -130,16 +158,16 @@ public class TablaVehiculos extends JDialog {
 		TablaVehiculos v = new TablaVehiculos();
 		//La mostramos
 		v.setVisible(true);
-		return Emplelegido;
+		return VehiculoElegido;
 	}
-	
+
 	public static Vehiculo showDialogModal() {
 		// Llamamos al constructor
 		TablaVehiculos v = new TablaVehiculos();
 		v.setModal(true);
 		//La mostramos
 		v.setVisible(true);
-		return Emplelegido;
+		return VehiculoElegido;
 	}
 
 }

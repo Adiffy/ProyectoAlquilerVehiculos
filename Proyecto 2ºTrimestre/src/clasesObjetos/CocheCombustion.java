@@ -28,21 +28,21 @@ public final class CocheCombustion extends DeCombustion implements Coche, Serial
 	@Override
 	public void setNumPlazas(int num) throws NumPlazasNoValidoException
 	{
-		if (num>0 && num<=8) //Suponemos que en un coche no caben m�s de 8 personas
-		{
+//		if (num>0 && num<=15) //Suponemos que en un coche no caben m�s de 8 personas
+//		{
 			this.numPlazas = num;
-		}else {
-			throw new NumPlazasNoValidoException("N�mero de plazas no v�lido");
-		}
+//		}else {
+//			throw new NumPlazasNoValidoException("Número de plazas no válido");
+//		}
 	}
 	public void setTipo(String Tipo) throws TipoNoValidoException
 	{
-		if (Tipo.equalsIgnoreCase("deportivo")||Tipo.equalsIgnoreCase("familiar")||Tipo.equalsIgnoreCase("todoterreno") ||Tipo.equalsIgnoreCase("4x4")) //si es A o B o C
+		if (Tipo.compareToIgnoreCase("deportivo")==0||Tipo.compareToIgnoreCase("familiar")==0||Tipo.compareToIgnoreCase("todoterreno")==0 ||Tipo.compareToIgnoreCase("4x4")==0) //si es A o B o C
 		{
 			String trab = Tipo;
 			this.tipo = trab;
 		}else {
-			throw new TipoNoValidoException("El tipo puede ser �nicamente 'familiar', 'deportivo' o 'todoterreno(4x4)'");
+			throw new TipoNoValidoException("El tipo puede ser únicamente 'familiar', 'deportivo' o 'todoterreno(4x4)'");
 		}
 	}
 

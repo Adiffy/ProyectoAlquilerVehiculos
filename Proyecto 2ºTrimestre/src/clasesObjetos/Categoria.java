@@ -25,7 +25,7 @@ public class Categoria implements Serializable {
 		return codigo;
 	}
 	public void setCodigo(String codigo) {
-//		if (codigo.equalsIgnoreCase("A") || codigo.equalsIgnoreCase("B") || codigo.equalsIgnoreCase("C"))	El código de la categoría no será limitado
+//		if (codigo.equalsIgnoreCase("A") || codigo.equalsIgnoreCase("B") || codigo.equalsIgnoreCase("C"))	El cï¿½digo de la categorï¿½a no serï¿½ limitado
 		{
 			String code=codigo; //Creamos la copia
 			this.codigo = code;
@@ -36,11 +36,11 @@ public class Categoria implements Serializable {
 		return desc;
 	}
 	public void setDescripcion(String descripcion) {
-//		if (descripcion.equalsIgnoreCase("ECONOMICO") || descripcion.equalsIgnoreCase("MEDIO") || descripcion.equalsIgnoreCase("PREMIUM")) La descripción no será limitada
+//		if (descripcion.equalsIgnoreCase("ECONOMICO") || descripcion.equalsIgnoreCase("MEDIO") || descripcion.equalsIgnoreCase("PREMIUM")) La descripciï¿½n no serï¿½ limitada
 		{
 			String desc = descripcion; //clonamos
 			this.descripcion = desc;
-			//Ahora según la descripción pondremos un porcentaje de recargo u otro
+			//Ahora segï¿½n la descripciï¿½n pondremos un porcentaje de recargo u otro
 			
 //			switch (desc.toUpperCase()) { //TODO revisar los porcentajes 
 //			case "A":
@@ -53,7 +53,7 @@ public class Categoria implements Serializable {
 		}
 	}
 	private void setRecargo(double recargo) throws RecargoNoValidoException {
-		if (recargo>=0 && recargo<=100)	//No puede ser un recargo del 100% pero sí puede ser nulo (0)
+		if (recargo>=0 && recargo<=100)	//No puede ser un recargo del 100% pero sï¿½ puede ser nulo (0)
 		{
 			double cop = recargo; //Copia
 			this.recargo=cop;
@@ -61,7 +61,7 @@ public class Categoria implements Serializable {
 			if (recargo >100) // Comprobamos si se ha pasado por ser mayor que 100 o no
 			{
 				throw new RecargoNoValidoException("Recargo demasiado alto");
-			}else {	//Si no es mayor que 100, será menor que 0
+			}else {	//Si no es mayor que 100, serï¿½ menor que 0
 				throw new RecargoNoValidoException("Recargo demasiado bajo (menor que 0)");
 			}
 		}
@@ -72,7 +72,7 @@ public class Categoria implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return codigo + "-" + descripcion;
+		return codigo + " Â· " + descripcion;
 	}
 	
 	/*
@@ -81,11 +81,11 @@ public class Categoria implements Serializable {
 	 */
 	
 	/**
-	 * Constructor completo, pide todos los parámetros y construye una <em>Categoría</em>
-	 * @param codigo	El código de la categoria. Puede ser "A", "B", "C" ...
+	 * Constructor completo, pide todos los parï¿½metros y construye una <em>Categorï¿½a</em>
+	 * @param codigo	El cï¿½digo de la categoria. Puede ser "A", "B", "C" ...
 	 * @param descripcion	{@code String} que puede ser "ECONOMICO", "MEDIO" o "PREMIUM".
 	 * @param recargo	Entero referido al porcentaje de recargo (necesario para luego calcular la factura)
-	 * @throws RecargoNoValidoException Porcentaje de recargo no válido (mayor que 100 o menor que 0)
+	 * @throws RecargoNoValidoException Porcentaje de recargo no vï¿½lido (mayor que 100 o menor que 0)
 	 */
 	public Categoria(String codigo, String descripcion, double recargo) throws RecargoNoValidoException {
 		super();
@@ -94,8 +94,8 @@ public class Categoria implements Serializable {
 		this.setRecargo(recargo);
 	}
 	/**
-	 * Constructor que asigna el % de recargo según su descripción por tanto sólo necesita 2 parámetros.
-	 * @param codigo	El código de la categoria. Puede ser "A", "B", "C" ...
+	 * Constructor que asigna el % de recargo segï¿½n su descripciï¿½n por tanto sï¿½lo necesita 2 parï¿½metros.
+	 * @param codigo	El cï¿½digo de la categoria. Puede ser "A", "B", "C" ...
 	 * @param descripcion	Cadena que puede ser "ECONOMICO", "MEDIO" o "PREMIUM".
 	 */
 	public Categoria(String codigo, String descripcion) {
@@ -107,14 +107,14 @@ public class Categoria implements Serializable {
 	/**
 	 * Constructor de copia
 	 * @param otro	El Objeto tipo {@code Categoria} a copiar.
-	 * @throws RecargoNoValidoException Porcentaje de recargo no válido (mayor que 100 o menor que 0)
+	 * @throws RecargoNoValidoException Porcentaje de recargo no vï¿½lido (mayor que 100 o menor que 0)
 	 */
 	public Categoria(Categoria otro) throws RecargoNoValidoException {
-		//Obtenemos los parámetros que necesitamos
+		//Obtenemos los parï¿½metros que necesitamos
 		String codcop = otro.getCodigo();
 		String desccop = otro.getDescripcion();
 		double recargocop = otro.getRecargo();
-		//Hacemos set con la copia de los parámetros
+		//Hacemos set con la copia de los parï¿½metros
 		this.setCodigo(codcop);
 		this.setDescripcion(desccop);
 		this.setRecargo(recargocop);

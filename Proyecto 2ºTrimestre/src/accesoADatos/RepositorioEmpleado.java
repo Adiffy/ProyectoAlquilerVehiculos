@@ -3,7 +3,6 @@ package accesoADatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.sql.Date;
@@ -16,6 +15,12 @@ import clasesObjetos.Oficina;
 import exceptions.DNInoValidoException;
 import exceptions.LongitudCadenaNoValidaException;
 
+/**
+ * Clase que contiene métodos públicos estáticos, encargados del manejo de la base de datos
+ * especializado en las tablas: Empleado, Persona
+ * @author Victor
+ *
+ */
 public class RepositorioEmpleado {
 
 	/**
@@ -47,7 +52,7 @@ public class RepositorioEmpleado {
 				String ap1 = rs.getString("Ap1");
 				String ap2 = rs.getString("Ap2");
 				//Obtenemos la oficina
-				String o = rs.getString("Oficina");	//Obtenemos el c�digo de la oficina
+				String o = rs.getString("Oficina");	//Obtenemos el código de la oficina
 				Oficina Ofi = RepositorioOficina.leeOficina(o);	//Encontramos la oficina
 				//Obtenemos la fecha de alta del trabajador
 				Date fechaAlta = rs.getDate("Fecha_alta");
@@ -56,15 +61,15 @@ public class RepositorioEmpleado {
 				fechAlta.setTime(fechaAlta);
 
 
-				try {		/* Nos cubrimos de los errores de la creaci�n de Empleado */
+				try {		/* Nos cubrimos de los errores de la creación de Empleado */
 					emple = new Empleado(nombre, ap1, ap2, Dni, fechAlta, Ofi);
 				} catch (LongitudCadenaNoValidaException e) {
-					// Longitud inv�lida
-					JOptionPane.showMessageDialog(null, "Longitud de cadena no v�lida","Error de creaci�n",JOptionPane.ERROR_MESSAGE);
+					// Longitud inválida
+					JOptionPane.showMessageDialog(null, "Longitud de cadena no válida","Error de creación",JOptionPane.ERROR_MESSAGE);
 					e.printStackTrace();
 				} catch (DNInoValidoException e) {
-					// DNI no v�lido 
-					JOptionPane.showMessageDialog(null, "DNI no v�lido: "+dni,"Error de creaci�n",JOptionPane.ERROR_MESSAGE);
+					// DNI no válido 
+					JOptionPane.showMessageDialog(null, "DNI no válido: "+dni,"Error de creación",JOptionPane.ERROR_MESSAGE);
 					e.printStackTrace();
 				} 
 			}
@@ -103,7 +108,7 @@ public class RepositorioEmpleado {
 			{
 				//Cogemos una oficina
 				String dni = rs.getString("persona_dni");
-				//La a�adimos al ArrayList
+				//La añadimos al ArrayList
 				lista.add(leeEmpleado(dni));
 			}
 			st.close(); 	//Cerramos la conexion
@@ -120,21 +125,21 @@ public class RepositorioEmpleado {
 	public static ArrayList<Empleado> leeEmpleados(Oficina ofi)
 	{
 		ArrayList<Empleado> lista = new ArrayList<Empleado>();
-		String FK = ofi.getCódigo();
-		String sql="SELECT dni FROM Empleado WHERE Oficina = ";
-		sql+=FK; //concatenamos el cod_ofi
-
+		String FK = ofi.getCódigo();	
+		String sql="SELECT persona_dni FROM EMPLEADO WHERE oficina = ?";
+		//		sql+=FK; //concatenamos el cod_ofi
+		PreparedStatement st;
 		ResultSet rs;
 		try {
-			Statement st = EmpresaDB.conn.prepareStatement(sql);
-			//			((PreparedStatement) st).setString(1, FK);	//Le ponemos el c�digo de la oficina donde el ?
-			rs = st.executeQuery(sql);
+			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setString(1, FK);	//Le ponemos el código de la oficina donde el ?
+			rs = st.executeQuery();
 			//Intentamos conectar
 			while (rs.next())	//Mientras avance el cursor
 			{
-				//Cogemos una oficina
-				String dni = rs.getString("dni");
-				//La a�adimos al ArrayList
+				//Cogemos un empleado
+				String dni = rs.getString("persona_dni");
+				//Lañadimos al ArrayList
 				lista.add(leeEmpleado(dni));
 			}
 			st.close(); 	//Cerramos la conexion
@@ -318,13 +323,13 @@ public class RepositorioEmpleado {
 			st.execute("COMMIT");
 
 			sql="INSERT INTO empleado (fecha_alta,persona_dni,oficina) VALUES (?,?,?)";	
-			
+
 			st = EmpresaDB.conn.prepareStatement(sql);
-//			RepositorioPersona.insertPersona(emple);	//Insertamos primero la persona
+			//			RepositorioPersona.insertPersona(emple);	//Insertamos primero la persona
 
 			GregorianCalendar aux = emple.getFechaAlta();	//Acortamos la ruta a escribir
 			//Componemos la fecha
-//			aux.get(Calendar.YEAR)+"/"+aux.get(Calendar.MONTH)+"/"+aux.get(Calendar.DAY_OF_MONTH)
+			//			aux.get(Calendar.YEAR)+"/"+aux.get(Calendar.MONTH)+"/"+aux.get(Calendar.DAY_OF_MONTH)
 			Date dat = new Date(aux.get(Calendar.YEAR),aux.get(Calendar.MONTH), aux.get(Calendar.DAY_OF_MONTH));
 			st.setDate(1, (java.sql.Date) dat);
 			st.setString(2, emple.getDni());

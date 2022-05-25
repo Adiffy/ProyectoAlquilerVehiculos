@@ -8,12 +8,15 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import clasesObjetos.Empleado;
+import manejadoresEventos.filtroTablas;
 import metodos.Handlers;
 
 /**
@@ -30,9 +33,10 @@ public class TablaEmpleado extends JDialog {
 
 	private JPanel panelPrincipal;
 	private JTable tableBusqueda;
+	private JTextField tbDni;
 	private static TablaEmpleado yo;
 	private static Empleado Emplelegido;
-//	private JComboBox<Oficina> comboBox;
+	//	private JComboBox<Oficina> comboBox;
 
 
 
@@ -42,16 +46,50 @@ public class TablaEmpleado extends JDialog {
 	public TablaEmpleado() {
 		creaPanelPrincipal();
 		creaPanelBotones();
-//		creaComboBox();
+		creaPanelBusqueda();
+		//		creaComboBox();
 		JPanel panelTabla = creaTabla();
 		creaScrollPane(panelTabla);
 		MetodosGUI.centraFormulario(yo);
-		}
+		filtroTablas.filtraEnTabla(tableBusqueda,tbDni);
+	}
 
-		
-		
-		//Cogemos la fila obtenida
-		/*int fila = tableBusqueda.getSelectedRow();
+
+
+	private void creaPanelBusqueda() {
+		{
+			JPanel panel = new JPanel();
+			FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+			flowLayout.setAlignment(FlowLayout.LEFT);
+			panelPrincipal.add(panel, BorderLayout.NORTH);
+			labelBuscar(panel);
+			textFieldDNI(panel);
+		}
+	}
+
+
+
+	private void textFieldDNI(JPanel panel) {
+		{
+			tbDni = new JTextField();
+			panel.add(tbDni);
+			tbDni.setColumns(10);
+		}
+	}
+
+
+
+	private void labelBuscar(JPanel panel) {
+		{
+			JLabel lblNewLabel = new JLabel("Buscar:");
+			panel.add(lblNewLabel);
+		}
+	}
+
+
+
+	//Cogemos la fila obtenida
+	/*int fila = tableBusqueda.getSelectedRow();
 		//Si no ha elegido ninguna
 		if (fila<0)
 		{
@@ -92,12 +130,12 @@ public class TablaEmpleado extends JDialog {
 	}
 
 
-//	private void creaComboBox() {
-//		comboBox = MetodosGUI.creaDesplegable();
-//		comboBox.setToolTipText("Elija la oficina correspondiente");
-//		comboBox.setEnabled(false);
-//		comboBox.setMaximumRowCount(15);
-//	}
+	//	private void creaComboBox() {
+	//		comboBox = MetodosGUI.creaDesplegable();
+	//		comboBox.setToolTipText("Elija la oficina correspondiente");
+	//		comboBox.setEnabled(false);
+	//		comboBox.setMaximumRowCount(15);
+	//	}
 
 
 	private void creaBotonAceptar(JPanel abajo) {
@@ -108,7 +146,7 @@ public class TablaEmpleado extends JDialog {
 				if (tableBusqueda.getSelectedRow()>=0)
 				{
 					int num_fila  = tableBusqueda.getSelectedRow();
-					
+
 					Emplelegido = (Empleado) tableBusqueda.getValueAt(num_fila, 1);
 					yo.setVisible(false);
 				}
@@ -116,8 +154,8 @@ public class TablaEmpleado extends JDialog {
 		});
 		btnAceptar.setToolTipText("Guarda los cambios realizados");
 		abajo.add(btnAceptar);
-		
-			
+
+
 	}
 
 
@@ -154,7 +192,7 @@ public class TablaEmpleado extends JDialog {
 		v.setVisible(true);
 		return Emplelegido;
 	}
-	
+
 	public static Empleado showDialogModal() {
 		// Llamamos al constructor
 		TablaEmpleado v = new TablaEmpleado();

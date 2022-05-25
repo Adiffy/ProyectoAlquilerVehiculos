@@ -30,18 +30,24 @@ public class RepositorioAlquiler {
 
 	/**
 	 * Realiza el insert en la tabla Alquiler en la base de datos
+	 * @return realizado: Si ha insertado/actualizado el alquiler o no
 	 */
-	public static void alquilar(Alquiler alquiler) {
+	public static boolean alquilar(Alquiler alquiler) {
+		//Realizado (SI O NO)
+		boolean realizado;
 		// Si ya existe hacemos Update, sino INSERT
 		if (leeAlquiler(alquiler.getCodigo())!=null)
 		{
-			update(alquiler);
+			realizado = update(alquiler);
 		}else {
-			insert(alquiler);
+			realizado = insert(alquiler);
 		}
+		return realizado;
 	}
 
-	private static void update(Alquiler alquiler) {
+	private static boolean update(Alquiler alquiler) {
+		//Hecho: A priori suponemos que NO se ha podido hacer
+		boolean hecho = false;
 		String sql = "UPDATE alquiler SET fecha_inicio=?,fechaprevistafin=?,precio=?,dni_cliente=?,dni_empleado=?,matricula_vehiculo=?,oficinaRecogida=?,oficinaDejada=? WHERE codigo ="+alquiler.getCodigo();
 		PreparedStatement st;
 		
@@ -61,13 +67,18 @@ public class RepositorioAlquiler {
 			
 			//cerramos la conexión
 			st.close();
+			//Hemos terminado
+			hecho = true;
 		} catch (SQLException | LicenciaNoValidaException | DNInoValidoException | LongitudCadenaNoValidaException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
 			// Error en la base de datos / leer cliente o matricula
 			e.printStackTrace();
 		}
+		return hecho;
 	}
 
-	private static void insert(Alquiler alquiler) {
+	private static boolean insert(Alquiler alquiler) {
+		//hecho: A priori NO
+		boolean hecho = false;
 		String sql = "INSERT INTO alquiler "
 				+ "(codigo,fecha_inicio,fechaprevistafin,precio,dni_cliente,matricula_vehiculo,oficinaRecogida,oficinaDejada)"
 				+ " VALUES (?,?,?,?,?,?,?,?)";
@@ -79,14 +90,18 @@ public class RepositorioAlquiler {
 			//Ejecutamos la orden y guardamos los cambios
 			st.executeUpdate();
 			st.execute("COMMIT");
+			
 			//Cerramos la conexión
 			st.close();
+			//Todo hecho
+			hecho = true;
 		} catch (SQLException | LicenciaNoValidaException | DNInoValidoException 
 				| LongitudCadenaNoValidaException | LetrasMatriculaNoValidasException 
 				| NumeroMatriculaNoValidoException e) {
 			// error al insertar el alquiler
 			e.printStackTrace();
 		}
+		return hecho;
 	}
 
 	private static PreparedStatement rellenaStatementAlquiler(Alquiler alquiler, PreparedStatement st)
@@ -106,13 +121,14 @@ public class RepositorioAlquiler {
 
 	public static Alquiler leeAlquiler(String codigo) {
 		// Hacemos la consulta
-		String sql ="SELECT * FROM alquiler WHERE codigo = "+codigo;
+		String sql ="SELECT * FROM alquiler WHERE codigo = ?";
 		PreparedStatement st;
 		ResultSet rs;
 		Alquiler al = null;
 		
 		try {
 			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setString(1, codigo);
 			rs = st.executeQuery();
 			
 			while (rs.next())

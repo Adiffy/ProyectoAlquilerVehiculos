@@ -26,8 +26,8 @@ import clasesObjetos.Oficina;
 import enums.BusquedaPor;
 
 /**
- * Clase que sirve para crear una ventana de búsqueda 'genérica'
- * @author Víctor J. Esquinas García
+ * Clase que sirve para crear una ventana de bï¿½squeda 'genï¿½rica'
+ * @author Vï¿½ctor J. Esquinas Garcï¿½a
  *
  */
 public class VentanaBusqueda extends JDialog {
@@ -86,7 +86,7 @@ public class VentanaBusqueda extends JDialog {
 		});
 		abajo.add(btnAceptar);
 		
-		//Según la tabla que se quiera 
+		//SegÃºn la tabla que se quiera 
 		switch (a)
 		{
 		case EMPLEADO:
@@ -108,7 +108,7 @@ public class VentanaBusqueda extends JDialog {
 		
 		}
 		
-		//Ponemos la tabla visíble en el JPanel
+		//Ponemos la tabla visï¿½ble en el JPanel
 		panelPrincipal.add(tableBusqueda, BorderLayout.CENTER);
 		
 		JPanel panel_superior = new JPanel();
@@ -233,10 +233,10 @@ public class VentanaBusqueda extends JDialog {
 		//Si no ha elegido ninguna
 		if (fila<0)
 		{
-			JOptionPane.showMessageDialog(getParent(), "Debes seleccionar una opción", "Error", JOptionPane.ERROR_MESSAGE);
-		}else //Si elige una opción válida
+			JOptionPane.showMessageDialog(getParent(), "Debes seleccionar una opciï¿½n", "Error", JOptionPane.ERROR_MESSAGE);
+		}else //Si elige una opciï¿½n vï¿½lida
 		{
-			//La última columna tiene el objeto
+			//La ï¿½ltima columna tiene el objeto
 			Emplelegido= (Empleado) model.getValueAt(fila, tableBusqueda.getColumnCount()-1);
 		}
 	}

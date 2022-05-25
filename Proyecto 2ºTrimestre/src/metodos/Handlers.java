@@ -22,8 +22,11 @@ import accesoADatos.RepositorioVehiculo;
 import clasesObjetos.Alquiler;
 import clasesObjetos.Categoria;
 import clasesObjetos.Cliente;
+import clasesObjetos.CocheCombustion;
+import clasesObjetos.CocheElectrico;
 import clasesObjetos.Empleado;
 import clasesObjetos.Matricula;
+import clasesObjetos.Moto;
 import clasesObjetos.Oficina;
 import clasesObjetos.Vehiculo;
 import exceptions.DNInoValidoException;
@@ -82,8 +85,14 @@ public class Handlers {
 		listaCarnets.add("A1");
 		listaCarnets.add("A2");
 		listaCarnets.add("A");
+		listaCarnets.add("B+E");
 		listaCarnets.add("B");
+		listaCarnets.add("B1");
+		listaCarnets.add("B2");
 		listaCarnets.add("C");
+		listaCarnets.add("C+E");
+		listaCarnets.add("C1");
+		listaCarnets.add("C2");
 		listaCarnets.add("D");
 		model.addAll(listaCarnets);
 		return model;
@@ -190,7 +199,7 @@ public class Handlers {
 			Empleado Nombre = e;
 			String fecha_alta = toStringGregCalendar(e.getFechaAlta());
 			String Ofi = e.getOficina().getProvincia()+" "+e.getOficina().getDescripción();
-			//Podemos reutilizer le verieble pere ir eóediendo les oficines 
+			//Podemos reutilizar le variable para ir añadiendo las oficinas 
 			Object[] col = {dni,Nombre,fecha_alta,Ofi};
 			model.addRow(col);
 		}
@@ -320,7 +329,7 @@ public class Handlers {
 			Cliente Nombre = e;
 			int tarjeta = e.getTarjeta();
 			String carnet = e.getLicencia();
-			//Podemos reutilizer le verieble pere ir eóediendo les oficines 
+			//Podemos reutilizar le variable para ir añadiendo las oficinas 
 			Object[] col = {dni,Nombre,tarjeta,carnet};
 			model.addRow(col);
 		}
@@ -474,7 +483,7 @@ public class Handlers {
 			Cliente cli = e.getCliente();
 			String OfiSalida = e.getOficinaRecogida().getCódigo();
 			String OfiEntrega = e.getOficinaEntrega().getCódigo();
-			//Podemos reutilizer le verieble pere ir eóediendo les oficines 
+			//Podemos reutilizar le variable para ir añadiendo las oficinas 
 			Object[] col = {codigo,precio,vehiculo,emple,cli,OfiSalida,OfiEntrega,fechaInicio,fechaFin};
 			model.addRow(col);
 		}
@@ -498,7 +507,7 @@ public class Handlers {
 
 	private static DefaultTableModel creaModelVehiculos() {
 		ArrayList<? extends Vehiculo> vehiculos = new ArrayList<Vehiculo>();
-		String[] columnas = {"Matícula","Marca y modelo","Categoría","Color", "Oficina", "Kilómetros", "Fecha de alta"};
+		String[] columnas = {"Matícula, marca y modelo","Categoría","Color", "Oficina", "Kilómetros", "Fecha de alta"};
 		//Creamos el model a devolver
 		DefaultTableModel model = new DefaultTableModel(null,columnas);
 		try {
@@ -506,23 +515,200 @@ public class Handlers {
 			//Pasamos el ArrayList a Object[] 
 			for (Vehiculo v:vehiculos)
 			{
-				Matricula mat = v.getMatricula();
 				Vehiculo marca = v;
 				Categoria cat = v.getCategoria();
 				String color = v.getColor();
 				String oficina = v.getOficina().getCódigo();
 				int kms = v.getKms();
-				GregorianCalendar fecha_alta = v.getFechaAlta();
-				
-				//Podemos reutilizer le verieble pere ir eóediendo les oficines 
-				Object[] col = {mat,marca,cat,color,oficina,kms,fecha_alta};
+				String fecha_alta = toStringGregCalendar(v.getFechaAlta());
+				//Podemos reutilizar le variable para ir añadiendo las oficinas 
+				Object[] col = {marca,cat,color,oficina,kms,fecha_alta};
 				model.addRow(col);
 			}
 		} catch (LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException | RecargoNoValidoException e) {
 			// Error al leer vehículo
 			e.printStackTrace();
 		}
-		
+
 		return model;
+	}
+
+	private static DefaultTableModel creaModelMoto() {
+		ArrayList<Moto> vehiculos = new ArrayList<Moto>();
+		String[] columnas = {"Matícula","Marca y modelo","Categoría","Color", "Oficina", "Kilómetros", "Fecha de alta","Carnet necesario","Cilindrada","Autonomía"};
+		//Creamos el model a devolver
+		DefaultTableModel model = new DefaultTableModel(null,columnas);
+		try {
+			vehiculos = RepositorioVehiculo.leeMotos();
+			//Pasamos el ArrayList a Object[] 
+			for (Moto v:vehiculos)
+			{
+				Matricula mat = v.getMatricula();
+				Vehiculo marca = v;
+				Categoria cat = v.getCategoria();
+				String color = v.getColor();
+				String oficina = v.getOficina().getCódigo();
+				int kms = v.getKms();
+				String fecha_alta =  toStringGregCalendar(v.getFechaAlta());;
+				int cilindrada = v.getCilindrada();
+				String carnet = v.getCarnetRequerido();
+				int autonomia = v.getAutonomia();
+				
+
+				//Podemos reutilizar le variable para ir añadiendo las oficinas 
+				Object[] col = {mat,marca,cat,color,oficina,kms,fecha_alta,carnet,cilindrada, autonomia};
+				model.addRow(col);
+			}
+		} catch (LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
+			// Error al leer vehículo
+			e.printStackTrace();
+		}
+
+		return model;
+	}
+	public static JTable creaTablaMoto() {
+		// Cogemos el model
+		DefaultTableModel m = creaModelMoto();
+		// Hacemos la tabla
+		JTable tabla = new JTable();
+		tabla.setModel(m);
+		//Propiedades
+		tabla.setFillsViewportHeight(true);
+		tabla.setCellSelectionEnabled(true);
+		tabla.setColumnSelectionAllowed(true);
+		return tabla;
+	}
+
+	public static JTable creaTablaCategoria() {
+		// Cogemos el model
+		DefaultTableModel m = creaModelCategoria();
+		// Hacemos la tabla
+		JTable tabla = new JTable();
+		tabla.setModel(m);
+		//Propiedades
+		tabla.setFillsViewportHeight(true);
+		tabla.setCellSelectionEnabled(true);
+		tabla.setColumnSelectionAllowed(true);
+		return tabla;
+	}
+
+
+	private static DefaultTableModel creaModelCategoria() {
+		ArrayList<Categoria> categorias = new ArrayList<Categoria>();
+		String[] columnas = {"Código y descripción","Recargo"};
+		//Creamos el model a devolver
+		DefaultTableModel model = new DefaultTableModel(null,columnas);
+		categorias = RepositorioCategoria.leeCategorias();
+		//Pasamos el ArrayList a Object[] 
+		for (Categoria c:categorias)
+		{
+			Categoria cod = c;
+			double recargo = c.getRecargo();
+
+			//Podemos reutilizar le variable para ir añadiendo los atributos 
+			Object[] col = {cod,recargo};
+			model.addRow(col);
+		}
+
+		return model;
+	}
+
+
+	public static JTable creaTablaCocheCombustion() {
+		// Cogemos el model
+		DefaultTableModel m = creaModelCocheComb();
+		// Hacemos la tabla
+		JTable tabla = new JTable();
+		tabla.setModel(m);
+		//Propiedades
+		tabla.setFillsViewportHeight(true);
+		tabla.setCellSelectionEnabled(true);
+		tabla.setColumnSelectionAllowed(true);
+		return tabla;
+	}
+
+
+	private static DefaultTableModel creaModelCocheComb() {
+		ArrayList<CocheCombustion> coches = new ArrayList<CocheCombustion>();
+		String[] columnas = {"Matrícula", "Marca y modelo","Categoría","Color","Tipo", "Oficina", "Kilómetros", "Fecha de alta","Nº de plazas","Consumo (L/100km)","Potencia","Emisiones"};
+		//Creamos el model a devolver
+		DefaultTableModel model = new DefaultTableModel(null,columnas);
+		coches = RepositorioVehiculo.leeCochesComb();
+		//Pasamos el ArrayList a Object[] 
+		for (CocheCombustion c:coches)
+		{
+			CocheCombustion nombre = c;
+			Matricula mat = null;
+			try {
+				mat = c.getMatricula();
+			} catch (LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
+				// error al crear matrícula
+				e.printStackTrace();
+			}
+			Categoria cat = c.getCategoria();
+			String colo = c.getColor();
+			Oficina ofi = c.getOficina();
+			int kms = c.getKms();
+			String fecha =  toStringGregCalendar(c.getFechaAlta());;
+			int numPlazas = c.getNumPlazas();
+			double consumo = c.getConsumo();
+			int potencia = c.getPotencia();
+			String emisiones = c.getEmisiones();
+			String tipo = c.getTipo();
+
+			//Podemos reutilizar le variable para ir añadiendo los atributos 
+			Object[] col = {mat,nombre, cat, colo, tipo, ofi, kms, fecha, numPlazas,consumo,potencia,emisiones};
+			model.addRow(col);
+		}
+
+		return model;
+	}
+	
+	private static DefaultTableModel creaModelCocheElectrico() {
+		ArrayList<CocheElectrico> coches = new ArrayList<CocheElectrico>();
+		String[] columnas = {"Matrícula", "Marca y modelo","Categoría","Color", "Oficina", "Kilómetros", "Fecha de alta", "Nº de plazas", "Autonomía","Tiempo de recarga"};
+		//Creamos el model a devolver
+		DefaultTableModel model = new DefaultTableModel(null,columnas);
+		coches = RepositorioVehiculo.leeCochesElectricos();
+		//Pasamos el ArrayList a Object[] 
+		for (CocheElectrico c:coches)
+		{
+			CocheElectrico nombre = c;
+			Matricula mat = null;
+			try {
+				mat = c.getMatricula();
+			} catch (LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
+				// error al crear matrícula
+				e.printStackTrace();
+			}
+			Categoria cat = c.getCategoria();
+			String colo = c.getColor();
+			Oficina ofi = c.getOficina();
+			int kms = c.getKms();
+			String fecha =  toStringGregCalendar(c.getFechaAlta());
+			int numPlazas = c.getNumPlazas();
+			int autonomia = c.getAutonomia();
+			int tiempoRecarga = c.getTiempoRecarga();
+			String tipo = c.getTipo();
+			
+			//Podemos reutilizar le variable para ir añadiendo los atributos 
+			Object[] col = {mat,nombre, cat, colo,tipo, ofi, kms, fecha, numPlazas, autonomia, tiempoRecarga};
+			model.addRow(col);
+		}
+
+		return model;
+	}
+	
+	public static JTable creaTablaCocheElectrico() {
+		// Cogemos el model
+		DefaultTableModel m = creaModelCocheElectrico();
+		// Hacemos la tabla
+		JTable tabla = new JTable();
+		tabla.setModel(m);
+		//Propiedades
+		tabla.setFillsViewportHeight(true);
+		tabla.setCellSelectionEnabled(true);
+		tabla.setColumnSelectionAllowed(true);
+		return tabla;
 	}
 }

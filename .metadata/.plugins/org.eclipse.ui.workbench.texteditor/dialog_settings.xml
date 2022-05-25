@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="Vehiculo"/>
+		<item key="selection" value="válida"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="Empleado"/>
-			<item value="TablaEmpleado"/>
-			<item value="cliente"/>
-			<item value="num"/>
-			<item value="Num"/>
-			<item value="NumDi"/>
-			<item value="precio"/>
-			<item value="toStr"/>
+			<item value="v�lida"/>
+			<item value="equals("/>
+			<item value="Seleccionar"/>
+			<item value="tbDni"/>
+			<item value="textFiltro"/>
+			<item value="SearchInJtable"/>
+			<item value="panelFiltroBusqueda"/>
+			<item value="filter"/>
 			<item value="Emplelegido"/>
-			<item value="dni"/>
-			<item value="dniç"/>
-			<item value="vk"/>
-			<item value="Cliente"/>
-			<item value="handlers"/>
-			<item value="west"/>
+			<item value="les oficines"/>
+			<item value="eóediendo"/>
+			<item value="toStr"/>
+			<item value="Vehiculo"/>
+			<item value="TablaVehiculos"/>
+			<item value="Empleado"/>
 		</list>
 		<list key="replacehistory">
+			<item value="válida"/>
+			<item value="compareToIgnoreCase("/>
+			<item value="tbDni"/>
+			<item value="panel"/>
+			<item value="CatElegida"/>
+			<item value="las oficinas"/>
+			<item value="añadiendo"/>
+			<item value="Categoria"/>
+			<item value="TablaCategoria"/>
 			<item value="Vehiculo"/>
 			<item value="TablaVehiculos"/>
 			<item value="Alquielegido"/>
 			<item value="Alquiler"/>
 			<item value="tbPrecio"/>
 			<item value="vehículo"/>
-			<item value="Date"/>
-			<item value="ColorBorde"/>
-			<item value="ColorFondo"/>
-			<item value="MiColor"/>
-			<item value="Punto"/>
-			<item value="clien"/>
-			<item value="matrícula"/>
-			<item value="kilómetros"/>
-			<item value="conexión"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

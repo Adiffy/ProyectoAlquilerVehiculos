@@ -29,7 +29,7 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 		if (nombre.length()<=25 && nombre.length()>=2) {
 			this.nombre = nombre;
 		}else {
-			throw new LongitudCadenaNoValidaException("Longitud de nombre no v�lida");
+			throw new LongitudCadenaNoValidaException("Longitud de nombre no válida");
 		}
 	}
 	public String getApellido1() {
@@ -86,7 +86,7 @@ public abstract class Persona implements Comparable<Persona>, Serializable{
 		this.setDni(dni);
 	}
 	
-	//M�todos
+	//Métodos
 	public String getNombreCompleto() {
 		return apellido1+" "+apellido2+", "+nombre;
 	}

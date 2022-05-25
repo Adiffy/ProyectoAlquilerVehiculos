@@ -20,12 +20,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import clasesObjetos.Cliente;
+import clasesObjetos.CocheCombustion;
 import manejadoresEventos.filtroTablas;
 import metodos.Handlers;
 import metodos.MetodoDni;
 
-public class TablaCliente extends JDialog {
+public class TablaCocheComb extends JDialog {
 
 	/**
 	 * 
@@ -33,21 +33,20 @@ public class TablaCliente extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	private final JPanel contentPanel = new JPanel();
-	private static TablaCliente yoMismo;
-	private static Cliente ClienteElegido;
-	private JTextField tbDni;
-	private JTable tablaCliente;
+	private static TablaCocheComb yoMismo;
+	private static CocheCombustion CocheCombustionElegido;
+	private JTextField tbMatricula;
+	private JTable tablaCocheCombustion;
 
 	/**
 	 * Crea el JDialog.
 	 */
-	public TablaCliente() {
+	public TablaCocheComb() {
 		creaAtributosGenerales();
 		creabuttonPane();
-		creaFiltro();
 		yoMismo = this;
 		MetodosGUI.centraFormulario(yoMismo);
-		filtroTablas.filtraEnTabla(tablaCliente,tbDni);
+		filtroTablas.filtraEnTabla(tablaCocheCombustion,tbMatricula);
 	}
 
 	private void creabuttonPane() {
@@ -56,27 +55,10 @@ public class TablaCliente extends JDialog {
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 	}
 
-	private void creaFiltro() {
-		{
-			JPanel panel = new JPanel();
-			FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-			flowLayout.setAlignment(FlowLayout.LEFT);
-			contentPanel.add(panel, BorderLayout.NORTH);
-			{
-				JLabel lblBusqueda = new JLabel("Buscar: ");
-				panel.add(lblBusqueda);
-			}
-			{
-				tbDni = new JTextField();
-				panel.add(tbDni);
-				tbDni.setColumns(10);
-			}
-		}
-	}
 
 	private void creaAtributosGenerales() {
-		setTitle("Clientes");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(TablaCliente.class.getResource("/icons/miniLogo.png")));
+		setTitle("Coches de Combustión");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TablaCocheComb.class.getResource("/icons/miniLogo.png")));
 		setBounds(100, 100, 596, 356);
 		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
@@ -88,8 +70,8 @@ public class TablaCliente extends JDialog {
 	}
 
 	private void creaTabla() {
-		tablaCliente = Handlers.creaTablaCliente();
-		contentPanel.add(tablaCliente, BorderLayout.CENTER);
+		tablaCocheCombustion = Handlers.creaTablaCocheCombustion();
+		contentPanel.add(tablaCocheCombustion, BorderLayout.CENTER);
 
 	}
 
@@ -100,25 +82,25 @@ public class TablaCliente extends JDialog {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPanel.add(panel, BorderLayout.NORTH);
 
-		JLabel lblDNI = new JLabel("DNI");
+		JLabel lblDNI = new JLabel("Buscar");
 		panel.add(lblDNI);
 
 		creaTbDni();
-		panel.add(tbDni);
-		tbDni.setColumns(10);
+		panel.add(tbMatricula);
+		tbMatricula.setColumns(10);
 		{
-			JLabel lblTitulo = new JLabel("Tabla de clientes");
-			lblTitulo.setIcon(new ImageIcon(TablaCliente.class.getResource("/16/edit.png")));
+			JLabel lblTitulo = new JLabel("Tabla de Coches de combustión");
+			lblTitulo.setIcon(new ImageIcon(TablaCocheComb.class.getResource("/16/edit.png")));
 			panel.add(lblTitulo);
 		}
 
-		tbDni = new JTextField();
-		tbDni.setPreferredSize(new Dimension(500, 19));
-		tbDni.setBounds(new Rectangle(0, 0, 5000, 0));
-		tbDni.setText("");
-		panel.add(tbDni);
-		tbDni.setColumns(50);
-		tbDni.setColumns(50);
+		tbMatricula = new JTextField();
+		tbMatricula.setPreferredSize(new Dimension(500, 19));
+		tbMatricula.setBounds(new Rectangle(0, 0, 5000, 0));
+		tbMatricula.setText("");
+		panel.add(tbMatricula);
+		tbMatricula.setColumns(50);
+		tbMatricula.setColumns(50);
 		
 		JPanel buttonPane = new JPanel();
 		contentPanel.add(buttonPane, BorderLayout.SOUTH);
@@ -131,11 +113,11 @@ public class TablaCliente extends JDialog {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Si ha elegido alguna fila
-				if (tablaCliente.getSelectedRow()>=0)
+				if (tablaCocheCombustion.getSelectedRow()>=0)
 				{
-					int num_fila  = tablaCliente.getSelectedRow();
+					int num_fila  = tablaCocheCombustion.getSelectedRow();
 					
-					ClienteElegido = (Cliente) tablaCliente.getValueAt(num_fila, 1);
+					CocheCombustionElegido = (CocheCombustion) tablaCocheCombustion.getValueAt(num_fila, 1);
 					yoMismo.setVisible(false);
 				}
 			}
@@ -158,20 +140,20 @@ public class TablaCliente extends JDialog {
 	}
 
 	private void creaTbDni() {
-		tbDni = new JTextField();
-		tbDni.addKeyListener(new KeyAdapter() {
+		tbMatricula = new JTextField();
+		tbMatricula.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				//Si la tecla pulsada es el ENTER
 				if (e.getKeyCode()==KeyEvent.VK_ENTER)
 				{
-					if (tbDni.getText().length()==9)
+					if (tbMatricula.getText().length()==9)
 					{
-						if (MetodoDni.DNIvalido(tbDni.getText()))	//Si es un DNI válido
+						if (MetodoDni.DNIvalido(tbMatricula.getText()))	//Si es un DNI válido
 						{
-							//Componemos el cliente
-							//							eligeClienteConsultado();
-							tbDni.setEnabled(false);
+							//Componemos el CocheCombustion
+							//							eligeCocheCombustionConsultado();
+							tbMatricula.setEnabled(false);
 
 						}else {
 							JOptionPane.showMessageDialog(null, "Longitud del DNI inválida");
@@ -183,25 +165,25 @@ public class TablaCliente extends JDialog {
 		});
 	}
 
-	//	private void eligeClienteConsultado() {
+	//	private void eligeCocheCombustionConsultado() {
 	//		String dni = tbDni.getText();
-	////		Cliente cli = RepositorioCliente.leeCliente(dni);
-	////		seleccionaCliente(cli);
+	////		CocheCombustion cli = RepositorioCocheCombustion.leeCocheCombustion(dni);
+	////		seleccionaCocheCombustion(cli);
 	//
 	//	}
 
-	public static Cliente showDialog()
+	public static CocheCombustion showDialog()
 	{
-		TablaCliente v = new TablaCliente();
+		TablaCocheComb v = new TablaCocheComb();
 		v.setVisible(true);
-		return ClienteElegido;
+		return CocheCombustionElegido;
 	}
 
-	public static Cliente showDialogModal()
+	public static CocheCombustion showDialogModal()
 	{
-		TablaCliente v = new TablaCliente();
+		TablaCocheComb v = new TablaCocheComb();
 		v.setModal(true);
 		v.setVisible(true);
-		return ClienteElegido;
+		return CocheCombustionElegido;
 	}
 }

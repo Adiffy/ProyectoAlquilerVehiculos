@@ -7,15 +7,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+/**
+ * Clase principal desde la que podemos realizar una conexiÃ³n con la base de datos.
+ * Esta {@code Clase madre} es clave en el acceso a la base de datos puesto que es la encargada de conectarse con ella.
+ * @author Victor
+ *
+ */
 public class EmpresaDB {
 
-	//Propiedades estáticas
+	//Propiedades estÃ¡ticas
 	static String cadenaConexion = "jdbc:oracle:thin:@localhost:1521:xe";
 	static Connection conn;
 	static Statement st;
 	
 	/**
-	 * Método que crea una conexión con la base de datos
+	 * Mï¿½todo que crea una conexiï¿½n con la base de datos
 	 */
 	public static void abreConexion()
 	{
@@ -29,7 +37,7 @@ public class EmpresaDB {
 	}
 	
 	/**
-	 * Método que Consulta la base de datos en busca de parámetros tipo {@code String}
+	 * Mï¿½todo que Consulta la base de datos en busca de parï¿½metros tipo {@code String}
 	 * @param Instruccionsql	El comando SQL que realiza la consulta a la base de datos. Tipo {@code String}
 	 * @param columna	El nombre de la columna por la que se pregunta {@code String} Puede haber una o hasta 6
 	 * Pon nombres de columnas "" para solo pedir 1
@@ -45,7 +53,7 @@ public class EmpresaDB {
 		
 		while (resultados.next())
 		{
-			//Lo añadimos al ArrayList
+			//Lo aï¿½adimos al ArrayList
 			resultado.add(resultados.getString(columna));
 			resultado.add(resultados.getString(columna2));
 			resultado.add(resultados.getString(columna3));
@@ -69,14 +77,16 @@ public class EmpresaDB {
 		
 		while (resultados.next())
 		{
-			//Lo añadimos al ArrayList
+			//Lo aï¿½adimos al ArrayList
 			resultado.add(resultados.getInt(columna));
 		}
 		
 		
 		orden.close();		//Cerramos el Statement para liberar recursos
 		} catch (SQLException e) {
-			// TODO Sacar ventana error
+			//  Sacar ventana error
+			JOptionPane.showMessageDialog(null, "No se ha podido conectar con la base de datos",
+					"DataBase Error",JOptionPane.ERROR);
 			e.printStackTrace();
 		}
 		return resultado;
@@ -92,7 +102,7 @@ public class EmpresaDB {
 		
 		while (resultados.next())
 		{
-			//Lo añadimos al ArrayList
+			//Lo aï¿½adimos al ArrayList
 			resultado.add(resultados.getDouble(columna));
 		}
 		

@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import accesoADatos.RepositorioAlquiler;
+import accesoADatos.RepositorioEmpleado;
+import accesoADatos.RepositorioVehiculo;
 import clasesObjetos.Alquiler;
 import clasesObjetos.Cliente;
 import clasesObjetos.Empleado;
@@ -17,14 +19,18 @@ import clasesObjetos.Vehiculo;
 import exceptions.CodigoNoValidoException;
 import exceptions.DNInoValidoException;
 import exceptions.FechaNoValidaException;
+import exceptions.LetrasMatriculaNoValidasException;
 import exceptions.LicenciaNoValidaException;
 import exceptions.LongitudCadenaNoValidaException;
+import exceptions.NumeroMatriculaNoValidoException;
+import exceptions.RecargoNoValidoException;
 import metodos.Handlers;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -55,7 +61,7 @@ public class FormuAlquiler extends JFrame {
 	private JComboBox<Oficina> cbOficinaSalida;
 
 	private JDateChooser tbFechaInicioAlquiler;
-	private JTextField tbPrecio = new JTextField();;
+	private JLabel tbPrecio;
 	private JDateChooser tbFechaPrevistaFinAlquiler;
 
 
@@ -75,6 +81,44 @@ public class FormuAlquiler extends JFrame {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		creaButtonPane(buttonPane);
+		{
+			JButton okButton = new JButton("Aceptar");
+			okButton.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/check_mark.png")));
+			okButton.addActionListener(new ActionListener() {
+
+
+				public void actionPerformed(ActionEvent e) {
+					//  Realizar el alquiler
+						rellenaAlquiler();
+						if (RepositorioAlquiler.alquilar(alquilerRealizado))
+						{
+							MetodosGUI.estadoEditar(contentPane);
+							//Lo vaciamos para que se note que se insertó
+						}
+					
+				}
+
+				private void rellenaAlquiler() {
+					try {
+			
+						alquilerRealizado = new Alquiler(tbCodAlquiler.getText(), (Date) tbFechaInicioAlquiler.getDate(), (Date) tbFechaPrevistaFinAlquiler.getDate(), Double.parseDouble(tbPrecio.getText()), vehiculo, cliente, emple, (Oficina) cbOficinaSalida.getSelectedItem(), (Oficina) cbOfi.getSelectedItem());
+						
+						int duracion = alquilerRealizado.getNumDiasAprox();
+						double PrecioAlquiler = duracion*vehiculo.PrecioAlquiler();
+						alquilerRealizado.setPrecioAlquiler(PrecioAlquiler);
+						tbPrecio.setText(""+alquilerRealizado.getPrecioAlquiler());
+
+					} catch (FechaNoValidaException | CodigoNoValidoException e1) {
+						// error al crear el alquiler
+						e1.printStackTrace();
+					}
+				}
+
+			});
+			okButton.setActionCommand("Aceptar");
+			buttonPane.add(okButton);
+			getRootPane().setDefaultButton(okButton);
+		}
 		{
 			JPanel panel = new JPanel();
 			contentPane.add(panel, BorderLayout.CENTER);
@@ -106,20 +150,20 @@ public class FormuAlquiler extends JFrame {
 			panel.add(cbOfi);
 
 			tbCodAlquiler = new JTextField();
-			tbCodAlquiler.setBounds(178, 8, 86, 20);
+			tbCodAlquiler.setBounds(198, 8, 86, 20);
 			panel.add(tbCodAlquiler);
 			tbCodAlquiler.setColumns(10);
 			tbCodAlquiler.addKeyListener(new KeyListener() {
 
 				@Override
 				public void keyTyped(KeyEvent e) {
-					// TODO Auto-generated method stub
+					// Nada
 
 				}
 
 				@Override
 				public void keyReleased(KeyEvent e) {
-					// TODO Auto-generated method stub
+					// Nada
 
 				}
 
@@ -139,7 +183,7 @@ public class FormuAlquiler extends JFrame {
 			});
 
 			JLabel lblCodAlquiler = new JLabel("C\u00F3digo del alquiler");
-			lblCodAlquiler.setBounds(79, 11, 129, 14);
+			lblCodAlquiler.setBounds(58, 11, 150, 14);
 			panel.add(lblCodAlquiler);
 
 			JButton btnCreaOficina = new JButton("");
@@ -149,7 +193,7 @@ public class FormuAlquiler extends JFrame {
 				}
 			});
 			btnCreaOficina.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/add.png")));
-			btnCreaOficina.setBounds(461, 81, 33, 23);
+			btnCreaOficina.setBounds(417, 81, 33, 23);
 			panel.add(btnCreaOficina);
 
 			JButton btnCreaEmpleado = new JButton("");
@@ -174,7 +218,7 @@ public class FormuAlquiler extends JFrame {
 				}
 			});
 			btnCreaVehiculo.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/add.png")));
-			btnCreaVehiculo.setBounds(461, 139, 33, 23);
+			btnCreaVehiculo.setBounds(417, 139, 33, 23);
 			panel.add(btnCreaVehiculo);
 
 			JButton btnListaAlquileres = new JButton("");
@@ -185,41 +229,56 @@ public class FormuAlquiler extends JFrame {
 				}
 			});
 			btnListaAlquileres.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/zoom.png")));
-			btnListaAlquileres.setBounds(274, 8, 25, 20);
+			btnListaAlquileres.setBounds(294, 8, 25, 20);
 			panel.add(btnListaAlquileres);
 
 			cbOficinaSalida = Handlers.creaDesplegableOficina(); 
-			cbOficinaSalida.setBounds(10, 81, 154, 22);
-			panel.add(cbOficinaSalida);
-			cbOficinaSalida.addItemListener(new ItemListener() {
-				//Cuando se elige una oficina de trabajo
-				public void itemStateChanged(ItemEvent e) {
-					//ComboBox de Vehiculos
-					cbVehiculo = Handlers.creaDesplegableVehiculos((Oficina) cbOficinaSalida.getSelectedItem());
-					cbVehiculo.setBounds(253, 139, 200, 22);
-					panel.add(cbVehiculo);
-					cbVehiculo.addItemListener(new ItemListener() {
-
-						@Override
-						public void itemStateChanged(ItemEvent e) {
-							vehiculo = (Vehiculo) cbVehiculo.getSelectedItem();			
-						}
-
-					});
+			cbOficinaSalida.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					//ComboBox de Vehículos
+					DefaultComboBoxModel<Vehiculo> model = null;
+					try {
+						model = new DefaultComboBoxModel<Vehiculo>();
+						model.addAll(RepositorioVehiculo.leeTodosLosVehiculos((Oficina) cbOficinaSalida.getSelectedItem()));
+						cbVehiculo.setModel(model);
+					} catch (LetrasMatriculaNoValidasException 
+							| NumeroMatriculaNoValidoException
+							| RecargoNoValidoException e1) {
+						//
+						e1.printStackTrace();
+					}
 					//ComboBox de empleados
-					cbEmpleados = Handlers.creaDesplegableEmpleados((Oficina) cbOficinaSalida.getSelectedItem());
-					cbEmpleados.setBounds(10, 139, 154, 22);
-					panel.add(cbEmpleados);
-					cbEmpleados.addItemListener(new ItemListener() {
-
-						@Override
-						public void itemStateChanged(ItemEvent e) {
-							// Rellenamos el empleado
-							emple = (Empleado) cbEmpleados.getSelectedItem();
-						}
-					});
+					DefaultComboBoxModel<Empleado> m = null;
+					m = new DefaultComboBoxModel<Empleado>();
+					m.addAll(RepositorioEmpleado.leeEmpleados((Oficina) cbOficinaSalida.getSelectedItem()));
+					cbEmpleados.setModel(m);
 				}
 			});
+			
+			cbVehiculo = new JComboBox<Vehiculo>();
+			cbVehiculo.setBounds(253, 139, 154, 22);
+			panel.add(cbVehiculo);
+			cbVehiculo.addItemListener(new ItemListener() {
+
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+					vehiculo = (Vehiculo) cbVehiculo.getSelectedItem();			
+				}
+
+			});
+			cbEmpleados = new JComboBox<Empleado>();
+			cbEmpleados.setBounds(10, 139, 155, 22);
+			panel.add(cbEmpleados);
+			cbEmpleados.addItemListener(new ItemListener() {
+
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+					// Rellenamos el empleado
+					emple = (Empleado) cbEmpleados.getSelectedItem();
+				}
+			});
+			cbOficinaSalida.setBounds(10, 81, 154, 22);
+			panel.add(cbOficinaSalida);
 
 			JLabel lblOficinaDeSalida = new JLabel("Oficina de salida");
 			lblOficinaDeSalida.setBounds(10, 56, 154, 14);
@@ -236,10 +295,12 @@ public class FormuAlquiler extends JFrame {
 			panel.add(btnCreaOficina_1);
 
 			tbFechaInicioAlquiler = new JDateChooser();
+			tbFechaInicioAlquiler.setDateFormatString("dd-MM-yyyy");
 			tbFechaInicioAlquiler.setBounds(10, 253, 105, 20);
 			panel.add(tbFechaInicioAlquiler);
 
 			tbFechaPrevistaFinAlquiler = new JDateChooser();
+			tbFechaPrevistaFinAlquiler.setDateFormatString("dd-MM-yyyy");
 			tbFechaPrevistaFinAlquiler.setBounds(253, 253, 105, 20);
 			panel.add(tbFechaPrevistaFinAlquiler);
 
@@ -250,11 +311,8 @@ public class FormuAlquiler extends JFrame {
 			JLabel lblFechaFin = new JLabel("Fecha estimada finalizacion");
 			lblFechaFin.setBounds(253, 217, 154, 36);
 			panel.add(lblFechaFin);
-			tbPrecio.setEnabled(false);
-
-			tbPrecio.setBounds(434, 253, 60, 20);
-			panel.add(tbPrecio);
-			tbPrecio.setColumns(6);
+			
+			creaTbPrecio(panel);
 
 			JLabel lblClientes = new JLabel("Clientes");
 			lblClientes.setBounds(10, 169, 71, 14);
@@ -278,52 +336,20 @@ public class FormuAlquiler extends JFrame {
 
 	}
 
-
+	private void creaTbPrecio(JPanel panel) {
+		tbPrecio = new JLabel();
+		tbPrecio.setBounds(434, 253, 60, 20);
+		panel.add(tbPrecio);
+	}
 
 	private void creaButtonPane(JPanel buttonPane) {
-		{
-			JButton okButton = new JButton("Aceptar");
-			okButton.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/check_mark.png")));
-			okButton.addActionListener(new ActionListener() {
-
-
-				public void actionPerformed(ActionEvent e) {
-					//TODO realizar el alquiler
-					if (RepositorioAlquiler.leeAlquiler(tbCodAlquiler.getText())==null)
-					{
-						rellenaAlquiler();
-						RepositorioAlquiler.alquilar(alquilerRealizado);
-					}
-
-				}
-
-				private void rellenaAlquiler() {
-					try {
-			
-						alquilerRealizado = new Alquiler(tbCodAlquiler.getText(), (Date) tbFechaInicioAlquiler.getDate(), (Date) tbFechaPrevistaFinAlquiler.getDate(), Double.parseDouble(tbPrecio.getText()), vehiculo, cliente, emple, (Oficina) cbOficinaSalida.getSelectedItem(), (Oficina) cbOfi.getSelectedItem());
-						
-						int duracion = alquilerRealizado.getNumDiasAprox();
-						double PrecioAlquiler = duracion*vehiculo.PrecioAlquiler();
-						alquilerRealizado.setPrecioAlquiler(PrecioAlquiler);
-						tbPrecio.setText(""+alquilerRealizado.getPrecioAlquiler());
-
-					} catch (FechaNoValidaException | CodigoNoValidoException e1) {
-						// error al crear el alquiler
-						e1.printStackTrace();
-					}
-				}
-
-			});
-			okButton.setActionCommand("Aceptar");
-			buttonPane.add(okButton);
-			getRootPane().setDefaultButton(okButton);
-		}
 		{
 			JButton cancelButton = new JButton("Cancelar");
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					//Lo ponemos como al principio: todo vacío
 					MetodosGUI.estadoInicial(contentPane);
+					tbCodAlquiler.setEnabled(true);
 				}
 			});
 			cancelButton.setIcon(new ImageIcon(FormuAlquiler.class.getResource("/16/cancel.png")));
@@ -331,6 +357,10 @@ public class FormuAlquiler extends JFrame {
 			buttonPane.add(cancelButton);
 		}
 	}
+	/**
+	 * Rellena el alquiler, buscando en la base de datos el código escrito
+	 * por el usuario.
+	 */
 	private void rellenaAlquilerConsultado() {
 		// Buscamos el alquiler
 		if (RepositorioAlquiler.leeAlquiler(tbCodAlquiler.getText()) != null)
@@ -339,25 +369,25 @@ public class FormuAlquiler extends JFrame {
 			rellenaCamposAlquiler();
 		}
 
-
 	}
-
-
-
+	/**
+	 * Rellena los campos de alquiler en funcón al alquilerRealizado
+	 */
 	private void rellenaCamposAlquiler() {
+		tbCodAlquiler.setText(alquilerRealizado.getCodigo());
 		tbFechaInicioAlquiler.setDate(alquilerRealizado.getFechaInicioAlquiler());
 		tbFechaPrevistaFinAlquiler.setDate(alquilerRealizado.getFechaPrevistaFinAlquiler());
 		try {
-			cbClientes.setSelectedItem(alquilerRealizado.getCliente());
+			cbClientes.setSelectedItem((Cliente) alquilerRealizado.getCliente());
 		} catch (LicenciaNoValidaException | DNInoValidoException | LongitudCadenaNoValidaException e) {
 			// errores de creación del cliente
 			e.printStackTrace();
 		}
-		cbEmpleados.setSelectedItem(alquilerRealizado.getEncargado());
-		cbOficinaSalida.setSelectedItem(alquilerRealizado.getOficinaRecogida());
-		cbOfi.setSelectedItem(alquilerRealizado.getOficinaEntrega());
-		cbVehiculo.setSelectedItem(alquilerRealizado.getaAlquilar());
-		tbPrecio.setText(""+alquilerRealizado.getPrecioAlquiler());
+		cbOficinaSalida.setSelectedItem((Oficina) alquilerRealizado.getOficinaRecogida());
+		cbOfi.setSelectedItem((Oficina) alquilerRealizado.getOficinaEntrega());
+		cbEmpleados.setSelectedItem((Empleado) alquilerRealizado.getEncargado());
+		cbVehiculo.setSelectedItem((Vehiculo) alquilerRealizado.getaAlquilar());
+		tbPrecio.setText(String.valueOf(alquilerRealizado.getPrecioAlquiler()));
 	}
 
 	/**

@@ -149,7 +149,7 @@ public class FormuVehiculos extends JDialog {
 
 	private void declaraAtributosVentana() {
 		setTitle("Nuevo veh\u00EDculo");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("recursos\\jekeii7rp5hx8lfuz257.webp"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FormuVehiculos.class.getResource("/16/gear.png")));
 		setBounds(100, 100, 873, 423);
 		getContentPane().setLayout(new BorderLayout());
 		//Centramos la ventana

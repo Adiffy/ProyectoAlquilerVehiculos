@@ -125,6 +125,7 @@ public class MetodosGUI {
 		return resultado;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static void estadoInicial(JPanel panel)
 	{
 		for (Component co:panel.getComponents())
@@ -134,7 +135,8 @@ public class MetodosGUI {
 			boolean jpanel = (co.getClass().getSimpleName().compareToIgnoreCase("JPanel")==0);
 			boolean jtextField = (co.getClass().getSimpleName().compareToIgnoreCase("JTextField")==0);
 			boolean jdatechooser = (co.getClass().getSimpleName().compareToIgnoreCase("JDateChooser")==0);
-			boolean jtabbedpane = (co.getClass().getSimpleName().compareToIgnoreCase("JTabbedPane")==0); 
+			boolean jtabbedpane = (co.getClass().getSimpleName().compareToIgnoreCase("JTabbedPane")==0);
+			boolean jcomboBox = (co.getClass().getSimpleName().compareToIgnoreCase("JComboBox")==0);
 			//Si no es un JLABEL ni un JButton ni otro JPanel
 			if (!jlabel && !jbutton && !jpanel && !jtabbedpane)
 			{
@@ -146,7 +148,12 @@ public class MetodosGUI {
 				}else if (jdatechooser)
 				{
 					((JDateChooser) co).setDate(null);	//Vaciamos los componentes de fecha
+				}else if (jcomboBox)
+				{
+					((JComboBox) co).setSelectedIndex(-1); //Des-seleccionamos 
 				}
+				
+					
 			}
 			if (jpanel)	//Si es un panel que se meta dentro 
 			{

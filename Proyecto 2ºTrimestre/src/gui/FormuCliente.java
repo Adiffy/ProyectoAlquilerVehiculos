@@ -26,6 +26,13 @@ import metodos.Handlers;
 import metodos.MetodoDni;
 import javax.swing.JComboBox;
 
+/**
+ * Formulario que pide los datos de un cliente, lo puede borrar, insertar en la base de datos o actualiza si ya existe.
+ * También es capaz de autocompletar un cliente desde un listado o dado su DNI.
+ * 
+ * @author Victor
+ *
+ */
 public class FormuCliente extends JDialog {
 
 	/**
@@ -131,7 +138,7 @@ public class FormuCliente extends JDialog {
 
 	private JButton creaBotonConsulta() {
 		JButton btnBuscar = new JButton("");	//Botón sin mensaje solo icono de lupa (ICONO DE BUSCAR)
-		btnBuscar.setIcon(new ImageIcon("recursos\\\\16\\\\zoom.png"));
+		btnBuscar.setIcon(new ImageIcon(FormuCliente.class.getResource("/16/zoom.png")));
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MetodosGUI.estadoEditar(panelPrincipal);
@@ -167,7 +174,7 @@ public class FormuCliente extends JDialog {
 
 	private void creaBotonCancelar(JPanel panel) {
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setIcon(new ImageIcon("recursos\\16\\cross.png"));
+		btnCancelar.setIcon(new ImageIcon(FormuCliente.class.getResource("/16/cross.png")));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Volvemos a poner el formulario en su estado inicial
@@ -185,7 +192,7 @@ public class FormuCliente extends JDialog {
 				//Borramos el Cliente si existe
 				rellenaCliente();	//Componemos el Cliente
 				switch (JOptionPane.showConfirmDialog(btnBorrar,
-						"óEstó seguro de que desea eliminar al Cliente "+elelegido.getNombreCompleto()+"?",
+						"¿Está seguro de que desea eliminar al Cliente "+elelegido.getNombreCompleto()+"?",
 						"Confirme para borrar", JOptionPane.WARNING_MESSAGE))
 				{
 				case 0:
@@ -203,13 +210,13 @@ public class FormuCliente extends JDialog {
 				}
 			}
 		});
-		btnBorrar.setIcon((new ImageIcon("recursos\\16\\recycle_bin.png")));
+		btnBorrar.setIcon((new ImageIcon(FormuCliente.class.getResource("/16/recycle_bin.png"))));
 		panel.add(btnBorrar);
 	}
 
 	private void creaBotonAceptar(JPanel panel) {
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setIcon(new ImageIcon("recursos\\16\\diskette.png"));
+		btnAceptar.setIcon(new ImageIcon(FormuCliente.class.getResource("/16/diskette.png")));
 		panel.add(btnAceptar);
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

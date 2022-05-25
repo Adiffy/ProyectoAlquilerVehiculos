@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -159,12 +158,13 @@ public class RepositorioVehiculo {
 	public static boolean CocheCombustion(String matricula) {
 		// Miramos si la matrícula se encuentra en la tabla de cocheCombustión
 		boolean encontrado;
-		String sql = "SELECT * FROM CocheCombustion WHERE combustionMatricula = "+matricula;
-		Statement st;
+		String sql = "SELECT * FROM CocheCombustion WHERE combustionMatricula = ?";
+		PreparedStatement st;
 		ResultSet rs;
 
 		try {
-			st = EmpresaDB.conn.createStatement();
+			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setString(1,matricula);
 			rs = st.executeQuery(sql);
 			if (rs.next())
 			{
@@ -184,12 +184,13 @@ public class RepositorioVehiculo {
 	public static boolean Electrico(String matricula) {
 		// Miramos si la matrícula se encuentra en la tabla de Electrico
 		boolean encontrado;
-		String sql = "SELECT * FROM ELECTRICO WHERE VEHICULO_MATRICULA = "+matricula;
-		Statement st;
+		String sql = "SELECT * FROM ELECTRICO WHERE VEHICULO_MATRICULA = ?";
+		PreparedStatement st;
 		ResultSet rs;
 
 		try {
-			st = EmpresaDB.conn.createStatement();
+			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setString(1, matricula);
 			rs = st.executeQuery(sql);
 			if (rs.next())
 			{
@@ -208,12 +209,13 @@ public class RepositorioVehiculo {
 	public static boolean cocheElectrico(String matricula) {
 		// Miramos si la matrícula se encuentra en la tabla de coche Electrico
 		boolean encontrado;
-		String sql = "SELECT * FROM COCHEELECTRICO WHERE VEHICULO_MATRICULA = "+matricula;
-		Statement st;
+		String sql = "SELECT * FROM COCHEELECTRICO WHERE VEHICULO_MATRICULA = ?";
+		PreparedStatement st;
 		ResultSet rs;
 
 		try {
-			st = EmpresaDB.conn.createStatement();
+			st = EmpresaDB.conn.prepareStatement(sql);
+			st.setString(1, matricula);
 			rs = st.executeQuery(sql);
 			if (rs.next())
 			{
@@ -281,9 +283,9 @@ public class RepositorioVehiculo {
 		PreparedStatement st;
 
 		try {
-			//Ejecutamos la primera instrucci�n (VEHICULO)
+			//Ejecutamos la primera instrucción (VEHICULO)
 			insertVehiculo(a);
-			//Ejecutamos la segunda instrucci�n (ELECTRICO)
+			//Ejecutamos la segunda instrucción (ELECTRICO)
 			insertElectrico((Electrico)a);
 			//Ejecutamos la tercera instruccion (CocheElectrico)
 			st = EmpresaDB.conn.prepareStatement(sql);
@@ -329,10 +331,10 @@ public class RepositorioVehiculo {
 		PreparedStatement st;
 
 		try {
-			//Ejecutamos la primera instrucci�n (VEHICULO)
+			//Ejecutamos la primera instrucción (VEHICULO)
 			insertVehiculo(a);
 
-			//Ejecutamos la segunda instrucci�n (DE COMBUSTION)
+			//Ejecutamos la segunda instrucción (DE COMBUSTION)
 			insertDeCombustion(a);
 			st = EmpresaDB.conn.prepareStatement(sql);
 			CocheCombustion b = (CocheCombustion) a ;
@@ -379,12 +381,12 @@ public class RepositorioVehiculo {
 		PreparedStatement st;
 
 		try {
-			//Ejecutamos la primera instrucci�n (VEHICULO)
+			//Ejecutamos la primera instrucción (VEHICULO)
 			insertVehiculo(a);
 
-			//Ejecutamos la segunda instrucci�n (DE COMBUSTION)
+			//Ejecutamos la segunda instrucción (DE COMBUSTION)
 			insertDeCombustion(a);
-			//Ejecutamos la tercera instrucci�n (FURGONETA)
+			//Ejecutamos la tercera instrucción (FURGONETA)
 			st = EmpresaDB.conn.prepareStatement(sql);
 			Furgoneta b = (Furgoneta) a ;
 			st.setInt(1,  b.getCapacidadCarga());
@@ -407,11 +409,11 @@ public class RepositorioVehiculo {
 		PreparedStatement st;
 
 		try {
-			//Ejecutamos la primera instrucci�n (VEHICULO)
+			//Ejecutamos la primera instrucción (VEHICULO)
 			insertVehiculo(a);
-			//Ejecutamos la segunda instrucci�n (ELECTRICO)
+			//Ejecutamos la segunda instrucción (ELECTRICO)
 			insertElectrico((Electrico)a);
-			//Ejecutamos la tercera instrucci�n (MOTO)
+			//Ejecutamos la tercera instrucción (MOTO)
 			st = EmpresaDB.conn.prepareStatement(sql2);
 			Moto b = (Moto) a ;
 			st.setInt(1,  b.getCilindrada());
@@ -577,7 +579,7 @@ public class RepositorioVehiculo {
 				case "CocheCombustion":
 					st.close();
 					rs.close();
-					sql = "SELECT * FROM cochecombustion WHERE combustionMatricula=?";
+					sql = "SELECT * FROM cochecombustion WHERE combustionmatricula=?";
 					st = EmpresaDB.conn.prepareStatement(sql);
 					st.setString(1, mat.toString());
 					rs = st.executeQuery();
@@ -1070,5 +1072,75 @@ public class RepositorioVehiculo {
 		return new Matricula(numeros, letras);
 	}
 
+	public static ArrayList<CocheCombustion> leeCochesComb() {
+		ArrayList<CocheCombustion> lista = new ArrayList<CocheCombustion>();
+		// Leemos las matriculas 
+		String sql = "SELECT combustionmatricula FROM cochecombustion";
+		PreparedStatement st;
+		ResultSet rs;
+		
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			rs = st.executeQuery();
+			while (rs.next())
+			{
+				String mat = rs.getString("combustionmatricula");
+				Matricula matricula = leeMatricula(mat);
+				lista.add(leeCocheComb(matricula));
+			}
+		} catch (SQLException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException | EmisionesNoValidasException | NumPlazasNoValidoException | ConsumoNoValidoException | PotenciaNoValidaException | TipoNoValidoException | RecargoNoValidoException e) {
+			// Posibles errores
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
+	public static ArrayList<CocheElectrico> leeCochesElectricos() {
+		ArrayList<CocheElectrico> lista = new ArrayList<CocheElectrico>();
+		// Leemos las matriculas 
+		String sql = "SELECT vehiculo_matricula FROM cocheelectrico";
+		PreparedStatement st;
+		ResultSet rs;
+		
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			rs = st.executeQuery();
+			while (rs.next())
+			{
+				String mat = rs.getString("vehiculo_matricula");
+				Matricula matricula = leeMatricula(mat);
+				lista.add(leeCocheElectrico(matricula));
+			}
+		} catch (SQLException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
+			// Posibles errores
+			e.printStackTrace();
+		}
+		return lista;
+	}
+
+	public static ArrayList<Moto> leeMotos() {
+		//Creamos el arrayList
+		ArrayList<Moto> motos = new ArrayList<Moto>();
+		//Consulta
+		String sql = "SELECT vehiculo_matricula FROM moto";
+		PreparedStatement st;
+		ResultSet rs;
+		
+		try {
+			st = EmpresaDB.conn.prepareStatement(sql);
+			rs = st.executeQuery();
+			while (rs.next())
+			{
+				String mat = rs.getString("vehiculo_matricula");
+				Matricula matricula = leeMatricula(mat);
+				motos.add(leeMotocicleta(matricula));
+			}
+		} catch (SQLException | LetrasMatriculaNoValidasException | NumeroMatriculaNoValidoException e) {
+			// errores
+			e.printStackTrace();
+		}
+		
+		return motos;
+	}
 
 }

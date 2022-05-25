@@ -14,18 +14,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import clasesObjetos.Cliente;
+import clasesObjetos.Moto;
 import manejadoresEventos.filtroTablas;
 import metodos.Handlers;
-import metodos.MetodoDni;
 
-public class TablaCliente extends JDialog {
+public class TablaMoto extends JDialog {
 
 	/**
 	 * 
@@ -33,21 +31,20 @@ public class TablaCliente extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	private final JPanel contentPanel = new JPanel();
-	private static TablaCliente yoMismo;
-	private static Cliente ClienteElegido;
-	private JTextField tbDni;
-	private JTable tablaCliente;
+	private static TablaMoto yoMismo;
+	private static Moto MotoElegida;
+	private JTextField tbMat;
+	private JTable TablaMoto;
 
 	/**
 	 * Crea el JDialog.
 	 */
-	public TablaCliente() {
+	public TablaMoto() {
 		creaAtributosGenerales();
 		creabuttonPane();
-		creaFiltro();
 		yoMismo = this;
 		MetodosGUI.centraFormulario(yoMismo);
-		filtroTablas.filtraEnTabla(tablaCliente,tbDni);
+		filtroTablas.filtraEnTabla(TablaMoto,tbMat);
 	}
 
 	private void creabuttonPane() {
@@ -56,27 +53,10 @@ public class TablaCliente extends JDialog {
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 	}
 
-	private void creaFiltro() {
-		{
-			JPanel panel = new JPanel();
-			FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-			flowLayout.setAlignment(FlowLayout.LEFT);
-			contentPanel.add(panel, BorderLayout.NORTH);
-			{
-				JLabel lblBusqueda = new JLabel("Buscar: ");
-				panel.add(lblBusqueda);
-			}
-			{
-				tbDni = new JTextField();
-				panel.add(tbDni);
-				tbDni.setColumns(10);
-			}
-		}
-	}
 
 	private void creaAtributosGenerales() {
-		setTitle("Clientes");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(TablaCliente.class.getResource("/icons/miniLogo.png")));
+		setTitle("Moto");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TablaMoto.class.getResource("/icons/miniLogo.png")));
 		setBounds(100, 100, 596, 356);
 		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
@@ -88,8 +68,8 @@ public class TablaCliente extends JDialog {
 	}
 
 	private void creaTabla() {
-		tablaCliente = Handlers.creaTablaCliente();
-		contentPanel.add(tablaCliente, BorderLayout.CENTER);
+		TablaMoto = Handlers.creaTablaMoto();
+		contentPanel.add(TablaMoto, BorderLayout.CENTER);
 
 	}
 
@@ -100,25 +80,25 @@ public class TablaCliente extends JDialog {
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		contentPanel.add(panel, BorderLayout.NORTH);
 
-		JLabel lblDNI = new JLabel("DNI");
-		panel.add(lblDNI);
+		JLabel lblBusqueda = new JLabel("Buscar: ");
+		panel.add(lblBusqueda);
 
-		creaTbDni();
-		panel.add(tbDni);
-		tbDni.setColumns(10);
+		creatbMat();
+		panel.add(tbMat);
+		tbMat.setColumns(10);
 		{
-			JLabel lblTitulo = new JLabel("Tabla de clientes");
-			lblTitulo.setIcon(new ImageIcon(TablaCliente.class.getResource("/16/edit.png")));
+			JLabel lblTitulo = new JLabel("Tabla de motos");
+			lblTitulo.setIcon(new ImageIcon(TablaMoto.class.getResource("/16/edit.png")));
 			panel.add(lblTitulo);
 		}
 
-		tbDni = new JTextField();
-		tbDni.setPreferredSize(new Dimension(500, 19));
-		tbDni.setBounds(new Rectangle(0, 0, 5000, 0));
-		tbDni.setText("");
-		panel.add(tbDni);
-		tbDni.setColumns(50);
-		tbDni.setColumns(50);
+		tbMat = new JTextField();
+		tbMat.setPreferredSize(new Dimension(500, 19));
+		tbMat.setBounds(new Rectangle(0, 0, 5000, 0));
+		tbMat.setText("");
+		panel.add(tbMat);
+		tbMat.setColumns(50);
+		tbMat.setColumns(50);
 		
 		JPanel buttonPane = new JPanel();
 		contentPanel.add(buttonPane, BorderLayout.SOUTH);
@@ -131,11 +111,11 @@ public class TablaCliente extends JDialog {
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Si ha elegido alguna fila
-				if (tablaCliente.getSelectedRow()>=0)
+				if (TablaMoto.getSelectedRow()>=0)
 				{
-					int num_fila  = tablaCliente.getSelectedRow();
+					int num_fila  = TablaMoto.getSelectedRow();
 					
-					ClienteElegido = (Cliente) tablaCliente.getValueAt(num_fila, 1);
+					MotoElegida = (Moto) TablaMoto.getValueAt(num_fila, 1);
 					yoMismo.setVisible(false);
 				}
 			}
@@ -157,51 +137,39 @@ public class TablaCliente extends JDialog {
 		abajo.add(btnCancelar);
 	}
 
-	private void creaTbDni() {
-		tbDni = new JTextField();
-		tbDni.addKeyListener(new KeyAdapter() {
+	private void creatbMat() {
+		tbMat = new JTextField();
+		tbMat.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				//Si la tecla pulsada es el ENTER
 				if (e.getKeyCode()==KeyEvent.VK_ENTER)
 				{
-					if (tbDni.getText().length()==9)
-					{
-						if (MetodoDni.DNIvalido(tbDni.getText()))	//Si es un DNI válido
-						{
-							//Componemos el cliente
-							//							eligeClienteConsultado();
-							tbDni.setEnabled(false);
 
-						}else {
-							JOptionPane.showMessageDialog(null, "Longitud del DNI inválida");
-						}
-					}
+						
+							//Componemos el Moto
+							//							eligeMotoConsultado();
+							tbMat.setEnabled(false);
+
+						
 				}
 			}
 
 		});
 	}
 
-	//	private void eligeClienteConsultado() {
-	//		String dni = tbDni.getText();
-	////		Cliente cli = RepositorioCliente.leeCliente(dni);
-	////		seleccionaCliente(cli);
-	//
-	//	}
-
-	public static Cliente showDialog()
+	public static Moto showDialog()
 	{
-		TablaCliente v = new TablaCliente();
+		TablaMoto v = new TablaMoto();
 		v.setVisible(true);
-		return ClienteElegido;
+		return MotoElegida;
 	}
 
-	public static Cliente showDialogModal()
+	public static Moto showDialogModal()
 	{
-		TablaCliente v = new TablaCliente();
+		TablaMoto v = new TablaMoto();
 		v.setModal(true);
 		v.setVisible(true);
-		return ClienteElegido;
+		return MotoElegida;
 	}
 }

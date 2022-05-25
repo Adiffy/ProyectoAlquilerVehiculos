@@ -1,5 +1,7 @@
 package clasesObjetos;
 
+import java.util.Objects;
+
 import exceptions.DNInoValidoException;
 import exceptions.LicenciaNoValidaException;
 import exceptions.LongitudCadenaNoValidaException;
@@ -13,7 +15,7 @@ public class Cliente extends Persona{
 	
 	//Propiedades
 	private String licencia;
-	private int tarjeta;	//N� de tarjeta de cliente habitual
+	private int tarjeta;	//Nº de tarjeta de cliente habitual
 	
 	//Getters y Setters
 	public int getTarjeta() {
@@ -59,6 +61,23 @@ public class Cliente extends Persona{
 	@Override
 	public String toString() {
 		return getNombreCompleto() ;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(licencia, tarjeta);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente otro = (Cliente) obj;
+		return (otro.getDni().compareToIgnoreCase(this.getDni())==0) || tarjeta == otro.tarjeta;
 	}
 
 	

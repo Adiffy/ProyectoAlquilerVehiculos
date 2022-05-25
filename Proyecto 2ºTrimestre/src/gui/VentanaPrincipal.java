@@ -13,7 +13,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import clasesObjetos.Oficina;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -44,9 +43,11 @@ public class VentanaPrincipal extends JFrame {
 		setJMenuBar(menuPrincipal);
 		
 		JMenu mnFicherosMaestros = new JMenu("Ficheros maestros");
+		mnFicherosMaestros.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/file.png")));
 		menuPrincipal.add(mnFicherosMaestros);
 		
 		JMenuItem mnVehiculos = new JMenuItem("Vehiculos");
+		mnVehiculos.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/network.png")));
 		mnVehiculos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				FormuVehiculo ventana = new FormuVehiculo();
@@ -63,7 +64,7 @@ public class VentanaPrincipal extends JFrame {
 //		mncoche.add(mntmDeCombustion);
 //		
 //		JMenuItem mntmElectrico = new JMenuItem("El\u00E9ctricos");
-//		mncoche.add(mntmElectrico);
+//		mncoche.add(mntmElectrico); 
 		
 //		JMenuItem mntmFurgo = new JMenuItem("Furgonetas");
 //		mnVehiculos.add(mntmFurgo);
@@ -72,12 +73,15 @@ public class VentanaPrincipal extends JFrame {
 //		mnVehiculos.add(mntmMoto);
 		
 		JMenu mnPersonas = new JMenu("Personas");
+		mnPersonas.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/group.png")));
 		mnFicherosMaestros.add(mnPersonas);
 		
 		JMenuItem mntmEmpleado = new JMenuItem("Empleados");
+		mntmEmpleado.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/chat.png")));
 		mnPersonas.add(mntmEmpleado);
 		
 		JMenuItem mntmClientes = new JMenuItem("Clientes");
+		mntmClientes.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/clients.png")));
 		mntmClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FormuCliente.showDialog();
@@ -86,9 +90,11 @@ public class VentanaPrincipal extends JFrame {
 		mnPersonas.add(mntmClientes);
 		
 		JMenuItem mntmOficinas = new JMenuItem("Oficinas");
+		mntmOficinas.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/home.png")));
 		mnFicherosMaestros.add(mntmOficinas);
 		
 		JMenuItem mntmCategorias = new JMenuItem("Categor\u00EDas");
+		mntmCategorias.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/paste.png")));
 		mntmCategorias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FormuCategoria.showFormuCat();;
@@ -99,15 +105,16 @@ public class VentanaPrincipal extends JFrame {
 		mntmOficinas.addActionListener(new ActionListener() 
 				{
 					public void actionPerformed(ActionEvent e) {
-						@SuppressWarnings("unused")
-						Oficina ofi = FormuOficinas.showDialog();
+						FormuOficinas.showDialog();
 					}
 				});
 		
 		JMenu mnListados = new JMenu("Listados");
+		mnListados.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/folder.png")));
 		menuPrincipal.add(mnListados);
 		
 		JMenuItem mntmTablaEmpleados = new JMenuItem("Empleados");
+		mntmTablaEmpleados.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/chat.png")));
 		mntmTablaEmpleados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TablaEmpleado.showDialog();
@@ -115,6 +122,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		JMenuItem mntmTablaOficinas = new JMenuItem("Oficinas");
+		mntmTablaOficinas.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/home.png")));
 		mntmTablaOficinas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TablaOficina.showTablaOficinas();
@@ -122,6 +130,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		JMenuItem mntmListadoAlquileres = new JMenuItem("Alquileres");
+		mntmListadoAlquileres.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/shopping_cart.png")));
 		mntmListadoAlquileres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TablaAlquiler.showDialog();
@@ -132,6 +141,7 @@ public class VentanaPrincipal extends JFrame {
 		mnListados.add(mntmTablaEmpleados);
 		
 		JMenuItem mntmCliente = new JMenuItem("Clientes");
+		mntmCliente.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/clients.png")));
 		mntmCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TablaCliente.showDialogModal();
@@ -140,24 +150,71 @@ public class VentanaPrincipal extends JFrame {
 		mnListados.add(mntmCliente);
 		
 		JMenuItem mntmListadoCategorias = new JMenuItem("Categorias");
+		mntmListadoCategorias.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/paste.png")));
+		mntmListadoCategorias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Mostramos el listado de las categorías
+				TablaCategoria.showDialog();
+			}
+		});
 		mnListados.add(mntmListadoCategorias);
 		
 		JMenu mnVehiculosGeneral = new JMenu("Vehículos");
+		mnVehiculosGeneral.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/network.png")));
 		mnListados.add(mnVehiculosGeneral);
 		
 		JMenuItem mntmTablaVehiculos = new JMenuItem("Vehiculos");
+		mntmTablaVehiculos.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/book.png")));
+		mntmTablaVehiculos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Mostramos el listado de un vehículo
+				TablaVehiculos.showDialog();
+			}
+		});
 		mnVehiculosGeneral.add(mntmTablaVehiculos);
 		
+		JMenuItem mntmTablaCocheComb = new JMenuItem("Coche de combustión");
+		mntmTablaCocheComb.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/clock.png")));
+		mntmTablaCocheComb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Listamos la tabla
+				TablaCocheComb.showDialog();
+			}
+		});
+		mnVehiculosGeneral.add(mntmTablaCocheComb);
+		
+		JMenuItem mntmTablaCocheElectrico = new JMenuItem("Coche eléctrico");
+		mntmTablaCocheElectrico.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/webcam.png")));
+		mntmTablaCocheElectrico.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TablaCocheElectrico.showDialog();
+			}
+		});
+		mnVehiculosGeneral.add(mntmTablaCocheElectrico);
+		
+		JMenuItem mntmListaMotos = new JMenuItem("Moto");
+		mntmListaMotos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TablaMoto.showDialog();
+			}
+		});
+		mntmListaMotos.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/clip.png")));
+		mnVehiculosGeneral.add(mntmListaMotos);
+		
 		JMenuItem mntmAlquiler = new JMenuItem("Realizar alquiler");
+		mntmAlquiler.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/16/windows.png")));
 		mntmAlquiler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FormuAlquiler.showFrame();
 			}
 		});
 		
+		JMenu mnNewMenu_1 = new JMenu("");
+		menuPrincipal.add(mnNewMenu_1);
+		menuPrincipal.add(mntmAlquiler);
+		
 		JMenu mnNewMenu = new JMenu("");
 		menuPrincipal.add(mnNewMenu);
-		menuPrincipal.add(mntmAlquiler);
 		mntmEmpleado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				

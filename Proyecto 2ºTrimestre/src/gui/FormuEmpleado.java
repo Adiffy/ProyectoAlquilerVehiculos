@@ -54,7 +54,7 @@ public class FormuEmpleado extends JDialog {
 		creaComboBoxOficinas();
 		JButton btnBuscar = creaBotonConsulta();
 
-		btnBuscar.setBounds(180, 42, 46, 25);
+		btnBuscar.setBounds(193, 47, 46, 25);
 		panelPrincipal.add(btnBuscar);
 		creaLabelFecha_alta();
 		creaTbFechaAlta();
@@ -82,7 +82,7 @@ public class FormuEmpleado extends JDialog {
 	private void creaTbFechaAlta() {
 		fechaAlta = new JDateChooser();
 		fechaAlta.setDateFormatString("yyyy/MM/dd");
-		fechaAlta.setBounds(91, 163, 110, 24);
+		fechaAlta.setBounds(98, 192, 110, 24);
 		panelPrincipal.add(fechaAlta);
 
 		JButton btnAceptar = new JButton("");
@@ -103,7 +103,7 @@ public class FormuEmpleado extends JDialog {
 
 	private void creaLabelFecha_alta() {
 		JLabel lblFechaAlta = new JLabel("Fecha de alta");
-		lblFechaAlta.setBounds(10, 165, 97, 14);
+		lblFechaAlta.setBounds(10, 202, 97, 14);
 		panelPrincipal.add(lblFechaAlta);
 	}
 
@@ -122,7 +122,7 @@ public class FormuEmpleado extends JDialog {
 
 	private void creaComboBoxOficinas() {
 		comboBox = MetodosGUI.creaDesplegable();
-		comboBox.setBounds(70, 109, 165, 22);
+		comboBox.setBounds(70, 147, 165, 22);
 		comboBox.setToolTipText("Elija la oficina correspondiente");
 		comboBox.setSelectedIndex(-1);
 		panelPrincipal.add(comboBox);
@@ -155,7 +155,7 @@ public class FormuEmpleado extends JDialog {
 
 	private void creaBotonCancelar(JPanel panel) {
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setIcon(new ImageIcon("recursos\\16\\cross.png"));
+		btnCancelar.setIcon(new ImageIcon(FormuEmpleado.class.getResource("/16/cross.png")));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Volvemos a poner el formulario en su estado inicial
@@ -193,7 +193,7 @@ public class FormuEmpleado extends JDialog {
 				}
 			}
 		});
-		btnBorrar.setIcon((new ImageIcon("recursos\\16\\recycle_bin.png")));
+		btnBorrar.setIcon(new ImageIcon(FormuEmpleado.class.getResource("/16/recycle_bin.png")));
 		panel.add(btnBorrar);
 	}
 
@@ -210,7 +210,7 @@ public class FormuEmpleado extends JDialog {
 				}
 			}
 		});
-		btnAceptar.setIcon(new ImageIcon("recursos\\16\\diskette.png"));
+		btnAceptar.setIcon(new ImageIcon(FormuEmpleado.class.getResource("/16/diskette.png")));
 		panel.add(btnAceptar);
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -227,26 +227,26 @@ public class FormuEmpleado extends JDialog {
 
 	private void creaLabelDNI() {
 		JLabel lblDni = new JLabel("DNI");
-		lblDni.setBounds(22, 11, 63, 14);
+		lblDni.setBounds(10, 11, 63, 14);
 		panelPrincipal.add(lblDni);
 	}
 
 	private void creaLabelNombre() {
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(10, 47, 63, 14);
+		lblNombre.setBounds(10, 52, 63, 14);
 		panelPrincipal.add(lblNombre);
 	}
 
 	private void creaLabelOficina() {
 		JLabel lblOficina = new JLabel("Oficina");
-		lblOficina.setBounds(10, 119, 46, 14);
+		lblOficina.setBounds(10, 147, 46, 14);
 		panelPrincipal.add(lblOficina);
 	}
 
 	private void creaApellido2() {
 		tbAp2 = new JTextField();
 		tbAp2.setEnabled(false);
-		tbAp2.setBounds(204, 79, 125, 21);
+		tbAp2.setBounds(206, 96, 125, 21);
 		panelPrincipal.add(tbAp2);
 		tbAp2.setColumns(25);
 	}
@@ -254,28 +254,28 @@ public class FormuEmpleado extends JDialog {
 	private void creaTbApellido1() {
 		tbAp1 = new JTextField();
 		tbAp1.setEnabled(false);
-		tbAp1.setBounds(68, 76, 125, 24);
+		tbAp1.setBounds(68, 94, 125, 24);
 		panelPrincipal.add(tbAp1);
 		tbAp1.setColumns(25);
 	}
 
 	private void creaLabelApellidos() {
 		JLabel lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setBounds(10, 81, 79, 14);
+		lblApellidos.setBounds(10, 99, 79, 14);
 		panelPrincipal.add(lblApellidos);
 	}
 
 	private void creaTbNombre() {
 		tbNombre = new JTextField();
 		tbNombre.setEnabled(false);
-		tbNombre.setBounds(60, 42, 110, 25);
+		tbNombre.setBounds(68, 47, 110, 25);
 		panelPrincipal.add(tbNombre);
 		tbNombre.setColumns(25);
 	}
 
 	private void creaTbDNI() {
 		tbDNI = new JTextField();
-		tbDNI.setBounds(83, 8, 110, 24);
+		tbDNI.setBounds(82, 6, 110, 24);
 		panelPrincipal.add(tbDNI);
 		tbDNI.setColumns(10);
 		tbDNI.addKeyListener(new KeyAdapter() {
